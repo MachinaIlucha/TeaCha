@@ -36,3 +36,15 @@ function closeModal() {
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") closeModal();
 });
+
+const topbar = document.querySelector(".topbar");
+const setTopbarH = () => {
+  if (!topbar) return;
+  document.documentElement.style.setProperty(
+    "--topbar-h",
+    `${topbar.offsetHeight}px`
+  );
+};
+
+setTopbarH();
+window.addEventListener("resize", setTopbarH);

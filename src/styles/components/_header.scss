@@ -201,3 +201,62 @@
     width: auto;
   }
 }
+
+@media (max-width: 979px) {
+  /* базово панель существует, но скрыта */
+  .topbar .nav__right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+
+    position: fixed;
+    top: var(--topbar-h, 72px);
+    left: 14px;
+    right: 14px;
+    width: auto;
+
+    padding: 12px;
+    background: var(--white);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-top: 0;
+    border-radius: 0 0 18px 18px;
+    box-shadow: var(--shadow);
+
+    transform: translateY(-10px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition: transform 0.25s ease, opacity 0.2s ease,
+      visibility 0s linear 0.25s;
+    will-change: transform, opacity;
+    z-index: 60;
+  }
+
+  /* ВАЖНО: тут тоже задаём left/right/width/position, иначе база .nav__right.is-open перетрет */
+  .topbar .nav__right.is-open {
+    position: fixed;
+    top: var(--topbar-h, 72px);
+    left: 14px;
+    right: 14px;
+    width: auto;
+
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+
+    transform: translateY(0);
+    transition: transform 0.25s ease, opacity 0.2s ease, visibility 0s;
+  }
+
+  .topbar .nav__right::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 1px;
+    background: rgba(0, 0, 0, 0.08);
+  }
+}
