@@ -1,33 +1,56 @@
+---
+const base = import.meta.env.BASE_URL;
+---
+
 <footer class="footer" id="contacts">
   <div class="container footer__grid">
     <div class="footer__brand">
       <div class="footerBrand">
-        <img class="footerBrand__logo" src="/TeaCha/img/logo.png" alt="TeaCha" />
+        <img
+          class="footerBrand__logo"
+          src={`${base}img/logo.png`}
+          alt="TeaCha"
+        />
         <div class="footerBrand__name">
           <span class="tea">Tea</span><span class="cha">Cha</span>
         </div>
       </div>
 
       <div class="footer__linksSmall">
-        <a href="#" class="footer__link">ДОГОВІР ПУБЛІЧНОЇ ОФЕРТИ</a>
-        <a href="#" class="footer__link">ПОЛІТИКА КОНФІДЕНЦІЙНОСТІ</a>
+        <a
+          class="footer__link"
+          href={`${base}docs/dogovir-publichnoi-oferty.pdf`}
+          target="_blank"
+          rel="noopener"
+        >
+          ДОГОВІР ПУБЛІЧНОЇ ОФЕРТИ
+        </a>
+
+        <a
+          class="footer__link"
+          href={`${base}docs/polityka-konfidentsiinosti.pdf`}
+          target="_blank"
+          rel="noopener"
+        >
+          ПОЛІТИКА КОНФІДЕНЦІЙНОСТІ
+        </a>
       </div>
     </div>
 
     <div class="footer__col">
       <div class="footer__title">СТУДЕНТАМ</div>
       <a class="footer__a" href="#consult">Безкоштовна консультація</a>
-      <a class="footer__a" href="/price">Ціни</a>
-      <a class="footer__a" href="/about">Про нас</a>
+      <a class="footer__a" href={`${base}price`}>Ціни</a>
+      <a class="footer__a" href={`${base}about`}>Про нас</a>
       <a class="footer__a" href="#reviews">Відгуки</a>
     </div>
 
     <div class="footer__col">
       <div class="footer__title">НАВІГАЦІЯ</div>
       <a class="footer__a" href="/">Головна</a>
-      <a class="footer__a" href="/english">Англійська</a>
-      <a class="footer__a" href="/chinese">Китайська</a>
-      <a class="footer__a" href="/corporate">Для бізнесу</a>
+      <a class="footer__a" href={`${base}english`}>Англійська</a>
+      <a class="footer__a" href={`${base}/chinese`}>Китайська</a>
+      <a class="footer__a" href={`${base}/corporate`}>Для бізнесу</a>
     </div>
 
     <div class="footer__col">
@@ -36,14 +59,45 @@
       <div class="footer__text">hello@teacha.ua</div>
 
       <div class="footer__ctaRow">
-        <a class="iconBtn" href="https://instagram.com/" aria-label="Instagram"
-          >◎</a
+        <a
+          class="iconBtn"
+          href="https://www.instagram.com/teacha_english_chinese?igsh=MW15MzJpdmVqemRidg=="
+          aria-label="Instagram"
+          target="_blank"
+          rel="noopener"
         >
-        <a class="iconBtn" href="https://t.me/" aria-label="Telegram">➤</a>
+          <img class="iconBtn__img" src={`${base}img/ig-black.png`} alt="" />
+        </a>
+
+        <a
+          class="iconBtn"
+          href="https://t.me/"
+          aria-label="Telegram"
+          target="_blank"
+          rel="noopener"
+        >
+          <img class="iconBtn__img" src={`${base}img/tg.png`} alt="" />
+        </a>
+
         <a class="pill" href="/contacts"
           >НАПИСАТИ НАМ <span aria-hidden="true">↗</span></a
         >
       </div>
     </div>
+  </div>
+
+  <div class="footer__bottom">
+    <span>© 2026 TeaCha. Усі права захищені.</span>
+    <span>
+      Дизайн та розробка —
+      <a
+        href="https://www.linkedin.com/in/illia-pinchuk/"
+        class="footer__author"
+        target="_blank"
+        rel="noopener"
+      >
+        Ілля Пінчук
+      </a>
+    </span>
   </div>
 </footer>

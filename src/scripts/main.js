@@ -1,3 +1,9 @@
+/**
+ * TeaCha website
+ * Design & development: Ілля Пінчук Вадимович
+ * © 2026. All rights reserved.
+ */
+
 import { initMenu } from "./menu.js";
 import { initReviews } from "./reviews.js";
 

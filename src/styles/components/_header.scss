@@ -15,7 +15,7 @@
 .topbar__row {
   display: flex;
   align-items: center;
-  justify-content: flex-start; // ✅
+  justify-content: space-between;
   gap: 14px;
   padding: 14px 0;
 }
@@ -23,9 +23,7 @@
 .brand {
   display: flex;
   align-items: center;
-  gap: 10px;
-
-  cursor: pointer; // ← главное
+  cursor: pointer;
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
@@ -61,9 +59,9 @@
   align-items: center;
   gap: 12px;
 
-  flex: 1; // ✅ занимает свободное место
-  min-width: 0; // ✅ чтобы ничего не распирало строку
-  margin-left: 24px; // ✅ если хочешь отступ от лого — регулируй тут
+  flex: 1;
+  min-width: 0;
+  margin-left: 24px;
   position: relative;
 }
 
@@ -76,8 +74,8 @@
   cursor: pointer;
   padding: 10px;
 
-  margin-left: auto; // ✅ бургер всегда справа внутри nav
-  flex: 0 0 auto; // ✅ не сжимается
+  margin-left: auto;
+  flex: 0 0 auto;
 }
 
 .nav__burger span {
@@ -89,7 +87,7 @@
 }
 
 .nav__right {
-  display: none; /* скрыто на мобилке */
+  display: none;
 }
 
 .nav__right.is-open {
@@ -99,7 +97,7 @@
 
   position: absolute;
   right: 0;
-  top: calc(100% + 10px);  // ✅ всегда под nav
+  top: calc(100% + 10px);
 
   width: min(520px, calc(100vw - 28px));
   padding: 12px;
@@ -144,6 +142,7 @@
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
   filter: brightness(0.95);
 }
+
 .socialBtn:hover img {
   transform: scale(1.1);
 }
@@ -156,28 +155,25 @@
 
 .nav__links {
   display: flex;
-  flex-direction: column; /* mobile first */
+  flex-direction: column;
   gap: 10px;
   width: 100%;
 }
 
 /* Desktop */
-@media (min-width: 1100px) {
-  .topbar__row {
-    padding: 18px 0;
-    gap: 18px;
-  }
-
-  .brand__logo {
-    width: 64px;
-    height: 64px;
-  }
-  .brand__word {
-    font-size: 24px;
-  }
-
+@media (min-width: 980px) {
   .nav__burger {
     display: none;
+  }
+
+  .brand {
+    flex: 0 0 auto;
+  }
+
+  .nav {
+    flex: 1;
+    min-width: 0;
+    margin-left: 24px;
   }
 
   .nav__right {
@@ -185,13 +181,23 @@
     align-items: center;
     gap: 14px;
     position: static;
+
+    flex: 0 0 auto;
+    margin-left: auto;
+  }
+
+  .nav__social {
+    display: flex;
+    gap: 10px;
   }
 
   .nav__links {
+    display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     white-space: nowrap;
     gap: 10px;
+
     width: auto;
   }
 }

@@ -1,7 +1,11 @@
+---
+const base = import.meta.env.BASE_URL;
+---
+
 <header class="topbar" id="top">
   <div class="container topbar__row">
-    <a class="brand" href="/" aria-label="На головну">
-      <img class="brand__logo" src="/TeaCha/img/logo.png" alt="TeaCha" />
+    <a class="brand" href={base} aria-label="На головну">
+      <img class="brand__logo" src={`${base}img/logo.png`} alt="TeaCha" />
       <span class="brand__word"
         ><span class="tea">Tea</span><span class="cha">Cha</span></span
       >
@@ -21,31 +25,31 @@
         <div class="nav__social">
           <a
             class="socialBtn"
-            href="https://instagram.com/"
+            href="https://www.instagram.com/teacha_english_chinese?igsh=MW15MzJpdmVqemRidg=="
             target="_blank"
             rel="noopener"
             aria-label="Instagram"
           >
-            <img src="/TeaCha/img/ig.png" alt="" />
+            <img src={`${base}img/ig.png`} alt="" />
           </a>
           <a
             class="socialBtn"
-            href="https://tiktok.com/"
+            href="https://www.tiktok.com/@school.teacha?_r=1&_t=ZM-92xtLcPpblU"
             target="_blank"
             rel="noopener"
             aria-label="TikTok"
           >
-            <img src="/TeaCha/img/tiktok.png" alt="" />
+            <img src={`${base}img/tiktok.png`} alt="" />
           </a>
         </div>
 
         <div class="nav__links">
-          <a class="pill" href="/english">Англійська</a>
-          <a class="pill" href="/chinese">Китайська</a>
-          <a class="pill" href="/corporate">Корпоративне навчання</a>
-          <a class="pill" href="/price">Ціна</a>
-          <a class="pill" href="/products">Продукція</a>
-          <a class="pill" href="/about">Про нас</a>
+          <a class="pill" href={`${base}english`}>Англійська</a>
+          <a class="pill" href={`${base}chinese`}>Китайська</a>
+          <a class="pill" href={`${base}corporate`}>Корпоративне навчання</a>
+          <a class="pill" href={`${base}price`}>Ціна</a>
+          <a class="pill" href={`${base}products`}>Продукція</a>
+          <a class="pill" href={`${base}about`}>Про нас</a>
         </div>
       </div>
     </nav>
