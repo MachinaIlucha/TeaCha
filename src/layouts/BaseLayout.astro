@@ -1,0 +1,50 @@
+---
+import "../styles/main.scss";
+import Header from "../components/Header.astro";
+---
+
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>TeaCha</title>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <slot />
+    </main>
+
+    <!-- Modal -->
+    <div class="modal" id="consultModal" aria-hidden="true">
+      <div class="modal__overlay" data-close-modal></div>
+
+      <div class="modal__content">
+        <button class="modal__close" data-close-modal aria-label="Закрити"
+          >✕</button
+        >
+
+        <h3 class="modal__title">БЕЗКОШТОВНА КОНСУЛЬТАЦІЯ</h3>
+        <p class="modal__subtitle">
+          Професійно вчимо говорити, подорожувати, працювати і жити мовою
+        </p>
+
+        <form class="modal__form" id="consultForm">
+          <input type="text" name="name" placeholder="Ваше імʼя" required />
+          <input
+            type="text"
+            name="contact"
+            placeholder="Телефон або Telegram"
+            required
+          />
+          <input type="email" name="email" placeholder="Ваш email" />
+
+          <button type="submit" class="modal__submit"> ЗАЛИШИТИ ЗАЯВКУ </button>
+        </form>
+      </div>
+    </div>
+
+    <script type="module" src="/src/scripts/main.js"></script>
+  </body>
+</html>

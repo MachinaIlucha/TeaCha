@@ -1,0 +1,301 @@
+.reviews {
+  padding: 30px 0 54px;
+}
+
+/* =========================
+   HEAD
+========================= */
+.reviews__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+/* mobile: кнопок нет */
+.reviews__controls {
+  display: none;
+}
+
+.circleBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 2px solid rgba(43, 46, 68, 0.18);
+  background: transparent;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease,
+    background-color 0.12s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .circleBtn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow);
+    background-color: rgba(43, 46, 68, 0.04);
+  }
+}
+
+/* =========================
+   FRAME
+========================= */
+.reviews__frame {
+  position: relative;
+  border-radius: var(--radius-xl);
+  padding: 14px;
+  background: var(--white);
+}
+
+.reviews__bgMark {
+  position: absolute;
+  inset: auto auto 10px 10px;
+  font-size: 240px;
+  font-weight: 900;
+  color: rgba(0, 0, 0, 0.04);
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* =========================
+   MOBILE (SWIPE)
+========================= */
+.reviewsMobile__viewport {
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+
+  /* чтобы край не прилипал к рамке */
+  scroll-padding-left: 14px;
+  scroll-padding-right: 14px;
+}
+
+.reviewsMobile__viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.reviewsMobile__track {
+  display: flex;
+  gap: 14px;
+  align-items: stretch;
+}
+
+.mSlide {
+  flex: 0 0 86%;
+  scroll-snap-align: start;
+  min-width: 0;
+}
+
+.mMedia {
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  background: #fff;
+
+  /* фикс высоты: большая фотка не раздувает */
+  height: 360px;
+  max-height: 360px;
+}
+
+.mMedia img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.mTextCard {
+  margin-top: 12px;
+  border-radius: 24px;
+  border: 2px solid rgba(43, 46, 68, 0.14);
+  padding: 18px 18px 54px;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  min-height: 200px;
+}
+
+.mText {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.65;
+  font-size: 15px;
+  max-width: 680px;
+}
+
+.mSig {
+  margin-top: 14px;
+  font-weight: 900;
+  color: var(--text);
+}
+
+.mDecor {
+  position: absolute;
+  right: 16px;
+  bottom: 12px;
+}
+
+/* bubbles (общие для mobile+desktop) */
+.bubble {
+  width: 96px;
+  height: 96px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+.bubble--small {
+  width: 56px;
+  height: 56px;
+  margin-top: -22px;
+  margin-left: 52px;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+/* =========================
+   DESKTOP (PHOTO + TEXT) + SUPER SMOOTH CROSSFADE
+========================= */
+.reviewsDesk {
+  display: none;
+}
+
+/* слои для crossfade (работают только на desktop блоке) */
+.deskStack {
+  position: relative;
+}
+
+.deskLayer {
+  position: absolute;
+  inset: 0;
+
+  opacity: 0;
+  transform: translate3d(8px, 0, 0);
+  transition: opacity 1200ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1200ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  will-change: opacity, transform;
+  pointer-events: none;
+}
+
+.deskLayer.is-front {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.deskLayer.is-back {
+  opacity: 0;
+}
+
+/* запуск анимации */
+.deskAnim.is-transitioning .deskLayer.is-front {
+  opacity: 0;
+  transform: translate3d(-8px, 0, 0);
+}
+
+.deskAnim.is-transitioning .deskLayer.is-back {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* направление назад */
+.deskAnim.is-transitioning.is-prev .deskLayer.is-front {
+  transform: translate3d(8px, 0, 0);
+}
+
+/* уважение к reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .deskLayer {
+    transition: none;
+  }
+}
+
+@media (min-width: 980px) {
+  .reviews {
+    padding: 40px 0 70px;
+  }
+
+  .reviews__bgMark {
+    font-size: 420px;
+  }
+
+  /* desktop: кнопки показываем */
+  .reviews__controls {
+    display: flex;
+    gap: 10px;
+  }
+
+  /* desktop: показываем desk, прячем mobile */
+  .reviewsMobile {
+    display: none;
+  }
+
+  .reviewsDesk {
+    display: block;
+  }
+
+  .deskGrid {
+    display: grid;
+    grid-template-columns: 520px minmax(0, 1fr);
+    gap: 18px;
+    align-items: stretch;
+  }
+
+  .deskMedia {
+    border-radius: 34px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    background: #fff;
+    height: 420px;
+  }
+
+  /* картинки-слои */
+  .deskMedia img.deskLayer {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .deskTextCard {
+    border-radius: 34px;
+    border: 2px solid rgba(43, 46, 68, 0.14);
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+    min-height: 420px;
+  }
+
+  /* текстовые слои: padding на слоях, чтобы красиво crossfade’илось */
+  .deskTextCard [data-front-text],
+  .deskTextCard [data-back-text] {
+    padding: 28px 28px 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .deskText {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.7;
+    font-size: 16px;
+    max-width: 720px;
+  }
+
+  .deskSig {
+    margin-top: 18px;
+    font-weight: 900;
+    color: var(--text);
+  }
+
+  .deskDecor {
+    position: absolute;
+    right: 18px;
+    bottom: 14px;
+    pointer-events: none;
+  }
+}

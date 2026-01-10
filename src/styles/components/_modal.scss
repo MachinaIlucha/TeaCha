@@ -1,0 +1,113 @@
+/* =========================
+   MODAL
+========================= */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: none;
+}
+
+.modal.is-open {
+  display: block;
+}
+
+.modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(43, 46, 68, 0.45);
+  backdrop-filter: blur(6px);
+}
+
+.modal__content {
+  position: relative;
+  max-width: 520px;
+  margin: 8vh auto;
+  background: #fff;
+  border-radius: 28px;
+  padding: 32px;
+  z-index: 1;
+
+  animation: modalIn 0.35s ease;
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.modal__close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid rgba(43, 46, 68, 0.25);
+  background: transparent;
+  cursor: pointer;
+}
+
+.modal__title {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 900;
+  color: rgba(43, 46, 68, 1);
+}
+
+.modal__subtitle {
+  margin: 8px 0 22px;
+  color: rgba(43, 46, 68, 0.75);
+  line-height: 1.4;
+}
+
+.modal__form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.modal__form input {
+  height: 52px;
+  border-radius: 999px;
+  border: 2px solid rgba(219, 31, 50, 0.35);
+  padding: 0 18px;
+  font-size: 15px;
+}
+
+.modal__submit {
+  margin-top: 10px;
+  height: 52px;
+  border-radius: 999px;
+
+  border: none;
+  background: rgba(219, 31, 50, 1); // 🔴 акцентный красный
+  color: #fff;
+
+  font-weight: 900;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.modal__submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 26px rgba(219, 31, 50, 0.45);
+  background-color: rgba(200, 25, 42, 1); // чуть темнее на hover
+}
+
+.modal__submit:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 14px rgba(219, 31, 50, 0.35);
+}

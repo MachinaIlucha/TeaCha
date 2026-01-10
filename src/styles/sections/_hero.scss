@@ -1,0 +1,186 @@
+.hero {
+  position: relative;
+  padding: 28px 0 20px;
+}
+
+.hero__grid {
+  display: grid;
+  grid-template-columns: 1fr; // mobile first
+  align-items: start;
+}
+
+.hero__left {
+  position: relative;
+}
+
+.hero__title {
+  margin-top: 8px;
+}
+
+.hero__titleLine {
+  font-size: clamp(34px, 8vw, 74px);
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  line-height: 0.95;
+}
+
+.hero__subtitle--big {
+  font-size: 20px;
+  line-height: 1.35;
+  margin-top: 20px;
+  margin-bottom: 0;
+  color: var(--text);
+}
+
+.hero__modes {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+/* ========= Фото ========= */
+
+.hero__right {
+  position: relative;
+}
+
+.heroPhoto {
+  position: relative; // якорь для mobile-кружка
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  min-height: 380px;
+  box-shadow: var(--shadow);
+}
+
+.heroPhoto__bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+      1200px 600px at 70% 30%,
+      rgba(0, 0, 0, 0.04),
+      rgba(0, 0, 0, 0) 55%
+    ),
+    linear-gradient(180deg, #f3f3f3 0%, #ffffff 60%);
+}
+
+.heroPhoto__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.info-tag {
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 999px;
+  background-color: var(--red);
+  color: var(--white);
+
+  font-weight: 700;
+  letter-spacing: 0.2px;
+
+  // mobile-first размер
+  padding: 12px 22px;
+  font-size: 16px;
+  min-height: 46px;
+}
+
+@media (min-width: 980px) {
+  .info-tag {
+    display: inline-flex;
+    padding: 16px 20px;
+    font-size: 18px;
+    min-height: 56px;
+  }
+}
+
+/* ========= КРУЖОК ========= */
+
+/* базовый вид */
+.badge--round {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: var(--red);
+  color: var(--white);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 700;
+  text-align: center;
+
+  cursor: pointer;
+  user-select: none;
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* hover только на устройствах с hover */
+@media (hover: hover) and (pointer: fine) {
+  .badge--round:hover {
+    transform: scale(1.06);
+    box-shadow: 0 18px 40px rgba(219, 31, 50, 0.35);
+  }
+}
+
+.hero__chips--mobile {
+  position: absolute;
+
+  right: -12px; // правее
+  top: -60px; // выше, чуть «вылезает» над фото
+
+  z-index: 1;
+}
+
+.hero__chips--desktop {
+  display: none;
+}
+
+/* ========= DESKTOP / TABLET+ ========= */
+
+@media (min-width: 980px) {
+  .hero {
+    padding: 34px 0 24px;
+  }
+
+  .hero__grid {
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 24px;
+    align-items: center;
+  }
+
+  .heroPhoto {
+    min-height: 520px;
+  }
+
+  /* на десктопе: прячем кружок на фото */
+  .hero__chips--mobile {
+    display: none;
+  }
+
+  /* на десктопе: возвращаем кружок "на букве І" */
+  .hero__chips--desktop {
+    display: block;
+    position: absolute;
+
+    left: 71%; // 👉 правее (буква І)
+    top: 71%; // 👉 чуть выше, чтобы визуально легло в строку
+
+    transform: translate(-50%, -50%) rotate(-15deg);
+    z-index: 3;
+  }
+
+  /* чтобы hover не наезжал на кнопки — кнопки выше */
+  .hero__modes {
+    z-index: 4;
+  }
+}

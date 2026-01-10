@@ -1,0 +1,107 @@
+.footer {
+  margin-top: 30px;
+  padding: 34px 0;
+  background: rgba(43, 46, 68, 0.03);
+  border-top: 2px solid rgba(43, 46, 68, 0.12);
+}
+
+.footer__grid {
+  display: grid;
+  grid-template-columns: 1fr; /* mobile */
+  gap: 18px;
+  align-items: start;
+}
+
+.footerBrand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footerBrand__logo {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+}
+
+.footerBrand__name {
+  font-weight: 900;
+  font-size: 22px;
+  letter-spacing: 0.3px;
+}
+
+.footer__title {
+  font-weight: 900;
+  letter-spacing: 0.3px;
+  margin-bottom: 10px;
+}
+
+.footer__a {
+  display: block;
+  color: rgba(43, 46, 68, 0.85);
+  margin: 8px 0;
+}
+.footer__a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.footer__text {
+  color: rgba(43, 46, 68, 0.85);
+  margin: 8px 0;
+}
+
+.footer__linksSmall {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer__link {
+  color: rgba(43, 46, 68, 0.85);
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.footer__ctaRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+/* icon buttons outline */
+.iconBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+
+  background: transparent;
+  border: 2px solid rgba(43, 46, 68, 0.25);
+  color: var(--text);
+  font-weight: 900;
+
+  transition: transform 0.12s ease, box-shadow 0.12s ease,
+    background-color 0.12s ease;
+}
+
+.iconBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+  background-color: rgba(43, 46, 68, 0.04);
+}
+
+@media (min-width: 980px) {
+  .footer {
+    padding: 44px 0;
+  }
+  .footer__grid {
+    grid-template-columns: 1.2fr 1fr 1fr 1fr;
+    gap: 20px;
+  }
+}
