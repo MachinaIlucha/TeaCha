@@ -1,0 +1,114 @@
+@media (min-width: 980px) {
+  /* TOP */
+  .price-top__cards {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+
+  /* RATES */
+  .price-rates__title {
+    font-size: clamp(34px, 4vw, 56px);
+  }
+
+  .price-bar {
+    grid-template-columns: 1.1fr 1.7fr;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 18px;
+  }
+
+  .price-bar__label {
+    font-size: 18px;
+  }
+
+  .price-table__name {
+    font-size: 20px;
+  }
+
+  .price-table__price {
+    font-size: 24px;
+  }
+
+  /* LEAD */
+  .price-lead__form {
+    grid-template-columns: minmax(0, 1fr) max-content;
+    grid-template-areas:
+      "fields cta"
+      "consent cta";
+    column-gap: 32px;
+    row-gap: 14px;
+    align-items: center;
+  }
+
+  .price-lead__fields {
+    grid-template-columns: 0.9fr 1.4fr 1.6fr;
+    gap: 26px;
+  }
+
+  .price-lead__cta {
+    justify-content: flex-end;
+    justify-self: end;
+    margin-top: 0;
+  }
+
+  .price-lead__btn {
+    font-size: 16px;
+    padding: 18px 32px;
+    min-height: 56px;
+  }
+
+  .price-lead__chip {
+    right: -30px;
+    bottom: -20px;
+  }
+
+  /* TEACHERS */
+  .teachers__title {
+    font-size: 36px;
+  }
+
+  .teachers-bar {
+    grid-template-columns: 1fr 1.2fr;
+    align-items: center;
+    gap: 16px;
+  }
+
+    /* сам контейнер табов — ограничим ширину и выровняем */
+  .teachers-tabs {
+    width: min(520px, 100%);  /* чтобы не растягивалось в бесконечность */
+    justify-self: center;     /* центр в своей колонке */
+    margin-left: 0;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 ровные кнопки */
+  }
+
+  .teacher__card {
+    grid-template-columns: minmax(0, 1fr) 420px;
+    align-items: end;
+    min-height: 560px;
+  }
+
+  .teacher__photo {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+  }
+
+  .teacher__img {
+    width: 440px;
+    margin-right: -10px; /* вылазит за край */
+    margin-bottom: 15px;
+    filter: drop-shadow(0 18px 32px rgba(0, 0, 0, 0.18));
+  }
+
+  /* FOUNDER */
+  .founder {
+    grid-template-columns: 1.05fr 1fr;
+    gap: 18px;
+  }
+
+  .founder__stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+}

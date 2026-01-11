@@ -1,0 +1,257 @@
+/* =========================
+   TEACHERS (ref-style)
+========================= */
+
+.teachers {
+  padding: 46px 0 72px;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.teachers__title {
+  margin: 0 0 18px;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.teachers-bar {
+  position: relative;
+  background: #1f1f1f;
+  color: #fff;
+
+  border-radius: 999px; /* было 22px */
+  padding: 14px 16px; /* как в price-bar */
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+
+  overflow: visible; /* как в price-bar, чтобы не было “подрезаний” */
+}
+
+.teachers-bar__label {
+  font-size: 16px; /* как price-bar__label */
+  padding-left: 10px; /* как price-bar__label */
+  opacity: 0.95;
+  font-weight: 600; /* если хочешь прям как в первом */
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.teachers-tabs__btn {
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.75);
+  cursor: pointer;
+  padding: 12px 10px;
+  border-radius: 999px;
+  font-weight: 800;
+  text-align: center;
+  position: relative;
+
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.teachers-tabs__btn.is-active {
+  color: var(--white);
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 2px;
+    border-radius: 999px;
+    outline: 2px solid rgba(255, 255, 255, 0.65);
+    pointer-events: none;
+  }
+}
+
+.teacher {
+  margin-top: 16px;
+}
+
+.teacher[hidden] {
+  display: none;
+}
+
+/* ====== STORY CARD ====== */
+.teacher__card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+
+  /* ⛔️ убираем карточность */
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  border: 0;
+
+  /* оставляем только отступы как у секции */
+  padding: 0;
+}
+
+.teacher__content {
+  min-width: 0;
+}
+
+.teacher__badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: #e11b22;
+  color: #fff;
+  font-weight: 900;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+}
+
+.teacher__name {
+  margin: 10px 0 4px;
+  font-size: 52px;
+  line-height: 0.92;
+  font-weight: 900;
+  color: #e11b22;
+}
+
+.teacher__role {
+  margin: 14px 0 14px;
+  font-size: 20px;
+  line-height: 1.15;
+  font-weight: 800;
+  color: #15161a;
+}
+
+/* === Сірий блок досвіду як у рефі === */
+.teacher__meta {
+  background: #efeff2;
+  border-radius: 18px;
+  padding: 14px 16px;
+}
+
+.teacher__meta-title {
+  font-weight: 900;
+  color: #e11b22;
+  font-size: 14px;
+  margin: 0 0 10px;
+  letter-spacing: 0.02em;
+}
+
+.teacher__meta-grid {
+  display: flex;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.teacher__meta-label {
+  font-size: 14px;
+  color: rgba(21, 22, 26, 0.65);
+  font-weight: 800;
+}
+
+.teacher__meta-value {
+  margin-top: 2px;
+  font-size: 22px;
+  color: #15161a;
+  font-weight: 900;
+}
+
+/* === Освіта як у рефі: маркери "-" === */
+.teacher__edu {
+  margin-top: 12px;
+}
+
+.teacher__edu-title {
+  font-weight: 900;
+  font-size: 20px;
+  margin: 0 0 10px;
+  color: #15161a;
+}
+
+.teacher__edu-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 12px;
+  max-width: 62ch;
+
+  li {
+    position: relative;
+    padding-left: 14px;
+    color: rgba(21, 22, 26, 0.72);
+    font-size: 20px;
+    line-height: 1.25;
+
+    &::before {
+      content: "-";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: rgba(21, 22, 26, 0.55);
+      font-weight: 900;
+    }
+  }
+}
+
+/* Фото на мобилці — в потоці */
+.teacher__photo {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.teacher__img {
+  width: min(340px, 92%);
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.18));
+  pointer-events: none;
+  user-select: none;
+}
+
+/* =========================
+   DESKTOP ≥ 980px
+========================= */
+
+@media (min-width: 980px) {
+  .teachers__title {
+    font-size: 36px;
+  }
+
+  .teachers-bar {
+    grid-template-columns: 1.1fr 1.7fr; /* как price-bar */
+    align-items: center;
+    gap: 14px;
+    padding: 16px 18px;
+    border-radius: 999px;
+  }
+
+  .teachers-bar__label {
+    font-size: 18px; /* как price-bar__label на desktop */
+  }
+
+  /* Карта: робимо місце справа, але саме фото "липне" absolute */
+  .teacher__card {
+    padding: 22px 22px;
+    grid-template-columns: minmax(0, 1fr) 420px; /* резерв під фото */
+    gap: 18px;
+    min-height: 640px;
+  }
+
+  .teacher__photo {
+    /* фото буде absolute, але залишимо блок як "якір" */
+    position: relative;
+  }
+
+  .teacher__img {
+    position: absolute;
+    right: -28px; /* "вилазить" як стікер */
+    bottom: -100px;
+    width: 440px;
+    margin: 0;
+    transform: none;
+  }
+}

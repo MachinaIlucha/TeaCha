@@ -1,0 +1,149 @@
+.price-rates {
+  padding: 44px 0 64px;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.price-rates__title {
+  text-align: center;
+  margin: 0 0 22px;
+  line-height: 1.05;
+  font-weight: 500;
+  font-size: 28px;
+}
+
+/* black pill */
+.price-bar {
+  position: relative;
+  background: #1f1f1f;
+  color: var(--white);
+  border-radius: 999px;
+  padding: 14px 16px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin: 0 auto 18px;
+  overflow: visible;
+}
+
+.price-bar__label {
+  font-size: 16px;
+  padding-left: 10px;
+  opacity: 0.95;
+}
+
+/* teacher switch */
+.teacher-switch {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  background: transparent;
+  border-radius: 999px;
+  padding: 6px;
+  overflow: visible; /* важно */
+  --pos: 0;
+}
+
+.teacher-switch__btn {
+  position: relative;
+  z-index: 2;
+  pointer-events: auto;
+
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 800;
+  padding: 12px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.teacher-switch__btn.is-active {
+  color: #fff;
+  outline: 2px solid rgba(255, 255, 255, 0.65);
+  outline-offset: -2px;
+}
+
+.price-bar__sticker {
+  position: absolute;
+  right: -35px;
+  top: -35px;
+  transform: rotate(15deg);
+  pointer-events: none;
+  user-select: none;
+  z-index: 2;
+
+  img {
+    display: block;
+    width: 180px;
+    height: auto;
+  }
+}
+
+/* table */
+.price-table {
+  border-top: 1px solid rgba(43, 46, 68, 0.18);
+}
+
+.price-table__head,
+.price-table__row {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr 1.1fr;
+  align-items: center;
+}
+
+.price-table__head {
+  padding: 16px 0;
+  color: rgba(43, 46, 68, 0.75);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  > div {
+    text-align: center;
+  }
+
+  > div:first-child {
+    text-align: left;
+    color: rgba(43, 46, 68, 0.9);
+  }
+}
+
+.price-table__row {
+  border-bottom: 1px solid rgba(43, 46, 68, 0.12);
+  padding: 18px 0;
+}
+
+.price-table__name {
+  font-size: 18px;
+  font-weight: 600;
+  color: rgba(43, 46, 68, 0.95);
+}
+
+.price-table__cell {
+  text-align: center;
+}
+
+.price-table__price {
+  font-size: 22px;
+  font-weight: 900;
+  color: rgba(43, 46, 68, 1);
+}
+
+.price-table__old {
+  margin-top: 6px;
+  font-size: 12px;
+
+  s {
+    color: rgba(43, 46, 68, 0.55);
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--red);
+  }
+}
+
+.price-table__cell.is-empty {
+  opacity: 0;
+}
