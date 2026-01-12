@@ -175,27 +175,31 @@ const base = import.meta.env.BASE_URL;
               class="price-field__input"
               name="name"
               type="text"
-              autocomplete="name"
               placeholder="ІМʼЯ"
+              required
+              oninvalid="this.setCustomValidity('Введіть ваше імʼя')"
+              oninput="this.setCustomValidity('')"
             />
             <input
               class="price-field__input"
               name="contact"
               type="text"
-              autocomplete="tel"
               placeholder="ТЕЛЕФОН АБО НІК TELEGRAM"
-            />
-            <input
-              class="price-field__input"
-              name="email"
-              type="email"
-              autocomplete="email"
-              placeholder="EMAIL"
+              required
+              oninvalid="this.setCustomValidity('Вкажіть телефон або Telegram')"
+              oninput="this.setCustomValidity('')"
             />
           </div>
 
           <label class="price-consent">
-            <input class="price-consent__check" type="checkbox" required />
+            <input
+              class="price-consent__check"
+              type="checkbox"
+              name="consent"
+              required
+              oninvalid="this.setCustomValidity('Потрібно погодитися з політикою конфіденційності')"
+              onchange="this.setCustomValidity('')"
+            />
             <span class="price-consent__box" aria-hidden="true"></span>
             <span class="price-consent__text">
               Я підтверджую, що ознайомився(-лася) та погоджуюся з умовами
@@ -262,8 +266,16 @@ const base = import.meta.env.BASE_URL;
         <article class="teacher" data-teacher-panel="daryna">
           <div class="teacher__card">
             <div class="teacher__content">
-              <div class="teacher__badge">ТОП СПЕЦІАЛІСТ:</div>
               <h3 class="teacher__name">Дарина</h3>
+
+              <div class="teacher__badgeSticker" aria-hidden="true">
+                <img
+                  src={`${base}img/top-specialist.png`}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
               <p class="teacher__role">Співзасновниця мовного центру TeaCha</p>
 
               <div class="teacher__meta">
@@ -316,8 +328,16 @@ const base = import.meta.env.BASE_URL;
         <article class="teacher" data-teacher-panel="daria" hidden>
           <div class="teacher__card">
             <div class="teacher__content">
-              <div class="teacher__badge">ТОП СПЕЦІАЛІСТ:</div>
               <h3 class="teacher__name">Дарія</h3>
+
+              <div class="teacher__badgeSticker" aria-hidden="true">
+                <img
+                  src={`${base}img/top-specialist.png`}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
               <p class="teacher__role">Співзасновниця мовного центру TeaCha</p>
 
               <div class="teacher__meta">

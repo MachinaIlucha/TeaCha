@@ -67,6 +67,39 @@
   color: rgba(43, 46, 68, 0.75);
   line-height: 1.4;
 }
+/* consent inside white modal */
+.modal__consent {
+  margin: 14px 0 18px;
+  color: rgba(43, 46, 68, 0.85);
+
+  .price-consent__box {
+    border-color: rgba(43, 46, 68, 0.35);
+    background: transparent;
+  }
+
+  .price-consent__text {
+    color: rgba(43, 46, 68, 0.85);
+    font-size: 13px;
+    line-height: 1.35;
+  }
+
+  .price-consent__text a {
+    color: rgba(43, 46, 68, 0.95);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  /* checked state (dark tick on light bg) */
+  .price-consent__check:checked + .price-consent__box {
+    background: rgba(43, 46, 68, 0.92);
+    border-color: rgba(43, 46, 68, 0.92);
+  }
+
+  .price-consent__check:checked + .price-consent__box::after {
+    border-left-color: #fff;
+    border-bottom-color: #fff;
+  }
+}
 
 .modal__form {
   display: flex;
@@ -95,9 +128,7 @@
   letter-spacing: 0.3px;
   cursor: pointer;
 
-  transition:
-    transform 0.15s ease,
-    box-shadow 0.15s ease,
+  transition: transform 0.15s ease, box-shadow 0.15s ease,
     background-color 0.15s ease;
 }
 
