@@ -9,6 +9,13 @@ import "../styles/main.scss";
 import Header from "../components/Header.astro";
 
 const base = import.meta.env.BASE_URL;
+const pathname = Astro.url.pathname;
+
+const baseNoTrailingSlash =
+  base !== "/" && base.endsWith("/") ? base.slice(0, -1) : base;
+
+const isHome =
+  pathname === "/" || pathname === base || pathname === baseNoTrailingSlash;
 ---
 
 <!doctype html>
@@ -25,6 +32,25 @@ const base = import.meta.env.BASE_URL;
     <main>
       <slot />
     </main>
+
+    {/* Floating CTA (not on home) */}
+    {
+      !isHome && (
+        <button
+          class="floating-cta"
+          type="button"
+          data-open-modal
+          aria-haspopup="dialog"
+          aria-controls="consultModal"
+        >
+          <span>
+            ХОЧУ
+            <br />
+            ПРОБНЕ ЗАНЯТТЯ
+          </span>
+        </button>
+      )
+    }
 
     <!-- Modal -->
     <div class="modal" id="consultModal" aria-hidden="true">

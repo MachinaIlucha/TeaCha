@@ -167,74 +167,6 @@ const base = import.meta.env.BASE_URL;
           </div>
         </div>
       </section>
-
-      <div class="price-lead">
-        <form class="price-lead__form" action="#" method="post">
-          <div class="price-lead__fields">
-            <input
-              class="price-field__input"
-              name="name"
-              type="text"
-              placeholder="ІМʼЯ"
-              required
-              oninvalid="this.setCustomValidity('Введіть ваше імʼя')"
-              oninput="this.setCustomValidity('')"
-            />
-            <input
-              class="price-field__input"
-              name="contact"
-              type="text"
-              placeholder="ТЕЛЕФОН АБО НІК TELEGRAM"
-              required
-              oninvalid="this.setCustomValidity('Вкажіть телефон або Telegram')"
-              oninput="this.setCustomValidity('')"
-            />
-          </div>
-
-          <label class="price-consent">
-            <input
-              class="price-consent__check"
-              type="checkbox"
-              name="consent"
-              required
-              oninvalid="this.setCustomValidity('Потрібно погодитися з політикою конфіденційності')"
-              onchange="this.setCustomValidity('')"
-            />
-            <span class="price-consent__box" aria-hidden="true"></span>
-            <span class="price-consent__text">
-              Я підтверджую, що ознайомився(-лася) та погоджуюся з умовами
-              <a
-                href={`${base}docs/polityka-konfidentsiinosti.pdf`}
-                target="_blank"
-                rel="noopener">Політики конфіденційності</a
-              >
-            </span>
-          </label>
-
-          <div class="price-lead__cta">
-            <div class="price-lead__btnWrap">
-              <button class="price-lead__btn" type="submit">
-                ЗАПИСАТИСЯ НА ПРОБНИЙ УРОК
-              </button>
-
-              <div class="price-lead__chip">
-                <img
-                  src={`${base}img/messenger-sticker.png`}
-                  alt="Напишемо в месенджер"
-                  loading="lazy"
-                />
-              </div>
-            </div>
-          </div>
-
-          <img
-            class="price-lead__doodle"
-            src={`${base}img/doodle-hand.png`}
-            alt="Декоративний рукописний елемент"
-            loading="lazy"
-          />
-        </form>
-      </div>
     </div>
 
     <section class="teachers" id="teachers">
@@ -387,6 +319,76 @@ const base = import.meta.env.BASE_URL;
         </article>
       </div>
     </section>
+
+    <div class="price-lead">
+      <div class="container">
+        <form class="price-lead__form" action="#" method="post">
+          <div class="price-lead__fields">
+            <input
+              class="price-field__input"
+              name="name"
+              type="text"
+              placeholder="ІМʼЯ"
+              required
+              oninvalid="this.setCustomValidity('Введіть ваше імʼя')"
+              oninput="this.setCustomValidity('')"
+            />
+            <input
+              class="price-field__input"
+              name="contact"
+              type="text"
+              placeholder="ТЕЛЕФОН АБО НІК TELEGRAM"
+              required
+              oninvalid="this.setCustomValidity('Вкажіть телефон або Telegram')"
+              oninput="this.setCustomValidity('')"
+            />
+          </div>
+
+          <label class="price-consent">
+            <input
+              class="price-consent__check"
+              type="checkbox"
+              name="consent"
+              required
+              oninvalid="this.setCustomValidity('Потрібно погодитися з політикою конфіденційності')"
+              onchange="this.setCustomValidity('')"
+            />
+            <span class="price-consent__box" aria-hidden="true"></span>
+            <span class="price-consent__text">
+              Я підтверджую, що ознайомився(-лася) та погоджуюся з умовами
+              <a
+                href={`${base}docs/polityka-konfidentsiinosti.pdf`}
+                target="_blank"
+                rel="noopener">Політики конфіденційності</a
+              >
+            </span>
+          </label>
+
+          <div class="price-lead__cta">
+            <div class="price-lead__btnWrap">
+              <button class="price-lead__btn" type="submit">
+                ЗАПИСАТИСЯ НА ПРОБНИЙ УРОК
+              </button>
+
+              <div class="price-lead__chip">
+                <img
+                  src={`${base}img/messenger-sticker.png`}
+                  alt="Напишемо в месенджер"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
+
+          <img
+            class="price-lead__doodle"
+            src={`${base}img/doodle-hand.png`}
+            alt="Декоративний рукописний елемент"
+            loading="lazy"
+          />
+        </form>
+      </div>
+    </div>
   </section>
 
   <Footer />

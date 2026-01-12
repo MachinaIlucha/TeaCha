@@ -157,6 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.classList.remove("is-open");
     modal.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
+    document.body.classList.remove("modal-open");
   };
 
   if (modal) {
@@ -165,6 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
         modal.classList.add("is-open");
         modal.setAttribute("aria-hidden", "false");
         document.body.style.overflow = "hidden";
+        document.body.classList.add("modal-open");
       });
     });
 
@@ -192,6 +194,20 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   setTopbarH();
+
+  document.querySelectorAll(".badge--round").forEach((el, i) => {
+    console.log("[badge-pulse] init", i, el);
+
+    const delay = -(Math.random() * 2.8).toFixed(2) + "s";
+    el.style.setProperty("--halo-delay", delay);
+
+    const dur = (2.6 + Math.random() * 0.8).toFixed(2) + "s";
+    el.style.setProperty("--halo-dur", dur);
+
+    el.classList.add("is-intro");
+    setTimeout(() => el.classList.remove("is-intro"), 480);
+  });
+
   window.addEventListener("resize", setTopbarH);
 });
 
