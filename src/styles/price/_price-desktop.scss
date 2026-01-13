@@ -68,9 +68,15 @@
   }
 
   .teachers-bar {
-    grid-template-columns: 1fr 1.2fr;
+    grid-template-columns: 1.1fr 1.7fr; /* как price-bar */
     align-items: center;
-    gap: 16px;
+    gap: 14px;
+    padding: 16px 18px;
+    border-radius: 999px;
+  }
+
+  .teachers-bar__label {
+    font-size: 18px; /* как price-bar__label на desktop */
   }
 
     /* сам контейнер табов — ограничим ширину и выровняем */

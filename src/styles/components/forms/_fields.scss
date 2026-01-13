@@ -1,0 +1,25 @@
+.price-field__input {
+  width: 100%;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: var(--white);
+  font-size: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+  min-width: 0;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.95);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+    opacity: 1;
+  }
+
+  &:focus {
+    border-bottom-color: rgba(255, 255, 255, 0.85);
+  }
+}

@@ -11,6 +11,9 @@
 
 .hero__left {
   position: relative;
+
+  // чтобы кнопки не "прилипали" к фото на мобилке
+  padding-bottom: 25px;
 }
 
 .hero__title {
@@ -36,9 +39,77 @@
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
-  margin-top: 20px;
+  margin-top: 10px;
   position: relative;
   z-index: 2;
+}
+
+/* ========= HERO LANGUAGE BUTTONS (only hero) ========= */
+/* в разметке сейчас: class="heroPill heroLangBtn" — поддерживаем обе */
+.hero__modes .heroPill,
+.hero__modes .heroLangBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 999px;
+  background-color: var(--red);
+  border: 2px solid var(--red);
+  color: var(--white);
+
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+
+  // mobile-first размеры (близко к тем, что были у info-tag)
+  padding: 12px 22px;
+  font-size: 16px;
+  min-height: 46px;
+
+  cursor: pointer;
+
+  // чтобы в статике читалось как кнопка, а не плашка
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.18), 0 10px 22px rgba(219, 31, 50, 0.22);
+
+  transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .hero__modes .heroPill:hover,
+  .hero__modes .heroLangBtn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.18), 0 16px 34px rgba(219, 31, 50, 0.28);
+    filter: brightness(0.96);
+  }
+}
+
+.hero__modes .heroPill:active,
+.hero__modes .heroLangBtn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.18), 0 8px 18px rgba(219, 31, 50, 0.2);
+  filter: brightness(0.92);
+}
+
+.hero__modes .heroPill:focus-visible,
+.hero__modes .heroLangBtn:focus-visible {
+  outline: 3px solid rgba(219, 31, 50, 0.32);
+  outline-offset: 3px;
+}
+
+/* чуть компактнее на очень узких экранах */
+@media (max-width: 420px) {
+  .hero__modes {
+    gap: 10px;
+  }
+
+  .hero__modes .heroPill,
+  .hero__modes .heroLangBtn {
+    padding: 10px 16px;
+    min-height: 42px;
+    font-size: 15px;
+  }
 }
 
 /* ========= Фото ========= */
@@ -74,40 +145,16 @@
   object-fit: cover;
 }
 
-.info-tag {
-  display: none;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 999px;
-  background-color: var(--red);
-  color: var(--white);
-
-  font-weight: 700;
-  letter-spacing: 0.2px;
-
-  // mobile-first размер
-  padding: 12px 22px;
-  font-size: 16px;
-  min-height: 46px;
-}
-
-@media (min-width: 980px) {
-  .info-tag {
-    display: inline-flex;
-    padding: 16px 20px;
-    font-size: 18px;
-    min-height: 56px;
-  }
-}
-
 /* ========= КРУЖОК ========= */
 
+/* mobile-first: уменьшаем круг */
 .badge--round {
   position: relative;
-  width: 140px;
-  height: 140px;
+
+  width: 104px;
+  height: 104px;
   border-radius: 50%;
+
   background: var(--red);
   color: var(--white);
 
@@ -117,6 +164,9 @@
 
   font-weight: 700;
   text-align: center;
+
+  font-size: 12px;
+  line-height: 1.05;
 
   cursor: pointer;
   user-select: none;
@@ -132,7 +182,7 @@
 .badge--round::after {
   content: "";
   position: absolute;
-  inset: -6px;
+  inset: -5px;
   border-radius: 50%;
   background: rgba(219, 31, 50, 0.22);
   z-index: -1;
@@ -207,8 +257,8 @@
 .hero__chips--mobile {
   position: absolute;
 
-  right: -12px; // правее
-  top: -60px; // выше, чуть «вылезает» над фото
+  right: -10px;
+  top: -38px; // было -60px, чтобы не конфликтовало с кнопками
 
   z-index: 1;
 }
@@ -228,6 +278,10 @@
     grid-template-columns: 1.05fr 0.95fr;
     gap: 24px;
     align-items: center;
+  }
+
+  .hero__left {
+    padding-bottom: 0;
   }
 
   .heroPhoto {
@@ -251,8 +305,29 @@
     z-index: 3;
   }
 
+  /* возвращаем размер круга как было */
+  .badge--round {
+    width: 140px;
+    height: 140px;
+    font-size: inherit;
+    line-height: normal;
+  }
+
+  .badge--round::after {
+    inset: -6px;
+  }
+
+  /* размеры кнопок на десктопе как раньше у info-tag */
+  .hero__modes .heroPill,
+  .hero__modes .heroLangBtn {
+    padding: 16px 20px;
+    font-size: 18px;
+    min-height: 56px;
+  }
+
   /* чтобы hover не наезжал на кнопки — кнопки выше */
   .hero__modes {
+    margin-top: 20px;
     z-index: 4;
   }
 }

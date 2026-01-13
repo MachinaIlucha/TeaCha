@@ -1,0 +1,19 @@
+---
+const { hidden = false } = Astro.props
+---
+
+{!hidden && (
+  <button
+    class="floating-cta"
+    type="button"
+    data-open-modal
+    aria-haspopup="dialog"
+    aria-controls="consultModal"
+  >
+    <span>
+      ХОЧУ
+      <br />
+      ПРОБНЕ ЗАНЯТТЯ
+    </span>
+  </button>
+)}

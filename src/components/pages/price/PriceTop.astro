@@ -1,0 +1,57 @@
+---
+const { base } = Astro.props
+---
+
+<section class="price-top">
+  <div class="container">
+    <h1 class="price-top__title">
+      Зроби свій перший крок<br />
+      до <span class="u-ink">вивчення</span> іноземної<br />
+      мови
+    </h1>
+
+    <div class="price-top__cards">
+      <article class="price-card">
+        <div class="price-card__icon">
+          <img src={`${base}img/icon-smile.png`} alt="Іконка усмішки" loading="lazy" />
+        </div>
+        <h3 class="price-card__title">Визнач свою мету</h3>
+        <p class="price-card__text">
+          Дивитися фільми без субтитрів, читати книги в оригіналі чи вести
+          ділові переговори з іноземцями — допоможемо досягти тобі будь-якої
+          цілі.
+        </p>
+      </article>
+
+      <article class="price-card">
+        <div class="price-card__icon">
+          <img
+            src={`${base}img/icon-handwrite.png`}
+            alt="Іконка рукописного тексту"
+            loading="lazy"
+          />
+        </div>
+        <h3 class="price-card__title">Заповни форму реєстрації</h3>
+        <p class="price-card__text">
+          Залиш свої контакти, і ми напишемо тобі, щоб узгодити деталі першого уроку.
+        </p>
+      </article>
+
+      <article class="price-card">
+        <div class="price-card__icon">
+          <img
+            src={`${base}img/icon-check.png`}
+            alt="Іконка галочки підтвердження"
+            loading="lazy"
+          />
+        </div>
+        <h3 class="price-card__title">Пройди пробний урок</h3>
+        <p class="price-card__text">
+          Познайомся з викладачем, скинь свій улюблений мем, розкажи чому
+          хочеш вивчити мову. Це допоможе скласти індивідуальний план навчання
+          для тебе.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>

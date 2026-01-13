@@ -1,0 +1,116 @@
+---
+const { base } = Astro.props
+---
+
+<section class="teachers" id="teachers">
+  <div class="container">
+    <h2 class="teachers__title">Наші вчителі</h2>
+
+    <div class="teachers-bar">
+      <div class="teachers-bar__label">Вибери вчителя</div>
+
+      <div class="teacher-switch" data-teacher-tabs>
+        <button class="teacher-switch__btn is-active" type="button" data-teacher="daryna">
+          Дарина
+        </button>
+        <button class="teacher-switch__btn" type="button" data-teacher="daria">
+          Дарія
+        </button>
+      </div>
+    </div>
+
+    <article class="teacher" data-teacher-panel="daryna">
+      <div class="teacher__card">
+        <div class="teacher__content">
+          <h3 class="teacher__name">Дарина</h3>
+
+          <div class="teacher__badgeSticker" aria-hidden="true">
+            <img src={`${base}img/top-specialist.png`} alt="" loading="lazy" decoding="async" />
+          </div>
+
+          <p class="teacher__role">Співзасновниця мовного центру TeaCha</p>
+
+          <div class="teacher__meta">
+            <div class="teacher__meta-title">ДОСВІД ВИКЛАДАННЯ:</div>
+            <div class="teacher__meta-grid">
+              <div class="teacher__meta-item">
+                <div class="teacher__meta-label">англійської:</div>
+                <div class="teacher__meta-value">8 років</div>
+              </div>
+              <div class="teacher__meta-item">
+                <div class="teacher__meta-label">китайської:</div>
+                <div class="teacher__meta-value">6 років</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="teacher__edu">
+            <div class="teacher__edu-title">ОСВІТА:</div>
+            <ul class="teacher__edu-list">
+              <li>
+                Червоний диплом магістра КНУ ім. Шевченка (китайська мова та література,
+                англійська мова і переклад)
+              </li>
+              <li>Семестрова програма навчання в Університеті Ціндао, Китай (онлайн)</li>
+              <li>
+                Річна програма навчання в Університеті Ціндао, Китай (проживання і навчання в Китаї)
+              </li>
+              <li>Курси Інституту Конфуція при КНУ ім. Шевченка</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="teacher__photo">
+          <img class="teacher__img" src={`${base}img/daryna.webp`} alt="Дарина" loading="lazy" decoding="async" />
+        </div>
+      </div>
+    </article>
+
+    <article class="teacher" data-teacher-panel="daria" hidden>
+      <div class="teacher__card">
+        <div class="teacher__content">
+          <h3 class="teacher__name">Дарія</h3>
+
+          <div class="teacher__badgeSticker" aria-hidden="true">
+            <img src={`${base}img/top-specialist.png`} alt="" loading="lazy" decoding="async" />
+          </div>
+
+          <p class="teacher__role">Співзасновниця мовного центру TeaCha</p>
+
+          <div class="teacher__meta">
+            <div class="teacher__meta-title">ДОСВІД ВИКЛАДАННЯ:</div>
+            <div class="teacher__meta-grid">
+              <div class="teacher__meta-item">
+                <div class="teacher__meta-label">англійської:</div>
+                <div class="teacher__meta-value">7 років</div>
+              </div>
+              <div class="teacher__meta-item">
+                <div class="teacher__meta-label">китайської:</div>
+                <div class="teacher__meta-value">4 роки</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="teacher__edu">
+            <div class="teacher__edu-title">ОСВІТА:</div>
+            <ul class="teacher__edu-list">
+              <li>
+                Червоний диплом магістра КНУ ім. Шевченка (китайська мова та література,
+                англійська мова і переклад)
+              </li>
+              <li>Семестрова програма навчання в Університеті Ціндао, Китай (онлайн)</li>
+              <li>
+                Річна програма навчання в Університеті Ціндао, Китай (проживання і навчання в Китаї)
+              </li>
+              <li>Курси Інституту Конфуція при КНУ ім. Шевченка</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="teacher__photo">
+          <img class="teacher__img" src={`${base}img/daria.webp`} alt="Дарія" loading="lazy" decoding="async" />
+        </div>
+      </div>
+    </article>
+  </div>
+</section>

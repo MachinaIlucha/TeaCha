@@ -1,64 +1,10 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Recognize from "../components/Recognize.astro";
-import Steps from "../components/Steps.astro";
+import HomeHero from "../components/pages/home/HomeHero.astro";
 import Reviews from "../components/Reviews.astro";
-import Footer from "../components/Footer.astro";
-
-const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout>
-  <section class="hero" id="school">
-    <div class="container hero__grid">
-      <div class="hero__left">
-        <div class="hero__title">
-          <div class="hero__titleLine">
-            <span class="tea">TEA</span><span class="cha">CHA</span> -
-          </div>
-          <div class="hero__titleLine">ДВІ КУЛЬТУРИ В ОДНОМУ ПРОСТОРІ</div>
-        </div>
-
-        <p class="hero__subtitle hero__subtitle--big">
-          Ми - центр <br />найпопулярніших мов у світі
-        </p>
-
-        <!-- ✅ DESKTOP-ВАРИАНТ (на букве "І") -->
-        <div class="hero__chips hero__chips--desktop">
-          <div class="badge badge--round" data-open-modal>
-            <span>ХОЧУ<br />ПРОБНИЙ УРОК</span>
-          </div>
-        </div>
-
-        <div class="hero__modes">
-          <span class="info-tag">Офлайн навчання</span>
-          <span class="info-tag">Онлайн навчання</span>
-        </div>
-      </div>
-
-      <div class="hero__right">
-        <!-- НАКЛЕЙКА -->
-        <div class="hero__chips hero__chips--mobile">
-          <div class="badge badge--round" data-open-modal>
-            <span>ХОЧУ<br />ПРОБНИЙ УРОК</span>
-          </div>
-        </div>
-
-        <!-- ФОТО -->
-        <div class="heroPhoto">
-          <div class="heroPhoto__bg" aria-hidden="true"></div>
-          <img
-            class="heroPhoto__img"
-            src={`${base}img/hero-portrait.jpg`}
-            alt="Фото викладачів"
-          />
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- <Recognize />
-  <Steps /> -->
+  <HomeHero />
   <Reviews />
-  <Footer />
 </BaseLayout>

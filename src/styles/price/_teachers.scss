@@ -15,58 +15,6 @@
   letter-spacing: -0.02em;
 }
 
-.teachers-bar {
-  position: relative;
-  background: #1f1f1f;
-  color: #fff;
-
-  border-radius: 999px; /* было 22px */
-  padding: 14px 16px; /* как в price-bar */
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-
-  overflow: visible; /* как в price-bar, чтобы не было “подрезаний” */
-}
-
-.teachers-bar__label {
-  font-size: 16px; /* как price-bar__label */
-  padding-left: 10px; /* как price-bar__label */
-  opacity: 0.95;
-  font-weight: 600; /* если хочешь прям как в первом */
-  color: rgba(255, 255, 255, 0.95);
-}
-
-.teachers-tabs__btn {
-  border: 0;
-  background: transparent;
-  color: rgba(255, 255, 255, 0.75);
-  cursor: pointer;
-  padding: 12px 10px;
-  border-radius: 999px;
-  font-weight: 800;
-  text-align: center;
-  position: relative;
-
-  min-width: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.teachers-tabs__btn.is-active {
-  color: var(--white);
-
-  &::after {
-    content: "";
-    position: absolute;
-    inset: 2px;
-    border-radius: 999px;
-    outline: 2px solid rgba(255, 255, 255, 0.65);
-    pointer-events: none;
-  }
-}
-
 .teacher[hidden] {
   display: none;
 }
@@ -86,11 +34,6 @@
 
   /* оставляем только отступы как у секции */
   padding: 0;
-}
-
-.teacher__content {
-  position: relative;
-  min-width: 0;
 }
 
 .teacher__content {
@@ -237,18 +180,6 @@
 @media (min-width: 980px) {
   .teachers__title {
     font-size: 36px;
-  }
-
-  .teachers-bar {
-    grid-template-columns: 1.1fr 1.7fr; /* как price-bar */
-    align-items: center;
-    gap: 14px;
-    padding: 16px 18px;
-    border-radius: 999px;
-  }
-
-  .teachers-bar__label {
-    font-size: 18px; /* как price-bar__label на desktop */
   }
 
   /* Карта: робимо місце справа, але саме фото "липне" absolute */

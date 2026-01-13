@@ -1,0 +1,88 @@
+/* Base consent block (reusable) */
+.price-consent {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  font-size: 12px;
+  line-height: 1.25;
+}
+
+.price-consent a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.price-consent__check {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.price-consent__box {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  flex: 0 0 22px;
+
+  display: inline-grid;
+  place-items: center;
+
+  border: 1px solid currentColor;
+  background: transparent;
+}
+
+/* tick */
+.price-consent__check:checked + .price-consent__box::after {
+  content: "";
+  width: 10px;
+  height: 6px;
+  border-left: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(-45deg);
+  margin-top: -1px;
+}
+
+/* =========================
+   Themes
+========================= */
+
+/* Dark theme (black blocks like price-lead) */
+.price-consent--dark {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.price-consent--dark a {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.price-consent--dark .price-consent__box {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.price-consent--dark .price-consent__check:checked + .price-consent__box {
+  background: rgba(255, 255, 255, 0.92);
+  color: #111;
+  border-color: rgba(255, 255, 255, 0.92);
+}
+
+/* Light theme (white modal) */
+.price-consent--light {
+  color: rgba(43, 46, 68, 0.85);
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.price-consent--light a {
+  color: rgba(43, 46, 68, 0.95);
+}
+
+.price-consent--light .price-consent__box {
+  color: rgba(43, 46, 68, 0.35);
+}
+
+.price-consent--light .price-consent__check:checked + .price-consent__box {
+  background: rgba(43, 46, 68, 0.92);
+  color: #fff;
+  border-color: rgba(43, 46, 68, 0.92);
+}

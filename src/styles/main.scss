@@ -1,17 +1,6 @@
-@use "./settings/tokens";
-@use "./base/reset";
-@use "./base/globals";
-@use "./base/ui";
-@use "./layout/container";
-
-@use "./components/buttons";
-@use "./components/header";
-@use "./components/modal";
-@use "./components/floating-cta";
-
-@use "./price/price";
-@use "./sections/hero";
-@use "./sections/recognize";
-@use "./sections/steps";
-@use "./sections/reviews";
-@use "./sections/footer";
+@use "./settings";
+@use "./base";
+@use "./layout";
+@use "./components";
+@use "./sections";
+@use "./price";

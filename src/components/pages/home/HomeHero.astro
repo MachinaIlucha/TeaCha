@@ -1,0 +1,50 @@
+---
+const base = import.meta.env.BASE_URL;
+---
+
+<section class="hero" id="school">
+  <div class="container hero__grid">
+    <div class="hero__left">
+      <div class="hero__title">
+        <div class="hero__titleLine">
+          <span class="tea">TEA</span><span class="cha">CHA</span> -
+        </div>
+        <div class="hero__titleLine">ДВІ КУЛЬТУРИ В ОДНОМУ ПРОСТОРІ</div>
+      </div>
+
+      <p class="hero__subtitle hero__subtitle--big">
+        Ми - центр <br />найпопулярніших мов у світі
+      </p>
+
+      <!-- DESKTOP -->
+      <div class="hero__chips hero__chips--desktop">
+        <div class="badge badge--round" data-open-modal>
+          <span>ХОЧУ<br />ПРОБНИЙ УРОК</span>
+        </div>
+      </div>
+
+      <div class="hero__modes">
+        <a href="/english" class="heroPill heroLangBtn"> Англійська </a>
+        <a href="/chinese" class="heroPill heroLangBtn"> Китайська </a>
+      </div>
+    </div>
+
+    <div class="hero__right">
+      <!-- MOBILE -->
+      <div class="hero__chips hero__chips--mobile">
+        <div class="badge badge--round" data-open-modal>
+          <span>ХОЧУ<br />ПРОБНИЙ УРОК</span>
+        </div>
+      </div>
+
+      <div class="heroPhoto">
+        <div class="heroPhoto__bg" aria-hidden="true"></div>
+        <img
+          class="heroPhoto__img"
+          src={`${base}img/hero-portrait.jpg`}
+          alt="Фото викладачів"
+        />
+      </div>
+    </div>
+  </div>
+</section>

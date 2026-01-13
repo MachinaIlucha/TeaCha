@@ -1,0 +1,99 @@
+---
+const { base } = Astro.props
+---
+
+<section class="price-rates">
+  <div class="container">
+    <h2 class="price-rates__title">
+      Вартість <span>[ навчання ]</span>:
+    </h2>
+
+    <div class="price-bar">
+      <div class="price-bar__label">Вибери вчителя</div>
+
+      <div class="teacher-switch" data-price-teacher-tabs>
+        <button
+          class="teacher-switch__btn is-active"
+          type="button"
+          data-teacher="daryna"
+          aria-selected="true"
+        >
+          Дарина
+        </button>
+        <button
+          class="teacher-switch__btn"
+          type="button"
+          data-teacher="daria"
+          aria-selected="false"
+        >
+          Дарія
+        </button>
+      </div>
+
+      <div class="price-bar__sticker" aria-hidden="true">
+        <img
+          src={`${base}img/pair-sticker.png`}
+          alt="Стікер з написом «Не маєш пари? Ми допоможемо!»"
+          loading="lazy"
+        />
+      </div>
+    </div>
+
+    <div class="price-table" data-price-table>
+      <div class="price-table__head">
+        <div>Формат уроків</div>
+        <div>1 урок</div>
+        <div>за місяць<br />(8 уроків)</div>
+      </div>
+
+      <div class="price-table__row" data-row="individual">
+        <div class="price-table__name">за індивідуальне</div>
+
+        <div class="price-table__cell">
+          <div class="price-table__price" data-cell="individual.one">—</div>
+        </div>
+
+        <div class="price-table__cell">
+          <div class="price-table__price" data-cell="individual.month">—</div>
+          <div class="price-table__old" data-old="individual.month"></div>
+        </div>
+      </div>
+
+      <div class="price-table__row" data-row="pair">
+        <div class="price-table__name">парне (за 1 люд.)</div>
+
+        <div class="price-table__cell">
+          <div class="price-table__price" data-cell="pair.one">—</div>
+        </div>
+
+        <div class="price-table__cell">
+          <div class="price-table__price" data-cell="pair.month">—</div>
+          <div class="price-table__old" data-old="pair.month"></div>
+        </div>
+      </div>
+
+      <div class="price-table__row" data-row="group">
+        <div class="price-table__name">група (3-5 люд.)</div>
+
+        <div class="price-table__cell">
+          <div class="price-table__price" data-cell="group.one">—</div>
+        </div>
+
+        <div class="price-table__cell">
+          <div class="price-table__price" data-cell="group.month">—</div>
+          <div class="price-table__old" data-old="group.month"></div>
+        </div>
+      </div>
+
+      <div class="price-table__row" data-row="trial">
+        <div class="price-table__name">пробне заняття</div>
+
+        <div class="price-table__cell">
+          <div class="price-table__price" data-cell="trial.one">—</div>
+        </div>
+
+        <div class="price-table__cell is-empty" aria-hidden="true"></div>
+      </div>
+    </div>
+  </div>
+</section>

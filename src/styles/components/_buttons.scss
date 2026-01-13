@@ -19,13 +19,111 @@
     background-color 0.12s ease;
 }
 
-.pill:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-  background-color: rgba(43, 46, 68, 0.04);
+.heroLangBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 999px;
+  background-color: var(--red);
+  border: 2px solid var(--red);
+  color: var(--white);
+
+  font-weight: 700;
+  letter-spacing: 0.2px;
+
+  padding: 12px 22px;
+  font-size: 16px;
+  min-height: 46px;
+
+  text-decoration: none;
+  cursor: pointer;
+
+  /* ВАЖНО: кнопочная глубина */
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.18), 0 8px 20px rgba(228, 57, 57, 0.25);
 }
 
-.pill:active {
+@media (min-width: 980px) {
+  .heroLangBtn {
+    padding: 16px 20px;
+    font-size: 18px;
+    min-height: 56px;
+    width: 200px;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .heroLangBtn:hover {
+    transform: translateY(-1px);
+    /* чуть сильнее тень + лёгкое затемнение */
+    box-shadow: 0 14px 30px rgba(228, 57, 57, 0.28),
+      0 6px 14px rgba(0, 0, 0, 0.12);
+    filter: brightness(0.96);
+  }
+}
+
+.heroLangBtn:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.18), 0 4px 10px rgba(228, 57, 57, 0.2);
+}
+
+/* очень важно для "кнопка!" + доступность */
+.heroLangBtn:focus-visible {
+  outline: 3px solid rgba(228, 57, 57, 0.35);
+  outline-offset: 3px;
+}
+
+/* Circle control button (used in Reviews) */
+.circleBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 2px solid rgba(43, 46, 68, 0.18);
+  background: transparent;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease,
+    background-color 0.12s ease;
+}
+
+/* Icon round button (used in Footer) */
+.iconBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+
+  background: transparent;
+  border: 2px solid rgba(43, 46, 68, 0.25);
+  color: var(--text);
+  font-weight: 900;
+
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease,
+    background-color 0.12s ease;
+}
+
+.iconBtn__img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  display: block;
+}
+
+/* shared hover/active */
+@media (hover: hover) and (pointer: fine) {
+  .pill:hover,
+  .circleBtn:hover,
+  .iconBtn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow);
+    background-color: rgba(43, 46, 68, 0.04);
+  }
+}
+
+.pill:active,
+.circleBtn:active,
+.iconBtn:active {
   transform: translateY(0);
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
 }

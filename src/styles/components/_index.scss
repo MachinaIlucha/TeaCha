@@ -1,0 +1,8 @@
+@forward "./buttons";
+@forward "./header";
+@forward "./modal";
+@forward "./floating-cta";
+
+@forward "./forms";      // <- это теперь forms/_index.scss
+@forward "./bars";       // <- твой _bars.scss (он и есть bar)
+@forward "./ui";

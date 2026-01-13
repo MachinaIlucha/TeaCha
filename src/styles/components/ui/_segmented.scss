@@ -1,0 +1,33 @@
+/* segmented control (teacher-switch) */
+.teacher-switch {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  background: transparent;
+  border-radius: 999px;
+  padding: 6px;
+  overflow: visible;
+}
+
+.teacher-switch__btn {
+  position: relative;
+  z-index: 2;
+  pointer-events: auto;
+
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.75);
+
+  font-weight: 800;
+  padding: 12px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.teacher-switch__btn.is-active {
+  color: #fff;
+  outline: 2px solid rgba(255, 255, 255, 0.65);
+  outline-offset: -2px;
+}

@@ -36,52 +36,38 @@ const reviews =
       <h2 class="h2">ВІДГУКИ</h2>
 
       <div class="reviews__controls" aria-hidden="true">
-        <button
-          class="circleBtn"
-          data-reviews-prev
-          aria-label="Попередній відгук">←</button
-        >
-        <button
-          class="circleBtn"
-          data-reviews-next
-          aria-label="Наступний відгук">→</button
-        >
+        <button class="circleBtn" data-reviews-prev aria-label="Попередній відгук">←</button>
+        <button class="circleBtn" data-reviews-next aria-label="Наступний відгук">→</button>
       </div>
     </div>
 
     <div class="reviews__frame">
       <div class="reviews__bgMark" aria-hidden="true">S</div>
 
-      {/* MOBILE: свайп карточек (фото+текст в одном) */}
       <div class="reviewsMobile" data-reviews-mobile>
         <div class="reviewsMobile__viewport">
           <div class="reviewsMobile__track">
-            {
-              reviews.map((r) => (
-                <article class="mSlide">
-                  <div class="mMedia">
-                    <img src={r.img} alt={`Фото: ${r.name}`} loading="lazy" />
-                  </div>
+            {reviews.map((r) => (
+              <article class="mSlide">
+                <div class="mMedia">
+                  <img src={r.img} alt={`Фото: ${r.name}`} loading="lazy" />
+                </div>
 
-                  <div class="mTextCard">
-                    <p class="mText">{r.text}</p>
-                    <div class="mSig">— {r.name}</div>
+                <div class="mTextCard">
+                  <p class="mText">{r.text}</p>
+                  <div class="mSig">— {r.name}</div>
 
-                    <div class="mDecor" aria-hidden="true">
-                      <div class="bubble" />
-                      <div class="bubble bubble--small" />
-                    </div>
+                  <div class="mDecor" aria-hidden="true">
+                    <div class="bubble" />
+                    <div class="bubble bubble--small" />
                   </div>
-                </article>
-              ))
-            }
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </div>
 
-      {
-        /* DESKTOP: рефовая сетка (current media + current text + next media preview) */
-      }
       <div class="reviewsDesk" data-reviews-desk>
         <div class="deskGrid deskAnim" data-desk-anim>
           <div class="deskMedia deskStack">
@@ -110,116 +96,7 @@ const reviews =
     </div>
   </div>
 
-  <script define:vars={{ reviews }}>
-    const prevBtn = document.querySelector("[data-reviews-prev]");
-    const nextBtn = document.querySelector("[data-reviews-next]");
-
-    const anim = document.querySelector("[data-desk-anim]");
-    const isDesktop = () => window.matchMedia("(min-width: 980px)").matches;
-
-    let frontImg = document.querySelector("[data-front-img]");
-    let backImg = document.querySelector("[data-back-img]");
-
-    let frontP = document.querySelector("[data-front-p]");
-    let backP = document.querySelector("[data-back-p]");
-
-    let frontName = document.querySelector("[data-front-name]");
-    let backName = document.querySelector("[data-back-name]");
-
-    let frontTextLayer = document.querySelector("[data-front-text]");
-    let backTextLayer = document.querySelector("[data-back-text]");
-
-    if (
-      anim &&
-      frontImg &&
-      backImg &&
-      frontP &&
-      backP &&
-      frontName &&
-      backName &&
-      frontTextLayer &&
-      backTextLayer
-    ) {
-      let i = 0;
-      let locked = false;
-      let fallbackT = 0;
-
-      const setLayer = (imgEl, pEl, nameEl, data) => {
-        imgEl.src = data.img;
-        imgEl.alt = `Фото: ${data.name}`;
-        pEl.textContent = data.text;
-        nameEl.textContent = `— ${data.name}`;
-      };
-
-      reviews.forEach((r) => {
-        const im = new Image();
-        im.src = r.img;
-      });
-
-      setLayer(frontImg, frontP, frontName, reviews[i]);
-      setLayer(backImg, backP, backName, reviews[(i + 1) % reviews.length]);
-
-      const commit = () => {
-        anim.classList.remove("is-transitioning", "is-prev");
-
-        // swap classes
-        frontImg.classList.remove("is-front");
-        frontImg.classList.add("is-back");
-        backImg.classList.remove("is-back");
-        backImg.classList.add("is-front");
-
-        frontTextLayer.classList.remove("is-front");
-        frontTextLayer.classList.add("is-back");
-        backTextLayer.classList.remove("is-back");
-        backTextLayer.classList.add("is-front");
-
-        // swap refs so next time we write into real "back"
-        [frontImg, backImg] = [backImg, frontImg];
-        [frontP, backP] = [backP, frontP];
-        [frontName, backName] = [backName, frontName];
-        [frontTextLayer, backTextLayer] = [backTextLayer, frontTextLayer];
-
-        locked = false;
-      };
-
-      const go = (dir) => {
-        if (!isDesktop()) return;
-        if (locked) return;
-        locked = true;
-
-        window.clearTimeout(fallbackT);
-
-        const nextIndex = (i + dir + reviews.length) % reviews.length;
-        const nextData = reviews[nextIndex];
-
-        // write next into current "back"
-        setLayer(backImg, backP, backName, nextData);
-
-        anim.classList.toggle("is-prev", dir === -1);
-
-        // start transition
-        requestAnimationFrame(() => {
-          anim.classList.add("is-transitioning");
-        });
-
-        // listen only ONE element, once (no bubbling mess)
-        const onEnd = () => {
-          i = nextIndex;
-          commit();
-        };
-
-        backTextLayer.addEventListener("transitionend", onEnd, { once: true });
-
-        // safe fallback (won't double-commit because locked flips)
-        fallbackT = window.setTimeout(() => {
-          if (!locked) return;
-          i = nextIndex;
-          commit();
-        }, 1400);
-      };
-
-      prevBtn && prevBtn.addEventListener("click", () => go(-1));
-      nextBtn && nextBtn.addEventListener("click", () => go(1));
-    }
+  <script type="application/json" data-reviews-json>
+    {JSON.stringify(reviews)}
   </script>
 </section>

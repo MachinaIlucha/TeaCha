@@ -1,0 +1,53 @@
+---
+import PrivacyConsent from "../../forms/PrivacyConsent.astro";
+
+const { base } = Astro.props;
+---
+
+<div class="price-lead">
+  <div class="container">
+    <form class="price-lead__form" action="#" method="post">
+      <div class="price-lead__fields">
+        <input
+          class="price-field__input"
+          name="name"
+          type="text"
+          placeholder="ІМʼЯ"
+          required
+        />
+        <input
+          class="price-field__input"
+          name="contact"
+          type="text"
+          placeholder="ТЕЛЕФОН АБО НІК TELEGRAM"
+          required
+        />
+      </div>
+
+      <PrivacyConsent />
+
+      <div class="price-lead__cta">
+        <div class="price-lead__btnWrap">
+          <button class="price-lead__btn" type="submit">
+            ЗАПИСАТИСЯ НА ПРОБНИЙ УРОК
+          </button>
+
+          <div class="price-lead__chip">
+            <img
+              src={`${base}img/messenger-sticker.png`}
+              alt="Напишемо в месенджер"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+
+      <img
+        class="price-lead__doodle"
+        src={`${base}img/doodle-hand.png`}
+        alt="Декоративний рукописний елемент"
+        loading="lazy"
+      />
+    </form>
+  </div>
+</div>

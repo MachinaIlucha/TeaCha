@@ -17,13 +17,6 @@
   align-items: center;
 }
 
-.iconBtn__img {
-  width: 22px;
-  height: 22px;
-  object-fit: contain;
-  display: block;
-}
-
 .footerBrand__logo {
   width: 52px;
   height: 52px;
@@ -77,29 +70,6 @@
   align-items: center;
   gap: 10px;
   margin-top: 14px;
-}
-
-/* icon buttons outline */
-.iconBtn {
-  width: 44px;
-  height: 44px;
-  border-radius: 999px;
-  display: grid;
-  place-items: center;
-
-  background: transparent;
-  border: 2px solid rgba(43, 46, 68, 0.25);
-  color: var(--text);
-  font-weight: 900;
-
-  transition: transform 0.12s ease, box-shadow 0.12s ease,
-    background-color 0.12s ease;
-}
-
-.iconBtn:hover {
-  transform: translateY(-1px);
-  box-shadow: var(--shadow);
-  background-color: rgba(43, 46, 68, 0.04);
 }
 
 .footer__bottom {

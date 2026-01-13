@@ -87,28 +87,10 @@
 }
 
 .nav__right {
-  display: none;
-}
-
-.nav__right.is-open {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-
-  position: absolute;
-  right: 0;
-  top: calc(100% + 10px);
-
-  width: min(520px, calc(100vw - 28px));
-  padding: 12px;
-
-  background: var(--white);
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  border-radius: 18px;
-  box-shadow: var(--shadow);
-
+  display: flex; /* важно: панель существует */
   gap: 12px;
 }
+
 
 .nav__social {
   display: flex;

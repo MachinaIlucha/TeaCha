@@ -1,21 +1,15 @@
 ---
-/**
- * TeaCha website
- * Design & development: Ілля Пінчук Вадимович
- * © 2026. All rights reserved.
- */
-
 import "../styles/main.scss";
-import Header from "../components/Header.astro";
 
-const base = import.meta.env.BASE_URL;
+import Header from "../components/layout/Header.astro";
+import Footer from "../components/Footer.astro";
+
+import FloatingCta from "../components/layout/FloatingCta.astro";
+import ModalConsult from "../components/layout/ModalConsult.astro";
+import ToastHost from "../components/layout/ToastHost.astro";
+
 const pathname = Astro.url.pathname;
-
-const baseNoTrailingSlash =
-  base !== "/" && base.endsWith("/") ? base.slice(0, -1) : base;
-
-const isHome =
-  pathname === "/" || pathname === base || pathname === baseNoTrailingSlash;
+const isHome = pathname === "/";
 ---
 
 <!doctype html>
@@ -23,96 +17,22 @@ const isHome =
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="author" content="Ілля Пінчук Вадимович" />
-    <meta name="copyright" content="© 2026 Ілля Пінчук" />
     <title>TeaCha</title>
   </head>
+
   <body>
     <Header />
+
     <main>
       <slot />
     </main>
 
-    {/* Floating CTA (not on home) */}
-    {
-      !isHome && (
-        <button
-          class="floating-cta"
-          type="button"
-          data-open-modal
-          aria-haspopup="dialog"
-          aria-controls="consultModal"
-        >
-          <span>
-            ХОЧУ
-            <br />
-            ПРОБНЕ ЗАНЯТТЯ
-          </span>
-        </button>
-      )
-    }
+    <Footer />
 
-    <!-- Modal -->
-    <div class="modal" id="consultModal" aria-hidden="true">
-      <div class="modal__overlay" data-close-modal></div>
+    <FloatingCta hidden={isHome} />
+    <ModalConsult />
+    <ToastHost />
 
-      <div class="modal__content">
-        <button class="modal__close" data-close-modal aria-label="Закрити"
-          >✕</button
-        >
-
-        <h3 class="modal__title">БЕЗКОШТОВНА КОНСУЛЬТАЦІЯ</h3>
-        <p class="modal__subtitle">
-          Професійно вчимо говорити, подорожувати, працювати і жити мовою
-        </p>
-
-        <form class="modal__form" id="consultForm">
-          <input
-            type="text"
-            name="name"
-            placeholder="Ваше імʼя"
-            required
-            oninvalid="this.setCustomValidity('Будь ласка, введіть ваше імʼя')"
-            oninput="this.setCustomValidity('')"
-          />
-
-          <input
-            type="text"
-            name="contact"
-            placeholder="Телефон або Telegram"
-            required
-            oninvalid="this.setCustomValidity('Вкажіть телефон або Telegram')"
-            oninput="this.setCustomValidity('')"
-          />
-
-          <label class="price-consent modal__consent">
-            <input
-              class="price-consent__check"
-              type="checkbox"
-              name="consent"
-              required
-              oninvalid="this.setCustomValidity('Потрібно погодитися з політикою конфіденційності')"
-              onchange="this.setCustomValidity('')"
-            />
-
-            <span class="price-consent__box" aria-hidden="true"></span>
-
-            <span class="price-consent__text">
-              Я підтверджую, що ознайомився(-лася) та погоджуюся з умовами
-              <a
-                href={`${base}docs/polityka-konfidentsiinosti.pdf`}
-                target="_blank"
-                rel="noopener">Політики конфіденційності</a
-              >
-            </span>
-          </label>
-
-          <button type="submit" class="modal__submit"> ЗАЛИШИТИ ЗАЯВКУ </button>
-        </form>
-      </div>
-    </div>
-
-    <div class="toasts" aria-live="polite" aria-atomic="true"></div>
     <script type="module" src={`${import.meta.env.BASE_URL}scripts/main.js`}
     ></script>
   </body>

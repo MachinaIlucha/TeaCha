@@ -12,60 +12,6 @@
   font-size: 28px;
 }
 
-/* black pill */
-.price-bar {
-  position: relative;
-  background: #1f1f1f;
-  color: var(--white);
-  border-radius: 999px;
-  padding: 14px 16px;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-  margin: 0 auto 18px;
-  overflow: visible;
-}
-
-.price-bar__label {
-  font-size: 16px;
-  padding-left: 10px;
-  opacity: 0.95;
-}
-
-/* teacher switch */
-.teacher-switch {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  background: transparent;
-  border-radius: 999px;
-  padding: 6px;
-  overflow: visible; /* важно */
-  --pos: 0;
-}
-
-.teacher-switch__btn {
-  position: relative;
-  z-index: 2;
-  pointer-events: auto;
-
-  border: 0;
-  background: transparent;
-  color: rgba(255, 255, 255, 0.75);
-  font-weight: 800;
-  padding: 12px 18px;
-  border-radius: 999px;
-  cursor: pointer;
-  text-align: center;
-  white-space: nowrap;
-}
-
-.teacher-switch__btn.is-active {
-  color: #fff;
-  outline: 2px solid rgba(255, 255, 255, 0.65);
-  outline-offset: -2px;
-}
-
 .price-bar__sticker {
   position: absolute;
   right: -35px;
