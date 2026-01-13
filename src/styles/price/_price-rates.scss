@@ -1,38 +1,24 @@
+/*!
+ * TeaCha website
+ * Design & development: Ілля Пінчук Вадимович
+ * © 2026. All rights reserved.
+ */
+
 .price-rates {
   padding: 44px 0 0;
   background: var(--bg);
   color: var(--text);
 }
 
-.price-rates__title {
-  text-align: center;
-  margin: 0 0 22px;
-  line-height: 1.05;
-  font-weight: 500;
-  font-size: 28px;
-}
+/* =========================
+   PRICE TABLE
+========================= */
 
-.price-bar__sticker {
-  position: absolute;
-  right: -35px;
-  top: -40px;
-  transform: rotate(15deg);
-  pointer-events: none;
-  user-select: none;
-  z-index: 2;
-
-  img {
-    display: block;
-    width: 180px;
-    height: auto;
-  }
-}
-
-/* table */
 .price-table {
   border-top: 1px solid rgba(43, 46, 68, 0.18);
 }
 
+/* grid */
 .price-table__head,
 .price-table__row {
   display: grid;
@@ -40,6 +26,7 @@
   align-items: center;
 }
 
+/* head */
 .price-table__head {
   padding: 16px 0;
   color: rgba(43, 46, 68, 0.75);
@@ -58,30 +45,45 @@
   }
 }
 
+/* row */
 .price-table__row {
   border-bottom: 1px solid rgba(43, 46, 68, 0.12);
   padding: 18px 0;
 }
 
+/* name */
 .price-table__name {
   font-size: 18px;
   font-weight: 600;
   color: rgba(43, 46, 68, 0.95);
 }
 
+/* =========================
+   CELLS
+========================= */
+
 .price-table__cell {
+  position: relative;
   text-align: center;
 }
 
+.price-table__cell.is-empty {
+  opacity: 0;
+}
+
+/* price */
 .price-table__price {
   font-size: 22px;
   font-weight: 900;
   color: rgba(43, 46, 68, 1);
+  transition: opacity 0.18s ease;
 }
 
+/* old price */
 .price-table__old {
   margin-top: 6px;
   font-size: 12px;
+  transition: opacity 0.18s ease;
 
   s {
     color: rgba(43, 46, 68, 0.55);
@@ -90,6 +92,67 @@
   }
 }
 
-.price-table__cell.is-empty {
+/* =========================
+   CTA OVERLAY (desktop only)
+========================= */
+
+.price-table__ctaOverlay {
+  position: absolute;
+  inset: 0; /* ✅ вся ячейка */
+  border-radius: 999px; /* или 22px — как тебе больше нравится */
+
+  display: grid;
+  place-items: center;
+
+  background: var(--red); /* ✅ непрозрачная */
+  color: var(--white);
+  text-decoration: none;
+
+  font-weight: 900;
+  letter-spacing: 0.06em;
+
   opacity: 0;
+  transform: translateY(6px) scale(0.985);
+  pointer-events: none;
+
+  z-index: 3; /* ✅ выше цены/old */
+
+  transition: opacity 0.18s ease, transform 0.18s ease, filter 0.18s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .price-table__cell:hover .price-table__ctaOverlay {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+  }
+
+  .price-table__cell:hover .price-table__price,
+  .price-table__cell:hover .price-table__old {
+    opacity: 0; /* ✅ не видно, и не мешают клику */
+  }
+
+  .price-table__ctaOverlay:hover {
+    filter: brightness(0.95);
+  }
+
+  .price-table__ctaOverlay:active {
+    transform: translateY(1px) scale(0.99);
+    filter: brightness(0.9);
+  }
+}
+
+/* phone / tablet — кнопок нет */
+@media (hover: none), (pointer: coarse) {
+  .price-table__ctaOverlay {
+    display: none;
+  }
+}
+
+/* =========================
+   SCROLL TARGET
+========================= */
+
+#price-lead {
+  scroll-margin-top: calc(var(--topbar-h) + 18px);
 }

@@ -1,10 +1,16 @@
 ---
+/**
+ * TeaCha website
+ * Design & development: Ілля Пінчук Вадимович
+ * © 2026. All rights reserved.
+ */
+
 import PrivacyConsent from "../../forms/PrivacyConsent.astro";
 
 const { base } = Astro.props;
 ---
 
-<div class="price-lead">
+<div class="price-lead" id="price-lead">
   <div class="container">
     <form class="price-lead__form" action="#" method="post">
       <div class="price-lead__fields">
@@ -24,7 +30,7 @@ const { base } = Astro.props;
         />
       </div>
 
-      <PrivacyConsent />
+      <PrivacyConsent className="price-consent--dark" />
 
       <div class="price-lead__cta">
         <div class="price-lead__btnWrap">

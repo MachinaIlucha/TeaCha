@@ -1,9 +1,16 @@
+/*!
+ * TeaCha website
+ * Design & development: Ілля Пінчук Вадимович
+ * © 2026. All rights reserved.
+ */
+
 html,
 body {
   background: var(--bg);
   color: var(--text);
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial,
     "Noto Sans", "Helvetica Neue", sans-serif;
+  scroll-behavior: smooth;
 }
 
 .tea {

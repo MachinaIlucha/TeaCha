@@ -1,5 +1,11 @@
-/* Reusable dark bar (price-bar / teachers-bar) */
-:is(.price-bar, .teachers-bar) {
+/*!
+ * TeaCha website
+ * Design & development: Ілля Пінчук Вадимович
+ * © 2026. All rights reserved.
+ */
+
+/* Reusable dark bar (price-bar) */
+:is(.price-bar) {
   position: relative;
   background: #1f1f1f;
   color: var(--white);
@@ -11,23 +17,4 @@
   gap: 12px;
 
   overflow: visible;
-}
-
-:is(.price-bar__label, .teachers-bar__label) {
-  font-size: 16px;
-  padding-left: 10px;
-  opacity: 0.95;
-}
-
-@media (min-width: 980px) {
-  .teachers-bar {
-    grid-template-columns: 1.1fr 1.7fr;
-    align-items: center;
-    gap: 14px;
-    padding: 16px 18px;
-  }
-
-  .teachers-bar__label {
-    font-size: 18px;
-  }
 }

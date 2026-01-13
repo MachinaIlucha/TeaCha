@@ -1,3 +1,9 @@
+/*!
+ * TeaCha website
+ * Design & development: Ілля Пінчук Вадимович
+ * © 2026. All rights reserved.
+ */
+
 /* =========================
    TEACHERS (ref-style)
 ========================= */
@@ -6,13 +12,6 @@
   padding: 46px 0 0px;
   background: var(--bg);
   color: var(--text);
-}
-
-.teachers__title {
-  margin: 0 0 18px;
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
 }
 
 .teacher[hidden] {
@@ -41,24 +40,18 @@
   min-width: 0;
 }
 
-/* sticker */
-.teacher__badgeSticker {
-  position: absolute;
+.teacher__meta-grid--two {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+}
 
-  /* стартовая позиция — подгоняй как хочешь */
-  left: 190px; /* двигай */
-  top: -5px; /* двигай */
-
-  transform: rotate(5deg);
-  pointer-events: none;
-  user-select: none;
-  z-index: 2;
-
-  img {
-    display: block;
-    width: 150px; /* двигай размер */
-    height: auto;
-  }
+.teacher__meta-block {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 14px;
+  row-gap: 6px;
+  align-items: baseline;
 }
 
 .teacher__name {
@@ -93,7 +86,7 @@
 }
 
 .teacher__meta-grid {
-  display: flex;
+  display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
 }
@@ -178,13 +171,14 @@
 ========================= */
 
 @media (min-width: 980px) {
-  .teachers__title {
-    font-size: 36px;
+  .teacher__meta-grid--two {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
   }
 
   /* Карта: робимо місце справа, але саме фото "липне" absolute */
   .teacher__card {
-    padding: 22px;
+    padding: 0 22px 22px 22px;
     grid-template-columns: minmax(0, 1fr) 420px; /* резерв під фото */
     gap: 18px;
     min-height: 560px;

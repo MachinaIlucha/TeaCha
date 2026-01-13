@@ -1,43 +1,20 @@
 ---
-const { base } = Astro.props
+/**
+ * TeaCha website
+ * Design & development: Ілля Пінчук Вадимович
+ * © 2026. All rights reserved.
+ */
+
+const { base } = Astro.props;
 ---
 
 <section class="price-rates">
   <div class="container">
-    <h2 class="price-rates__title">
+    <h2 class="section-title section-heading">
       Вартість <span>[ навчання ]</span>:
     </h2>
 
-    <div class="price-bar">
-      <div class="price-bar__label">Вибери вчителя</div>
-
-      <div class="teacher-switch" data-price-teacher-tabs>
-        <button
-          class="teacher-switch__btn is-active"
-          type="button"
-          data-teacher="daryna"
-          aria-selected="true"
-        >
-          Дарина
-        </button>
-        <button
-          class="teacher-switch__btn"
-          type="button"
-          data-teacher="daria"
-          aria-selected="false"
-        >
-          Дарія
-        </button>
-      </div>
-
-      <div class="price-bar__sticker" aria-hidden="true">
-        <img
-          src={`${base}img/pair-sticker.png`}
-          alt="Стікер з написом «Не маєш пари? Ми допоможемо!»"
-          loading="lazy"
-        />
-      </div>
-    </div>
+    <div class="section-divider" aria-hidden="true"></div>
 
     <div class="price-table" data-price-table>
       <div class="price-table__head">
@@ -50,10 +27,16 @@ const { base } = Astro.props
         <div class="price-table__name">за індивідуальне</div>
 
         <div class="price-table__cell">
+          <a class="price-table__ctaOverlay" href="#price-lead">
+            ЗАПИСАТИСЬ
+          </a>
           <div class="price-table__price" data-cell="individual.one">—</div>
         </div>
 
         <div class="price-table__cell">
+          <a class="price-table__ctaOverlay" href="#price-lead">
+            ЗАПИСАТИСЬ
+          </a>
           <div class="price-table__price" data-cell="individual.month">—</div>
           <div class="price-table__old" data-old="individual.month"></div>
         </div>
@@ -63,10 +46,16 @@ const { base } = Astro.props
         <div class="price-table__name">парне (за 1 люд.)</div>
 
         <div class="price-table__cell">
+          <a class="price-table__ctaOverlay" href="#price-lead">
+            ЗАПИСАТИСЬ
+          </a>
           <div class="price-table__price" data-cell="pair.one">—</div>
         </div>
 
         <div class="price-table__cell">
+          <a class="price-table__ctaOverlay" href="#price-lead">
+            ЗАПИСАТИСЬ
+          </a>
           <div class="price-table__price" data-cell="pair.month">—</div>
           <div class="price-table__old" data-old="pair.month"></div>
         </div>
@@ -76,10 +65,16 @@ const { base } = Astro.props
         <div class="price-table__name">група (3-5 люд.)</div>
 
         <div class="price-table__cell">
+          <a class="price-table__ctaOverlay" href="#price-lead">
+            ЗАПИСАТИСЬ
+          </a>
           <div class="price-table__price" data-cell="group.one">—</div>
         </div>
 
         <div class="price-table__cell">
+          <a class="price-table__ctaOverlay" href="#price-lead">
+            ЗАПИСАТИСЬ
+          </a>
           <div class="price-table__price" data-cell="group.month">—</div>
           <div class="price-table__old" data-old="group.month"></div>
         </div>
@@ -89,6 +84,9 @@ const { base } = Astro.props
         <div class="price-table__name">пробне заняття</div>
 
         <div class="price-table__cell">
+          <a class="price-table__ctaOverlay" href="#price-lead">
+            ЗАПИСАТИСЬ
+          </a>
           <div class="price-table__price" data-cell="trial.one">—</div>
         </div>
 

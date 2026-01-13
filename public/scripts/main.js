@@ -10,19 +10,17 @@ import { initTopbarHeightVar } from "./core/layout.js";
 import { initMenu } from "./features/menu.js";
 import { initReviews } from "./features/reviews.js";
 import { initPriceTeachers } from "./features/price.js";
-import { initTeacherTabs } from "./features/teachers.js";
 
 import { attachLeadValidation } from "./lead/validation.js";
 import { bindLeadForm } from "./lead/bind.js";
 
 import { initBadges } from "./ui/badges.js";
 
-document.addEventListener("DOMContentLoaded", () => {
+const boot = () => {
   // features (safe to call on every page – they self-check DOM)
   initMenu();
   initReviews();
   initPriceTeachers();
-  initTeacherTabs();
 
   // modal
   const modalEl = document.getElementById("consultModal");
@@ -37,7 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (f.elements.name) f.elements.name.value = "";
     if (f.elements.contact) {
       f.elements.contact.value = "";
-      // validation.js uses dataset.prev to detect deleting
       f.elements.contact.dataset.prev = "";
     }
     if (f.elements.consent) f.elements.consent.checked = false;
@@ -45,8 +42,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const closeModal = () => {
     modalApi?.close?.();
-    // reset here is fine, но ESC может закрывать модалку внутри initModal
-    // поэтому ниже есть observer, который гарантирует reset при любом закрытии
     resetConsultForm();
   };
 
@@ -58,8 +53,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // ✅ гарантированный reset при любом закрытии (ESC / overlay / api.close / etc.)
-  if (modalEl) {
+  // гарантированный reset при любом закрытии (ESC / overlay / api.close / etc.)
+  if (modalEl && !modalEl.dataset.resetObserver) {
+    modalEl.dataset.resetObserver = "1";
+
     const observer = new MutationObserver(() => {
       if (!modalEl.classList.contains("is-open")) {
         resetConsultForm();
@@ -84,4 +81,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ui
   initBadges();
-});
+};
+
+// 1) обычная загрузка
+document.addEventListener("DOMContentLoaded", boot);
+
+// 2) Astro client navigation / view transitions
+document.addEventListener("astro:page-load", boot);

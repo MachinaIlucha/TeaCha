@@ -1,24 +1,14 @@
+/*!
+ * TeaCha website
+ * Design & development: Ілля Пінчук Вадимович
+ * © 2026. All rights reserved.
+ */
+
 @media (min-width: 980px) {
   /* TOP */
   .price-top__cards {
     grid-template-columns: repeat(3, 1fr);
     gap: 22px;
-  }
-
-  /* RATES */
-  .price-rates__title {
-    font-size: clamp(34px, 4vw, 56px);
-  }
-
-  .price-bar {
-    grid-template-columns: 1.1fr 1.7fr;
-    align-items: center;
-    gap: 14px;
-    padding: 16px 18px;
-  }
-
-  .price-bar__label {
-    font-size: 18px;
   }
 
   .price-table__name {
@@ -60,32 +50,6 @@
   .price-lead__chip {
     right: -30px;
     bottom: -20px;
-  }
-
-  /* TEACHERS */
-  .teachers__title {
-    font-size: 36px;
-  }
-
-  .teachers-bar {
-    grid-template-columns: 1.1fr 1.7fr; /* как price-bar */
-    align-items: center;
-    gap: 14px;
-    padding: 16px 18px;
-    border-radius: 999px;
-  }
-
-  .teachers-bar__label {
-    font-size: 18px; /* как price-bar__label на desktop */
-  }
-
-    /* сам контейнер табов — ограничим ширину и выровняем */
-  .teachers-tabs {
-    width: min(520px, 100%);  /* чтобы не растягивалось в бесконечность */
-    justify-self: center;     /* центр в своей колонке */
-    margin-left: 0;
-
-    grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 ровные кнопки */
   }
 
   .teacher__photo {
