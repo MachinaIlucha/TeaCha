@@ -1,0 +1,67 @@
+---
+/**
+ * TeaCha website
+ * Design & development: Ілля Пінчук Вадимович
+ * © 2026. All rights reserved.
+ */
+
+const { base } = Astro.props;
+
+type FactItem = {
+  kind: "stat" | "text";
+  value?: string;
+  label?: string;
+  text?: string;
+  wide?: boolean;
+};
+
+const {
+  items = [
+    { kind: "stat", value: "200+", label: "студентів" },
+    {
+      kind: "text",
+      text: "Команда викладачів з вищою\nпедагогічною/ філологічною освітою та\nдосвідом викладання",
+      wide: true,
+    },
+    { kind: "text", text: "Онлайн та\nофлайн у м.Київ" },
+    {
+      kind: "text",
+      text: "Індивідуальне, парне, групове та\nкорпоративне навчання",
+      wide: true,
+    },
+  ] satisfies FactItem[],
+} = Astro.props as { items?: FactItem[] };
+---
+
+<section class="facts" data-facts>
+  <div class="facts__container">
+    <div class="facts__bg" aria-hidden="true"></div>
+    <div class="facts__grid">
+      {
+        items.map((item) => (
+          <article
+            class={`facts__card ${item.wide ? "facts__card--wide" : ""}`}
+          >
+            {item.kind === "stat" ? (
+              <div class="facts__stat">
+                <div class="facts__value">{item.value}</div>
+                <div class="facts__label">{item.label}</div>
+              </div>
+            ) : (
+              <div class="facts__text">
+                {(item.text ?? "").split("\n").map((line) => (
+                  <>
+                    {line}
+                    <br />
+                  </>
+                ))}
+              </div>
+            )}
+          </article>
+        ))
+      }
+    </div>
+  </div>
+
+  <script type="module" src="/scripts/ui/facts.js"></script>
+</section>

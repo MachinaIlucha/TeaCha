@@ -8,35 +8,37 @@
 const base = import.meta.env.BASE_URL;
 ---
 
-<section class="hero" id="school">
+<section class="hero" id="school" data-reveal="load">
   <div class="container hero__grid">
     <div class="hero__left">
-      <div class="hero__title">
+      <div class="hero__title" data-reveal-item="1">
         <div class="hero__titleLine">
           <span class="tea">TEA</span><span class="cha">CHA</span> -
         </div>
         <div class="hero__titleLine">ДВІ КУЛЬТУРИ В ОДНОМУ ПРОСТОРІ</div>
       </div>
 
-      <p class="hero__subtitle hero__subtitle--big">
+      <p class="hero__subtitle hero__subtitle--big" data-reveal-item="2">
         Ми - центр <br />найпопулярніших мов у світі
       </p>
 
-      <!-- DESKTOP -->
-      <div class="hero__chips hero__chips--desktop">
-        <div class="badge badge--round" data-open-modal>
-          <span>ХОЧУ<br />ПРОБНИЙ УРОК</span>
-        </div>
-      </div>
-
-      <div class="hero__modes">
+      <!-- кнопки языков ДОЛЖНЫ появляться раньше badge -->
+      <div class="hero__modes" data-reveal-item="3">
         <a href="/english" class="heroPill heroLangBtn"> Англійська </a>
         <a href="/chinese" class="heroPill heroLangBtn"> Китайська </a>
       </div>
+
+      <!-- DESKTOP badge ПОСЛЕ -->
+      <div class="hero__chips hero__chips--desktop">
+        <div class="badge badge--round" data-open-modal data-reveal-item="5">
+          <span>ХОЧУ<br />ПРОБНИЙ УРОК</span>
+        </div>
+      </div>
     </div>
 
-    <div class="hero__right">
-      <!-- MOBILE -->
+    <!-- фото можно 4 -->
+    <div class="hero__right" data-reveal-item="4">
+      <!-- MOBILE badge оставляем как было (без reveal-item, чтобы не исчезал на мобилке) -->
       <div class="hero__chips hero__chips--mobile">
         <div class="badge badge--round" data-open-modal>
           <span>ХОЧУ<br />ПРОБНИЙ УРОК</span>
@@ -45,12 +47,9 @@ const base = import.meta.env.BASE_URL;
 
       <div class="heroPhoto">
         <div class="heroPhoto__bg" aria-hidden="true"></div>
-        <img
-          class="heroPhoto__img"
-          src={`${base}img/hero-portrait.jpg`}
-          alt="Фото викладачів"
-        />
+        <img class="heroPhoto__img" src={`${base}img/hero-portrait.jpg`} alt="Фото викладачів" />
       </div>
     </div>
   </div>
 </section>
+

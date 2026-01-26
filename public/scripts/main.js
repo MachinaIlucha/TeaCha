@@ -15,6 +15,7 @@ import { attachLeadValidation } from "./lead/validation.js";
 import { bindLeadForm } from "./lead/bind.js";
 
 import { initBadges } from "./ui/badges.js";
+import "./ui/reveal.js";
 
 const boot = () => {
   // features (safe to call on every page – they self-check DOM)

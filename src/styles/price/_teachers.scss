@@ -72,9 +72,8 @@
 
 /* === Сірий блок досвіду як у рефі === */
 .teacher__meta {
-  background: #efeff2;
-  border-radius: 18px;
-  padding: 14px 16px;
+  background: transparent;
+  padding: 0;
 }
 
 .teacher__meta-title {
@@ -89,6 +88,11 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
+
+  background: #d9dbe2; /* заметнее серый */
+  border-radius: 18px;
+  padding: 16px 18px;
+  box-shadow: 0 10px 22px rgba(21, 22, 26, 0.06);
 }
 
 .teacher__meta-label {
@@ -100,7 +104,6 @@
 .teacher__meta-value {
   margin-top: 2px;
   font-size: 22px;
-  color: #15161a;
   font-weight: 900;
 }
 
@@ -113,7 +116,6 @@
   font-weight: 900;
   font-size: 20px;
   margin: 0 0 10px;
-  color: #15161a;
 }
 
 .teacher__edu-list {

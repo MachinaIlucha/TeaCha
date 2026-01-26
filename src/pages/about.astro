@@ -6,14 +6,13 @@
  */
 
 import BaseLayout from "../layouts/BaseLayout.astro";
-
-import PriceRates from "../components/pages/price/PriceRates.astro";
+import Teachers from "../components/sections/Teachers.astro";
 import PriceLead from "../components/pages/price/PriceLead.astro";
 
 const base = import.meta.env.BASE_URL;
 ---
 
-<BaseLayout title="Вартість навчання" reveal={false}>
-  <PriceRates base={base} />
+<BaseLayout title="Про нас">
+  <Teachers base={base} />
   <PriceLead base={base} />
 </BaseLayout>

@@ -1,0 +1,285 @@
+/* File: styles/sections/_process.scss */
+
+.process {
+  padding: clamp(34px, 6vw, 30px) 0;
+  background: transparent;
+  color: var(--text);
+}
+
+.process__container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 18px;
+}
+
+.process__title {
+  margin: 0 0 clamp(14px, 2.5vw, 28px); /* было больше */
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-size: clamp(34px, 4.2vw, 58px);
+  color: var(--text);
+}
+
+/* -------------------- */
+/* MOBILE (default)     */
+/* -------------------- */
+
+.process__timeline {
+  --node: 64px;
+
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 18px;
+
+  padding-left: 26px;
+}
+
+.process__timeline::before {
+  content: "";
+  position: absolute;
+  left: 26px;
+  top: 10px;
+  bottom: 10px;
+  width: 2px;
+  background: rgba(43, 46, 68, 0.9);
+  z-index: 0;
+
+  transform-origin: center top;
+  transform: scaleY(0);
+  opacity: 0;
+  transition:
+    transform 700ms ease,
+    opacity 450ms ease;
+}
+
+.process__item {
+  display: grid;
+  grid-template-columns: var(--node) 1fr;
+  column-gap: 14px;
+  align-items: start;
+  position: relative;
+  min-width: 0;
+}
+
+.process__node {
+  grid-column: 1;
+  width: var(--node);
+  height: var(--node);
+  border-radius: 999px;
+
+  background: #e9eaee;
+  border: 1px solid rgba(43, 46, 68, 0.08);
+
+  display: grid;
+  place-items: center;
+
+  position: relative;
+  z-index: 2;
+
+  box-shadow: 0 0 0 8px var(--bg);
+
+  opacity: 0;
+  transform: scale(0.96);
+  transition:
+    opacity 650ms ease,
+    transform 650ms ease;
+}
+
+.process__num {
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1;
+  color: rgba(43, 46, 68, 0.95);
+}
+
+.process__content {
+  grid-column: 2;
+  min-width: 0;
+
+  font-size: clamp(18px, 1.8vw, 24px);
+  line-height: 1.25;
+  color: var(--text);
+
+  hyphens: none;
+  -webkit-hyphens: none;
+  overflow-wrap: normal;
+  word-break: normal;
+  white-space: normal;
+  text-wrap: balance;
+
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 650ms ease,
+    transform 650ms ease;
+
+  justify-self: center;
+  text-align: center;
+  max-inline-size: 28ch;
+}
+
+.process__note {
+  margin: clamp(18px, 3vw, 34px) 0 0;
+  font-size: 16px;
+  line-height: 1.3;
+  color: var(--muted);
+}
+
+/* reveal */
+.process.is-visible .process__timeline::before {
+  transform: scaleY(1);
+  opacity: 1;
+}
+
+.process.is-visible .process__node,
+.process.is-visible .process__content {
+  opacity: 1;
+  transform: none;
+}
+
+/* -------------------- */
+/* DESKTOP              */
+/* -------------------- */
+@media (min-width: 861px) {
+  .process__timeline {
+    --node: 76px;
+    --topH: clamp(70px, 6vw, 100px);
+    --bottomH: clamp(120px, 10vw, 160px);
+
+    padding-left: 0;
+    overflow: visible;
+
+    display: grid;
+    grid-template-columns: repeat(
+      5,
+      minmax(0, 1fr)
+    ); /* ✅ равномерные 5 колонок */
+    column-gap: 0;
+    row-gap: 0;
+    position: relative;
+  }
+
+  /* линия строго от центра 1 до центра 5 */
+  .process__timeline::before {
+    content: "";
+    position: absolute;
+
+    left: calc(var(--node) / 2);
+    right: calc(var(--node) / 2);
+    top: calc(var(--topH) + (var(--node) / 2));
+
+    height: 2px;
+    width: auto;
+    bottom: auto;
+
+    background: rgba(43, 46, 68, 0.9);
+    z-index: 0;
+    pointer-events: none;
+
+    transform-origin: left center;
+    transform: scaleX(0);
+    opacity: 0;
+    transition:
+      transform 700ms ease,
+      opacity 450ms ease;
+  }
+
+  .process.is-visible .process__timeline::before {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+
+  .process__item {
+    display: grid;
+    grid-template-rows: var(--topH) var(--node) var(--bottomH);
+    grid-template-columns: 1fr;
+    min-width: 0;
+    position: relative;
+  }
+
+  .process__node,
+  .process__content {
+    grid-column: 1;
+  }
+
+  .process__node {
+    grid-row: 2;
+    align-self: center;
+    justify-self: center;
+    z-index: 2;
+    box-shadow: 0 0 0 10px var(--bg);
+  }
+
+  /* 1 и 5 — по краям */
+  .process__item:nth-child(1) .process__node {
+    justify-self: start;
+  }
+  .process__item:nth-child(5) .process__node {
+    justify-self: end;
+  }
+
+  /* ✅ текст снова в потоке, поэтому он всегда "над/под своей цифрой" */
+  .process__content {
+    grid-row: 1;
+    align-self: end;
+    justify-self: center;
+
+    white-space: nowrap;
+    max-inline-size: none;
+    overflow-wrap: normal;
+    word-break: normal;
+
+    max-inline-size: 56ch; /* достаточно широко, чтобы не ломало по 1-2 слова */
+    text-align: center;
+
+    opacity: 0;
+    transform: translateY(10px);
+    transition:
+      opacity 650ms ease,
+      transform 650ms ease;
+  }
+
+  /* 1/3/5 сверху */
+  .process__item:nth-child(odd) .process__content {
+    grid-row: 1;
+    margin-bottom: 18px;
+  }
+
+  /* 2/4 снизу — но выглядят как верхние (центрируются и “под своей цифрой”) */
+  .process__item:nth-child(even) .process__content {
+    grid-row: 3;
+    align-self: start;
+    margin-top: 18px;
+    text-align: center;
+  }
+
+  /* 1 слева, 5 справа (как в рефе) */
+  .process__item:nth-child(1) .process__content {
+    justify-self: start;
+    text-align: left;
+    max-inline-size: 48ch;
+  }
+
+  .process__item:nth-child(5) .process__content {
+    justify-self: end;
+    text-align: right;
+    max-inline-size: 48ch;
+  }
+
+  .process.is-visible .process__content {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (max-width: 1100px) {
+    .process__content {
+      white-space: normal;
+      max-inline-size: 56ch; /* или твое значение */
+    }
+  }
+}

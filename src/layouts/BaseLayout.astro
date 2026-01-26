@@ -1,10 +1,4 @@
 ---
-/**
- * TeaCha website
- * Design & development: Ілля Пінчук Вадимович
- * © 2026. All rights reserved.
- */
-
 import "../styles/main.scss";
 
 import Header from "../components/layout/Header.astro";
@@ -16,17 +10,33 @@ import ToastHost from "../components/layout/ToastHost.astro";
 
 const pathname = Astro.url.pathname;
 const isHome = pathname === "/";
+
+// ✅ по умолчанию reveal включен
+const { reveal = true } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="uk">
+<html lang="uk" class="js">
   <head>
+    <noscript>
+      <style>
+        {`
+          html.js [data-reveal="load"] [data-reveal-item],
+          html.js [data-reveal-load] [data-reveal-item]{
+            opacity:1 !important;
+            transform:none !important;
+            transition:none !important;
+          }
+        `}
+      </style>
+    </noscript>
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>TeaCha</title>
   </head>
 
-  <body>
+  <body {...(!reveal ? { "data-reveal-off": "" } : {})}>
     <Header />
 
     <main>
@@ -39,7 +49,6 @@ const isHome = pathname === "/";
     <ModalConsult />
     <ToastHost />
 
-    <script type="module" src={`${import.meta.env.BASE_URL}scripts/main.js`}
-    ></script>
+    <script type="module" src={`${import.meta.env.BASE_URL}scripts/main.js`}></script>
   </body>
 </html>

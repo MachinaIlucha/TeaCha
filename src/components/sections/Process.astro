@@ -1,0 +1,46 @@
+---
+type ProcessStep = { text: string };
+
+const {
+  title = "ПРОЦЕС:",
+  steps = [
+    { text: "Знайомство з компанією, її<br/>потребами та ціллю навчання" },
+    {
+      text: "Оцінка рівня кожного студента<br/>та формування відповідних груп",
+    },
+    {
+      text: "Індивідуальний навчальний план<br/>під запит компанії та рівень груп",
+    },
+    { text: "Початок<br/>навчання" },
+    { text: "Щомісячна звітність про<br/>відвідуваність і успішність" },
+  ] satisfies ProcessStep[],
+  footnote = "* Кожна корпоративна група отримує план курсу, його опис, перелік лексичних та граматичних тем",
+} = Astro.props as {
+  title?: string;
+  steps?: ProcessStep[];
+  footnote?: string;
+};
+---
+
+<section class="process" data-process>
+  <div class="process__container">
+    <h2 class="process__title">{title}</h2>
+
+    <ol class="process__timeline" aria-label="Процес навчання">
+      {
+        steps.map((s, idx) => (
+          <li class="process__item">
+            <div class="process__content" set:html={s.text} />
+            <div class="process__node">
+              <span class="process__num">{idx + 1}</span>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+
+    <p class="process__note">{footnote}</p>
+  </div>
+
+  <script type="module" src="/scripts/ui/process.js"></script>
+</section>

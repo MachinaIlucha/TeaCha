@@ -8,20 +8,20 @@
 const { base } = Astro.props;
 ---
 
-<section class="teachers">
+<section class="teachers" data-reveal="load">
   <div class="container">
-    <h2 class="section-title">Співзасновниці мовного центру</h2>
+    <h2 class="section-title" data-reveal-item="1">Засновниці мовного центру</h2>
 
-    <div class="section-divider section-heading" aria-hidden="true"></div>
+    <div class="section-divider section-heading" aria-hidden="true" data-reveal-item="2"></div>
 
     <div class="teacher">
       <div class="teacher__card">
         <div class="teacher__content">
-          <h3 class="teacher__name">Дарина і Дарія</h3>
+          <h3 class="teacher__name" data-reveal-item="3">Дарина і Дарія</h3>
 
-          <p class="teacher__role">Співзасновниці мовного центру TeaCha</p>
+          <p class="teacher__role" data-reveal-item="4">Засновниці мовного центру TeaCha</p>
 
-          <div class="teacher__meta">
+          <div class="teacher__meta" data-reveal-item="5">
             <p class="teacher__meta-title">ДОСВІД ВИКЛАДАННЯ:</p>
 
             <div class="teacher__meta-grid teacher__meta-grid--two">
@@ -43,7 +43,7 @@ const { base } = Astro.props;
             </div>
           </div>
 
-          <div class="teacher__edu">
+          <div class="teacher__edu" data-reveal-item="6">
             <h4 class="teacher__edu-title">ОСВІТА:</h4>
 
             <ul class="teacher__edu-list">
@@ -64,7 +64,7 @@ const { base } = Astro.props;
           </div>
         </div>
 
-        <div class="teacher__photo">
+        <div class="teacher__photo" data-reveal-item="7">
           <img
             class="teacher__img"
             src={`${base}img/daryna.webp`}

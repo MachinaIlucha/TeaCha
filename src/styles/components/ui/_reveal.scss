@@ -1,0 +1,41 @@
+/* ===== REVEAL (GLOBAL): load + scroll ===== */
+html.js [data-reveal="load"] [data-reveal-item],
+html.js [data-reveal="scroll"] [data-reveal-item],
+html.js [data-reveal-load] [data-reveal-item],
+html.js [data-reveal-scroll] [data-reveal-item] {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 650ms ease, transform 650ms ease;
+  will-change: opacity, transform;
+}
+
+html.js [data-reveal="load"].is-visible [data-reveal-item],
+html.js [data-reveal="scroll"].is-visible [data-reveal-item],
+html.js [data-reveal-load].is-visible [data-reveal-item],
+html.js [data-reveal-scroll].is-visible [data-reveal-item] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Stagger 1..12 */
+html.js [data-reveal].is-visible [data-reveal-item="1"] { transition-delay: 0ms; }
+html.js [data-reveal].is-visible [data-reveal-item="2"] { transition-delay: 90ms; }
+html.js [data-reveal].is-visible [data-reveal-item="3"] { transition-delay: 180ms; }
+html.js [data-reveal].is-visible [data-reveal-item="4"] { transition-delay: 270ms; }
+html.js [data-reveal].is-visible [data-reveal-item="5"] { transition-delay: 360ms; }
+html.js [data-reveal].is-visible [data-reveal-item="6"] { transition-delay: 450ms; }
+html.js [data-reveal].is-visible [data-reveal-item="7"] { transition-delay: 540ms; }
+html.js [data-reveal].is-visible [data-reveal-item="8"] { transition-delay: 630ms; }
+html.js [data-reveal].is-visible [data-reveal-item="9"] { transition-delay: 720ms; }
+html.js [data-reveal].is-visible [data-reveal-item="10"] { transition-delay: 810ms; }
+html.js [data-reveal].is-visible [data-reveal-item="11"] { transition-delay: 900ms; }
+html.js [data-reveal].is-visible [data-reveal-item="12"] { transition-delay: 990ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  html.js [data-reveal="load"] [data-reveal-item],
+  html.js [data-reveal="scroll"] [data-reveal-item] {
+    transition: none;
+    transform: none;
+    opacity: 1;
+  }
+}

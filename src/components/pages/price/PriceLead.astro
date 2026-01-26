@@ -10,10 +10,10 @@ import PrivacyConsent from "../../forms/PrivacyConsent.astro";
 const { base } = Astro.props;
 ---
 
-<div class="price-lead" id="price-lead">
+<div class="price-lead" id="price-lead" data-reveal="scroll">
   <div class="container">
-    <form class="price-lead__form" action="#" method="post">
-      <div class="price-lead__fields">
+    <form class="price-lead__form" action="#" method="post" data-reveal-item="1">
+      <div class="price-lead__fields" data-reveal-item="2">
         <input
           class="price-field__input"
           name="name"
@@ -30,9 +30,11 @@ const { base } = Astro.props;
         />
       </div>
 
-      <PrivacyConsent className="price-consent--dark" />
+      <div data-reveal-item="3">
+        <PrivacyConsent className="price-consent--dark" />
+      </div>
 
-      <div class="price-lead__cta">
+      <div class="price-lead__cta" data-reveal-item="4">
         <div class="price-lead__btnWrap">
           <button class="price-lead__btn" type="submit">
             ЗАПИСАТИСЯ НА ПРОБНИЙ УРОК
@@ -50,6 +52,7 @@ const { base } = Astro.props;
 
       <img
         class="price-lead__doodle"
+        data-reveal-item="5"
         src={`${base}img/doodle-hand.png`}
         alt="Декоративний рукописний елемент"
         loading="lazy"

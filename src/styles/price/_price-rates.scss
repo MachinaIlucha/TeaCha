@@ -10,15 +10,41 @@
   color: var(--text);
 }
 
+.price-rates__hint {
+  margin: 10px 0 0 0;
+  text-align: center;
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+
+  color: rgba(43, 46, 68, 0.55);
+}
+
+/* показываем подсказку только там, где реально есть hover-кнопки */
+@media (hover: none), (pointer: coarse) {
+  .price-rates__hint {
+    display: none;
+  }
+}
+
+/* чуть крупнее на десктопе */
+@media (min-width: 980px) {
+  .price-rates__hint {
+    margin: 12px 0 0 0;
+    font-size: 14px;
+  }
+}
+
 /* =========================
-   PRICE TABLE
+   TABLE
 ========================= */
 
 .price-table {
   border-top: 1px solid rgba(43, 46, 68, 0.18);
 }
 
-/* grid */
 .price-table__head,
 .price-table__row {
   display: grid;
@@ -26,7 +52,6 @@
   align-items: center;
 }
 
-/* head */
 .price-table__head {
   padding: 16px 0;
   color: rgba(43, 46, 68, 0.75);
@@ -45,33 +70,22 @@
   }
 }
 
-/* row */
 .price-table__row {
   border-bottom: 1px solid rgba(43, 46, 68, 0.12);
   padding: 18px 0;
 }
 
-/* name */
 .price-table__name {
   font-size: 18px;
   font-weight: 600;
   color: rgba(43, 46, 68, 0.95);
 }
 
-/* =========================
-   CELLS
-========================= */
-
 .price-table__cell {
   position: relative;
   text-align: center;
 }
 
-.price-table__cell.is-empty {
-  opacity: 0;
-}
-
-/* price */
 .price-table__price {
   font-size: 22px;
   font-weight: 900;
@@ -79,10 +93,11 @@
   transition: opacity 0.18s ease;
 }
 
-/* old price */
+/* резервируем вторую строку, чтобы высота ячеек была одинаковой */
 .price-table__old {
   margin-top: 6px;
   font-size: 12px;
+  min-height: 16px; /* 🔑 одинаковая высота "второй строки" */
   transition: opacity 0.18s ease;
 
   s {
@@ -92,15 +107,24 @@
   }
 }
 
+/* пустые old-спейсеры не должны "занимать внимание" */
+.price-table__old:empty {
+  visibility: hidden;
+}
+
+.price-table__cell.is-empty {
+  opacity: 0;
+}
+
 /* =========================
-   CTA OVERLAY (desktop only)
+   CTA OVERLAY
+   - desktop hover only
+   - phone: hidden
 ========================= */
 
 .price-table__ctaOverlay {
   position: absolute;
-  inset: 0; /* ✅ вся ячейка */
-  border-radius: 999px; /* или 22px — как тебе больше нравится */
-
+  inset: 0; /* ✅ покрывает всю ячейку */
   display: grid;
   place-items: center;
 
@@ -108,14 +132,14 @@
   color: var(--white);
   text-decoration: none;
 
+  border-radius: 999px;
   font-weight: 900;
   letter-spacing: 0.06em;
 
   opacity: 0;
   transform: translateY(6px) scale(0.985);
   pointer-events: none;
-
-  z-index: 3; /* ✅ выше цены/old */
+  z-index: 3;
 
   transition: opacity 0.18s ease, transform 0.18s ease, filter 0.18s ease;
 }
@@ -127,9 +151,10 @@
     pointer-events: auto;
   }
 
+  /* не просвечивает цена под кнопкой и не мешает клику */
   .price-table__cell:hover .price-table__price,
   .price-table__cell:hover .price-table__old {
-    opacity: 0; /* ✅ не видно, и не мешают клику */
+    opacity: 0;
   }
 
   .price-table__ctaOverlay:hover {
@@ -142,7 +167,7 @@
   }
 }
 
-/* phone / tablet — кнопок нет */
+/* ✅ phone/tablet: no buttons at all */
 @media (hover: none), (pointer: coarse) {
   .price-table__ctaOverlay {
     display: none;

@@ -4,7 +4,7 @@
  * © 2026. All rights reserved.
  */
 
-:root{
+:root {
   --bg: #ffffff;
   --text: rgba(43, 46, 68, 1);
   --muted: #6b6b6b;
@@ -13,11 +13,20 @@
   --accent: rgba(225, 67, 63, 1);
   --white: rgb(255, 255, 255);
 
-  --shadow: 0 10px 30px rgba(0,0,0,.08);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 
   --radius-xl: 34px;
   --radius-lg: 26px;
   --radius-md: 18px;
 
   --container: 1200px;
+
+  --silver-1: #f6f7f9;
+  --silver-2: #d9dbe0;
+  --silver-3: #b8bcc6;
+  --silver-4: #eef0f4;
+
+  --silver-stroke: rgba(20, 24, 40, 0.14);
+  --silver-highlight: rgba(255, 255, 255, 0.75);
+  --silver-shadow: 0 18px 55px rgba(0, 0, 0, 0.18);
 }
