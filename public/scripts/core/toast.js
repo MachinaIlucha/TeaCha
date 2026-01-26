@@ -1,13 +1,3 @@
-/**
- * TeaCha website
- * Design & development: Ілля Пінчук Вадимович
- * © 2026. All rights reserved.
- */
-
-/**
- * Toast system (TeaCha)
- */
-
 const escapeHtml = (str) =>
   String(str)
     .replaceAll("&", "&amp;")

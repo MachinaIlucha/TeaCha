@@ -1,13 +1,3 @@
-/**
- * TeaCha website
- * Design & development: Ілля Пінчук Вадимович
- * © 2026. All rights reserved.
- */
-
-/**
- * Modal helper (TeaCha)
- */
-
 export const initModal = ({
   modalId,
   openSelector = "[data-open-modal]",
@@ -33,7 +23,11 @@ export const initModal = ({
   };
 
   document.querySelectorAll(openSelector).forEach((btn) => {
-    btn.addEventListener("click", open);
+    btn.addEventListener("click", (e) => {
+      e.preventDefault(); // ✅ не прыгать вверх
+      e.stopPropagation();
+      open();
+    });
   });
 
   document.querySelectorAll(closeSelector).forEach((btn) => {

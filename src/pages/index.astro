@@ -13,6 +13,7 @@ import Teachers from "../components/sections/Teachers.astro";
 import Process from "../components/sections/Process.astro";
 import PriceRates from "../components/pages/price/PriceRates.astro";
 import PriceLead from "../components/pages/price/PriceLead.astro";
+import Faq from "../components/sections/Faq.astro";
 
 const base = import.meta.env.BASE_URL;
 ---
@@ -25,5 +26,6 @@ const base = import.meta.env.BASE_URL;
   <Process />
   <PriceRates base={base} />
   <Reviews />
+  <Faq />
   <PriceLead base={base} />
 </BaseLayout>

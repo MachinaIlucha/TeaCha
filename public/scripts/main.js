@@ -16,12 +16,17 @@ import { bindLeadForm } from "./lead/bind.js";
 
 import { initBadges } from "./ui/badges.js";
 import "./ui/reveal.js";
+import { initFaq } from "./features/faq.js";
 
 const boot = () => {
+  if (window.__teachaBooted) return;
+  window.__teachaBooted = true;
+
   // features (safe to call on every page – they self-check DOM)
   initMenu();
   initReviews();
   initPriceTeachers();
+  initFaq();
 
   // modal
   const modalEl = document.getElementById("consultModal");

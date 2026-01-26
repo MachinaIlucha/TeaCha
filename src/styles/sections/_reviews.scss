@@ -1,288 +1,383 @@
-/*!
- * TeaCha website
- * Design & development: Ілля Пінчук Вадимович
- * © 2026. All rights reserved.
- */
+/* =========================
+   REVIEWS (r2)
+   TeaCha website © 2026
+   Mobile-first
+========================= */
 
-.reviews {
-  padding: 30px 0 54px;
+.r2 {
+  padding: 40px 0 70px;
 }
 
-/* =========================
-   HEAD
-========================= */
-.reviews__head {
+.r2,
+.r2Card {
+  overflow-anchor: none;
+}
+
+/* ---------- Head ---------- */
+.r2__head {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
   gap: 14px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
-/* mobile: кнопок нет */
-.reviews__controls {
-  display: none;
-}
-
-/* =========================
-   FRAME
-========================= */
-.reviews__frame {
+.r2HeadNav {
+  display: inline-flex;
+  gap: 12px;
+  align-items: center;
   position: relative;
-  border-radius: var(--radius-xl);
-  padding: 14px;
-  background: var(--white);
+  z-index: 10;
 }
 
-.reviews__bgMark {
-  position: absolute;
-  inset: auto auto 10px 10px;
-  font-size: 240px;
+.r2__btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  border: 2px solid color-mix(in srgb, var(--text) 18%, transparent);
+  background: transparent;
+  color: color-mix(in srgb, var(--text) 82%, black 0%);
   font-weight: 900;
-  color: rgba(0, 0, 0, 0.04);
-  line-height: 1;
-  user-select: none;
-  pointer-events: none;
+  cursor: pointer;
+  transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
 }
 
-/* =========================
-   MOBILE (SWIPE)
-========================= */
-.reviewsMobile__viewport {
-  position: relative;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-
-  /* чтобы край не прилипал к рамке */
-  scroll-padding-left: 14px;
-  scroll-padding-right: 14px;
+@media (hover: hover) and (pointer: fine) {
+  .r2__btn:hover {
+    transform: translateY(-1px);
+    border-color: color-mix(in srgb, var(--text) 28%, transparent);
+    background: color-mix(in srgb, var(--silver-4) 60%, white 40%);
+  }
+}
+.r2__btn:active {
+  transform: translateY(0);
 }
 
-.reviewsMobile__viewport::-webkit-scrollbar {
-  display: none;
-}
-
-.reviewsMobile__track {
-  display: flex;
-  gap: 14px;
-  align-items: stretch;
-}
-
-.mSlide {
-  flex: 0 0 86%;
-  scroll-snap-align: start;
-  min-width: 0;
-}
-
-.mMedia {
-  border-radius: 24px;
-  overflow: hidden;
-  box-shadow: var(--shadow);
-  background: #fff;
-
-  /* фикс высоты: большая фотка не раздувает */
-  height: 360px;
-  max-height: 360px;
-}
-
-.mMedia img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
+/* ---------- Layout ---------- */
+.r2__layout {
   display: block;
 }
 
-.mTextCard {
-  margin-top: 12px;
-  border-radius: 24px;
-  border: 2px solid rgba(43, 46, 68, 0.14);
-  padding: 18px 18px 54px;
+/* ---------- Card ---------- */
+.r2Card {
+  background: var(--bg);
+  border-radius: 36px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+
+  display: grid;
+  grid-template-columns: 1fr; /* mobile */
+  min-height: 0;
+}
+
+/* ---------- Media ---------- */
+.r2Media {
   position: relative;
   overflow: hidden;
-  background: #fff;
-  min-height: 200px;
+
+  aspect-ratio: 3 / 4; /* mobile */
+  width: 100%;
+  background: var(--silver-4);
 }
 
-.mText {
-  margin: 0;
-  color: var(--muted);
-  line-height: 1.65;
-  font-size: 15px;
-  max-width: 680px;
+/* media layers: ONLY opacity */
+.r2Media .r2Layer {
+  position: absolute !important;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 700ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.mSig {
-  margin-top: 14px;
-  font-weight: 900;
-  color: var(--text);
+.r2Media .r2Layer.is-front {
+  opacity: 1;
+}
+.r2Card.is-transitioning .r2Media .r2Layer.is-front {
+  opacity: 0;
+}
+.r2Card.is-transitioning .r2Media .r2Layer.is-back {
+  opacity: 1;
 }
 
-.mDecor {
-  position: absolute;
-  right: 16px;
-  bottom: 12px;
-}
-
-/* bubbles (общие для mobile+desktop) */
-.bubble {
-  width: 96px;
-  height: 96px;
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--accent) 20%, transparent);
-}
-
-.bubble--small {
-  width: 56px;
-  height: 56px;
-  margin-top: -22px;
-  margin-left: 52px;
-  background: color-mix(in srgb, var(--accent) 12%, transparent);
-}
-
-/* =========================
-   DESKTOP (PHOTO + TEXT) + SUPER SMOOTH CROSSFADE
-========================= */
-.reviewsDesk {
-  display: none;
-}
-
-/* слои для crossfade (работают только на desktop блоке) */
-.deskStack {
-  position: relative;
-}
-
-.deskLayer {
+/* image */
+.r2Media__img {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
 
-  opacity: 0;
-  transform: translate3d(8px, 0, 0);
-  transition: opacity 1200ms cubic-bezier(0.16, 1, 0.3, 1),
-    transform 1200ms cubic-bezier(0.16, 1, 0.3, 1);
-
-  will-change: opacity, transform;
-  pointer-events: none;
+  object-fit: cover;
+  object-position: center;
 }
 
-.deskLayer.is-front {
+/* ---------- Info ---------- */
+.r2Info {
+  padding: 18px;
+  display: block;
+  min-width: 0;
+}
+
+/* stack wrapper */
+.r2TextStack {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+/* text layers: ONLY opacity */
+.r2TextStack .r2Layer {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* ВАЖНО: front — в потоке, чтобы карточка на мобилке росла по контенту */
+.r2TextStack .r2Layer.is-front {
+  position: relative;
   opacity: 1;
-  transform: translate3d(0, 0, 0);
 }
 
-.deskLayer.is-back {
+.r2Card.is-transitioning .r2TextStack .r2Layer.is-front {
   opacity: 0;
 }
-
-/* запуск анимации */
-.deskAnim.is-transitioning .deskLayer.is-front {
-  opacity: 0;
-  transform: translate3d(-8px, 0, 0);
-}
-
-.deskAnim.is-transitioning .deskLayer.is-back {
+.r2Card.is-transitioning .r2TextStack .r2Layer.is-back {
   opacity: 1;
-  transform: translate3d(0, 0, 0);
 }
 
-/* направление назад */
-.deskAnim.is-transitioning.is-prev .deskLayer.is-front {
-  transform: translate3d(8px, 0, 0);
+/* ---------- Top row ---------- */
+.r2Top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
 }
 
-/* уважение к reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .deskLayer {
-    transition: none;
-  }
+.r2Name {
+  margin: 0;
+  font-size: 32px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  color: var(--red);
+  text-transform: uppercase;
 }
 
-@media (min-width: 980px) {
-  .reviews {
-    padding: 40px 0 70px;
+.r2Badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--red) 16%, white 84%);
+  color: var(--red);
+  font-weight: 800;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/* ---------- Layer inner layout (quote pinned bottom) ---------- */
+.r2Layer[data-r2-front],
+.r2Layer[data-r2-back] {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* body rows */
+.r2Body {
+  display: grid;
+  gap: 14px;
+}
+
+.r2Row {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--text) 92%, black 0%);
+}
+
+.r2Row strong {
+  font-weight: 900;
+  font-size: 20px;
+  line-height: 1.35;
+}
+
+.r2Meta {
+  display: inline-block;
+  margin: 0 8px 0 6px;
+  font-weight: 800;
+  color: color-mix(in srgb, var(--text) 65%, transparent);
+}
+
+.r2Row .r2Meta + span {
+  display: block;
+  margin-top: 6px; /* можно 4–10px */
+}
+
+/* quote */
+.r2Quote {
+  margin-top: auto;
+  width: 100%;
+  box-sizing: border-box;
+
+  position: relative;
+  border-radius: 28px;
+  background: #3a3a3a;
+  color: var(--white);
+  padding: 22px 22px 22px 58px;
+  box-shadow: 6px 6px 0 color-mix(in srgb, var(--red) 65%, transparent);
+}
+
+.r2Quote__mark {
+  position: absolute;
+  left: 18px;
+  top: 18px;
+  font-size: 44px;
+  line-height: 1;
+  font-weight: 900;
+  color: color-mix(in srgb, var(--red) 60%, white 40%);
+}
+
+.r2Quote__text {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--white) 92%, transparent);
+}
+
+@media (max-width: 979px) {
+  .r2Card {
+    height: auto !important;
   }
 
-  .reviews__bgMark {
-    font-size: 420px;
+  /* ✅ делаем высоту стабильной (JS выставит переменную) */
+  .r2Info {
+    min-height: var(--r2-info-minh, auto);
+    overflow-anchor: none;
   }
 
-  /* desktop: кнопки показываем */
-  .reviews__controls {
-    display: flex;
-    gap: 10px;
-  }
-
-  /* desktop: показываем desk, прячем mobile */
-  .reviewsMobile {
-    display: none;
-  }
-
-  .reviewsDesk {
-    display: block;
-  }
-
-  .deskGrid {
+  /* ✅ ключевой фикс: слои текста НЕ absolute, а grid-overlay */
+  .r2TextStack {
     display: grid;
-    grid-template-columns: 520px minmax(0, 1fr);
-    gap: 18px;
-    align-items: stretch;
+    overflow-anchor: none;
   }
 
-  .deskMedia {
-    border-radius: 34px;
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    background: #fff;
-    height: 420px;
-  }
+  .r2TextStack .r2Layer {
+    position: relative !important;
+    inset: auto !important;
 
-  /* картинки-слои */
-  .deskMedia img.deskLayer {
+    grid-area: 1 / 1; /* обе карточки в одной ячейке => высота = max(front, back) */
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
+    min-width: 0;
 
-  .deskTextCard {
-    border-radius: 34px;
-    border: 2px solid rgba(43, 46, 68, 0.14);
-    position: relative;
-    overflow: hidden;
-    background: #fff;
-    min-height: 420px;
-  }
-
-  /* текстовые слои: padding на слоях, чтобы красиво crossfade’илось */
-  .deskTextCard [data-front-text],
-  .deskTextCard [data-back-text] {
-    padding: 28px 28px 70px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .deskText {
-    margin: 0;
-    color: var(--muted);
-    line-height: 1.7;
-    font-size: 16px;
-    max-width: 720px;
-  }
-
-  .deskSig {
-    margin-top: 18px;
-    font-weight: 900;
-    color: var(--text);
-  }
-
-  .deskDecor {
-    position: absolute;
-    right: 18px;
-    bottom: 14px;
+    /* оставляем анимацию opacity как есть */
     pointer-events: none;
+  }
+
+  .r2TextStack .r2Layer.is-front {
+    pointer-events: auto;
+    z-index: 2;
+  }
+
+  .r2TextStack .r2Layer.is-back {
+    z-index: 1;
+  }
+
+    /* цитата не прижимается к низу, а идёт сразу после текста */
+  .r2Quote {
+    margin-top: 10px; /* можно 6–14px по вкусу */
+  }
+
+  /* (опционально) чуть меньше общий зазор между блоками внутри слоя */
+  .r2Layer[data-r2-front],
+  .r2Layer[data-r2-back] {
+    gap: 10px; /* было 14px */
+  }
+}
+
+/* ---------- Desktop (как у тебя — НЕ ТРОГАЕМ) ---------- */
+@media (min-width: 980px) {
+  .r2Card {
+    grid-template-columns: 560px minmax(0, 1fr);
+    align-items: stretch;
+    height: 640px;
+  }
+
+  .r2Media {
+    height: 100%;
+    aspect-ratio: auto;
+  }
+
+  .r2Info {
+    min-height: var(--r2-info-minh, auto);
+  }
+
+  .r2TextStack {
+    height: 100%;
+  }
+
+  .r2TextStack .r2Layer {
+    height: 100%;
+  }
+
+  .r2TextStack .r2Layer,
+  .r2TextStack .r2Layer.is-front,
+  .r2TextStack .r2Layer.is-back {
+    position: absolute !important;
+    inset: 0;
+    height: 100%;
+  }
+
+  .r2Layer[data-r2-front],
+  .r2Layer[data-r2-back] {
+    height: 100%;
+    min-height: 0;
+  }
+
+  .r2Body {
+    overflow-y: scroll;
+    scrollbar-gutter: stable;
+  }
+
+  .r2Body::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+  .r2Body {
+    scrollbar-width: none;
+  }
+
+  .r2Name {
+    font-size: 44px;
+  }
+  .r2Row {
+    font-size: 20px;
+    line-height: 1.65;
+  }
+  .r2Meta {
+    font-size: 20px;
+    line-height: 1.4;
+  }
+  .r2Quote__text {
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  .r2Quote {
+    box-shadow: 10px 10px 0 color-mix(in srgb, var(--red) 65%, transparent);
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .r2Media .r2Layer,
+  .r2TextStack .r2Layer {
+    transition: none !important;
   }
 }

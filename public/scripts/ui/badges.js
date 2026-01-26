@@ -1,9 +1,3 @@
-/**
- * TeaCha website
- * Design & development: Ілля Пінчук Вадимович
- * © 2026. All rights reserved.
- */
-
 export const initBadges = () => {
   document.querySelectorAll(".badge--round").forEach((el) => {
     const delay = -(Math.random() * 2.8).toFixed(2) + "s"

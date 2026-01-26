@@ -1,9 +1,3 @@
-/**
- * TeaCha website
- * Design & development: Ілля Пінчук Вадимович
- * © 2026. All rights reserved.
- */
-
 export const initPriceTeachers = () => {
   const table = document.querySelector("[data-price-table]");
   if (!table) return;

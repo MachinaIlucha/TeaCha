@@ -1,9 +1,3 @@
-/**
- * TeaCha website
- * Design & development: Ілля Пінчук Вадимович
- * © 2026. All rights reserved.
- */
-
 import { postLead } from "./api.js";
 import { toast } from "../core/toast.js";
 

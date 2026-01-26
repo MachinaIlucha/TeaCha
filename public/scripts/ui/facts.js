@@ -1,8 +1,3 @@
-/**
- * Reveals "facts" section on scroll.
- * - Uses IntersectionObserver for performance.
- * - Respects prefers-reduced-motion.
- */
 function initFactsReveal() {
   const sections = document.querySelectorAll("[data-facts]");
   if (!sections.length) return;

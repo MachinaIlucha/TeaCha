@@ -1,9 +1,3 @@
-/**
- * TeaCha website
- * Design & development: Ілля Пінчук Вадимович
- * © 2026. All rights reserved.
- */
-
 import { toast } from "../core/toast.js";
 
 const isLetter = (ch) => /[A-Za-zА-Яа-яІіЇїЄєҐґ]/.test(ch);
