@@ -17,6 +17,7 @@ import { bindLeadForm } from "./lead/bind.js";
 import { initBadges } from "./ui/badges.js";
 import "./ui/reveal.js";
 import { initFaq } from "./features/faq.js";
+import { initEnglishPage } from "./features/english.js";
 
 const boot = () => {
   if (window.__teachaBooted) return;
@@ -27,6 +28,7 @@ const boot = () => {
   initReviews();
   initPriceTeachers();
   initFaq();
+  initEnglishPage();
 
   // modal
   const modalEl = document.getElementById("consultModal");

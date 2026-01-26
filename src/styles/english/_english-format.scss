@@ -1,0 +1,188 @@
+/*!
+ * TeaCha website
+ * Design & development: Ілля Пінчук Вадимович
+ * © 2026. All rights reserved.
+ */
+
+/* =======================================
+   ENGLISH FORMAT (dark tiles like WHY)
+   Icon left (absolute), text centered by card (absolute)
+   ======================================= */
+
+.enFormat {
+  padding: 54px 0 66px;
+
+  --enFormat-pad: 18px;
+  --enFormat-icon: 42px;
+  --enFormat-gap: 14px;
+}
+
+.enFormat__title {
+  margin-bottom: 14px;
+}
+
+/* base card */
+.enFormat .enCard {
+  border-radius: var(--radius-xl);
+  position: relative;
+
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--text) 92%, black 8%) 0%,
+    color-mix(in srgb, var(--text) 100%, black 0%) 100%
+  );
+  border: 1px solid color-mix(in srgb, var(--white) 14%, transparent);
+
+  box-shadow:
+    0 26px 70px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 color-mix(in srgb, var(--white) 16%, transparent);
+
+  height: 100%;
+  overflow: hidden;
+}
+
+/* premium highlight */
+.enFormat .enCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    120% 80% at 20% 0%,
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(255, 255, 255, 0) 55%
+  );
+  pointer-events: none;
+}
+
+/* layout inside card */
+.enCard--format {
+  position: relative;
+  min-height: 130px;
+
+  padding: var(--enFormat-pad);
+  display: block;
+}
+
+/* icon pinned left center */
+.enFormat .enCard__icon {
+  width: var(--enFormat-icon);
+  height: var(--enFormat-icon);
+  border-radius: 14px;
+
+  display: grid;
+  place-items: center;
+
+  color: color-mix(in srgb, var(--red) 70%, white 30%);
+  background: color-mix(in srgb, var(--red) 16%, transparent);
+  border: 1px solid color-mix(in srgb, var(--red) 28%, transparent);
+  box-shadow: 0 16px 36px rgba(219, 31, 50, 0.18);
+
+  position: absolute;
+  left: var(--enFormat-pad);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+/* ✅ content pinned to true center of card */
+.enCard__content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+
+  text-align: center;
+  display: grid;
+  justify-items: center;
+
+  /* чтобы не налезать на иконку и не упираться в края */
+  width: min(
+    40ch,
+    calc(
+      100% - (var(--enFormat-pad) * 2) - 2 *
+        (var(--enFormat-icon) + var(--enFormat-gap))
+    )
+  );
+}
+
+.enCard__k {
+  font-size: 13px;
+  font-weight: 1000;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--white) 64%, transparent);
+  margin-bottom: 8px;
+}
+
+.enCard__v {
+  font-size: 18px;
+  line-height: 1.35;
+  font-weight: 950;
+  color: color-mix(in srgb, var(--white) 92%, transparent);
+  text-wrap: balance;
+}
+
+/* accent: ONLINE */
+.enCard--accentOnline {
+  border-color: color-mix(in srgb, var(--red) 32%, transparent);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--red) 12%, var(--text) 88%) 0%,
+    color-mix(in srgb, var(--red) 6%, var(--text) 94%) 100%
+  );
+}
+
+.enCard--accentOnline .enCard__k {
+  color: color-mix(in srgb, var(--white) 72%, transparent);
+}
+
+.enCard--accentOnline .enCard__v {
+  font-weight: 1000;
+}
+
+/* hover */
+@media (hover: hover) and (pointer: fine) {
+  .enFormat .enCard {
+    transition:
+      transform 140ms ease,
+      box-shadow 140ms ease,
+      border-color 140ms ease;
+  }
+
+  .enFormat .enCard:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--white) 20%, transparent);
+    box-shadow:
+      0 34px 90px rgba(0, 0, 0, 0.25),
+      inset 0 1px 0 color-mix(in srgb, var(--white) 18%, transparent);
+  }
+}
+
+/* desktop */
+@media (min-width: 980px) {
+  .enFormat {
+    --enFormat-pad: 22px;
+    --enFormat-icon: 44px;
+    --enFormat-gap: 16px;
+  }
+
+  .enCard--format {
+    min-height: 150px;
+  }
+
+  .enCard__content {
+    width: min(
+      44ch,
+      calc(
+        100% - (var(--enFormat-pad) * 2) - 2 *
+          (var(--enFormat-icon) + var(--enFormat-gap))
+      )
+    );
+  }
+
+  .enCard__v {
+    font-size: 16px;
+  }
+}

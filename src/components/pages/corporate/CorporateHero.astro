@@ -1,0 +1,32 @@
+---
+/**
+ * TeaCha website
+ * © 2026. All rights reserved.
+ */
+const { base } = Astro.props;
+---
+
+<section class="cHero" data-reveal="scroll">
+  <div class="container cHero__grid">
+    <div class="cHero__left" data-reveal-item="1">
+      <h1 class="cHero__title">
+        Корпоративна англійська, яка підсилює вашу команду
+      </h1>
+
+      <p class="cHero__sub">
+        Персоналізована програма під ваш бізнес, рівень і цілі. Онлайн або офлайн у Києві.
+      </p>
+
+      <div class="cHero__cta">
+        <button class="cHero__btn" type="button" data-open-modal>
+          ХОЧУ ПРОБНИЙ УРОК
+        </button>
+      </div>
+    </div>
+
+    <div class="cHero__photo" data-reveal-item="2" aria-hidden="true">
+      <!-- Пока фото нет — плейсхолдер -->
+      <img class="cHero__img" src={`${base}img/hero-portrait.jpg`} alt="" loading="lazy" />
+    </div>
+  </div>
+</section>

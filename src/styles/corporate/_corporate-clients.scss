@@ -1,0 +1,90 @@
+.cClients {
+  padding: 56px 0 60px;
+}
+
+.cClients__title {
+  margin-bottom: 14px;
+}
+
+.cClients__marquee {
+  --marquee-duration: 18s;
+
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
+  gap: 18px;
+
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  background: linear-gradient(180deg, var(--silver-1), var(--silver-4));
+  border: 1px solid color-mix(in srgb, var(--silver-stroke) 65%, transparent);
+  box-shadow: var(--shadow);
+
+  padding: 18px 14px;
+}
+
+/* два трека, каждый крутится одинаково */
+.cClients__track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 220px;
+  gap: 18px;
+  align-items: center;
+
+  animation: cMarquee var(--marquee-duration) linear infinite;
+}
+
+@keyframes cMarquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-100%); }
+}
+
+.cClients__item {
+  /* было: height: 110px; */
+  min-height: 110px;
+  height: auto;
+
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid color-mix(in srgb, var(--silver-stroke) 55%, transparent);
+
+  /* было: display: grid; place-items: center; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 14px 18px;
+  box-sizing: border-box;
+
+  overflow: visible; /* чтобы точно ничего не резало внутри */
+}
+
+.cClients__logo {
+  display: block;
+
+  /* УБИРАЕМ 100% */
+  width: auto;
+  height: auto;
+
+  /* ВОТ ЭТО ДЕРЖИТ ЛОГОТИП В РАМКАХ И НЕ РЕЖЕТ */
+  max-height: 80%;
+  max-width: 100%;
+
+  object-fit: contain;
+
+  filter: saturate(0.98);
+  opacity: 0.95;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cClients__track {
+    animation: none !important;
+  }
+}
+
+/* пауза при наведении */
+@media (hover: hover) and (pointer: fine) {
+  .cClients__marquee:hover .cClients__track {
+    animation-play-state: paused;
+  }
+}

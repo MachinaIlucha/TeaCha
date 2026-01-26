@@ -1,0 +1,36 @@
+---
+/**
+ * TeaCha website
+ * Design & development: Ілля Пінчук Вадимович
+ * © 2026. All rights reserved.
+ */
+
+const { base } = Astro.props;
+---
+
+<section class="cnHero" data-reveal="scroll">
+  <div class="container">
+    <div class="cnHero__grid">
+      <div class="cnHero__left" data-reveal-item="1">
+        <h1 class="cnHero__title">
+          Почни вивчати найпопулярнішу мову в світі
+        </h1>
+
+        <p class="cnHero__sub" data-reveal-item="2">
+          Онлайн та офлайн у Києві • індивідуальний план • чітка структура уроків
+        </p>
+
+        <div class="cnHero__cta" data-reveal-item="3">
+          <button class="cnHero__btn" type="button" data-open-modal>
+            ХОЧУ ПРОБНИЙ УРОК
+          </button>
+        </div>
+      </div>
+
+      <div class="cnHero__photo" data-reveal-item="4" aria-hidden="true">
+        <!-- пока фото нет — оставляем плейсхолдер блоком -->
+        <img class="cnHero__img" src={`${base}img/hero-portrait.jpg`} alt="" />
+      </div>
+    </div>
+  </div>
+</section>

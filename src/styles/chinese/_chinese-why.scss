@@ -1,0 +1,144 @@
+.cnWhy {
+  padding: 52px 0 56px;
+
+  --cn-pad: 18px;
+  --cn-icon: 42px;
+  --cn-gap: 14px;
+}
+
+.cnWhy__title {
+  margin-bottom: 14px;
+}
+
+/* grid (общая) */
+.cnGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+@media (min-width: 620px) {
+  .cnGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 980px) {
+  .cnGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+}
+
+/* cards */
+.cnCard {
+  border-radius: var(--radius-xl);
+  min-height: 120px;
+  padding: var(--cn-pad);
+
+  position: relative;
+  overflow: hidden;
+
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--text) 92%, black 8%) 0%,
+    color-mix(in srgb, var(--text) 100%, black 0%) 100%
+  );
+
+  border: 1px solid color-mix(in srgb, var(--white) 14%, transparent);
+
+  box-shadow:
+    0 26px 70px rgba(0, 0, 0, 0.20),
+    inset 0 1px 0 color-mix(in srgb, var(--white) 16%, transparent);
+}
+
+.cnCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    120% 80% at 20% 0%,
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(255, 255, 255, 0) 55%
+  );
+  pointer-events: none;
+}
+
+/* icon left */
+.cnCard__icon {
+  width: var(--cn-icon);
+  height: var(--cn-icon);
+  border-radius: 14px;
+
+  display: grid;
+  place-items: center;
+
+  color: color-mix(in srgb, var(--red) 70%, white 30%);
+  background: color-mix(in srgb, var(--red) 16%, transparent);
+  border: 1px solid color-mix(in srgb, var(--red) 28%, transparent);
+  box-shadow: 0 16px 36px rgba(219, 31, 50, 0.18);
+
+  position: absolute;
+  left: var(--cn-pad);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+/* text centered by card, SAFE width (no overlap with icon) */
+.cnCard__text {
+  position: absolute;
+  left: 53%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+
+  font-weight: 950;
+  font-size: 16px;
+  line-height: 1.35;
+  color: color-mix(in srgb, var(--white) 92%, transparent);
+
+  text-align: center;
+  text-wrap: balance;
+
+  width: min(
+    30ch,
+    calc(100% - (var(--cn-pad) * 2) - 2 * (var(--cn-icon) + var(--cn-gap)))
+  );
+}
+
+@media (min-width: 980px) {
+  .cnWhy {
+    --cn-pad: 22px;
+    --cn-icon: 44px;
+    --cn-gap: 16px;
+  }
+
+  .cnCard {
+    min-height: 140px;
+  }
+
+  .cnCard__text {
+    font-size: 16px;
+    width: min(
+      34ch,
+      calc(100% - (var(--cn-pad) * 2) - 2 * (var(--cn-icon) + var(--cn-gap)))
+    );
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cnCard {
+    transition: transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease;
+  }
+
+  .cnCard:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--white) 20%, transparent);
+    box-shadow:
+      0 34px 90px rgba(0, 0, 0, 0.25),
+      inset 0 1px 0 color-mix(in srgb, var(--white) 18%, transparent);
+  }
+}

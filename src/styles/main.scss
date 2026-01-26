@@ -3,7 +3,9 @@
  * Design & development: Ілля Пінчук Вадимович
  * © 2026. All rights reserved.
  */
-
+@use "./english";
+@use "./chinese";
+@use "./corporate";
 @use "./settings";
 @use "./base";
 @use "./layout";

@@ -1,0 +1,34 @@
+---
+/**
+ * TeaCha website
+ * Design & development: Ілля Пінчук Вадимович
+ * © 2026. All rights reserved.
+ */
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+import ChineseHero from "../components/pages/chinese/ChineseHero.astro";
+import ChineseWhy from "../components/pages/chinese/ChineseWhy.astro";
+import ChineseFormat from "../components/pages/chinese/ChineseFormat.astro";
+
+import Process from "../components/sections/Process.astro";
+import PriceRates from "../components/pages/price/PriceRates.astro";
+import Reviews from "../components/Reviews.astro";
+import Faq from "../components/sections/Faq.astro";
+import PriceLead from "../components/pages/price/PriceLead.astro";
+
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="Китайська" bodyClass="page-chinese">
+  <ChineseHero base={base} />
+
+  <ChineseWhy />
+  <Process />
+  <ChineseFormat />
+
+  <PriceRates base={base} />
+  <Reviews />
+  <Faq />
+  <PriceLead base={base} />
+</BaseLayout>

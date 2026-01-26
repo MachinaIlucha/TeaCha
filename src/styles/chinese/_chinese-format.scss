@@ -1,0 +1,106 @@
+.cnFormat {
+  padding: 54px 0 66px;
+
+  --cnF-pad: 18px;
+  --cnF-icon: 42px;
+  --cnF-gap: 14px;
+}
+
+.cnFormat__title {
+  margin-bottom: 14px;
+}
+
+.cnGrid--format .cnCard {
+  min-height: 140px;
+}
+
+/* форматные карточки */
+.cnCard--format {
+  position: relative;
+  overflow: hidden;
+  padding: var(--cnF-pad);
+}
+
+/* ✅ ИКОНКА СЛЕВА (как в Why) */
+.cnFormat .cnCard__icon {
+  width: var(--cnF-icon);
+  height: var(--cnF-icon);
+  border-radius: 14px;
+
+  display: grid;
+  place-items: center;
+
+  color: color-mix(in srgb, var(--red) 70%, white 30%);
+  background: color-mix(in srgb, var(--red) 16%, transparent);
+  border: 1px solid color-mix(in srgb, var(--red) 28%, transparent);
+  box-shadow: 0 16px 36px rgba(219, 31, 50, 0.18);
+
+  position: absolute;
+  left: var(--cnF-pad);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+/* ✅ контент в центре, иконка не влияет */
+.cnFormat .cnCard__content {
+  position: absolute;
+  left: 52%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+
+  text-align: center;
+  display: grid;
+  justify-items: center;
+
+  width: min(
+    44ch,
+    calc(100% - (var(--cnF-pad) * 2) - 2 * (var(--cnF-icon) + var(--cnF-gap)))
+  );
+}
+
+/* подпись */
+.cnFormat .cnCard__k {
+  font-size: 13px;
+  font-weight: 1000;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--white) 64%, transparent);
+  margin-bottom: 8px;
+}
+
+/* значение */
+.cnFormat .cnCard__v {
+  font-size: 18px;
+  line-height: 1.35;
+  font-weight: 950;
+  color: color-mix(in srgb, var(--white) 92%, transparent);
+  text-wrap: balance;
+}
+
+/* online accent */
+.cnCard--accentOnline {
+  border-color: color-mix(in srgb, var(--red) 32%, transparent);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--red) 12%, var(--text) 88%) 0%,
+    color-mix(in srgb, var(--red) 6%, var(--text) 94%) 100%
+  );
+}
+
+@media (min-width: 980px) {
+  .cnFormat {
+    --cnF-pad: 22px;
+    --cnF-icon: 44px;
+    --cnF-gap: 16px;
+  }
+
+  .cnGrid--format .cnCard {
+    min-height: 160px;
+  }
+
+  .cnFormat .cnCard__v {
+    font-size: 16px;
+  }
+}

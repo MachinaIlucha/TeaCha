@@ -1,0 +1,40 @@
+---
+/**
+ * TeaCha website
+ * Design & development: Ілля Пінчук Вадимович
+ * © 2026. All rights reserved.
+ */
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+import EnglishQuote from "../components/pages/english/EnglishQuote.astro";
+import EnglishWhy from "../components/pages/english/EnglishWhy.astro";
+import EnglishFormat from "../components/pages/english/EnglishFormat.astro";
+
+import Process from "../components/sections/Process.astro";
+import PriceRates from "../components/pages/price/PriceRates.astro";
+import Reviews from "../components/Reviews.astro";
+import Faq from "../components/sections/Faq.astro";
+import PriceLead from "../components/pages/price/PriceLead.astro";
+
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="Англійська" reveal={true} bodyClass="page-english">
+  <EnglishQuote base={base} />
+
+  <EnglishWhy />
+
+  <Process />
+
+  <EnglishFormat base={base} />
+
+  <PriceRates base={base} />
+
+  <Reviews />
+
+  <Faq />
+
+  {/* ВАЖНО: на этой странице цены ведут сюда (якорь #price-lead), НЕ на модал */}
+  <PriceLead base={base} />
+</BaseLayout>

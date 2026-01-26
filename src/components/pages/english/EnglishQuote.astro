@@ -1,0 +1,40 @@
+---
+/**
+ * TeaCha website
+ * Design & development: Ілля Пінчук Вадимович
+ * © 2026. All rights reserved.
+ */
+
+const { base } = Astro.props;
+
+// временный плейсхолдер (поменяешь на свою фотку после фотосессии)
+const imgSrc = `${base}img/hero-portrait.jpg`;
+---
+
+<section class="enHero" data-reveal="scroll">
+  <div class="container">
+    <div class="enHero__grid" data-reveal-item="1">
+      <div class="enHero__left">
+        <h1 class="enHero__title">
+          Англійська, яка відкриє двері до нових можливостей
+        </h1>
+
+        <p class="enHero__sub">
+          Онлайн та офлайн у Києві • індивідуальний план • чітка структура уроків
+        </p>
+
+        <div class="enHero__cta">
+          <button class="enHero__btn" type="button" data-open-modal>
+            ХОЧУ ПРОБНИЙ УРОК
+          </button>
+        </div>
+      </div>
+
+      <div class="enHero__right" aria-hidden="true">
+        <div class="enHero__photo">
+          <img class="enHero__img" src={imgSrc} alt="" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,43 @@
+---
+/**
+ * TeaCha website
+ * Design & development: Ілля Пінчук Вадимович
+ * © 2026. All rights reserved.
+ */
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+import CorporateHero from "../components/pages/corporate/CorporateHero.astro";
+import CorporateBenefits from "../components/pages/corporate/CorporateBenefits.astro";
+import CorporateClients from "../components/pages/corporate/CorporateClients.astro";
+
+import Process from "../components/sections/Process.astro";
+import Faq from "../components/sections/Faq.astro";
+
+import PriceRates from "../components/pages/price/PriceRates.astro";
+import PriceLead from "../components/pages/price/PriceLead.astro";
+
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="Корпоративне навчання">
+  <main class="page-corporate">
+    <CorporateHero base={base} />
+    <CorporateBenefits />
+    <Process />
+    {/* формат обучения “как и был” — если у тебя уже есть готовый блок (EnglishFormat/ChineseFormat),
+        просто импортни его и вставь тут. Я оставляю хук под твой компонент: */}
+    <slot />
+
+    <CorporateClients base={base} />
+
+    <section class="price-rates" id="prices" data-reveal="scroll">
+      <PriceRates base={base} />
+    </section>
+
+    <Faq />
+
+    {/* цены ведут на лид-форму (как ты хотел) */}
+    <PriceLead base={base} />
+  </main>
+</BaseLayout>

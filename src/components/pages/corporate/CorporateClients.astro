@@ -1,0 +1,60 @@
+---
+/**
+ * TeaCha website
+ * © 2026. All rights reserved.
+ */
+const { base } = Astro.props;
+
+/* Подставь свои реальные логотипы из /public/img/clients/ */
+const logos = [
+  { src: `${base}img/MHP-logo.png`, alt: "MHP logo" },
+  { src: `${base}img/krasty-soft-logo.png`, alt: "Krasty soft logo" },
+  { src: `${base}img/miko-logo.png`, alt: "Miko logo" },
+  { src: `${base}img/overdone-logo.jpg`, alt: "Overdone logo" },
+  { src: `${base}img/community-key-logo.jpg`, alt: "Comunity key logo" },
+];
+---
+
+<section class="cClients" data-reveal="scroll">
+  <div class="container">
+    <h2
+      class="section-title section-heading cClients__title"
+      data-reveal-item="1"
+    >
+      КОРПОРАТИВНІ КЛІЄНТИ:
+    </h2>
+
+    <div class="cClients__marquee" data-reveal-item="2" data-marquee>
+      <!-- ДВА одинаковых трека для бесшовности -->
+      <div class="cClients__track" data-marquee-track>
+        {
+          logos.map((l) => (
+            <div class="cClients__item">
+              <img
+                class="cClients__logo"
+                src={l.src}
+                alt={l.alt}
+                loading="lazy"
+              />
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="cClients__track" aria-hidden="true">
+        {
+          logos.map((l) => (
+            <div class="cClients__item">
+              <img class="cClients__logo" src={l.src} alt="" loading="lazy" />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initMarquee } from "../scripts/features/marquee.js"; // <-- путь под себя
+    initMarquee();
+  </script>
+</section>
