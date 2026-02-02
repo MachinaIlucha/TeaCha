@@ -2,7 +2,7 @@
  * TeaCha website
  * © 2026. All rights reserved.
  *
- * Shared input field styles
+ * Shared input field styles + Floating label
  */
 
 .fieldInput {
@@ -21,6 +21,10 @@
   font-size: 13px;
 
   outline: none;
+
+  transition:
+    border-bottom-color var(--dur-1) var(--ease),
+    border-bottom-width var(--dur-1) var(--ease);
 }
 
 @supports not (color: color-mix(in srgb, red, white)) {
@@ -41,7 +45,94 @@
   }
 }
 
+/* ✅ Focus like before, but WITHOUT red underline/shadow */
 .fieldInput:focus-visible {
   border-bottom-color: color-mix(in srgb, var(--text) 85%, transparent);
-  box-shadow: 0 8px 0 -7px rgba(219, 31, 50, 0.45);
+  box-shadow: none;
+}
+
+@supports not (color: color-mix(in srgb, red, white)) {
+  .fieldInput:focus-visible {
+    border-bottom-color: rgba(43, 46, 68, 0.85);
+    box-shadow: none;
+  }
+}
+
+/* =========================================================
+   Floating label (one logic, reusable everywhere)
+   Usage:
+   <label class="floatField">
+     <input class="fieldInput floatField__input" placeholder=" " ... />
+     <span class="floatField__label">ІМʼЯ</span>
+   </label>
+========================================================= */
+
+.floatField {
+  position: relative;
+  display: block;
+  min-width: 0;
+}
+
+/* space for label when it floats */
+.floatField__input.fieldInput {
+  padding-top: 22px;
+
+  transition:
+    border-bottom-color var(--dur-1) var(--ease),
+    border-bottom-width var(--dur-1) var(--ease);
+}
+
+/* label */
+.floatField__label {
+  position: absolute;
+  left: 0;
+  top: 12px;
+
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  font-size: 13px;
+  text-transform: uppercase;
+
+  color: color-mix(in srgb, var(--text) 70%, transparent);
+  transform-origin: left top;
+
+  /* initial "placeholder-like" position */
+  transform: translateY(10px);
+  opacity: 0.92;
+
+  /* ✅ smoother, premium motion */
+  transition:
+    transform 260ms cubic-bezier(0.2, 0.9, 0.2, 1),
+    opacity 220ms var(--ease),
+    color 220ms var(--ease),
+    letter-spacing 260ms cubic-bezier(0.2, 0.9, 0.2, 1);
+
+  will-change: transform, opacity;
+
+  pointer-events: none;
+}
+
+@supports not (color: color-mix(in srgb, red, white)) {
+  .floatField__label {
+    color: rgba(43, 46, 68, 0.75);
+  }
+}
+
+/* float on focus or when filled */
+.floatField__input:focus + .floatField__label,
+.floatField__input:not(:placeholder-shown) + .floatField__label {
+  transform: translateY(-12px) scale(0.92);
+  opacity: 1;
+
+  /* micro-change makes it feel less "snappy" */
+  letter-spacing: 0.01em;
+
+  color: color-mix(in srgb, var(--text) 92%, transparent);
+}
+
+@supports not (color: color-mix(in srgb, red, white)) {
+  .floatField__input:focus + .floatField__label,
+  .floatField__input:not(:placeholder-shown) + .floatField__label {
+    color: rgba(43, 46, 68, 0.9);
+  }
 }
