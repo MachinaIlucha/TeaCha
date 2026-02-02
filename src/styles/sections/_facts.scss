@@ -1,165 +1,162 @@
+/*!
+ * TeaCha website
+ * Facts section
+ * © 2026. All rights reserved.
+ */
+
 .facts {
   position: relative;
-  padding: clamp(26px, 6vw, 78px) 0;
+  padding-block: var(--section-py-compact);
   overflow: hidden;
+
+  /* local vars (tokens source of truth) */
+  --facts-ink: var(--color-brand);
+  --facts-accent: var(--color-accent);
+  --facts-surface: var(--color-surface);
 }
 
+/* background (если есть картинка/градиент) */
 .facts__bg {
   position: absolute;
   inset: -70px -60px;
 
-  background-image: var(--facts-bg);
+  background-image: var(--facts-bg, none);
   background-size: cover;
   background-position: center;
 
   opacity: 1;
   filter: grayscale(1) contrast(0.8);
 
-  /* ⬇️ КОМБИНИРОВАННАЯ МАСКА */
-  mask-image:
-    radial-gradient(
-      ellipse at center,
-      rgba(0, 0, 0, 1) 40%,
-      rgba(0, 0, 0, 0.9) 58%,
-      rgba(0, 0, 0, 0.55) 75%,
-      rgba(0, 0, 0, 0) 100%
-    ),
-    linear-gradient(
-      to bottom,
-      transparent 0%,
-      black 18%,
-      black 82%,
-      transparent 100%
-    ),
-    linear-gradient(
-      to right,
-      transparent 0%,
-      black 18%,
-      black 82%,
-      transparent 100%
-    );
-
-  mask-composite: intersect;
-  -webkit-mask-composite: source-in;
-
   pointer-events: none;
+
+  /* мягкое затухание к краям */
+  -webkit-mask-image: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 1) 42%,
+    rgba(0, 0, 0, 0.85) 62%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  mask-image: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 1) 42%,
+    rgba(0, 0, 0, 0.85) 62%,
+    rgba(0, 0, 0, 0) 100%
+  );
 }
 
-.facts__container {
-  position: relative;
-  max-width: var(--container);
-  margin: 0 auto;
-  padding: 0 18px;
-}
-
+/* grid — mobile first */
 .facts__grid {
+  position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-  gap: 16px;
+  grid-template-columns: 1fr;
+  gap: 12px;
 }
+
+/* desktop */
+@media (min-width: 980px) {
+  .facts__grid {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: 16px;
+  }
+}
+
+/* =========================
+   CARD — теперь “синий” стиль
+   (оставляем центрирование и тексты как были)
+========================= */
 
 .facts__card {
-  background: none;
+  position: relative;
+  overflow: hidden;
 
-  background:
-    /* верхний свет — НЕ белый, а мягкий */
-    radial-gradient(120% 160% at 20% -10%,
-      rgba(255,255,255,.55) 0%,
-      rgba(255,255,255,0) 52%),
-
-    /* легкая "впадина" (сатин) по центру */
-    radial-gradient(120% 220% at 50% 45%,
-      rgba(120,130,160,.14) 0%,
-      rgba(120,130,160,0) 55%),
-
-    /* низ — глубина */
-    radial-gradient(120% 200% at 85% 120%,
-      rgba(0,0,0,.12) 0%,
-      rgba(0,0,0,0) 55%),
-
-    /* базовый серебряный тон (чуть темнее сверху) */
-    linear-gradient(180deg,
-      #eef1f6 0%,
-      #dee2ea 22%,
-      #f1f3f8 50%,
-      #d3d7e1 78%,
-      #eef1f6 100%);
-
-  color: rgba(18, 22, 40, 0.9);
-  border-radius: var(--radius-lg);
-
-  /* тонкая "металлическая" рамка */
-  border: 1px solid rgba(35, 40, 60, 0.14);
-
-  /* мягкая тень + внутренний свет */
-  box-shadow:
-    0 18px 55px rgba(0, 0, 0, 0.16),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9),
-    inset 0 -14px 26px rgba(0, 0, 0, 0.05);
-
+  /* как на твоих тёмных карточках */
+  border-radius: var(--radius-xl);
   padding: clamp(14px, 1.6vw, 20px);
   min-height: clamp(96px, 8vw, 124px);
+
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
 
-  position: relative;
-  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--facts-ink) 92%, black 8%) 0%,
+    color-mix(in srgb, var(--facts-ink) 100%, black 0%) 100%
+  );
 
+  border: 1px solid color-mix(in srgb, var(--facts-surface) 14%, transparent);
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, 0.16),
+    0 2px 0 rgba(255, 255, 255, 0.1) inset,
+    0 -18px 28px rgba(0, 0, 0, 0.1) inset;
+
+  /* reveal */
   opacity: 0;
   transform: translateY(10px);
   transition:
-    opacity 600ms ease,
-    transform 600ms ease,
-    box-shadow 220ms ease,
-    filter 220ms ease;
+    opacity 600ms var(--ease),
+    transform 600ms var(--ease),
+    filter 220ms var(--ease),
+    box-shadow 220ms var(--ease);
 }
 
+/* fallback если color-mix нет */
+@supports not (background: color-mix(in srgb, red, white)) {
+  .facts__card {
+    background: linear-gradient(180deg, #2a2d41 0%, #23263a 100%);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow:
+      0 26px 70px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  }
+}
+
+/* верхний мягкий блик как у твоих cBCard */
 .facts__card::before {
   content: "";
   position: absolute;
-  inset: -60% -30%;
-  background: linear-gradient(
-    115deg,
-    rgba(255, 255, 255, 0) 42%,
-    rgba(255, 255, 255, 0.55) 50%,
-    rgba(255, 255, 255, 0) 58%
-  );
-  opacity: 0.55;
-  pointer-events: none;
-}
-
-.facts__card::after {
-  content: "";
-  position: absolute;
   inset: 0;
-  background: repeating-linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0.04) 0px,
-    rgba(255, 255, 255, 0.04) 1px,
-    rgba(0, 0, 0, 0.02) 2px,
-    rgba(0, 0, 0, 0.02) 3px
+  border-radius: inherit;
+  background: radial-gradient(
+    120% 80% at 20% 0%,
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(255, 255, 255, 0) 55%
   );
-  mix-blend-mode: soft-light;
-  opacity: 0.35;
   pointer-events: none;
 }
 
+/* wide card — просто чуть выше на мобилке (как было) */
 .facts__card--wide {
-  justify-content: center;
-  text-align: center;
   min-height: clamp(104px, 9vw, 136px);
 }
 
-.facts__card:hover {
-  filter: contrast(1.04) saturate(1.02);
-  box-shadow:
-    0 24px 70px rgba(0,0,0,.20),
-    inset 0 1px 0 rgba(255,255,255,.95),
-    inset 0 -18px 32px rgba(0,0,0,.06);
-  transform: translateY(-2px);
+@media (max-width: 860px) {
+  .facts__grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .facts__card--wide {
+    min-height: clamp(120px, 16vw, 180px);
+  }
 }
+
+@media (hover: hover) and (pointer: fine) {
+  .facts__card:hover {
+    box-shadow:
+      0 18px 46px rgba(0, 0, 0, 0.2),
+      0 2px 0 rgba(255, 255, 255, 0.12) inset,
+      0 -22px 34px rgba(0, 0, 0, 0.12) inset;
+    transform: translateY(-2px);
+    filter: contrast(1.03) saturate(1.02);
+  }
+}
+
+/* =========================
+   TYPOGRAPHY — оставляем как было,
+   только меняем цвет на “белый” для тёмного фона
+========================= */
 
 .facts__stat {
   display: grid;
@@ -172,8 +169,8 @@
   letter-spacing: -0.02em;
   font-weight: 650;
 
-  color: rgba(10, 14, 28, 0.95);
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.55);
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
 }
 
 .facts__label {
@@ -181,19 +178,21 @@
   line-height: 1.15;
   opacity: 0.92;
   font-weight: 500;
+  color: rgba(255, 255, 255, 0.78);
 }
 
 .facts__text {
   font-size: clamp(16px, 1.6vw, 22px);
   line-height: 1.25;
   font-weight: 500;
+  color: rgba(255, 255, 255, 0.82);
 }
 
-.facts__text,
-.facts__label {
-  color: rgba(18, 22, 40, 0.86);
+.facts__bg > .container {
+  padding-inline: 0;
 }
 
+/* reveal */
 .facts.is-visible .facts__card {
   opacity: 1;
   transform: none;
@@ -212,13 +211,9 @@
   transition-delay: 210ms;
 }
 
-@media (max-width: 860px) {
-  .facts__grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
-  .facts__card--wide {
-    min-height: clamp(120px, 16vw, 180px);
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .facts__card {
+    transition: none !important;
   }
 }

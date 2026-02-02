@@ -2,9 +2,7 @@ function initFactsReveal() {
   const sections = document.querySelectorAll("[data-facts]");
   if (!sections.length) return;
 
-  const reduceMotion = window.matchMedia?.(
-    "(prefers-reduced-motion: reduce)",
-  )?.matches;
+  const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
   if (reduceMotion) {
     sections.forEach((s) => s.classList.add("is-visible"));
     return;
@@ -25,9 +23,7 @@ function initFactsReveal() {
 }
 
 if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initFactsReveal, {
-    once: true,
-  });
+  document.addEventListener("DOMContentLoaded", initFactsReveal, { once: true });
 } else {
   initFactsReveal();
 }

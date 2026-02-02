@@ -1,0 +1,68 @@
+---
+/**
+ * TeaCha website
+ * © 2026. All rights reserved.
+ */
+
+import PrivacyConsent from "../forms/PrivacyConsent.astro";
+
+const { base = "/" } = Astro.props;
+---
+
+<section
+  class="startLead"
+  id="start-lead"
+  data-reveal="scroll"
+  style={`--startlead-bg: url(${base}img/books-on-shelf.png);`}
+>
+  <div class="container">
+    <div class="startLead__grid">
+      <header class="startLead__copy" data-reveal-item="1">
+        <div class="sectionTitle sectionTitle--startLead">
+          <p class="sectionTitle__line sectionTitle__line--a">Хочеш почати?</p>
+          <p class="sectionTitle__line sectionTitle__line--b">Напиши нам</p>
+        </div>
+      </header>
+
+      <form
+        class="startLead__form"
+        id="start-lead-form"
+        action="#"
+        method="post"
+        data-reveal-item="2"
+      >
+        <div class="startLead__fields" data-reveal-item="3">
+          <input
+            class="leadField__input"
+            name="name"
+            type="text"
+            placeholder="ІМʼЯ"
+            autocomplete="name"
+            required
+          />
+
+          <input
+            class="leadField__input"
+            name="contact"
+            type="text"
+            placeholder="ТЕЛЕФОН АБО НІК TELEGRAM"
+            autocomplete="tel"
+            required
+          />
+        </div>
+
+        <div class="startLead__consent" data-reveal-item="4">
+          <PrivacyConsent className="price-consent--dark" />
+        </div>
+
+        <div class="startLead__cta" data-reveal-item="5">
+          <div class="startLead__ctaInner">
+            <button class="btn btn--startLead" type="submit">
+              ЗАПИСАТИСЯ НА ПРОБНИЙ УРОК
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

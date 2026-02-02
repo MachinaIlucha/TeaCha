@@ -5,7 +5,7 @@
 ========================= */
 
 .r2 {
-  padding: 40px 0 70px;
+  padding-block: 40px;
 }
 
 .r2,
@@ -14,56 +14,113 @@
 }
 
 /* ---------- Head ---------- */
+
 .r2__head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  position: relative;
+  display: grid;
   gap: 14px;
   margin-bottom: 14px;
 }
 
+/* Title: one word, centered like Process */
+.r2__head .sectionTitle {
+  width: 100%;
+  margin: 0;
+}
+
+.r2__head .sectionTitle.sectionTitle--inline {
+  display: flex !important;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0 !important;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+
+.r2__head .sectionTitle.sectionTitle--inline .sectionTitle__line--b {
+  margin-top: 0 !important;
+}
+
+/* Nav */
 .r2HeadNav {
   display: inline-flex;
   gap: 12px;
   align-items: center;
+  justify-content: center;
   position: relative;
   z-index: 10;
 }
 
 .r2__btn {
-  width: 56px;
-  height: 56px;
-  border-radius: 999px;
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-pill);
+
   border: 2px solid color-mix(in srgb, var(--text) 18%, transparent);
   background: transparent;
   color: color-mix(in srgb, var(--text) 82%, black 0%);
+
+  font-size: 18px;
   font-weight: 900;
   cursor: pointer;
-  transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
+
+  transition:
+    transform var(--dur-1) var(--ease),
+    border-color var(--dur-1) var(--ease),
+    background-color var(--dur-1) var(--ease),
+    box-shadow var(--dur-1) var(--ease);
+}
+
+.r2__btn:focus-visible {
+  box-shadow: var(--focus-ring);
 }
 
 @media (hover: hover) and (pointer: fine) {
   .r2__btn:hover {
     transform: translateY(-1px);
     border-color: color-mix(in srgb, var(--text) 28%, transparent);
-    background: color-mix(in srgb, var(--silver-4) 60%, white 40%);
+    background: color-mix(in srgb, var(--color-soft) 70%, white 30%);
   }
 }
+
 .r2__btn:active {
   transform: translateY(0);
 }
 
+@media (min-width: 980px) {
+  .r2__head {
+    display: block;
+    margin-bottom: 34px;
+  }
+
+  .r2HeadNav {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    justify-content: flex-end;
+  }
+
+  .r2__btn {
+    width: 72px;
+    height: 72px;
+    font-size: 20px;
+  }
+}
+
 /* ---------- Layout ---------- */
+
 .r2__layout {
   display: block;
 }
 
 /* ---------- Card ---------- */
+
 .r2Card {
-  background: var(--bg);
-  border-radius: 36px;
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
   overflow: hidden;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-1);
 
   display: grid;
   grid-template-columns: 1fr; /* mobile */
@@ -71,13 +128,15 @@
 }
 
 /* ---------- Media ---------- */
+
 .r2Media {
   position: relative;
   overflow: hidden;
 
   aspect-ratio: 3 / 4; /* mobile */
   width: 100%;
-  background: var(--silver-4);
+
+  background: var(--color-soft);
 }
 
 /* media layers: ONLY opacity */
@@ -85,15 +144,18 @@
   position: absolute !important;
   inset: 0;
   opacity: 0;
-  transition: opacity 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity;
+  transition: opacity 950ms var(--ease);
 }
 
 .r2Media .r2Layer.is-front {
   opacity: 1;
 }
+
 .r2Card.is-transitioning .r2Media .r2Layer.is-front {
   opacity: 0;
 }
+
 .r2Card.is-transitioning .r2Media .r2Layer.is-back {
   opacity: 1;
 }
@@ -111,6 +173,7 @@
 }
 
 /* ---------- Info ---------- */
+
 .r2Info {
   padding: 18px;
   display: block;
@@ -129,13 +192,14 @@
   position: absolute;
   inset: 0;
   opacity: 0;
-  transition: opacity 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity;
+  transition: opacity 950ms var(--ease);
   width: 100%;
   min-width: 0;
   box-sizing: border-box;
 }
 
-/* ВАЖНО: front — в потоке, чтобы карточка на мобилке росла по контенту */
+/* front in flow (mobile grows by content) */
 .r2TextStack .r2Layer.is-front {
   position: relative;
   opacity: 1;
@@ -144,11 +208,13 @@
 .r2Card.is-transitioning .r2TextStack .r2Layer.is-front {
   opacity: 0;
 }
+
 .r2Card.is-transitioning .r2TextStack .r2Layer.is-back {
   opacity: 1;
 }
 
 /* ---------- Top row ---------- */
+
 .r2Top {
   display: flex;
   align-items: center;
@@ -170,7 +236,7 @@
   display: inline-flex;
   align-items: center;
   padding: 8px 16px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: color-mix(in srgb, var(--red) 16%, white 84%);
   color: var(--red);
   font-weight: 800;
@@ -179,6 +245,7 @@
 }
 
 /* ---------- Layer inner layout (quote pinned bottom) ---------- */
+
 .r2Layer[data-r2-front],
 .r2Layer[data-r2-back] {
   display: flex;
@@ -217,7 +284,7 @@
 
 .r2Row .r2Meta + span {
   display: block;
-  margin-top: 6px; /* можно 4–10px */
+  margin-top: 6px;
 }
 
 /* quote */
@@ -227,11 +294,14 @@
   box-sizing: border-box;
 
   position: relative;
-  border-radius: 28px;
-  background: #3a3a3a;
+  border-radius: var(--radius-lg);
+
+  /* строго бренд */
+  background: var(--color-brand);
   color: var(--white);
+
   padding: 22px 22px 22px 58px;
-  box-shadow: 6px 6px 0 color-mix(in srgb, var(--red) 65%, transparent);
+  box-shadow: 6px 6px 0 color-mix(in srgb, var(--red) 75%, transparent);
 }
 
 .r2Quote__mark {
@@ -251,18 +321,20 @@
   color: color-mix(in srgb, var(--white) 92%, transparent);
 }
 
+/* ---------- Mobile overlay fix ---------- */
+
 @media (max-width: 979px) {
   .r2Card {
     height: auto !important;
   }
 
-  /* ✅ делаем высоту стабильной (JS выставит переменную) */
+  /* stable height (JS sets var) */
   .r2Info {
     min-height: var(--r2-info-minh, auto);
     overflow-anchor: none;
   }
 
-  /* ✅ ключевой фикс: слои текста НЕ absolute, а grid-overlay */
+  /* layers are grid-overlay (not absolute) */
   .r2TextStack {
     display: grid;
     overflow-anchor: none;
@@ -272,11 +344,10 @@
     position: relative !important;
     inset: auto !important;
 
-    grid-area: 1 / 1; /* обе карточки в одной ячейке => высота = max(front, back) */
+    grid-area: 1 / 1;
     width: 100%;
     min-width: 0;
 
-    /* оставляем анимацию opacity как есть */
     pointer-events: none;
   }
 
@@ -289,19 +360,19 @@
     z-index: 1;
   }
 
-    /* цитата не прижимается к низу, а идёт сразу после текста */
+  /* quote after text */
   .r2Quote {
-    margin-top: 10px; /* можно 6–14px по вкусу */
+    margin-top: 10px;
   }
 
-  /* (опционально) чуть меньше общий зазор между блоками внутри слоя */
   .r2Layer[data-r2-front],
   .r2Layer[data-r2-back] {
-    gap: 10px; /* было 14px */
+    gap: 10px;
   }
 }
 
-/* ---------- Desktop (как у тебя — НЕ ТРОГАЕМ) ---------- */
+/* ---------- Desktop (keep behavior) ---------- */
+
 @media (min-width: 980px) {
   .r2Card {
     grid-template-columns: 560px minmax(0, 1fr);
@@ -349,6 +420,7 @@
     width: 0;
     height: 0;
   }
+
   .r2Body {
     scrollbar-width: none;
   }
@@ -356,25 +428,33 @@
   .r2Name {
     font-size: 44px;
   }
+
   .r2Row {
     font-size: 20px;
     line-height: 1.65;
   }
+
   .r2Meta {
     font-size: 20px;
     line-height: 1.4;
   }
+
   .r2Quote__text {
     font-size: 15px;
     line-height: 1.65;
   }
 
   .r2Quote {
-    box-shadow: 10px 10px 0 color-mix(in srgb, var(--red) 65%, transparent);
+    box-shadow: 10px 10px 0 color-mix(in srgb, var(--red) 75%, transparent);
+  }
+
+  .r2 > .container {
+    padding-inline: 0;
   }
 }
 
 /* ---------- Reduced motion ---------- */
+
 @media (prefers-reduced-motion: reduce) {
   .r2Media .r2Layer,
   .r2TextStack .r2Layer {

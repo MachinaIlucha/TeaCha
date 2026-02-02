@@ -1,0 +1,142 @@
+/*!
+ * TeaCha website
+ * Design & development: Ілля Пінчук Вадимович
+ * © 2026. All rights reserved.
+ */
+
+.btn {
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  height: var(--btn-h);
+  padding-inline: var(--btn-px);
+  border-radius: var(--btn-radius);
+
+  font-weight: var(--btn-font);
+  font-size: var(--btn-size);
+  line-height: 1;
+  letter-spacing: -0.01em;
+
+  transition:
+    transform var(--dur-1) var(--ease),
+    box-shadow var(--dur-1) var(--ease),
+    background-color var(--dur-1) var(--ease),
+    color var(--dur-1) var(--ease),
+    border-color var(--dur-1) var(--ease);
+
+  /* Primary by default */
+  background: var(--color-accent);
+  color: #fff;
+  box-shadow: var(--btn-shadow);
+}
+
+.btn:hover {
+  box-shadow: var(--btn-shadow-hover);
+  transform: translateY(-1px);
+}
+
+/* Чуть “нажатие” */
+.btn:active {
+  transform: translateY(0);
+  box-shadow: var(--btn-shadow);
+}
+
+/* Focus */
+.btn:focus-visible {
+  box-shadow: var(--btn-shadow-hover), var(--focus-ring);
+}
+
+/* Disabled */
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* --- Variants (по необходимости) --- */
+.btn--primary {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+/* Если нужно “вторичную” под белый фон */
+.btn--secondary {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  box-shadow: none;
+}
+
+.btn--secondary:hover {
+  border-color: rgba(43, 46, 68, 0.3);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
+}
+
+/* Прозрачная */
+.btn--ghost {
+  background: transparent;
+  color: var(--color-text);
+  box-shadow: none;
+}
+
+.btn--ghost:hover {
+  background: rgba(43, 46, 68, 0.06);
+}
+
+/* Sizes */
+.btn--sm {
+  height: 44px;
+  padding-inline: 18px;
+  font-size: 14px;
+}
+
+.btn--lg {
+  height: 64px;
+  padding-inline: 34px;
+  font-size: 17px;
+}
+
+/* Optional: сделать hover чуть темнее (современно) */
+@supports (background: color-mix(in srgb, red, black)) {
+  .btn:hover {
+    background: color-mix(in srgb, var(--color-accent) 92%, black);
+  }
+}
+
+.btn--startLead {
+  height: 80px;
+  padding-inline: 64px;
+  font-size: 17px;
+  font-weight: 900;
+  letter-spacing: 0.01em;
+  min-width: clamp(340px, 26vw, 440px);
+
+  background: var(--white);
+  color: #111;
+  border: 2px solid transparent;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
+
+  white-space: nowrap;
+
+  &:hover {
+    background: transparent;
+    color: var(--white);
+    border-color: rgba(255, 255, 255, 0.85);
+    box-shadow: none;
+    transform: translateY(-1px);
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.9);
+    outline-offset: 4px;
+  }
+}

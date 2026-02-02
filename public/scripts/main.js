@@ -9,26 +9,28 @@ import { initTopbarHeightVar } from "./core/layout.js";
 
 import { initMenu } from "./features/menu.js";
 import { initReviews } from "./features/reviews.js";
-import { initPriceTeachers } from "./features/price.js";
+import { initPrices } from "./features/price.js";
 
 import { attachLeadValidation } from "./lead/validation.js";
 import { bindLeadForm } from "./lead/bind.js";
 
 import { initBadges } from "./ui/badges.js";
 import "./ui/reveal.js";
+import { initHeroLoadReveal } from "./ui/hero-load-reveal.js";
 import { initFaq } from "./features/faq.js";
 import { initEnglishPage } from "./features/english.js";
+import { initStartLead } from "./lead/startLead.js";
+import { initLeadDock } from "./features/leadDock.js";
 
 const boot = () => {
-  if (window.__teachaBooted) return;
-  window.__teachaBooted = true;
-
   // features (safe to call on every page – they self-check DOM)
   initMenu();
   initReviews();
-  initPriceTeachers();
   initFaq();
   initEnglishPage();
+  initPrices();
+  initStartLead();
+  initLeadDock();
 
   // modal
   const modalEl = document.getElementById("consultModal");
@@ -78,17 +80,18 @@ const boot = () => {
   }
 
   // forms
-  attachLeadValidation(document.querySelector(".price-lead__form"));
+  attachLeadValidation(document.getElementById("lead-bar-form"));
   attachLeadValidation(document.getElementById("consultForm"));
 
   bindLeadForm("#consultForm", { source: "modal", onSuccess: closeModal });
-  bindLeadForm(".price-lead__form", { source: "price" });
+  bindLeadForm("#lead-bar-form", { source: "lead-bar" });
 
   // layout helpers
   initTopbarHeightVar();
 
   // ui
   initBadges();
+  initHeroLoadReveal(); // ✅ NEW (hero appears smoothly on load)
 };
 
 // 1) обычная загрузка

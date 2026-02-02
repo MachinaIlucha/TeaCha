@@ -1,23 +1,28 @@
-/* File: styles/sections/_process.scss */
+/*!
+ * TeaCha website
+ * Process section
+ * © 2026. All rights reserved.
+ */
 
 .process {
-  padding: clamp(34px, 6vw, 30px) 0;
+  padding-block: var(--section-py-compact);
   background: transparent;
   color: var(--text);
+
+  /* local vars from tokens */
+  --p-line: rgba(43, 46, 68, 0.9);
+  --p-node-bg: var(--color-soft);
+  --p-node-border: rgba(43, 46, 68, 0.08);
+  --p-node-ring: var(--bg);
+  --p-num: rgba(43, 46, 68, 0.95);
 }
 
-.process__container {
-  max-width: var(--container);
-  margin: 0 auto;
-  padding: 0 18px;
-}
-
-.process__title {
-  margin: 0 0 clamp(14px, 2.5vw, 28px); /* было больше */
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  font-size: clamp(34px, 4.2vw, 58px);
-  color: var(--text);
+@supports (color: color-mix(in srgb, red, white)) {
+  .process {
+    --p-line: color-mix(in srgb, var(--color-brand) 90%, transparent);
+    --p-node-border: color-mix(in srgb, var(--color-brand) 10%, transparent);
+    --p-num: color-mix(in srgb, var(--color-brand) 95%, transparent);
+  }
 }
 
 /* -------------------- */
@@ -46,15 +51,15 @@
   top: 10px;
   bottom: 10px;
   width: 2px;
-  background: rgba(43, 46, 68, 0.9);
+  background: var(--p-line);
   z-index: 0;
 
   transform-origin: center top;
   transform: scaleY(0);
   opacity: 0;
   transition:
-    transform 700ms ease,
-    opacity 450ms ease;
+    transform 700ms var(--ease),
+    opacity 450ms var(--ease);
 }
 
 .process__item {
@@ -70,10 +75,10 @@
   grid-column: 1;
   width: var(--node);
   height: var(--node);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
 
-  background: #e9eaee;
-  border: 1px solid rgba(43, 46, 68, 0.08);
+  background: var(--p-node-bg);
+  border: 1px solid var(--p-node-border);
 
   display: grid;
   place-items: center;
@@ -81,20 +86,20 @@
   position: relative;
   z-index: 2;
 
-  box-shadow: 0 0 0 8px var(--bg);
+  box-shadow: 0 0 0 8px var(--p-node-ring);
 
   opacity: 0;
   transform: scale(0.96);
   transition:
-    opacity 650ms ease,
-    transform 650ms ease;
+    opacity 900ms var(--ease),
+    transform 900ms var(--ease);
 }
 
 .process__num {
   font-size: 22px;
   font-weight: 500;
   line-height: 1;
-  color: rgba(43, 46, 68, 0.95);
+  color: var(--p-num);
 }
 
 .process__content {
@@ -115,8 +120,8 @@
   opacity: 0;
   transform: translateY(10px);
   transition:
-    opacity 650ms ease,
-    transform 650ms ease;
+    opacity 900ms var(--ease),
+    transform 900ms var(--ease);
 
   justify-self: center;
   text-align: center;
@@ -143,9 +148,14 @@
 }
 
 /* -------------------- */
-/* DESKTOP              */
+/* DESKTOP (>=980)      */
 /* -------------------- */
-@media (min-width: 861px) {
+
+@media (min-width: 980px) {
+  .process > .container {
+    padding-inline: 0;
+  }
+
   .process__timeline {
     --node: 76px;
     --topH: clamp(70px, 6vw, 100px);
@@ -155,10 +165,7 @@
     overflow: visible;
 
     display: grid;
-    grid-template-columns: repeat(
-      5,
-      minmax(0, 1fr)
-    ); /* ✅ равномерные 5 колонок */
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     column-gap: 0;
     row-gap: 0;
     position: relative;
@@ -166,9 +173,6 @@
 
   /* линия строго от центра 1 до центра 5 */
   .process__timeline::before {
-    content: "";
-    position: absolute;
-
     left: calc(var(--node) / 2);
     right: calc(var(--node) / 2);
     top: calc(var(--topH) + (var(--node) / 2));
@@ -177,16 +181,13 @@
     width: auto;
     bottom: auto;
 
-    background: rgba(43, 46, 68, 0.9);
-    z-index: 0;
-    pointer-events: none;
-
     transform-origin: left center;
     transform: scaleX(0);
     opacity: 0;
+
     transition:
-      transform 700ms ease,
-      opacity 450ms ease;
+      transform 900ms var(--ease),
+      opacity 520ms var(--ease);
   }
 
   .process.is-visible .process__timeline::before {
@@ -212,7 +213,7 @@
     align-self: center;
     justify-self: center;
     z-index: 2;
-    box-shadow: 0 0 0 10px var(--bg);
+    box-shadow: 0 0 0 10px var(--p-node-ring);
   }
 
   /* 1 и 5 — по краям */
@@ -223,7 +224,6 @@
     justify-self: end;
   }
 
-  /* ✅ текст снова в потоке, поэтому он всегда "над/под своей цифрой" */
   .process__content {
     grid-row: 1;
     align-self: end;
@@ -234,14 +234,8 @@
     overflow-wrap: normal;
     word-break: normal;
 
-    max-inline-size: 56ch; /* достаточно широко, чтобы не ломало по 1-2 слова */
+    max-inline-size: 56ch;
     text-align: center;
-
-    opacity: 0;
-    transform: translateY(10px);
-    transition:
-      opacity 650ms ease,
-      transform 650ms ease;
   }
 
   /* 1/3/5 сверху */
@@ -250,7 +244,7 @@
     margin-bottom: 18px;
   }
 
-  /* 2/4 снизу — но выглядят как верхние (центрируются и “под своей цифрой”) */
+  /* 2/4 снизу */
   .process__item:nth-child(even) .process__content {
     grid-row: 3;
     align-self: start;
@@ -258,7 +252,7 @@
     text-align: center;
   }
 
-  /* 1 слева, 5 справа (как в рефе) */
+  /* 1 слева, 5 справа */
   .process__item:nth-child(1) .process__content {
     justify-self: start;
     text-align: left;
@@ -271,15 +265,10 @@
     max-inline-size: 48ch;
   }
 
-  .process.is-visible .process__content {
-    opacity: 1;
-    transform: none;
-  }
-
   @media (max-width: 1100px) {
     .process__content {
       white-space: normal;
-      max-inline-size: 56ch; /* или твое значение */
+      max-inline-size: 56ch;
     }
   }
 }

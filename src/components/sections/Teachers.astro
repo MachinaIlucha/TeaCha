@@ -8,69 +8,84 @@
 const { base } = Astro.props;
 ---
 
-<section class="teachers" id="teachers" data-reveal="load">
+<section class="foundersSketch" id="teachers" data-reveal="load">
   <div class="container">
-    <h2 class="section-title" data-reveal-item="1">Засновниці мовного центру</h2>
+    <!-- Decorative big word ONLY (no black title anymore), limited to container -->
+    <div class="foundersSketch__bgWord" aria-hidden="true">ЗАСНОВНИЦІ</div>
 
-    <div class="section-divider section-heading" aria-hidden="true" data-reveal-item="2"></div>
+    <!-- CENTER: photo + 2 captions -->
+    <div class="foundersSketch__center" data-reveal="load">
+      <div class="foundersSketch__hero" data-reveal-item="1">
+        <div class="foundersSketch__blob" aria-hidden="true"></div>
 
-    <div class="teacher">
-      <div class="teacher__card">
-        <div class="teacher__content">
-          <h3 class="teacher__name" data-reveal-item="3">Дарина і Дарія</h3>
+        <img
+          class="foundersSketch__photo"
+          src={`${base}img/teachers.png`}
+          alt="Дарина та Дарія"
+          loading="lazy"
+        />
 
-          <p class="teacher__role" data-reveal-item="4">Засновниці мовного центру TeaCha</p>
-
-          <div class="teacher__meta" data-reveal-item="5">
-            <p class="teacher__meta-title">ДОСВІД ВИКЛАДАННЯ:</p>
-
-            <div class="teacher__meta-grid teacher__meta-grid--two">
-              <div class="teacher__meta-block">
-                <div class="teacher__meta-label">англійської:</div>
-                <div class="teacher__meta-value">8 років</div>
-
-                <div class="teacher__meta-label">китайської:</div>
-                <div class="teacher__meta-value">6 років</div>
-              </div>
-
-              <div class="teacher__meta-block">
-                <div class="teacher__meta-label">англійської:</div>
-                <div class="teacher__meta-value">7 років</div>
-
-                <div class="teacher__meta-label">китайської:</div>
-                <div class="teacher__meta-value">4 років</div>
-              </div>
-            </div>
+        <!-- Name #1: left of photo (upper area) -->
+        <div class="foundersSketch__name foundersSketch__name--left" data-reveal-item="2">
+          <div class="foundersSketch__nameText">
+            <span class="first">Дарина</span>
+            <span class="last">Швець</span>
           </div>
-
-          <div class="teacher__edu" data-reveal-item="6">
-            <h4 class="teacher__edu-title">ОСВІТА:</h4>
-
-            <ul class="teacher__edu-list">
-              <li>
-                Червоний диплом магістра КНУ ім. Шевченка (китайська мова та
-                література, англійська мова і переклад)
-              </li>
-              <li>
-                Семестрова програма навчання в Університеті Ціндао, Китай
-                (онлайн)
-              </li>
-              <li>
-                Річна програма навчання в Університеті Ціндао, Китай (проживання
-                і навчання в Китаї)
-              </li>
-              <li>Курси інституту Конфуція при КНУ ім. Шевченка</li>
-            </ul>
-          </div>
+          <span class="foundersSketch__leader foundersSketch__leader--left" aria-hidden="true"></span>
         </div>
 
-        <div class="teacher__photo" data-reveal-item="7">
-          <img
-            class="teacher__img"
-            src={`${base}img/daryna.webp`}
-            alt="Дарина та Дарія"
-            loading="lazy"
-          />
+        <!-- Name #2: right of photo (middle/lower area) -->
+        <div class="foundersSketch__name foundersSketch__name--right" data-reveal-item="3">
+          <div class="foundersSketch__nameText">
+            <span class="first">Дарія</span>
+            <span class="last">Позняковська</span>
+          </div>
+          <span class="foundersSketch__leader foundersSketch__leader--right" aria-hidden="true"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOTTOM: 5 cards (OSVITA card removed) -->
+    <div class="foundersSketch__cards" data-reveal-item="4" aria-label="Освіта">
+      <div class="stampCard">
+        <div class="stampCard__inner">
+          Червоний диплом магістра<br />
+          КНУ ім. Шевченка<br />
+          (китайська мова та література,<br />
+          англійська мова і переклад)
+        </div>
+      </div>
+
+      <div class="stampCard">
+        <div class="stampCard__inner">
+          Семестрова програма<br />
+          навчання в Університеті<br />
+          Ціндао, Китай<br />
+          (онлайн)
+        </div>
+      </div>
+
+      <div class="stampCard">
+        <div class="stampCard__inner">
+          Річна програма навчання<br />
+          в Університеті Ціндао, Китай<br />
+          (проживання і навчання<br />
+          в Китаї)
+        </div>
+      </div>
+
+      <div class="stampCard">
+        <div class="stampCard__inner">
+          Курси інституту<br />
+          Конфуція при КНУ<br />
+          ім. Шевченка
+        </div>
+      </div>
+
+      <div class="stampCard">
+        <div class="stampCard__inner">
+          Керування мовним центром<br />
+          більше чотирьох років
         </div>
       </div>
     </div>

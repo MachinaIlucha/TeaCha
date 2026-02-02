@@ -5,8 +5,6 @@
  * © 2026. All rights reserved.
  */
 
-const { base } = Astro.props;
-
 type FactItem = {
   kind: "stat" | "text";
   value?: string;
@@ -34,14 +32,14 @@ const {
 ---
 
 <section class="facts" data-facts>
-  <div class="facts__container">
-    <div class="facts__bg" aria-hidden="true"></div>
-    <div class="facts__grid">
+  <div class="facts__bg" aria-hidden="true"></div>
+
+  <!-- ✅ используем общий container -->
+  <div class="container">
+    <div class="facts__grid" aria-label="Факти">
       {
         items.map((item) => (
-          <article
-            class={`facts__card ${item.wide ? "facts__card--wide" : ""}`}
-          >
+          <article class={`facts__card ${item.wide ? "facts__card--wide" : ""}`}>
             {item.kind === "stat" ? (
               <div class="facts__stat">
                 <div class="facts__value">{item.value}</div>

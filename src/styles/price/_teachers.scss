@@ -5,202 +5,382 @@
  */
 
 /* =========================
-   TEACHERS (ref-style)
+   FOUNDERS — sketch:
+   bg-word + photo center + cards bottom
+   mobile-first
 ========================= */
 
-.teachers {
-  padding: 46px 0 0px;
-  background: var(--bg);
-  color: var(--text);
+.foundersSketch {
+  /* Local aliases from tokens */
+  --fs-ink: var(--color-brand);
+  --fs-accent: var(--color-accent);
+  --fs-bg: var(--color-bg);
+  --fs-surface: var(--color-surface);
+  --fs-border: var(--color-border);
+
+  /* readable ink w/ alpha */
+  --fs-ink-92: rgba(43, 46, 68, 0.92);
+  --fs-ink-86: rgba(43, 46, 68, 0.86);
+
+  background:
+    radial-gradient(900px 560px at 18% 8%, rgba(219, 31, 50, 0.08), transparent 62%),
+    radial-gradient(900px 560px at 82% 18%, rgba(43, 46, 68, 0.05), transparent 64%),
+    linear-gradient(180deg, #ffffff 0%, var(--fs-bg) 100%);
+
+  padding-block: var(--section-py-compact);
+  overflow: hidden;
+  color: var(--color-text);
 }
 
-.teacher[hidden] {
-  display: none;
-}
-
-/* ====== STORY CARD ====== */
-.teacher__card {
+.foundersSketch .container {
   position: relative;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 18px;
-
-  /* ⛔️ убираем карточность */
-  background: transparent;
-  box-shadow: none;
-  border-radius: 0;
-  border: 0;
-
-  /* оставляем только отступы как у секции */
-  padding: 0;
-}
-
-.teacher__content {
-  position: relative;
-  min-width: 0;
-}
-
-.teacher__meta-grid--two {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 22px;
-}
-
-.teacher__meta-block {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  column-gap: 14px;
-  row-gap: 6px;
-  align-items: baseline;
-}
-
-.teacher__name {
-  margin: 10px 0 4px;
-  font-size: 52px;
-  line-height: 0.92;
-  font-weight: 900;
-  color: #e11b22;
-}
-
-.teacher__role {
-  margin: 14px 0 14px;
-  font-size: 20px;
-  line-height: 1.15;
-  font-weight: 800;
-  color: #15161a;
-}
-
-/* === Сірий блок досвіду як у рефі === */
-.teacher__meta {
-  background: transparent;
-  padding: 0;
-}
-
-.teacher__meta-title {
-  font-weight: 900;
-  color: #e11b22;
-  font-size: 14px;
-  margin: 0 0 10px;
-  letter-spacing: 0.02em;
-}
-
-.teacher__meta-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-
-  background: #d9dbe2; /* заметнее серый */
-  border-radius: 18px;
-  padding: 16px 18px;
-  box-shadow: 0 10px 22px rgba(21, 22, 26, 0.06);
-}
-
-.teacher__meta-label {
-  font-size: 14px;
-  color: rgba(21, 22, 26, 0.65);
-  font-weight: 800;
-}
-
-.teacher__meta-value {
-  margin-top: 2px;
-  font-size: 22px;
-  font-weight: 900;
-}
-
-/* === Освіта як у рефі: маркери "-" === */
-.teacher__edu {
-  margin-top: 12px;
-}
-
-.teacher__edu-title {
-  font-weight: 900;
-  font-size: 20px;
-  margin: 0 0 10px;
-}
-
-.teacher__edu-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: grid;
-  gap: 12px;
-  max-width: 62ch;
-
-  li {
-    position: relative;
-    padding-left: 14px;
-    color: rgba(21, 22, 26, 0.72);
-    font-size: 20px;
-    line-height: 1.25;
-
-    &::before {
-      content: "-";
-      position: absolute;
-      left: 0;
-      top: 0;
-      color: rgba(21, 22, 26, 0.55);
-      font-weight: 900;
-    }
-  }
-}
-
-/* Фото на мобилці — в потоці */
-.teacher__photo {
-  position: relative;
-  width: 100%;
-  max-width: 360px; /* чтобы не раздувалось */
-  height: 420px; /* 🔑 контейнер даёт высоту -> ничего не наедет */
-  margin: 18px auto 0; /* после текста */
-}
-
-.teacher__img {
-  position: absolute;
-  inset: 0;
-
-  width: 100%;
-  height: 100%;
-
-  object-fit: contain;
-  object-position: bottom center;
-
-  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.18));
-  pointer-events: none;
-  user-select: none;
 }
 
 /* =========================
-   DESKTOP ≥ 980px
+   BG WORD
 ========================= */
 
+.foundersSketch__bgWord {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 0;
+  pointer-events: none;
+
+  width: 88%;
+  max-width: 88%;
+  text-align: center;
+
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 0.84;
+
+  letter-spacing: -0.075em;
+  font-size: clamp(52px, 8.2vw, 138px);
+
+  color: rgba(219, 31, 50, 0.16);
+
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@supports (color: color-mix(in srgb, red, white)) {
+  .foundersSketch__bgWord {
+    color: color-mix(in srgb, var(--color-accent) 22%, transparent);
+  }
+}
+
+/* =========================
+   CENTER: HERO PHOTO
+========================= */
+
+.foundersSketch__center {
+  position: relative;
+  z-index: 1;
+  margin-top: 54px;
+}
+
+.foundersSketch__hero {
+  position: relative;
+  width: min(640px, 100%);
+  height: clamp(340px, 64vw, 540px);
+  margin: 0 auto;
+  overflow: visible;
+}
+
+/* soft blob behind photo */
+.foundersSketch__blob {
+  position: absolute;
+  inset: 12% 10% 10% 10%;
+  border-radius: 48% 52% 58% 42% / 52% 44% 56% 48%;
+  opacity: 0.96;
+
+  background:
+    radial-gradient(900px 520px at 30% 20%, rgba(219, 31, 50, 0.10), transparent 60%),
+    radial-gradient(900px 520px at 80% 30%, rgba(43, 46, 68, 0.06), transparent 62%),
+    linear-gradient(180deg, #ffffff 0%, rgba(246, 247, 251, 0.90) 100%);
+
+  box-shadow: var(--shadow-1);
+}
+
+.foundersSketch__photo {
+  position: absolute;
+  top: 3%;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+
+  width: 96%;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom center;
+
+  filter: drop-shadow(0 26px 58px rgba(16, 24, 40, 0.22));
+}
+
+/* =========================
+   NAMES
+========================= */
+
+.foundersSketch__name {
+  position: absolute;
+  z-index: 3;
+  max-width: 46%;
+  color: var(--fs-ink-92);
+}
+
+@supports (color: color-mix(in srgb, red, white)) {
+  .foundersSketch__name {
+    color: color-mix(in srgb, var(--fs-ink) 92%, transparent);
+  }
+}
+
+.foundersSketch__nameText {
+  display: grid;
+  line-height: 1;
+}
+
+.foundersSketch__nameText .first {
+  font-size: clamp(14px, 2.1vw, 18px);
+  font-weight: 800;
+  opacity: 0.85;
+  letter-spacing: -0.01em;
+}
+
+.foundersSketch__nameText .last {
+  margin-top: 4px;
+  font-size: clamp(18px, 2.9vw, 26px);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+/* leader line */
+.foundersSketch__leader {
+  display: block;
+  height: 1px;
+  margin-top: 10px;
+  border-radius: var(--radius-pill);
+  opacity: 0.75;
+}
+
+/* left name */
+.foundersSketch__name--left {
+  left: -6%;
+  top: 30%;
+  text-align: left;
+}
+
+.foundersSketch__leader--left {
+  width: 92%;
+  background: linear-gradient(
+    90deg,
+    rgba(43, 46, 68, 0.55),
+    rgba(43, 46, 68, 0.08)
+  );
+}
+
+@supports (background: color-mix(in srgb, red, white)) {
+  .foundersSketch__leader--left {
+    background: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--fs-ink) 55%, transparent),
+      color-mix(in srgb, var(--fs-ink) 8%, transparent)
+    );
+  }
+}
+
+/* right name */
+.foundersSketch__name--right {
+  right: -12%;
+  bottom: 18%;
+  text-align: right;
+}
+
+.foundersSketch__leader--right {
+  width: 82%;
+  margin-left: auto;
+  background: linear-gradient(
+    270deg,
+    rgba(43, 46, 68, 0.55),
+    rgba(43, 46, 68, 0.08)
+  );
+}
+
+@supports (background: color-mix(in srgb, red, white)) {
+  .foundersSketch__leader--right {
+    background: linear-gradient(
+      270deg,
+      color-mix(in srgb, var(--fs-ink) 55%, transparent),
+      color-mix(in srgb, var(--fs-ink) 8%, transparent)
+    );
+  }
+}
+
+/* On small screens don't overflow */
+@media (max-width: 520px) {
+  .foundersSketch__name--left {
+    left: 0;
+    top: 30%;
+  }
+  .foundersSketch__name--right {
+    right: 0;
+    bottom: 14%;
+  }
+  .foundersSketch__name {
+    max-width: 52%;
+  }
+}
+
+/* =========================
+   BOTTOM CARDS
+   1 col mobile -> 2 cols -> 3 cols
+========================= */
+
+.foundersSketch__cards {
+  position: relative;
+  z-index: 1;
+
+  margin-top: 38px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+
+@media (min-width: 520px) {
+  .foundersSketch__cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (min-width: 980px) {
-  .teacher__meta-grid--two {
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
+  .foundersSketch__cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+  }
+}
+
+/* =========================
+   STAMP CARD — your SVG frame
+   (frame color can be “locked” inside svg)
+========================= */
+
+.stampCard {
+  position: relative;
+  border: 0;
+
+  background: url("../../../public/img/frame.svg") center/100% 100% no-repeat;
+  border-radius: 0;
+  box-shadow: none;
+  overflow: visible;
+
+  filter: drop-shadow(0 18px 40px rgba(16, 24, 40, 0.12));
+}
+
+/* optional overlay stroke (if you add separate stroke svg later) */
+.stampCard::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  pointer-events: none;
+  z-index: 1;
+
+  background: none;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+
+  opacity: 0.95;
+}
+
+/* flower (brand-ish accent) */
+.stampCard::after {
+  content: "✿";
+  position: absolute;
+  left: 50%;
+  top: 18px;
+  transform: translateX(-50%);
+  font-size: 30px;
+  line-height: 1;
+  color: rgba(219, 31, 50, 0.55);
+  opacity: 0.95;
+  z-index: 2;
+  pointer-events: none;
+}
+
+@supports (color: color-mix(in srgb, red, white)) {
+  .stampCard::after {
+    color: color-mix(in srgb, var(--color-accent) 55%, white);
+  }
+}
+
+.stampCard__inner {
+  position: relative;
+  z-index: 2;
+
+  display: grid;
+  place-items: center;
+  text-align: center;
+
+  padding: 58px 20px 34px;
+  min-height: 200px;
+
+  letter-spacing: 0.01em;
+  color: var(--fs-ink-86);
+
+  font-size: 16px;
+  line-height: 1.18;
+  font-weight: 800;
+}
+
+@supports (color: color-mix(in srgb, red, white)) {
+  .stampCard__inner {
+    color: color-mix(in srgb, var(--fs-ink) 86%, transparent);
+  }
+}
+
+/* Desktop tweaks */
+@media (min-width: 980px) {
+  .foundersSketch__name--left {
+    left: -10%;
+    top: 26%;
+  }
+  .foundersSketch__name--right {
+    right: -20%;
+    bottom: 18%;
   }
 
-  /* Карта: робимо місце справа, але саме фото "липне" absolute */
-  .teacher__card {
-    padding: 0 22px 22px 22px;
-    grid-template-columns: minmax(0, 1fr) 420px; /* резерв під фото */
-    gap: 18px;
-    min-height: 560px;
+  .foundersSketch__bgWord {
+    width: 86%;
+    max-width: 86%;
+    font-size: clamp(84px, 8.6vw, 156px);
   }
 
-  .teacher__photo {
-    /* фото буде absolute, але залишимо блок як "якір" */
-    position: relative;
-
-    width: 440px;
-    height: 600px;
-    overflow: visible;
+  .stampCard__inner {
+    min-height: 212px;
+    padding: 62px 22px 36px;
+    font-size: 15px;
   }
 
-  .teacher__img {
-    position: absolute;
-    right: 40px; /* "вилазить" як стікер */
-    bottom: 20px;
-    width: 440px;
-    margin: 0;
-    transform: none;
+  .foundersSketch > .container {
+    padding-inline: 0;
+  }
+}
+
+/* subtle hover lift */
+@media (hover: hover) and (pointer: fine) {
+  .stampCard {
+    transition: transform var(--dur-2) var(--ease), filter var(--dur-2) var(--ease);
+  }
+  .stampCard:hover {
+    transform: translateY(-2px);
+    filter: drop-shadow(0 26px 64px rgba(16, 24, 40, 0.12));
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .stampCard {
+    transition: none !important;
   }
 }

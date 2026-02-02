@@ -26,25 +26,37 @@ const detectContactMode = (value) => {
 const onlyDigits = (s) => s.replace(/\D/g, "");
 
 /**
- * UA phone formatter:
- * - auto-normalizes into +380XXXXXXXXX as user types
- * - allows clean deletion: when deleting down to +3 / +38 / +380 => clears field
+ * UA phone normalization:
+ * - final target: +380XXXXXXXXX (12 digits total incl 380)
+ * - if user types anything not starting with 0/38/380, treat it as digits AFTER 380
+ * - supports deletion: if user deletes back to 3/38/380, allow clearing the field
  */
 const formatUA = (raw, { isDeleting }) => {
   let digits = onlyDigits(raw);
-
   if (!digits) return "";
 
-  // when deleting, allow full clear instead of sticking to +380
   if (isDeleting && (digits === "3" || digits === "38" || digits === "380"))
     return "";
 
-  // normalize typical UA inputs
+  // common UA entry: 0XXXXXXXXX -> 380XXXXXXXXX
   if (digits.startsWith("0")) digits = "38" + digits;
+
+  // handles pasted: 80XXXXXXXXX (rare) -> 380...
   if (digits.startsWith("80")) digits = "3" + digits;
 
-  if (digits.startsWith("3") && !digits.startsWith("380")) {
+  // 38XXXXXXXXXX -> 380XXXXXXXXX
+  if (digits.startsWith("38") && !digits.startsWith("380")) {
+    digits = "380" + digits.slice(2);
+  }
+
+  // 3XXXXXXXXXXX -> 380XXXXXXXXX
+  if (digits.startsWith("3") && !digits.startsWith("38")) {
     digits = "380" + digits.slice(1);
+  }
+
+  // any other prefix -> treat as digits after 380
+  if (!digits.startsWith("380")) {
+    digits = "380" + digits;
   }
 
   digits = digits.slice(0, 12);
@@ -58,13 +70,12 @@ const isValidUA = (value) => {
 
 /**
  * Telegram sanitize:
- * - auto-adds @ when user starts typing telegram-like value
- * - removes spaces and invalid chars
- * - allows clean deletion: if only "@" left while deleting => clears field
+ * - keeps @prefix
+ * - strips spaces and invalid chars
+ * - supports deletion: "@" alone can be cleared
  */
 const sanitizeTG = (raw, { isDeleting }) => {
   let v = raw.replace(/\s+/g, "");
-
   if (!v) return "";
 
   if (isDeleting && v === "@") return "";
@@ -77,27 +88,24 @@ const sanitizeTG = (raw, { isDeleting }) => {
     .slice(0, 32);
 
   if (isDeleting && cleaned.length === 0) return "";
-
   return "@" + cleaned;
 };
 
 const isValidTG = (value) => /^@[A-Za-z0-9_]{5,32}$/.test(value);
 
 /**
- * New feature:
- * Force UA native HTML5 "required" bubbles (instead of browser language)
- * via setCustomValidity on invalid/input/change events.
+ * Custom UA messages for required fields via reportValidity()
  */
 const attachUaNativeMessages = ({ nameInput, contactInput, consentInput }) => {
   nameInput?.addEventListener("invalid", () => {
-    nameInput.setCustomValidity("Будь ласка, заповніть імʼя");
+    nameInput.setCustomValidity("Введіть імʼя");
   });
   nameInput?.addEventListener("input", () => {
     nameInput.setCustomValidity("");
   });
 
   contactInput?.addEventListener("invalid", () => {
-    contactInput.setCustomValidity("Будь ласка, вкажіть телефон або Telegram");
+    contactInput.setCustomValidity("Введіть телефон або Telegram");
   });
   contactInput?.addEventListener("input", () => {
     contactInput.setCustomValidity("");
@@ -105,9 +113,7 @@ const attachUaNativeMessages = ({ nameInput, contactInput, consentInput }) => {
 
   if (consentInput) {
     consentInput.addEventListener("invalid", () => {
-      consentInput.setCustomValidity(
-        "Потрібно підтвердити згоду з політикою конфіденційності"
-      );
+      consentInput.setCustomValidity("Потрібно підтвердити згоду");
     });
     consentInput.addEventListener("change", () => {
       consentInput.setCustomValidity("");
@@ -124,10 +130,8 @@ export const attachLeadValidation = (form) => {
 
   if (!nameInput || !contactInput) return;
 
-  // ✅ New feature: UA native "required" bubbles
   attachUaNativeMessages({ nameInput, contactInput, consentInput });
 
-  // Name: collapse multiple spaces
   nameInput.addEventListener("input", () => {
     const pos = nameInput.selectionStart;
     const cleaned = nameInput.value.replace(/\s{2,}/g, " ");
@@ -137,7 +141,6 @@ export const attachLeadValidation = (form) => {
     }
   });
 
-  // Contact: previous value to detect deletion
   contactInput.dataset.prev = contactInput.value || "";
 
   contactInput.addEventListener("input", (e) => {
@@ -154,41 +157,45 @@ export const attachLeadValidation = (form) => {
       return;
     }
 
-    if (mode === "phone") {
-      contactInput.value = formatUA(next, { isDeleting });
-    }
+    if (mode === "phone") contactInput.value = formatUA(next, { isDeleting });
+    if (mode === "tg") contactInput.value = sanitizeTG(next, { isDeleting });
 
-    if (mode === "tg") {
-      contactInput.value = sanitizeTG(next, { isDeleting });
-    }
-
-    // keep prev in sync after formatting
     contactInput.dataset.prev = contactInput.value;
   });
 
-  // submit: validation + toasts
   form.addEventListener("submit", (e) => {
     const name = nameInput.value;
     const contact = contactInput.value.trim();
-    const consent = consentInput?.checked;
+
+    // Required fields should be handled by reportValidity() in bindLeadForm
+    if (nameInput.validity.valueMissing || contactInput.validity.valueMissing)
+      return;
+    if (consentInput && !consentInput.checked) return;
 
     if (!isValidName(name)) {
       e.preventDefault();
+      nameInput.setCustomValidity("Імʼя має містити щонайменше 2 літери");
+      form.reportValidity();
+      nameInput.setCustomValidity("");
       toast.error(
         "Перевірте ім'я",
-        "Мінімум 2 символи. Лише букви, пробіл, ' та ,"
+        "Мінімум 2 символи. Лише букви, пробіл, ' та ,",
       );
       nameInput.focus();
       return;
     }
 
     const mode = detectContactMode(contact);
+
     if (mode === "phone") {
       if (!isValidUA(contact)) {
         e.preventDefault();
+        contactInput.setCustomValidity("Формат: +380XXXXXXXXX");
+        form.reportValidity();
+        contactInput.setCustomValidity("");
         toast.error(
           "Перевірте телефон",
-          "Формат: +380XXXXXXXXX (9 цифр після 380)"
+          "Формат: +380XXXXXXXXX (9 цифр після 380)",
         );
         contactInput.focus();
         return;
@@ -196,29 +203,28 @@ export const attachLeadValidation = (form) => {
     } else if (mode === "tg") {
       if (!isValidTG(contact)) {
         e.preventDefault();
+        contactInput.setCustomValidity("Формат: @username (5–32 символи)");
+        form.reportValidity();
+        contactInput.setCustomValidity("");
         toast.error(
           "Перевірте Telegram",
-          "Формат: @username (5–32 символи: букви/цифри/_)"
+          "Формат: @username (5–32 символи: букви/цифри/_)",
         );
         contactInput.focus();
         return;
       }
     } else {
       e.preventDefault();
+      contactInput.setCustomValidity(
+        "Вкажіть телефон (+380…) або Telegram (@username)",
+      );
+      form.reportValidity();
+      contactInput.setCustomValidity("");
       toast.error(
         "Перевірте контакт",
-        "Вкажіть телефон (+380…) або Telegram (@username)"
+        "Вкажіть телефон (+380…) або Telegram (@username)",
       );
       contactInput.focus();
-      return;
-    }
-
-    if (!consent) {
-      e.preventDefault();
-      toast.error(
-        "Потрібна згода",
-        "Підтвердіть згоду з політикою конфіденційності"
-      );
     }
   });
 };

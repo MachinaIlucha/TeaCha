@@ -1,0 +1,94 @@
+/*!
+ * TeaCha website
+ * © 2026. All rights reserved.
+ */
+
+:root {
+  /* Brand */
+  --color-brand: rgba(43, 46, 68, 1); /* #2B2E44 */
+  --color-accent: rgba(219, 31, 50, 1); /* #DB1F32 */
+
+  /* Neutrals */
+  --color-bg: #f6f7fb;
+  --color-surface: #ffffff;
+  --color-text: var(--color-brand);
+  --color-muted: #6b7280;
+  --color-border: #d9dce6;
+  --color-soft: #eef0f4;
+
+  /* Shadows */
+  --shadow-1: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --shadow-2: 0 18px 55px rgba(0, 0, 0, 0.14);
+
+  /* Radii */
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 34px;
+  --radius-pill: 999px;
+
+  /* Container */
+  --container-max: 1200px;
+  --gutter: clamp(16px, 3vw, 32px);
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 80px;
+
+  /* Typography */
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial,
+    "Noto Sans", "Helvetica Neue", sans-serif;
+
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-md: 16px;
+  --text-lg: 18px;
+
+  --h1: clamp(34px, 4.6vw, 64px);
+  --h2: clamp(28px, 3.8vw, 56px);
+  --h3: clamp(22px, 2.6vw, 34px);
+
+  --lh-tight: 1.05;
+  --lh-normal: 1.4;
+  --lh-relaxed: 1.65;
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dur-1: 120ms;
+  --dur-2: 200ms;
+
+  /* Focus */
+  --focus-ring: 0 0 0 4px rgba(219, 31, 50, 0.18);
+
+  /* Buttons (общие) */
+  --btn-h: 56px;
+  --btn-px: 28px;
+  --btn-radius: var(--radius-pill);
+  --btn-shadow: 0 14px 30px rgba(0, 0, 0, 0.1);
+  --btn-shadow-hover: 0 18px 38px rgba(0, 0, 0, 0.14);
+  --btn-font: 800;
+  --btn-size: 16px;
+
+  /* ✅ Aliases (чтобы старые стили не ломались) */
+  --bg: var(--color-bg);
+  --text: var(--color-text);
+  --muted: var(--color-muted);
+
+  --red: var(--color-accent);
+  --accent: var(--color-accent);
+  --white: var(--color-surface);
+
+  --shadow: var(--shadow-1);
+  --container: var(--container-max);
+
+  --section-py: clamp(56px, 7vw, 90px);
+  --section-py-compact: clamp(40px, 6vw, 32px);
+}

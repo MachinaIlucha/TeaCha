@@ -4,7 +4,6 @@
  * Design & development: Ілля Пінчук Вадимович
  * © 2026. All rights reserved.
  */
-
 const base = import.meta.env.BASE_URL;
 ---
 
@@ -24,32 +23,35 @@ const base = import.meta.env.BASE_URL;
 
       <!-- кнопки языков ДОЛЖНЫ появляться раньше badge -->
       <div class="hero__modes" data-reveal-item="3">
-        <a href="/english" class="heroPill heroLangBtn"> Англійська </a>
-        <a href="/chinese" class="heroPill heroLangBtn"> Китайська </a>
+        <a href={`${base}english`} class="heroLangBtn">Англійська</a>
+        <a href={`${base}chinese`} class="heroLangBtn">Китайська</a>
       </div>
 
-      <!-- DESKTOP badge ПОСЛЕ -->
-      <div class="hero__chips hero__chips--desktop">
-        <div class="badge badge--round" data-open-modal data-reveal-item="5">
+      <!-- DESKTOP badge (анимация через обертку) -->
+      <div class="hero__chips hero__chips--desktop" data-reveal-item="6">
+        <button class="badge badge--round" type="button" data-open-modal>
           <span>ХОЧУ<br />ПРОБНИЙ УРОК</span>
-        </div>
+        </button>
       </div>
     </div>
 
-    <!-- фото можно 4 -->
     <div class="hero__right" data-reveal-item="4">
-      <!-- MOBILE badge оставляем как было (без reveal-item, чтобы не исчезал на мобилке) -->
-      <div class="hero__chips hero__chips--mobile">
-        <div class="badge badge--round" data-open-modal>
+      <!-- MOBILE badge (анимация через обертку) -->
+      <div class="hero__chips hero__chips--mobile" data-reveal-item="5">
+        <button class="badge badge--round" type="button" data-open-modal>
           <span>ХОЧУ<br />ПРОБНИЙ УРОК</span>
-        </div>
+        </button>
       </div>
 
       <div class="heroPhoto">
         <div class="heroPhoto__bg" aria-hidden="true"></div>
-        <img class="heroPhoto__img" src={`${base}img/hero-portrait.jpg`} alt="Фото викладачів" />
+        <img
+          class="heroPhoto__img"
+          src={`${base}img/hero-portrait.jpg`}
+          alt="Фото викладачів"
+          loading="eager"
+        />
       </div>
     </div>
   </div>
 </section>
-

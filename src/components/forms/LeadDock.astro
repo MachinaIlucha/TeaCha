@@ -1,0 +1,93 @@
+---
+/**
+ * TeaCha website
+ * © 2026. All rights reserved.
+ */
+
+const base = import.meta.env.BASE_URL;
+
+// опционально можно прокинуть hidden, но по умолчанию показываем всегда
+const { hidden = false } = Astro.props;
+---
+
+<!-- Fixed lead form dock (always visible until reaches #start-lead) -->
+<div
+  class="leadDock"
+  id="lead-dock"
+  data-reveal="off"
+  aria-hidden={hidden ? "true" : "false"}
+  style={hidden ? "display:none" : ""}
+>
+  <div class="container leadDock__inner">
+    <form
+      class="leadDock__form"
+      id="lead-dock-form"
+      action="#"
+      method="post"
+      novalidate
+    >
+      <div class="leadDock__intro">
+        <img
+          class="leadDock__icon"
+          src={`${base}img/icon-handwrite-black.png`}
+          alt=""
+          loading="lazy"
+          aria-hidden="true"
+        />
+        <div class="leadDock__introText">Запишись на пробний урок</div>
+      </div>
+
+      <div class="leadDock__fields">
+        <label class="leadDock__field">
+          <span class="srOnly">Імʼя</span>
+          <input
+            class="fieldInput leadDock__input"
+            name="name"
+            type="text"
+            placeholder="ІМʼЯ"
+            autocomplete="name"
+            required
+          />
+        </label>
+
+        <label class="leadDock__field">
+          <span class="srOnly">Телефон або нік Telegram</span>
+          <input
+            class="fieldInput leadDock__input"
+            name="contact"
+            type="text"
+            placeholder="ТЕЛЕФОН АБО НІК TELEGRAM"
+            autocomplete="tel"
+            required
+          />
+        </label>
+      </div>
+
+      <button class="leadDock__btn" type="submit">
+        <span class="leadDock__btnText">ХОЧУ ПРОБНЕ ЗАНЯТТЯ</span>
+        <span class="leadDock__btnIcon" aria-hidden="true">
+          <img
+            src={`${base}img/chinese-scroll.png`}
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
+        </span>
+      </button>
+    </form>
+  </div>
+</div>
+
+<style>
+  .srOnly {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+</style>

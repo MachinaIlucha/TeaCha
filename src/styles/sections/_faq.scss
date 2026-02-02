@@ -1,191 +1,358 @@
-/* =========================
-   FAQ (faq)
-   TeaCha website © 2026
-   Transparent background + site colors
-========================= */
+/*!
+ * TeaCha website
+ * Design & development: Ілля Пінчук Вадимович
+ * © 2026. All rights reserved.
+ */
+
 
 .faq {
   padding: 56px 0 80px;
   background: transparent;
+
+  &__head {
+    margin-bottom: 28px;
+  }
+
+  /* corporate heading (if present) */
+  &__mega {
+    margin: 0;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 0.9;
+    color: var(--text);
+    font-size: clamp(68px, 8vw, 120px);
+  }
+
+  &__sub {
+    margin: 16px auto 0;
+    max-width: 68ch;
+    color: color-mix(in srgb, var(--text) 78%, transparent);
+    font-size: clamp(16px, 1.2vw, 18px);
+    line-height: 1.55;
+  }
+
+  /* =========================
+     Cards Variant (pill)
+  ========================= */
+  &.faq--cards {
+    /* Section spacing like mock */
+    padding: 86px 0 96px;
+    position: relative;
+    overflow: hidden;
+
+    /* Decorative background (optional). Set path in your global CSS if needed */
+    --faq-decor: url("/img/faq-flower.svg");
+
+    /* Tokens (match your spec) */
+    --pill-bg: #f8f8f8; /* (2) inside */
+    --pill-accent: color-mix(in srgb, var(--red) 75%, transparent); /* (3) border + bottom layer */
+    --pill-stroke: 2px; /* (3) border thickness */
+    --pill-radius: 34px; /* (1) 30–35px feel */
+    --pill-offset: 8px; /* (4) bottom layer thickness 6–8px */
+    --pill-pad-y: 26px;
+    --pill-pad-x: 28px;
+    --pill-icon: 54px;
+
+    /* Header style like mock (centered) */
+    .faq__head {
+      text-align: center;
+      margin-bottom: 46px;
+    }
+
+    .faq__mega {
+      font-size: clamp(78px, 8vw, 140px);
+      line-height: 0.88;
+      letter-spacing: -0.03em;
+    }
+
+    .faq__sub {
+      margin: 18px auto 0;
+    }
+
+    /* Decor on the right */
+    &::after {
+      content: "";
+      position: absolute;
+      right: -140px;
+      top: -40px;
+      width: 820px;
+      height: 820px;
+      background-image: var(--faq-decor);
+      background-repeat: no-repeat;
+      background-size: contain;
+      opacity: 0.35;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Ensure content above decor */
+    > .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Grid — mobile first */
+    .faq__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 26px;
+    }
+
+    .faq__col {
+      min-width: 0;
+      display: grid;
+      gap: 26px;
+
+      /* kill any legacy line separators if present somewhere */
+      border-top: 0 !important;
+    }
+
+    /* Desktop: 2 columns */
+    @media (min-width: 980px) {
+      .faq__grid {
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
+      }
+    }
+
+    /* =========================
+       Card (pill) — two-layer construction
+       ::after  bottom accent (lavender) offset down
+       ::before top surface (light grey + border)
+       content  above with z-index: 2
+    ========================= */
+    .faqItem {
+      position: relative;
+      min-width: 0;
+
+      /* Visual is in pseudo layers */
+      background: transparent !important;
+      border: 0 !important;
+
+      border-radius: var(--pill-radius);
+      overflow: visible; /* allow bottom layer to show */
+      isolation: isolate; /* stable stacking context */
+
+      transition: transform 180ms ease;
+
+      /* bottom accent */
+      &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        transform: translateY(var(--pill-offset));
+        border-radius: var(--pill-radius);
+        background: var(--pill-accent);
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      /* top surface */
+      &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: var(--pill-radius);
+        background: var(--pill-bg);
+        border: var(--pill-stroke) solid var(--pill-accent);
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          transform: translateY(-2px);
+        }
+      }
+    }
+
+    /* content above layers */
+    .faqItem__btn,
+    .faqItem__panel {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* =========================
+       Button row layout
+       left content + right circle
+    ========================= */
+    .faqItem__btn {
+      width: 100%;
+      border: 0;
+      background: transparent !important;
+      cursor: pointer;
+
+      padding: var(--pill-pad-y) var(--pill-pad-x);
+      transition: padding-bottom 240ms ease;
+
+      display: flex;
+      align-items: center; /* vertical center */
+      justify-content: space-between;
+      gap: 18px;
+
+      text-align: left;
+      color: var(--text);
+
+      &:focus-visible {
+        outline: 3px solid
+          color-mix(in srgb, var(--pill-accent) 60%, transparent);
+        outline-offset: 6px;
+        border-radius: 22px;
+      }
+    }
+
+    /* question */
+    .faqItem__q {
+      display: block;
+      margin: 0;
+      padding: 0;
+
+      font-weight: 900;
+      letter-spacing: -0.015em;
+      line-height: 1.12;
+      text-transform: uppercase;
+
+      font-size: clamp(18px, 1.65vw, 24px);
+      color: var(--text);
+    }
+
+    /* =========================
+       Right circle + arrow ↘
+    ========================= */
+    .faqItem__icon {
+      width: var(--pill-icon);
+      height: var(--pill-icon);
+      flex: 0 0 auto;
+
+      border-radius: 999px;
+      background: var(--pill-bg);
+      border: var(--pill-stroke) solid var(--pill-accent);
+
+      position: relative;
+      transition: transform 220ms ease;
+
+      /* hard-kill any inherited plus/minus */
+      &::before {
+        content: none !important;
+      }
+
+      /* arrow ↘ */
+      &::after {
+        content: "" !important;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+
+        width: 14px;
+        height: 14px;
+
+        border-right: 3px solid var(--pill-accent);
+        border-bottom: 3px solid var(--pill-accent);
+
+        transform: translate(-50%, -50%) rotate(45deg);
+        border-radius: 1px;
+      }
+    }
+
+    /* open -> rotate circle (arrow becomes ↖) */
+    .faqItem.is-open {
+      .faqItem__icon {
+        transform: rotate(180deg);
+      }
+
+      /* bring answer closer to question on open */
+      .faqItem__btn {
+        padding-bottom: 10px; // 6–12px
+      }
+    }
+
+    /* =========================
+       Accordion panel animation (CSS side)
+       JS handles height (0 -> px -> auto)
+    ========================= */
+    .faqItem__panel {
+      overflow: hidden;
+      height: 0;
+
+      opacity: 0;
+      transform: translateY(-6px);
+
+      transition:
+        height 640ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 240ms ease,
+        transform 640ms cubic-bezier(0.22, 1, 0.36, 1);
+
+      will-change: height, opacity, transform;
+    }
+
+    .faqItem.is-open {
+      .faqItem__panel {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* answer */
+    .faqItem__answer {
+      margin: 0;
+
+      /* if you want closer, change first value to 6px */
+      padding: 0 var(--pill-pad-x) 22px var(--pill-pad-x);
+
+      color: color-mix(in srgb, var(--text) 85%, transparent);
+      font-size: 16px;
+      line-height: 1.55;
+      font-weight: 450;
+      letter-spacing: 0.01em;
+
+      a {
+        color: var(--text);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
+
+      strong {
+        font-weight: 800;
+        color: var(--text);
+      }
+    }
+
+    /* reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .faqItem,
+      .faqItem__icon,
+      .faqItem__panel {
+        transition: none !important;
+        transform: none !important;
+      }
+    }
+  }
+}
+
+/* ===== FAQ: fixed spacing (like Reviews) ===== */
+
+.faq {
+  --faq-py: 40px;
+  padding-block: var(--faq-py);
 }
 
 .faq__head {
-  margin-bottom: 28px;
+  margin-bottom: 34px;
 }
 
-.faq__title {
-  margin: 0;
-  color: var(--text);
-  font-weight: 900;
-  line-height: 0.95;
-  letter-spacing: -0.02em;
-  font-size: clamp(44px, 6vw, 78px);
+/* вариант cards тоже не должен раздуваться */
+.faq.faq--cards {
+  padding-block: var(--faq-py);
 }
 
-/* grid */
-.faq__grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 22px;
+.faq.faq--cards .faq__head {
+  margin-bottom: 34px;
 }
 
+/* если нужно убрать боковые паддинги контейнера только в FAQ (desktop) */
 @media (min-width: 980px) {
-  .faq__grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
-  }
-}
-
-.faq__col {
-  min-width: 0;
-  border-top: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
-}
-
-/* ===== Item ===== */
-.faqItem {
-  min-width: 0;
-  border-bottom: 1px solid color-mix(in srgb, var(--text) 18%, transparent);
-  background: transparent;
-  transition: background 260ms ease;
-}
-
-/* button row */
-.faqItem__btn {
-  width: 100%;
-  border: 0;
-  background: transparent;
-  padding: 22px 0;
-  cursor: pointer;
-
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 18px;
-
-  text-align: left;
-  color: var(--text);
-}
-
-/* question — делаем менее жирным */
-.faqItem__q {
-  display: block;
-  margin: 0;
-  padding-top: 2px;
-
-  font-weight: 750; /* ✅ было слишком жирно — стало легче */
-  letter-spacing: -0.01em;
-  line-height: 1.05;
-  font-size: clamp(26px, 3vw, 38px);
-}
-
-/* icon (+ / -) */
-.faqItem__icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 999px;
-
-  background: color-mix(in srgb, var(--red) 10%, transparent);
-  border: 1.5px solid color-mix(in srgb, var(--red) 55%, transparent);
-
-  position: relative;
-  flex: 0 0 auto;
-
-  transition: background 260ms ease, border-color 260ms ease, transform 260ms ease;
-}
-
-.faqItem__icon::before,
-.faqItem__icon::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  border-radius: 2px;
-  background: var(--red);
-  transform: translate(-50%, -50%);
-  transition: opacity 220ms ease;
-}
-
-.faqItem__icon::before {
-  width: 16px;
-  height: 2px;
-}
-
-.faqItem__icon::after {
-  width: 2px;
-  height: 16px;
-}
-
-/* when open => minus */
-.faqItem.is-open .faqItem__icon::after {
-  opacity: 0;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .faqItem__btn:hover .faqItem__icon {
-    background: color-mix(in srgb, var(--red) 16%, transparent);
-    border-color: color-mix(in srgb, var(--red) 70%, transparent);
-    transform: translateY(-1px);
-  }
-}
-
-.faqItem__btn:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--red) 70%, transparent);
-  outline-offset: 6px;
-  border-radius: 12px;
-}
-
-/* ===== Panel / Answer =====
-   height анимируем в JS (auto-height).
-   CSS отвечает за opacity/translate (мягко). */
-.faqItem__panel {
-  overflow: hidden;
-
-  /* стартовое состояние (JS на инициализации тоже выставит) */
-  height: 0;
-
-  opacity: 0;
-  transform: translateY(-10px);
-
-  /* ✅ делаем реально плавно */
-  transition:
-    height 820ms cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 520ms ease,
-    transform 820ms cubic-bezier(0.22, 1, 0.36, 1);
-
-  will-change: height, opacity, transform;
-}
-
-.faqItem.is-open .faqItem__panel {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* answer typography — делаем не серым, а цвет текста сайта + чуть жирнее */
-.faqItem__answer {
-  margin: 0;
-  padding: 10px 0 22px;
-
-  font-size: clamp(16px, 1.45vw, 18px); /* ✅ крупнее */
-  line-height: 1.55;
-  letter-spacing: 0.01em;
-
-  color: var(--text);   /* ✅ не серый */
-  font-weight: 450;     /* ✅ немного жирный */
-  max-width: 56ch;
-}
-
-/* мягкая подсветка открытого блока */
-.faqItem.is-open {
-  background: color-mix(in srgb, var(--red) 6%, transparent);
-}
-
-/* reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .faqItem__panel {
-    transition: none !important;
-    transform: none !important;
-  }
-  .faqItem__icon {
-    transition: none !important;
+  .faq > .container {
+    padding-inline: 0;
   }
 }

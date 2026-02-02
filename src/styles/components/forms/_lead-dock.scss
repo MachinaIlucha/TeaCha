@@ -1,0 +1,304 @@
+/*!
+ * TeaCha website
+ * © 2026. All rights reserved.
+ *
+ * LeadDock — fixed bottom CTA bar
+ * Mobile-first, 1 breakpoint: 980px
+ */
+
+:root {
+  /* sizes */
+  --leadDock-h: 90px;
+  --leadDock-btn-h: 65px;
+  --leadDock-inner-py: 10px;
+  --leadDock-h-mobile: calc(
+    var(--leadDock-btn-h) + (var(--leadDock-inner-py) * 2)
+  );
+
+  /* colors */
+  --leadDock-bg: #fff;
+  --leadDock-ink: #242424;
+  --leadDock-line: rgba(36, 36, 36, 0.45);
+  --leadDock-line-focus: rgba(36, 36, 36, 0.95);
+
+  /* effects */
+  --leadDock-shadow: 0 -14px 34px rgba(0, 0, 0, 0.12);
+  --leadDock-btn-shadow: 0 12px 26px rgba(0, 0, 0, 0.18);
+  --leadDock-btn-shadow-hover: 0 16px 32px rgba(0, 0, 0, 0.22);
+
+  /* page offset so dock doesn't cover content */
+  --leadDock-pad: var(--leadDock-h-mobile);
+}
+
+@media (min-width: 980px) {
+  :root {
+    --leadDock-pad: var(--leadDock-h);
+  }
+}
+
+body {
+  padding-bottom: var(--leadDock-pad);
+}
+
+/* =========================
+   Dock base
+========================= */
+.leadDock {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 9998;
+
+  background: var(--leadDock-bg);
+  box-shadow: var(--leadDock-shadow);
+
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity var(--dur-2) var(--ease),
+    transform var(--dur-2) var(--ease);
+
+  &.is-hidden {
+    opacity: 0;
+    transform: translateY(18px);
+    pointer-events: none;
+  }
+
+  /* =========================
+     Mobile-first: only CTA
+  ========================= */
+  &__inner {
+    padding-block: var(--leadDock-inner-py);
+  }
+
+  &__form {
+    display: block;
+  }
+
+  &__intro,
+  &__fields,
+  &__chip {
+    display: none;
+  }
+
+  &__btn {
+    width: 100%;
+    height: var(--leadDock-btn-h);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    appearance: none;
+    border: 0;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+
+    padding-inline: 22px;
+    border-radius: var(--radius-pill);
+
+    background: var(--leadDock-ink);
+    color: #fff;
+
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+
+    box-shadow: var(--leadDock-btn-shadow);
+    transition:
+      transform var(--dur-1) var(--ease),
+      box-shadow var(--dur-1) var(--ease);
+  }
+
+  &__btn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--leadDock-btn-shadow-hover);
+  }
+
+  &__btn:active {
+    transform: translateY(0);
+  }
+
+  &__btn:focus-visible {
+    outline: none;
+    box-shadow: var(--leadDock-btn-shadow-hover), var(--focus-ring);
+  }
+
+  &__btnIcon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+    opacity: 0.95;
+
+    img {
+      display: block;
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+    }
+  }
+}
+
+/* =========================
+   Desktop layout
+========================= */
+@media (min-width: 980px) {
+  .leadDock {
+    height: var(--leadDock-h);
+
+    &__inner {
+      height: var(--leadDock-h);
+      padding-block: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    &__form {
+      width: 100%;
+      height: var(--leadDock-h);
+
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 18px;
+      align-items: center;
+    }
+
+    &__intro,
+    &__fields {
+      display: flex;
+    }
+
+    &__intro {
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      padding-right: 10px;
+    }
+
+    &__icon {
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
+      transform: rotate(-8deg);
+      opacity: 0.95;
+    }
+
+    &__introText {
+      font-size: 20px;
+      font-weight: 800;
+      color: rgba(36, 36, 36, 0.92);
+      white-space: nowrap;
+    }
+
+    &__fields {
+      width: 100%;
+      justify-self: stretch;
+
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+
+      gap: 18px;
+      min-width: 0;
+    }
+
+    &__field {
+      min-width: 0;
+    }
+
+    &__input {
+      width: 240px;
+      min-width: 240px;
+      font-size: 13px;
+      padding: 10px 0 12px;
+    }
+
+    &__field:nth-child(2) &__input {
+      width: 300px;
+      min-width: 240px;
+    }
+
+    &__btn {
+      width: auto;
+      min-width: 274px;
+      height: var(--leadDock-btn-h);
+      padding-inline: 22px;
+      font-size: 12px;
+    }
+
+    &__btnIcon img {
+      width: 22px;
+      height: 22px;
+    }
+  }
+}
+
+/* =========================
+   Inputs underline (single source of truth)
+   underline drawn by label::after
+========================= */
+.leadDock {
+  &__field {
+    position: relative;
+    padding-bottom: 8px; /* место под линию + тень */
+  }
+
+  /* сам input без линии и без собственных теней */
+  input.leadDock__input {
+    border: 0;
+    background: transparent;
+    outline: none;
+
+    transition: background-color var(--dur-1) var(--ease);
+  }
+
+  /* базовая линия */
+  &__field::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 2px;
+
+    height: 1px;
+    border-radius: 999px;
+
+    background: var(--leadDock-line);
+    box-shadow: none;
+
+    transition:
+      height var(--dur-1) var(--ease),
+      background-color var(--dur-1) var(--ease),
+      box-shadow var(--dur-1) var(--ease);
+  }
+
+  /* focus */
+  &__field:focus-within::after {
+    height: 2px;
+    background: var(--leadDock-line-focus);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+  }
+
+  /* ===== invalid styles =====
+     Prefer: line reacts to input.is-invalid or :invalid
+  */
+  @supports selector(:has(*)) {
+    &__field:has(input.leadDock__input.is-invalid)::after,
+    &__field:has(input.leadDock__input:invalid)::after {
+      height: 2px;
+      background: rgba(36, 36, 36, 0.8);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.14);
+    }
+  }
+
+  /* Fallback: если в старых браузерах хочешь подсветку — добавляй .is-invalid на label */
+  &__field.is-invalid::after {
+    height: 2px;
+    background: rgba(36, 36, 36, 0.8);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.14);
+  }
+}

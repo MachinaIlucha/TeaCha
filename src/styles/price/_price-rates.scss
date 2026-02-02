@@ -1,183 +1,301 @@
 /*!
  * TeaCha website
- * Design & development: Ілля Пінчук Вадимович
+ * Prices section
  * © 2026. All rights reserved.
  */
 
-.price-rates {
-  padding: 44px 0 0;
+.priceRates {
+  padding-block: var(--section-py-compact);
   background: var(--bg);
   color: var(--text);
+  overflow: hidden;
 }
 
-.price-rates__hint {
-  margin: 10px 0 0 0;
-  text-align: center;
+.priceRates__container {
+  position: relative;
+}
 
+.priceRates__inner {
+  position: relative;
+}
+
+@media (min-width: 980px) {
+  .priceRates > .container.priceRates__container {
+    padding-inline: 0;
+  }
+}
+
+.priceRates__hint {
+  margin: 10px 0 0;
+  text-align: center;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-
   color: rgba(43, 46, 68, 0.55);
 }
 
-/* показываем подсказку только там, где реально есть hover-кнопки */
+@supports (color: color-mix(in srgb, red, white)) {
+  .priceRates__hint {
+    color: color-mix(in srgb, var(--text) 55%, transparent);
+  }
+}
+
 @media (hover: none), (pointer: coarse) {
-  .price-rates__hint {
+  .priceRates__hint {
     display: none;
   }
 }
 
-/* чуть крупнее на десктопе */
 @media (min-width: 980px) {
-  .price-rates__hint {
-    margin: 12px 0 0 0;
+  .priceRates__hint {
+    margin-top: 12px;
     font-size: 14px;
   }
 }
 
-/* =========================
-   TABLE
-========================= */
-
-.price-table {
-  border-top: 1px solid rgba(43, 46, 68, 0.18);
-}
-
-.price-table__head,
-.price-table__row {
+.priceGroups {
   display: grid;
-  grid-template-columns: 1.35fr 1fr 1.1fr;
-  align-items: center;
+  gap: clamp(26px, 3.4vw, 38px);
 }
 
-.price-table__head {
-  padding: 16px 0;
-  color: rgba(43, 46, 68, 0.75);
-  font-size: 14px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-
-  > div {
-    text-align: center;
-  }
-
-  > div:first-child {
-    text-align: left;
-    color: rgba(43, 46, 68, 0.9);
-  }
-}
-
-.price-table__row {
-  border-bottom: 1px solid rgba(43, 46, 68, 0.12);
-  padding: 18px 0;
-}
-
-.price-table__name {
-  font-size: 18px;
-  font-weight: 600;
-  color: rgba(43, 46, 68, 0.95);
-}
-
-.price-table__cell {
-  position: relative;
+.priceGroup__title {
+  margin: 0 0 12px;
   text-align: center;
-}
-
-.price-table__price {
-  font-size: 22px;
+  font-size: clamp(14px, 1.4vw, 18px);
+  line-height: 1.2;
   font-weight: 900;
-  color: rgba(43, 46, 68, 1);
-  transition: opacity 0.18s ease;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(43, 46, 68, 0.9);
 }
 
-/* резервируем вторую строку, чтобы высота ячеек была одинаковой */
-.price-table__old {
-  margin-top: 6px;
-  font-size: 12px;
-  min-height: 16px; /* 🔑 одинаковая высота "второй строки" */
-  transition: opacity 0.18s ease;
-
-  s {
-    color: rgba(43, 46, 68, 0.55);
-    text-decoration-thickness: 2px;
-    text-decoration-color: var(--red);
+@supports (color: color-mix(in srgb, red, white)) {
+  .priceGroup__title {
+    color: color-mix(in srgb, var(--text) 90%, transparent);
   }
 }
 
-/* пустые old-спейсеры не должны "занимать внимание" */
-.price-table__old:empty {
-  visibility: hidden;
+.priceCards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
 }
 
-.price-table__cell.is-empty {
+@media (min-width: 720px) {
+  .priceCards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+
+@media (min-width: 980px) {
+  .priceCards {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+  }
+}
+
+.priceCards--single {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 360px;
+  margin-inline: auto;
+}
+
+.priceCard {
+  --pc-stroke: #c6cad6;
+
+  position: relative;
+  background: var(--white);
+  border: 1px solid var(--pc-stroke);
+  border-radius: 28px;
+  box-shadow: none;
+  outline: none;
+  overflow: hidden;
+
+  padding: 22px 24px 18px;
+  min-height: 142px;
+
   opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 900ms var(--ease),
+    transform 900ms var(--ease);
+  isolation: isolate;
 }
 
-/* =========================
-   CTA OVERLAY
-   - desktop hover only
-   - phone: hidden
-========================= */
+@supports (color: color-mix(in srgb, red, white)) {
+  .priceCard {
+    --pc-stroke: color-mix(in srgb, var(--text) 18%, #c6cad6);
+  }
+}
 
-.price-table__ctaOverlay {
+.priceCard__cap {
+  font-size: clamp(22px, 2.1vw, 26px);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  text-align: left;
+}
+
+.priceCard__single {
+  margin-top: 14px;
+  display: grid;
+  gap: 4px;
+  align-content: start;
+  justify-items: start;
+}
+
+.priceCard__split {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  align-items: start;
+}
+
+.priceCard__col {
+  display: grid;
+  gap: 4px;
+  justify-items: start;
+}
+
+.priceCard__col--strong {
+  justify-items: end;
+  text-align: right;
+}
+
+.priceCard__value {
+  font-size: clamp(24px, 2.3vw, 28px);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.priceCard__value--strong {
+  font-size: clamp(24px, 2.5vw, 28px);
+  font-weight: 1000;
+}
+
+.priceCard__cur {
+  font-size: 0.68em;
+  vertical-align: super;
+  line-height: 1;
+  margin-left: 1px;
+}
+
+.priceCard__meta {
+  margin-top: 2px;
+  font-size: 13px;
+  line-height: 1.2;
+  font-weight: 650;
+  letter-spacing: 0.01em;
+  color: rgba(43, 46, 68, 0.72);
+}
+
+@supports (color: color-mix(in srgb, red, white)) {
+  .priceCard__meta {
+    color: color-mix(in srgb, var(--text) 72%, transparent);
+  }
+}
+
+.priceCard__cta {
   position: absolute;
-  inset: 0; /* ✅ покрывает всю ячейку */
+  inset: 0;
+  border-radius: inherit;
+
   display: grid;
   place-items: center;
 
-  background: var(--red); /* ✅ непрозрачная */
+  background: var(--red);
   color: var(--white);
   text-decoration: none;
 
-  border-radius: 999px;
   font-weight: 900;
   letter-spacing: 0.06em;
+  text-transform: uppercase;
 
+  /* NEW animation */
   opacity: 0;
-  transform: translateY(6px) scale(0.985);
+  transform: scale(0.25);
+  transform-origin: 50% 50%;
+  filter: blur(6px);
   pointer-events: none;
   z-index: 3;
 
-  transition: opacity 0.18s ease, transform 0.18s ease, filter 0.18s ease;
+  transition:
+    opacity 420ms var(--ease),
+    transform 620ms var(--ease),
+    filter 520ms var(--ease);
+  will-change: transform, opacity, filter;
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .price-table__cell:hover .price-table__ctaOverlay {
+  .priceCard:hover .priceCard__cta {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: scale(1);
+    filter: blur(0);
     pointer-events: auto;
   }
 
-  /* не просвечивает цена под кнопкой и не мешает клику */
-  .price-table__cell:hover .price-table__price,
-  .price-table__cell:hover .price-table__old {
-    opacity: 0;
-  }
-
-  .price-table__ctaOverlay:hover {
+  .priceCard__cta:hover {
     filter: brightness(0.95);
   }
 
-  .price-table__ctaOverlay:active {
-    transform: translateY(1px) scale(0.99);
+  .priceCard__cta:active {
+    transform: scale(0.985); /* вместо translateY */
     filter: brightness(0.9);
   }
 }
 
-/* ✅ phone/tablet: no buttons at all */
 @media (hover: none), (pointer: coarse) {
-  .price-table__ctaOverlay {
+  .priceCard__cta {
     display: none;
   }
 }
 
-/* =========================
-   SCROLL TARGET
-========================= */
+.priceCard__cap,
+.priceCard__single,
+.priceCard__split {
+  transition: opacity 180ms var(--ease);
+}
+
+.priceRates.is-visible .priceCard {
+  opacity: 1;
+  transform: none;
+}
+
+.priceRates [data-price-item="1"],
+.priceRates [data-price-item="2"],
+.priceRates [data-price-item="3"] {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 900ms var(--ease),
+    transform 900ms var(--ease);
+}
+
+.priceRates.is-visible [data-price-item="1"],
+.priceRates.is-visible [data-price-item="2"],
+.priceRates.is-visible [data-price-item="3"] {
+  opacity: 1;
+  transform: none;
+}
 
 #price-lead {
   scroll-margin-top: calc(var(--topbar-h) + 18px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .priceRates [data-price-item],
+  .priceCard,
+  .priceCard__cta,
+  .priceCard__cap,
+  .priceCard__single,
+  .priceCard__split {
+    transition: none !important;
+    transform: none !important;
+  }
 }

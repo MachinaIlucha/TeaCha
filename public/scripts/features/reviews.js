@@ -99,7 +99,9 @@ export function initReviews() {
     </div>
 
     <div class="r2Body">
-      <p class="r2Row"><strong>Запит:</strong> <span>${escapeHtml(data.request)}</span></p>
+      <p class="r2Row"><strong>Запит:</strong> <span>${escapeHtml(
+        data.request,
+      )}</span></p>
 
       <p class="r2Row">
         <strong>${escapeHtml((data.pointA?.label ?? "Точка А") + ":")}</strong>
@@ -133,7 +135,7 @@ export function initReviews() {
     imgEl.alt = `Фото: ${data.name}`;
   };
 
-  // ✅ Стабилизация высоты на мобилке
+  // Mobile height stabilization
   const mqMobile = window.matchMedia?.("(max-width: 979px)");
 
   function syncMobileInfoMinHeight() {
@@ -156,7 +158,7 @@ export function initReviews() {
 
     const stack = document.createElement("div");
     stack.className = "r2TextStack";
-    stack.style.display = "block"; // измеряем “как в потоке”, без наложений
+    stack.style.display = "block";
 
     const layer = document.createElement("div");
     layer.className = "r2Layer is-front";
@@ -182,18 +184,13 @@ export function initReviews() {
   const rafSync = () =>
     requestAnimationFrame(() => requestAnimationFrame(syncMobileInfoMinHeight));
 
-  // запуск сразу
   rafSync();
 
-  // ✅ после загрузки шрифтов (иначе переносы меняются => прыжки)
   if (document.fonts?.ready) {
     document.fonts.ready.then(rafSync).catch(() => {});
   }
 
-  // ✅ после полной загрузки страницы (картинки/стили)
   window.addEventListener("load", rafSync, { once: true });
-
-  // ✅ ресайз/поворот
   window.addEventListener("resize", rafSync);
   window.addEventListener("orientationchange", rafSync);
 
@@ -213,18 +210,24 @@ export function initReviews() {
     [frontImg, backImg] = [backImg, frontImg];
     [frontLayer, backLayer] = [backLayer, frontLayer];
 
+    // predecode next (no blocking)
+    const warmNext = reviews[(i + 1) % reviews.length];
+    predecode(warmNext?.img);
+
     locked = false;
   };
 
-  const go = async (dir) => {
-    if (locked) return;
+  const go = (dir) => {
+    if (locked) return Promise.resolve(false);
     locked = true;
+
     window.clearTimeout(fallbackT);
 
     const nextIndex = (i + dir + reviews.length) % reviews.length;
     const nextData = reviews[nextIndex];
 
-    await predecode(nextData.img);
+    // do NOT block animation start
+    predecode(nextData.img);
 
     setImage(backImg, nextData);
     fillTextLayer(backLayer, nextData);
@@ -235,101 +238,147 @@ export function initReviews() {
       card.classList.add("is-transitioning");
     });
 
-    const onEnd = (e) => {
-      if (e.target !== backLayer) return;
-      if (e.propertyName !== "opacity") return;
-      backLayer.removeEventListener("transitionend", onEnd);
+    return new Promise((resolve) => {
+      let done = false;
 
-      i = nextIndex;
-      commitSwap();
-    };
+      const finish = () => {
+        if (done) return;
+        done = true;
 
-    backLayer.addEventListener("transitionend", onEnd);
+        window.clearTimeout(fallbackT);
+        backLayer.removeEventListener("transitionend", onEnd);
 
-    fallbackT = window.setTimeout(() => {
-      if (!locked) return;
-      i = nextIndex;
-      commitSwap();
-    }, 1200);
+        i = nextIndex;
+        commitSwap();
+        resolve(true);
+      };
+
+      const onEnd = (e) => {
+        if (e.target !== backLayer) return;
+        if (e.propertyName !== "opacity") return;
+        finish();
+      };
+
+      backLayer.addEventListener("transitionend", onEnd);
+
+      // must be >= css opacity transition
+      fallbackT = window.setTimeout(finish, 1700);
+    });
   };
 
   // init BACK = next slide
   const next0 = reviews[(i + 1) % reviews.length];
   setImage(backImg, next0);
   fillTextLayer(backLayer, next0);
+  predecode(next0?.img);
 
-  const resetAutoplay = () => {
-    stopAutoplay();
-    startAutoplay();
-  };
-
-  prevBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    go(-1);
-    resetAutoplay();
-  });
-
-  nextBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    go(1);
-    resetAutoplay();
-  });
-
-  root.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowLeft") {
-      go(-1);
-      resetAutoplay();
-    }
-    if (e.key === "ArrowRight") {
-      go(1);
-      resetAutoplay();
-    }
-  });
-
-  // ---- AUTOPLAY ----
+  // ---- AUTOPLAY (stable) ----
   const reduceMotion = window.matchMedia?.(
     "(prefers-reduced-motion: reduce)",
   )?.matches;
-  const AUTOPLAY_MS = 7000;
+
+  const AUTOPLAY_MS = 5000;
 
   let t = 0;
   let paused = false;
-  let inView = true;
+  let inView = false;
 
   function stopAutoplay() {
-    if (t) window.clearInterval(t);
+    if (t) window.clearTimeout(t);
     t = 0;
+  }
+
+  function canPlay() {
+    if (reduceMotion) return false;
+    if (!inView) return false;
+    if (paused) return false;
+    if (document.visibilityState !== "visible") return false;
+    return true;
+  }
+
+  function schedule(delay = AUTOPLAY_MS) {
+    stopAutoplay();
+    t = window.setTimeout(tick, delay);
+  }
+
+  async function tick() {
+    if (!canPlay()) {
+      schedule(200);
+      return;
+    }
+    if (locked) {
+      schedule(120);
+      return;
+    }
+
+    try {
+      await go(1);
+    } finally {
+      schedule(AUTOPLAY_MS);
+    }
   }
 
   function startAutoplay() {
     if (reduceMotion) return;
     if (t) return;
-
-    t = window.setInterval(() => {
-      if (paused) return;
-      if (!inView) return;
-      if (document.visibilityState !== "visible") return;
-      go(1);
-    }, AUTOPLAY_MS);
+    schedule(AUTOPLAY_MS);
   }
 
-  const onPause = () => (paused = true);
-  const onResume = () => (paused = false);
+  function resetAutoplay() {
+    if (reduceMotion) return;
+    if (!inView) return;
+    schedule(AUTOPLAY_MS);
+  }
+
+  // ---- BUTTONS / KEYS ----
+  const onPrev = (e) => {
+    e.preventDefault();
+    go(-1).then(resetAutoplay);
+  };
+
+  const onNext = (e) => {
+    e.preventDefault();
+    go(1).then(resetAutoplay);
+  };
+
+  const onKey = (e) => {
+    if (e.key === "ArrowLeft") go(-1).then(resetAutoplay);
+    if (e.key === "ArrowRight") go(1).then(resetAutoplay);
+  };
+
+  prevBtn.addEventListener("click", onPrev);
+  nextBtn.addEventListener("click", onNext);
+  root.addEventListener("keydown", onKey);
+
+  // pause on hover/focus
+  const onPause = () => {
+    paused = true;
+  };
+
+  const onResume = () => {
+    paused = false;
+    resetAutoplay();
+  };
 
   root.addEventListener("pointerenter", onPause);
   root.addEventListener("pointerleave", onResume);
   root.addEventListener("focusin", onPause);
   root.addEventListener("focusout", onResume);
 
+  // IO: only start/stop
   const io = new IntersectionObserver(
     (entries) => {
-      inView = !!entries[0]?.isIntersecting;
+      const visible = !!entries[0]?.isIntersecting;
+      if (visible === inView) return;
+
+      inView = visible;
+
+      if (inView) startAutoplay();
+      else stopAutoplay();
     },
     { threshold: 0.2 },
   );
   io.observe(root);
-
-  startAutoplay();
 
   const cleanup = () => {
     stopAutoplay();
@@ -337,6 +386,10 @@ export function initReviews() {
 
     window.removeEventListener("resize", rafSync);
     window.removeEventListener("orientationchange", rafSync);
+
+    prevBtn.removeEventListener("click", onPrev);
+    nextBtn.removeEventListener("click", onNext);
+    root.removeEventListener("keydown", onKey);
 
     root.removeEventListener("pointerenter", onPause);
     root.removeEventListener("pointerleave", onResume);

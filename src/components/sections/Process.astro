@@ -2,29 +2,41 @@
 type ProcessStep = { text: string };
 
 const {
-  title = "ПРОЦЕС:",
+  titleTop = "ПРОЦЕС",
+  titleBottom = "НАВЧАННЯ",
+  accent = "bottom", // "bottom" | "top"
   steps = [
     { text: "Знайомство з <br/>вашим запитом" },
-    {
-      text: "Оцінка вашого рівня та <br/>підбір зручного формату навчання ",
-    },
-    {
-      text: "Створення індивідуального <br/>навчального плану",
-    },
+    { text: "Оцінка вашого рівня та <br/>підбір зручного формату навчання " },
+    { text: "Створення індивідуального <br/>навчального плану" },
     { text: "Початок<br/>навчання" },
     { text: "Щомісячна звітність <br/>про ваші успіхи" },
   ] satisfies ProcessStep[],
   footnote = "* Кожна корпоративна група отримує план курсу, його опис, перелік лексичних та граматичних тем",
 } = Astro.props as {
-  title?: string;
+  titleTop?: string;
+  titleBottom?: string;
+  accent?: "bottom" | "top";
   steps?: ProcessStep[];
   footnote?: string;
 };
 ---
 
 <section class="process" data-process>
-  <div class="process__container">
-    <h2 class="process__title">{title}</h2>
+  <div class="container">
+    <header
+      class={`sectionTitle sectionTitle--center ${
+        accent === "top" ? "sectionTitle--accentTop" : "sectionTitle--accentBottom"
+      }`}
+      data-reveal="scroll"
+    >
+      <h2 class="sectionTitle__line sectionTitle__line--a" data-reveal-item="1">
+        {titleTop}
+      </h2>
+      <div class="sectionTitle__line sectionTitle__line--b" data-reveal-item="2">
+        {titleBottom}
+      </div>
+    </header>
 
     <ol class="process__timeline" aria-label="Процес навчання">
       {
@@ -39,7 +51,7 @@ const {
       }
     </ol>
 
-    <p class="process__note">{footnote}</p>
+    <!-- <p class="process__note">{footnote}</p> -->
   </div>
 
   <script type="module" src="/scripts/ui/process.js"></script>

@@ -3,10 +3,8 @@
  * © 2026. All rights reserved.
  *
  * Accordion with smooth height animation.
- * Built for markup:
+ * Markup:
  *  [data-faq] -> [data-faq-item] -> button.faqItem__btn + .faqItem__panel[hidden]
- *
- * Key fix: init guard to prevent double-binding (DOMContentLoaded + astro:page-load).
  */
 
 const qs = (sel, root = document) => root.querySelector(sel);
@@ -16,16 +14,6 @@ function reduced() {
   return (
     window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false
   );
-}
-
-function stopAll(e) {
-  // helps when other scripts listen on click
-  e.preventDefault();
-  e.stopPropagation();
-  // stopImmediatePropagation protects from duplicate listeners on same element
-  // (still best fixed by init guard below)
-  if (typeof e.stopImmediatePropagation === "function")
-    e.stopImmediatePropagation();
 }
 
 function setExpanded(btn, expanded) {
@@ -43,11 +31,9 @@ function animateOpen(panel) {
     return;
   }
 
-  // старт: 0
   panel.style.overflow = "hidden";
   panel.style.height = "0px";
 
-  // 2 кадра — чтобы браузер точно применил стартовые стили (убирает "щёлк")
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       const target = panel.scrollHeight;
@@ -58,7 +44,6 @@ function animateOpen(panel) {
         if (e.propertyName !== "height") return;
         panel.removeEventListener("transitionend", onEnd);
 
-        // ✅ ключ: фиксируем открытое состояние поверх CSS height:0
         panel.style.height = "auto";
         panel.style.overflow = "";
       };
@@ -78,13 +63,11 @@ function animateClose(panel) {
     return;
   }
 
-  // если сейчас auto — зафиксируем в px
   const start = panel.scrollHeight;
   panel.style.overflow = "hidden";
   panel.style.height = `${start}px`;
 
   // reflow
-  // eslint-disable-next-line no-unused-expressions
   panel.offsetHeight;
 
   requestAnimationFrame(() => {
@@ -97,7 +80,6 @@ function animateClose(panel) {
 
       panel.hidden = true;
       panel.style.overflow = "";
-      // оставляем height 0, чтобы соответствовать CSS
       panel.style.height = "0px";
     };
 
@@ -109,7 +91,7 @@ export function initFaq() {
   const root = qs("[data-faq]");
   if (!root) return;
 
-  // ✅ guard from double init (DOMContentLoaded + astro:page-load)
+  // ✅ guard from double init
   if (root.dataset.faqInit === "1") return;
   root.dataset.faqInit = "1";
 
@@ -121,6 +103,7 @@ export function initFaq() {
   const closeItem = (item) => {
     const btn = qs(".faqItem__btn", item);
     const panel = qs(".faqItem__panel", item);
+
     item.classList.remove("is-open");
     if (btn) setExpanded(btn, false);
     if (panel) animateClose(panel);
@@ -129,9 +112,21 @@ export function initFaq() {
   const openItem = (item) => {
     const btn = qs(".faqItem__btn", item);
     const panel = qs(".faqItem__panel", item);
+
     item.classList.add("is-open");
     if (btn) setExpanded(btn, true);
     if (panel) animateOpen(panel);
+  };
+
+  const stop = (e) => {
+    e.stopPropagation();
+    if (typeof e.stopImmediatePropagation === "function")
+      e.stopImmediatePropagation();
+  };
+
+  // перехватываем раньше document click-closer’ов
+  const onPointerDown = (e) => {
+    if (e.target && btn.contains(e.target)) stop(e);
   };
 
   const toggleItem = (item) => {
@@ -157,39 +152,43 @@ export function initFaq() {
       panel.style.height = "0px";
     }
 
-    // prevent double binding per item
+    // ✅ prevent double binding per item
     if (item.dataset.faqBound === "1") return;
     item.dataset.faqBound = "1";
 
-    const onClick = (e) => {
-      stopAll(e);
-      toggleItem(item);
-    };
-
-    // Use pointerdown in capture to block "outside click closers" early
-    const onPointerDown = (e) => {
-      // only for clicks on the button/summary area
-      if (e.target && btn.contains(e.target)) {
-        e.stopPropagation();
-        if (typeof e.stopImmediatePropagation === "function")
-          e.stopImmediatePropagation();
+    // ✅ block "outside click closers" (very common on sites)
+    const stop = (e) => {
+      e.stopPropagation();
+      if (typeof e.stopImmediatePropagation === "function") {
+        e.stopImmediatePropagation();
       }
     };
 
-    btn.addEventListener("click", onClick);
-    btn.addEventListener("pointerdown", onPointerDown, true);
+    // capture pointerdown early (before any document click closers)
+    const onPointerDown = (e) => {
+      if (e.target && btn.contains(e.target)) stop(e);
+    };
 
-    listeners.push(() => btn.removeEventListener("click", onClick));
+    // click toggler (also blocks bubbling)
+    const onClick = (e) => {
+      e.preventDefault();
+      stop(e);
+      toggleItem(item);
+    };
+
+    btn.addEventListener("pointerdown", onPointerDown, true);
+    btn.addEventListener("click", onClick);
+
     listeners.push(() =>
       btn.removeEventListener("pointerdown", onPointerDown, true),
     );
+    listeners.push(() => btn.removeEventListener("click", onClick));
   });
 
   // cleanup on astro navigation
   const cleanup = () => {
     listeners.forEach((off) => off());
     root.dataset.faqInit = "0";
-    // do not remove faqBound: prevents duplicates if node persists
   };
 
   window.addEventListener("astro:before-swap", cleanup, { once: true });

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" preserveAspectRatio="none">
+  <!-- Outer frame -->
+  <path d="
+      M 56 10
+      H 944
+      C 973 10 990 27 990 56
+      V 240
+      C 990 270 955 275 955 300
+      C 955 325 990 330 990 360
+      V 544
+      C 990 573 973 590 944 590
+      H 56
+      C 27 590 10 573 10 544
+      V 360
+      C 10 330 45 325 45 300
+      C 45 275 10 270 10 240
+      V 56
+      C 10 27 27 10 56 10
+      Z" fill="none" stroke="rgba(43, 46, 68, 1)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
+
+  <!-- Inner print line -->
+  <path d="
+      M 80 32
+      H 920
+      C 945 32 960 47 960 72
+      V 246
+      C 960 268 936 272 936 300
+      C 936 328 960 332 960 354
+      V 528
+      C 960 553 945 568 920 568
+      H 80
+      C 55 568 40 553 40 528
+      V 354
+      C 40 332 64 328 64 300
+      C 64 272 40 268 40 246
+      V 72
+      C 40 47 55 32 80 32
+      Z" fill="none" stroke="rgba(43, 46, 68, 0.35)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>

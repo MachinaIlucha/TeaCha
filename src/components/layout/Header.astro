@@ -12,9 +12,9 @@ const base = import.meta.env.BASE_URL;
   <div class="container topbar__row">
     <a class="brand" href={base} aria-label="На головну">
       <img class="brand__logo" src={`${base}img/logo.png`} alt="TeaCha" />
-      <span class="brand__word"
-        ><span class="tea">Tea</span><span class="cha">Cha</span></span
-      >
+      <span class="brand__word">
+        <span class="tea">Tea</span><span class="cha">Cha</span>
+      </span>
     </a>
 
     <nav class="nav" aria-label="Навігація">
@@ -23,14 +23,15 @@ const base = import.meta.env.BASE_URL;
         data-burger
         aria-label="Відкрити меню"
         aria-expanded="false"
+        aria-controls="topbar-panel"
       >
         <span></span><span></span><span></span>
       </button>
 
-      <div class="nav__right" data-nav-panel>
+      <div class="nav__right" id="topbar-panel" data-nav-panel aria-hidden="true">
         <div class="nav__social">
           <a
-            class="socialBtn"
+            class="iconBtn"
             href="https://www.instagram.com/teacha_english_chinese?igsh=MW15MzJpdmVqemRidg=="
             target="_blank"
             rel="noopener"
@@ -39,7 +40,7 @@ const base = import.meta.env.BASE_URL;
             <img src={`${base}img/ig.png`} alt="" />
           </a>
           <a
-            class="socialBtn"
+            class="iconBtn"
             href="https://www.tiktok.com/@school.teacha?_r=1&_t=ZM-92xtLcPpblU"
             target="_blank"
             rel="noopener"
@@ -61,3 +62,4 @@ const base = import.meta.env.BASE_URL;
     </nav>
   </div>
 </header>
+

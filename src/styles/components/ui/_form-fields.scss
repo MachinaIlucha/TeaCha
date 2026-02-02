@@ -1,0 +1,47 @@
+/*!
+ * TeaCha website
+ * © 2026. All rights reserved.
+ *
+ * Shared input field styles
+ */
+
+.fieldInput {
+  width: 100%;
+  min-width: 0;
+
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 55%, transparent);
+
+  padding: 10px 0 12px;
+  color: var(--text);
+
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  font-size: 13px;
+
+  outline: none;
+}
+
+@supports not (color: color-mix(in srgb, red, white)) {
+  .fieldInput {
+    border-bottom-color: rgba(43, 46, 68, 0.55);
+    color: rgba(43, 46, 68, 1);
+  }
+}
+
+.fieldInput::placeholder {
+  color: color-mix(in srgb, var(--text) 75%, transparent);
+  opacity: 1;
+}
+
+@supports not (color: color-mix(in srgb, red, white)) {
+  .fieldInput::placeholder {
+    color: rgba(43, 46, 68, 0.75);
+  }
+}
+
+.fieldInput:focus-visible {
+  border-bottom-color: color-mix(in srgb, var(--text) 85%, transparent);
+  box-shadow: 0 8px 0 -7px rgba(219, 31, 50, 0.45);
+}

@@ -7,6 +7,18 @@
 
 const base = import.meta.env.BASE_URL;
 
+const {
+  titleTop = "ВІД",
+  titleBottom = "ГУКИ",
+  accent = "bottom", // "bottom" | "top"
+} = Astro.props as {
+  titleTop?: string;
+  titleBottom?: string;
+  accent?: "bottom" | "top";
+};
+
+const accentClass = accent === "top" ? "sectionTitle--accentTop" : "";
+
 type Review = {
   name: string;
   badge: string;
@@ -130,22 +142,42 @@ const first = reviews[0];
 <section class="r2" id="reviews" data-r2 data-reveal="scroll" tabindex="0">
   <div class="container" data-reveal-item="1">
     <div class="r2__head" data-reveal-item="2">
-      <h2 class="h2">ВІДГУКИ</h2>
+      <header
+        class={`sectionTitle sectionTitle--center sectionTitle--inline ${accentClass}`}
+        data-reveal="scroll"
+      >
+        <h2
+          class="sectionTitle__line sectionTitle__line--a"
+          data-reveal-item="1"
+        >
+          {titleTop}
+        </h2>
+        <div
+          class="sectionTitle__line sectionTitle__line--b"
+          data-reveal-item="2"
+        >
+          {titleBottom}
+        </div>
+      </header>
 
-      <!-- ✅ КНОПКИ НА УРОВНЕ ЗАГОЛОВКА СПРАВА -->
-      <div class="r2HeadNav" aria-hidden="true">
+      <div class="r2HeadNav">
         <button
           class="r2__btn"
           type="button"
           data-r2-prev
-          aria-label="Попередній відгук">←</button
+          aria-label="Попередній відгук"
         >
+          ←
+        </button>
+
         <button
           class="r2__btn"
           type="button"
           data-r2-next
-          aria-label="Наступний відгук">→</button
+          aria-label="Наступний відгук"
         >
+          →
+        </button>
       </div>
     </div>
 

@@ -1,21 +1,21 @@
 ---
 /**
  * TeaCha website
- * Design & development: Ілля Пінчук Вадимович
+ * Design & development: Ілля Пінчук Вadимович
  * © 2026. All rights reserved.
  */
 
-const base = import.meta.env.BASE_URL
+const base = import.meta.env.BASE_URL;
 
 const {
   className = "",
-  inputClass = "price-consent__check",
+  inputClass = "consent__check",
   required = true,
   invalidMessage = "Потрібно погодитися з політикою конфіденційності"
-} = Astro.props
+} = Astro.props;
 ---
 
-<label class={`price-consent ${className}`}>
+<label class={`consent ${className}`}>
   <input
     class={inputClass}
     type="checkbox"
@@ -25,9 +25,9 @@ const {
     onchange="this.setCustomValidity('')"
   />
 
-  <span class="price-consent__box" aria-hidden="true"></span>
+  <span class="consent__box" aria-hidden="true"></span>
 
-  <span class="price-consent__text">
+  <span class="consent__text">
     Я підтверджую, що ознайомився(-лася) та погоджуюся з умовами
     <a
       href={`${base}docs/polityka-konfidentsiinosti.pdf`}

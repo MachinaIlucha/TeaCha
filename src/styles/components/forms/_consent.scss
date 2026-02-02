@@ -1,10 +1,13 @@
 /*!
  * TeaCha website
- * Design & development: Ілля Пінчук Вадимович
  * © 2026. All rights reserved.
+ *
+ * Consent checkbox (reusable)
+ * Neutral naming + legacy aliases
  */
 
-/* Base consent block (reusable) */
+/* Base (new) */
+.consent,
 .price-consent {
   display: flex;
   align-items: center;
@@ -12,19 +15,26 @@
 
   font-size: 12px;
   line-height: 1.25;
+
+  cursor: pointer;
+  user-select: none;
 }
 
+.consent a,
 .price-consent a {
   text-decoration: underline;
   text-underline-offset: 2px;
+  cursor: pointer;
 }
 
+.consent__check,
 .price-consent__check {
   position: absolute;
   opacity: 0;
   pointer-events: none;
 }
 
+.consent__box,
 .price-consent__box {
   width: 22px;
   height: 22px;
@@ -36,9 +46,22 @@
 
   border: 1px solid currentColor;
   background: transparent;
+
+  /* ✅ убираем любые "увеличения" при клике/hover */
+  transform: none !important;
+  transition:
+    background-color var(--dur-1) var(--ease),
+    border-color var(--dur-1) var(--ease),
+    color var(--dur-1) var(--ease);
+}
+
+.consent__text,
+.price-consent__text {
+  cursor: pointer;
 }
 
 /* tick */
+.consent__check:checked + .consent__box::after,
 .price-consent__check:checked + .price-consent__box::after {
   content: "";
   width: 10px;
@@ -49,44 +72,48 @@
   margin-top: -1px;
 }
 
-/* =========================
-   Themes
-========================= */
-
-/* Dark theme (black blocks like price-lead) */
+/* Themes (new) */
+.consent--dark,
 .price-consent--dark {
   color: rgba(255, 255, 255, 0.8);
 }
 
+.consent--dark a,
 .price-consent--dark a {
   color: rgba(255, 255, 255, 0.95);
 }
 
+.consent--dark .consent__box,
 .price-consent--dark .price-consent__box {
   color: rgba(255, 255, 255, 0.55);
 }
 
+.consent--dark .consent__check:checked + .consent__box,
 .price-consent--dark .price-consent__check:checked + .price-consent__box {
   background: rgba(255, 255, 255, 0.92);
   color: #111;
   border-color: rgba(255, 255, 255, 0.92);
 }
 
-/* Light theme (white modal) */
+/* Light theme */
+.consent--light,
 .price-consent--light {
   color: rgba(43, 46, 68, 0.85);
   font-size: 13px;
   line-height: 1.35;
 }
 
+.consent--light a,
 .price-consent--light a {
   color: rgba(43, 46, 68, 0.95);
 }
 
+.consent--light .consent__box,
 .price-consent--light .price-consent__box {
   color: rgba(43, 46, 68, 0.35);
 }
 
+.consent--light .consent__check:checked + .consent__box,
 .price-consent--light .price-consent__check:checked + .price-consent__box {
   background: rgba(43, 46, 68, 0.92);
   color: #fff;

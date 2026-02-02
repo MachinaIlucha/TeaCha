@@ -1,82 +1,72 @@
-export const initPriceTeachers = () => {
-  const table = document.querySelector("[data-price-table]");
-  if (!table) return;
+export const initPrices = () => {
+  const section = document.querySelector("[data-prices]");
+  if (!section) return;
 
-  const tabs = document.querySelector("[data-price-teacher-tabs]");
+  const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
 
-  const cells = [...table.querySelectorAll("[data-cell]")];
-  const olds = [...table.querySelectorAll("[data-old]")];
-
-  const prices = {
-    daryna: {
-      "individual.one": "700 грн",
-      "individual.month": "5040 грн",
-      "pair.one": "500 грн",
-      "pair.month": "3600 грн",
-      "group.one": "400 грн",
-      "group.month": "2800 грн",
-      "trial.one": "200 грн",
-      old: {
-        "individual.month": "5600 грн",
-        "pair.month": "4000 грн",
-        "group.month": "3200 грн",
-      },
+  const raw = {
+    individual: {
+      1: { total: 700 },
+      8: { per: 645, total: 5160 },
+      12: { per: 630, total: 7560 },
+      24: { per: 600, total: 14400 },
     },
-    daria: {
-      "individual.one": "700 грн",
-      "individual.month": "5040 грн",
-      "pair.one": "500 грн",
-      "pair.month": "3600 грн",
-      "group.one": "400 грн",
-      "group.month": "2800 грн",
-      "trial.one": "200 грн",
-      old: {
-        "individual.month": "5600 грн",
-        "pair.month": "4000 грн",
-        "group.month": "3200 грн",
-      },
+    pair: {
+      1: { total: 500 },
+      8: { per: 445, total: 3560 },
+      12: { per: 430, total: 5160 },
+      24: { per: 400, total: 9600 },
+    },
+    group: {
+      1: { total: 400 },
+      8: { per: 355, total: 2840 },
+      12: { per: 330, total: 3960 },
+      24: { per: 310, total: 7440 },
+    },
+    trial: {
+      1: { total: 200 },
     },
   };
 
-  const setTeacher = (key) => {
-    const data = prices[key] ?? prices.daryna;
+  const fmt = (v) => `${Number(v).toLocaleString("uk-UA")}<span class="priceCard__cur">₴</span>`;
 
-    cells.forEach((el) => {
-      const k = el.dataset.cell;
-      el.textContent = data[k] ?? "—";
-    });
+  const nodes = [...section.querySelectorAll("[data-price]")];
+  nodes.forEach((el) => {
+    const key = el.dataset.price || "";
+    const [group, pack, field] = key.split(".");
+    const p = Number(pack);
+    const val = raw?.[group]?.[p]?.[field];
+    el.innerHTML = typeof val === "number" ? fmt(val) : "—";
+  });
 
-    olds.forEach((el) => {
-      const k = el.dataset.old;
-      const old = data.old?.[k];
-      el.innerHTML = old ? `<s>${old}</s>` : "";
-    });
+  const items = [
+    ...section.querySelectorAll("[data-price-item]"),
+    ...section.querySelectorAll(".priceCard"),
+  ];
+
+  items.forEach((el, i) => {
+    el.style.transitionDelay = `${Math.min(i * 70, 520)}ms`;
+  });
+
+  const show = () => {
+    section.classList.add("is-visible");
   };
 
-  // если tabs есть — подключаем клики и aria
-  if (tabs) {
-    const buttons = [...tabs.querySelectorAll("[data-teacher]")];
-    buttons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const key = btn.dataset.teacher;
-        buttons.forEach((b) => {
-          const active = b === btn;
-          b.classList.toggle("is-active", active);
-          b.setAttribute("aria-selected", active ? "true" : "false");
-        });
-        setTeacher(key);
-      });
-    });
-
-    const initial =
-      buttons.find((b) => b.classList.contains("is-active"))?.dataset.teacher ??
-      buttons[0]?.dataset.teacher ??
-      "daryna";
-
-    setTeacher(initial);
+  if (reduceMotion) {
+    show();
     return;
   }
 
-  // tabs нет — просто ставим дефолт и всё
-  setTeacher("daryna");
+  const io = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        show();
+        io.unobserve(entry.target);
+      }
+    },
+    { threshold: 0.15, rootMargin: "0px 0px -18% 0px" },
+  );
+
+  io.observe(section);
 };

@@ -4,25 +4,44 @@
  * © 2026. All rights reserved.
  */
 
+
 html,
 body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial,
-    "Noto Sans", "Helvetica Neue", sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  line-height: var(--lh-normal);
   scroll-behavior: smooth;
 }
 
-.tea {
-  color: var(--text);
-}
-.cha {
-  color: var(--red);
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+.container {
+  width: 100%;
+  max-width: calc(var(--container-max) + (var(--gutter) * 2));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Brand word */
+.tea {
+  color: var(--color-text);
+}
+.cha {
+  color: var(--color-accent);
+}
+
+/* Headings utility (если используешь классами) */
 .h2 {
-  font-size: clamp(28px, 5.5vw, 56px);
+  font-size: var(--h2);
   line-height: 0.98;
   letter-spacing: 0.5px;
   margin: 0;
+}
+
+::selection {
+  background: rgba(219, 31, 50, 0.18);
 }

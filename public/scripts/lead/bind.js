@@ -1,11 +1,6 @@
 import { postLead } from "./api.js";
 import { toast } from "../core/toast.js";
 
-/**
- * Bind any form with name/contact fields to /api/lead
- * @param {string} selector
- * @param {{ source?: string, onSuccess?: () => void }} opts
- */
 export const bindLeadForm = (selector, opts = {}) => {
   const form = document.querySelector(selector);
   if (!form) return;
@@ -13,13 +8,14 @@ export const bindLeadForm = (selector, opts = {}) => {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const name = form.elements.name?.value?.trim() || "";
-    const contact = form.elements.contact?.value?.trim() || "";
-
-    if (!name || !contact) {
-      toast.error("Перевірте форму", "Заповніть ім'я та контакт");
+    // Let native validity + customValidity messages handle required fields
+    if (!form.checkValidity()) {
+      form.reportValidity();
       return;
     }
+
+    const name = form.elements.name?.value?.trim() || "";
+    const contact = form.elements.contact?.value?.trim() || "";
 
     const btn = form.querySelector('button[type="submit"]');
     const prevText = btn?.textContent;

@@ -1,0 +1,182 @@
+/* StartLead (mobile-first) */
+.startLead {
+  position: relative;
+  isolation: isolate;
+  padding-block: var(--section-py-compact);
+
+  --sl-text: #fff;
+  --sl-text-dim: #fff;
+  --sl-border: rgba(255, 255, 255, 0.72);
+  --sl-card-bg: #1f1f1f;
+}
+
+.startLead::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: var(--startlead-bg) center / cover no-repeat;
+}
+
+.startLead::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.55));
+}
+
+.startLead__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+  align-items: start;
+}
+
+/* Если нужно фиксированно слева + без нижнего отступа */
+.startLead__copy .sectionTitle {
+  margin: 0;
+  text-align: left;
+}
+
+/* ===== SectionTitle (через переменные компонента) ===== */
+.startLead .sectionTitle--startLead {
+  /* Цвета берём из локальных токенов секции */
+  --st-a: var(--sl-text-dim);
+  --st-b: var(--sl-text);
+  --st-track: normal;
+  --st-lh: 0.95;
+}
+
+/* То, чего нет в компоненте */
+.startLead .sectionTitle--startLead .sectionTitle__line {
+  text-transform: none; /* глобально uppercase */
+  text-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+}
+
+/* Разные размеры строк (если реально нужно) */
+.startLead .sectionTitle--startLead .sectionTitle__line--a {
+  font-size: clamp(44px, 5.6vw, 86px);
+}
+
+.startLead .sectionTitle--startLead .sectionTitle__line--b {
+  font-size: clamp(36px, 4.6vw, 92px);
+  white-space: nowrap;
+  letter-spacing: -0.02em;
+  margin-top: 10px; /* у глобалки есть, но пусть будет явно */
+}
+
+@media (max-width: 1180px) {
+  .startLead .sectionTitle--startLead .sectionTitle__line--b {
+    letter-spacing: -0.03em;
+  }
+}
+
+/* ===== Form card ===== */
+.startLead__form {
+  background: var(--sl-card-bg);
+  border-radius: 24px;
+  padding: 30px 26px;
+  box-shadow: var(--shadow);
+
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+
+.startLead__fields {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+
+.leadField__input {
+  width: 100%;
+  min-width: 0;
+
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--sl-border);
+  border-bottom-width: 2px;
+
+  padding: 16px 0 18px;
+  color: var(--sl-text);
+
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+
+  outline: none;
+
+  &::placeholder {
+    color: var(--sl-text);
+    opacity: 1;
+  }
+
+  &:focus-visible {
+    border-bottom-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 8px 0 -7px rgba(219, 31, 50, 0.65);
+  }
+}
+
+/* Consent: если нужно чуть другой оттенок только в этой секции */
+.startLead .price-consent--dark {
+  font-size: 13px;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+/* ===== CTA ===== */
+.startLead__cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 6px;
+}
+
+.startLead__ctaInner {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+}
+
+/* Desktop */
+@media (min-width: 980px) {
+  .startLead {
+    padding-block: clamp(90px, 8vw, 160px);
+  }
+
+  .startLead__cta {
+    margin-top: 10px;
+  }
+
+  .startLead__grid {
+    grid-template-columns: 1fr auto;
+    gap: 46px;
+  }
+
+  .startLead__copy {
+    align-self: center;
+  }
+
+  .startLead__form {
+    width: clamp(520px, 34vw, 560px);
+    justify-self: end;
+    padding: 56px 44px;
+    border-radius: 34px;
+    min-height: unset;
+    gap: 18px;
+  }
+
+  .startLead__fields {
+    gap: 18px;
+  }
+
+  .leadField__input {
+    padding: 12px 0 14px;
+  }
+
+  .startLead > .container {
+    padding-inline: 0;
+  }
+}

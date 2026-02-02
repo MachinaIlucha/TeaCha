@@ -11,6 +11,7 @@
 
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 
   border-bottom: 0;
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.12);
@@ -97,48 +98,9 @@
   gap: 12px;
 }
 
-
 .nav__social {
   display: flex;
   gap: 12px;
-}
-
-.socialBtn {
-  width: 44px;
-  height: 44px;
-  border-radius: 999px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background: var(--accent);
-  border: none;
-
-  transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
-}
-
-.socialBtn img {
-  width: 28px;
-  height: 28px;
-  object-fit: contain;
-  transition: transform 0.12s ease;
-}
-
-.socialBtn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-  filter: brightness(0.95);
-}
-
-.socialBtn:hover img {
-  transform: scale(1.1);
-}
-
-.socialBtn:active {
-  transform: translateY(0);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
-  filter: brightness(0.9);
 }
 
 .nav__links {
@@ -222,7 +184,6 @@
     z-index: 60;
   }
 
-  /* ВАЖНО: тут тоже задаём left/right/width/position, иначе база .nav__right.is-open перетрет */
   .topbar .nav__right.is-open {
     position: fixed;
     top: var(--topbar-h, 72px);

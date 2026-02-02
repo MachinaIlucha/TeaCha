@@ -1,6 +1,3 @@
-/**
- * Process reveal on scroll.
- */
 function initProcessReveal() {
   const section = document.querySelector("[data-process]");
   if (!section) return;
@@ -19,7 +16,10 @@ function initProcessReveal() {
         io.unobserve(entry.target);
       }
     },
-    { threshold: 0.25 }
+    {
+      threshold: 0.45,
+      rootMargin: "0px 0px -18% 0px",
+    },
   );
 
   io.observe(section);
