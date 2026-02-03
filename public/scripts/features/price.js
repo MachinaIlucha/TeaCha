@@ -1,8 +1,10 @@
+import { prefersReducedMotion } from "../core/motion.js";
+
 export const initPrices = () => {
   const section = document.querySelector("[data-prices]");
   if (!section) return;
 
-  const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+  const reduceMotion = prefersReducedMotion();
 
   const raw = {
     individual: {

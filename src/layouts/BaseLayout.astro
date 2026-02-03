@@ -2,7 +2,7 @@
 import "../styles/main.scss";
 
 import Header from "../components/layout/Header.astro";
-import Footer from "../components/Footer.astro";
+import Footer from "../components/layout/Footer.astro";
 
 import ModalConsult from "../components/layout/ModalConsult.astro";
 import ToastHost from "../components/layout/ToastHost.astro";
@@ -37,6 +37,11 @@ const base = import.meta.env.BASE_URL;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>TeaCha</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
   </head>
 
   <body {...(!reveal ? { "data-reveal-off": "" } : {})}>

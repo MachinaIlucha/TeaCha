@@ -13,7 +13,7 @@
 .foundersSketch {
   /* Local aliases from tokens */
   --fs-ink: var(--color-brand);
-  --fs-accent: var(--color-accent);
+  --fs-accent: var(--accent);
   --fs-bg: var(--color-bg);
   --fs-surface: var(--color-surface);
   --fs-border: var(--color-border);
@@ -23,7 +23,7 @@
   --fs-ink-86: rgba(43, 46, 68, 0.86);
 
   background:
-    radial-gradient(900px 560px at 18% 8%, rgba(219, 31, 50, 0.08), transparent 62%),
+    radial-gradient(900px 560px at 18% 8%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 62%),
     radial-gradient(900px 560px at 82% 18%, rgba(43, 46, 68, 0.05), transparent 64%),
     linear-gradient(180deg, #ffffff 0%, var(--fs-bg) 100%);
 
@@ -59,16 +59,31 @@
   letter-spacing: -0.075em;
   font-size: clamp(52px, 8.2vw, 138px);
 
-  color: rgba(219, 31, 50, 0.16);
+  color: var(--accent);
+  --fs-bgword-opacity: 0.9;
+  opacity: var(--fs-bgword-opacity);
 
   white-space: nowrap;
   overflow: hidden;
 }
 
-@supports (color: color-mix(in srgb, red, white)) {
-  .foundersSketch__bgWord {
-    color: color-mix(in srgb, var(--color-accent) 22%, transparent);
-  }
+/* Keep centering when reveal adds transform */
+html.js [data-reveal="load"] .foundersSketch__bgWord[data-reveal-item],
+html.js [data-reveal="scroll"] .foundersSketch__bgWord[data-reveal-item],
+html.js [data-reveal-load] .foundersSketch__bgWord[data-reveal-item],
+html.js [data-reveal-scroll] .foundersSketch__bgWord[data-reveal-item] {
+  opacity: 0;
+  transition-duration: 1200ms;
+  transform: translateX(-50%) translateY(10px);
+}
+
+html.js [data-reveal="load"].is-visible .foundersSketch__bgWord[data-reveal-item],
+html.js [data-reveal="scroll"].is-visible .foundersSketch__bgWord[data-reveal-item],
+html.js [data-reveal-load].is-visible .foundersSketch__bgWord[data-reveal-item],
+html.js [data-reveal-scroll].is-visible .foundersSketch__bgWord[data-reveal-item] {
+  opacity: var(--fs-bgword-opacity);
+  transition-delay: 120ms;
+  transform: translateX(-50%);
 }
 
 /* =========================
@@ -97,7 +112,7 @@
   opacity: 0.96;
 
   background:
-    radial-gradient(900px 520px at 30% 20%, rgba(219, 31, 50, 0.10), transparent 60%),
+    radial-gradient(900px 520px at 30% 20%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 60%),
     radial-gradient(900px 520px at 80% 30%, rgba(43, 46, 68, 0.06), transparent 62%),
     linear-gradient(180deg, #ffffff 0%, rgba(246, 247, 251, 0.90) 100%);
 
@@ -128,6 +143,17 @@
   z-index: 3;
   max-width: 46%;
   color: var(--fs-ink-92);
+}
+
+.foundersSketch__names {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.foundersSketch__namesDivider {
+  display: none;
 }
 
 @supports (color: color-mix(in srgb, red, white)) {
@@ -217,18 +243,58 @@
   }
 }
 
-/* On small screens don't overflow */
+/* On small screens: names in one block at bottom center */
 @media (max-width: 520px) {
-  .foundersSketch__name--left {
-    left: 0;
-    top: 30%;
+  .foundersSketch__center {
+    padding-bottom: 36px;
   }
-  .foundersSketch__name--right {
-    right: 0;
-    bottom: 14%;
+
+  .foundersSketch__names {
+    inset: auto;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: min(360px, 92%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 16px;
+    box-shadow:
+      0 10px 28px rgba(16, 24, 40, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
+
   .foundersSketch__name {
-    max-width: 52%;
+    position: static;
+    max-width: none;
+    flex: 1 1 0;
+  }
+
+  .foundersSketch__name--left {
+    text-align: left;
+  }
+
+  .foundersSketch__name--right {
+    text-align: right;
+  }
+
+  .foundersSketch__leader {
+    display: none;
+  }
+
+  .foundersSketch__namesDivider {
+    display: block;
+    width: 1px;
+    height: 28px;
+    background: rgba(43, 46, 68, 0.35);
+    opacity: 0.6;
+    flex: 0 0 1px;
   }
 }
 
@@ -243,20 +309,41 @@
 
   margin-top: 38px;
   display: grid;
+  gap: 20px;
+}
+
+.foundersSketch__cardsRow {
+  display: grid;
   grid-template-columns: 1fr;
   gap: 18px;
 }
 
 @media (min-width: 520px) {
-  .foundersSketch__cards {
+  .foundersSketch__cardsRow--top {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .foundersSketch__cardsRow--bottom {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: min(520px, 100%);
+    margin-inline: auto;
   }
 }
 
 @media (min-width: 980px) {
   .foundersSketch__cards {
+    gap: 26px;
+  }
+
+  .foundersSketch__cardsRow--top {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 22px;
+  }
+
+  .foundersSketch__cardsRow--bottom {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: min(760px, 76%);
+    margin-inline: auto;
+    margin-top: 8px;
   }
 }
 
@@ -302,16 +389,10 @@
   transform: translateX(-50%);
   font-size: 30px;
   line-height: 1;
-  color: rgba(219, 31, 50, 0.55);
-  opacity: 0.95;
+  color: var(--accent);
+  opacity: var(--fs-bgword-opacity);
   z-index: 2;
   pointer-events: none;
-}
-
-@supports (color: color-mix(in srgb, red, white)) {
-  .stampCard::after {
-    color: color-mix(in srgb, var(--color-accent) 55%, white);
-  }
 }
 
 .stampCard__inner {

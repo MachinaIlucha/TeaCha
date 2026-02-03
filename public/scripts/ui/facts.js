@@ -1,10 +1,17 @@
-function initFactsReveal() {
-  const sections = document.querySelectorAll("[data-facts]");
+import { prefersReducedMotion } from "../core/motion.js";
+
+export const initFactsReveal = () => {
+  const sections = [...document.querySelectorAll("[data-facts]")].filter(
+    (section) => section.dataset.factsInit !== "1",
+  );
   if (!sections.length) return;
 
-  const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
-  if (reduceMotion) {
-    sections.forEach((s) => s.classList.add("is-visible"));
+  sections.forEach((section) => {
+    section.dataset.factsInit = "1";
+  });
+
+  if (prefersReducedMotion()) {
+    sections.forEach((section) => section.classList.add("is-visible"));
     return;
   }
 
@@ -19,11 +26,16 @@ function initFactsReveal() {
     { threshold: 0.25 },
   );
 
-  sections.forEach((s) => io.observe(s));
-}
+  sections.forEach((section) => io.observe(section));
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initFactsReveal, { once: true });
-} else {
-  initFactsReveal();
-}
+  window.addEventListener(
+    "astro:before-swap",
+    () => {
+      io.disconnect();
+      sections.forEach((section) => {
+        section.dataset.factsInit = "0";
+      });
+    },
+    { once: true },
+  );
+};

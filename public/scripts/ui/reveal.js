@@ -1,17 +1,13 @@
+import { prefersReducedMotion } from "../core/motion.js";
+
 const LOAD_SEL = '[data-reveal="load"], [data-reveal-load]';
 const SCROLL_SEL = '[data-reveal="scroll"], [data-reveal-scroll]';
-
-function reduced() {
-  return (
-    window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false
-  );
-}
 
 function runLoad() {
   const targets = document.querySelectorAll(LOAD_SEL);
   if (!targets.length) return;
 
-  if (reduced()) {
+  if (prefersReducedMotion()) {
     targets.forEach((el) => el.classList.add("is-visible"));
     return;
   }
@@ -34,7 +30,7 @@ function runScroll() {
   const targets = document.querySelectorAll(SCROLL_SEL);
   if (!targets.length) return;
 
-  if (reduced()) {
+  if (prefersReducedMotion()) {
     targets.forEach((el) => el.classList.add("is-visible"));
     return;
   }

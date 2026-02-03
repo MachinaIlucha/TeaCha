@@ -10,8 +10,9 @@
   --why-gap: 14px;
 }
 
-.enWhy__title {
-  margin-bottom: 14px;
+/* remove side paddings from container only */
+.enWhy > .container {
+  padding-inline: 0;
 }
 
 /* grid */

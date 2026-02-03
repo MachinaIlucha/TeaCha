@@ -7,14 +7,8 @@
  *  [data-faq] -> [data-faq-item] -> button.faqItem__btn + .faqItem__panel[hidden]
  */
 
-const qs = (sel, root = document) => root.querySelector(sel);
-const qsa = (sel, root = document) => Array.from(root.querySelectorAll(sel));
-
-function reduced() {
-  return (
-    window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false
-  );
-}
+import { qs, qsa } from "../core/dom.js";
+import { prefersReducedMotion } from "../core/motion.js";
 
 function setExpanded(btn, expanded) {
   btn.setAttribute("aria-expanded", expanded ? "true" : "false");
@@ -25,7 +19,7 @@ function animateOpen(panel) {
 
   panel.hidden = false;
 
-  if (reduced()) {
+  if (prefersReducedMotion()) {
     panel.style.height = "auto";
     panel.style.overflow = "";
     return;
@@ -56,7 +50,7 @@ function animateOpen(panel) {
 function animateClose(panel) {
   if (!panel) return;
 
-  if (reduced()) {
+  if (prefersReducedMotion()) {
     panel.hidden = true;
     panel.style.height = "0px";
     panel.style.overflow = "";
@@ -118,16 +112,6 @@ export function initFaq() {
     if (panel) animateOpen(panel);
   };
 
-  const stop = (e) => {
-    e.stopPropagation();
-    if (typeof e.stopImmediatePropagation === "function")
-      e.stopImmediatePropagation();
-  };
-
-  // перехватываем раньше document click-closer’ов
-  const onPointerDown = (e) => {
-    if (e.target && btn.contains(e.target)) stop(e);
-  };
 
   const toggleItem = (item) => {
     const isOpen = item.classList.contains("is-open");

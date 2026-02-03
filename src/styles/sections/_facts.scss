@@ -15,6 +15,11 @@
   --facts-surface: var(--color-surface);
 }
 
+/* remove horizontal padding only (keep container width) */
+.facts > .container {
+  padding-inline: 0;
+}
+
 /* background (если есть картинка/градиент) */
 .facts__bg {
   position: absolute;

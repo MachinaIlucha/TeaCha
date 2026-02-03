@@ -10,15 +10,17 @@ import { initTopbarHeightVar } from "./core/layout.js";
 import { initMenu } from "./features/menu.js";
 import { initReviews } from "./features/reviews.js";
 import { initPrices } from "./features/price.js";
+import { initMarquee } from "./features/marquee.js";
 
 import { attachLeadValidation } from "./lead/validation.js";
 import { bindLeadForm } from "./lead/bind.js";
 
 import { initBadges } from "./ui/badges.js";
+import { initFactsReveal } from "./ui/facts.js";
+import { initProcessReveal } from "./ui/process.js";
 import "./ui/reveal.js";
 import { initHeroLoadReveal } from "./ui/hero-load-reveal.js";
 import { initFaq } from "./features/faq.js";
-import { initEnglishPage } from "./features/english.js";
 import { initStartLead } from "./lead/startLead.js";
 import { initLeadDock } from "./features/leadDock.js";
 
@@ -27,10 +29,12 @@ const boot = () => {
   initMenu();
   initReviews();
   initFaq();
-  initEnglishPage();
   initPrices();
+  initMarquee();
   initStartLead();
   initLeadDock();
+  initFactsReveal();
+  initProcessReveal();
 
   // modal
   const modalEl = document.getElementById("consultModal");
@@ -80,11 +84,9 @@ const boot = () => {
   }
 
   // forms
-  attachLeadValidation(document.getElementById("lead-bar-form"));
   attachLeadValidation(document.getElementById("consultForm"));
 
   bindLeadForm("#consultForm", { source: "modal", onSuccess: closeModal });
-  bindLeadForm("#lead-bar-form", { source: "lead-bar" });
 
   // layout helpers
   initTopbarHeightVar();

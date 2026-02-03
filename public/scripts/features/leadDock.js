@@ -12,6 +12,7 @@ export const initLeadDock = () => {
   const dock = document.getElementById("lead-dock");
   const form = document.getElementById("lead-dock-form");
   const target = document.getElementById("start-lead");
+  const modal = document.getElementById("consultModal");
 
   if (!dock || !form || !target) return;
 
@@ -35,8 +36,11 @@ export const initLeadDock = () => {
 
   const applyPad = () => setPad(getDockPad());
 
-  const setHidden = (hidden) => {
-    dock.classList.toggle("is-hidden", !!hidden);
+  let hiddenByTarget = false;
+  let hiddenByModal = false;
+
+  const applyHidden = () => {
+    dock.classList.toggle("is-hidden", hiddenByTarget || hiddenByModal);
     applyPad();
   };
 
@@ -51,7 +55,8 @@ export const initLeadDock = () => {
   const io = new IntersectionObserver(
     ([entry]) => {
       if (!entry) return;
-      setHidden(entry.isIntersecting);
+      hiddenByTarget = entry.isIntersecting;
+      applyHidden();
     },
     {
       root: null,
@@ -62,6 +67,19 @@ export const initLeadDock = () => {
 
   io.observe(target);
 
+  // hide when modal opens (show when closes)
+  let modalObserver = null;
+  if (modal) {
+    const syncModalState = () => {
+      hiddenByModal = modal.classList.contains("is-open");
+      applyHidden();
+    };
+
+    modalObserver = new MutationObserver(syncModalState);
+    modalObserver.observe(modal, { attributes: true, attributeFilter: ["class"] });
+    syncModalState();
+  }
+
   // extra safety for viewport changes
   const onResize = () => applyPad();
   window.addEventListener("resize", onResize, { passive: true });
@@ -70,6 +88,7 @@ export const initLeadDock = () => {
   const onBeforeSwap = () => {
     io.disconnect();
     ro.disconnect();
+    modalObserver?.disconnect();
     window.removeEventListener("resize", onResize);
     dock.dataset.bound = "0";
     setPad(0);

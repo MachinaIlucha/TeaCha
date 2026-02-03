@@ -3,6 +3,8 @@
  * Works with: <section class="hero" data-reveal="load"> ... data-reveal-item="..."
  */
 
+import { prefersReducedMotion } from "../core/motion.js";
+
 export function initHeroLoadReveal() {
   // allow disabling reveal globally
   if (document.body?.hasAttribute("data-reveal-off")) return;
@@ -16,9 +18,7 @@ export function initHeroLoadReveal() {
     hero.dataset.heroRevealInit = "1";
   });
 
-  const reduceMotion = window.matchMedia?.(
-    "(prefers-reduced-motion: reduce)",
-  )?.matches;
+  const reduceMotion = prefersReducedMotion();
 
   if (reduceMotion) {
     heroes.forEach((hero) => hero.classList.add("is-visible"));

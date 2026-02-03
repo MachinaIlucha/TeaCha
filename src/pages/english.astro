@@ -7,20 +7,34 @@
 
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-import EnglishQuote from "../components/pages/english/EnglishQuote.astro";
+import LanguageHero from "../components/sections/LanguageHero.astro";
 import EnglishWhy from "../components/pages/english/EnglishWhy.astro";
 import EnglishFormat from "../components/pages/english/EnglishFormat.astro";
 
 import Process from "../components/sections/Process.astro";
 import PriceRates from "../components/pages/price/PriceRates.astro";
-import Reviews from "../components/Reviews.astro";
+import Reviews from "../components/sections/Reviews.astro";
 import Faq from "../components/sections/Faq.astro";
 
 const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title="Англійська" reveal={true} bodyClass="page-english">
-  <EnglishQuote base={base} />
+  <LanguageHero
+    base={base}
+    titleParts={[
+      { text: "АНГЛІЙСЬКА, ", accent: true },
+      { text: "ЯКА" },
+      { br: true },
+      { text: "ВІДКРИЄ ДВЕРІ" },
+      { br: true },
+      { text: "ДО НОВИХ" },
+      { br: true },
+      { text: "МОЖЛИВ", accent: true },
+      { text: "ОСТЕЙ" },
+    ]}
+    subtitle="Онлайн та офлайн у Києві • індивідуальний план • чітка структура уроків"
+  />
 
   <EnglishWhy />
 

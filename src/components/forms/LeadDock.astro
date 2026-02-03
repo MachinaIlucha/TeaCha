@@ -60,7 +60,23 @@ const { hidden = false } = Astro.props;
         </label>
       </div>
 
-      <button class="leadDock__btn" type="submit">
+      <button
+        class="leadDock__btn leadDock__btn--modal"
+        type="button"
+        data-open-modal
+      >
+        <span class="leadDock__btnText">ХОЧУ ПРОБНЕ ЗАНЯТТЯ</span>
+        <span class="leadDock__btnIcon" aria-hidden="true">
+          <img
+            src={`${base}img/chinese-scroll.png`}
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
+        </span>
+      </button>
+
+      <button class="leadDock__btn leadDock__btn--submit" type="submit">
         <span class="leadDock__btnText">ХОЧУ ПРОБНЕ ЗАНЯТТЯ</span>
         <span class="leadDock__btnIcon" aria-hidden="true">
           <img

@@ -14,7 +14,7 @@ import CorporateClients from "../components/pages/corporate/CorporateClients.ast
 import Process from "../components/sections/Process.astro";
 import Faq from "../components/sections/Faq.astro";
 
-import PriceRates from "../components/pages/price/PriceRates.astro";
+import CorporatePriceTable from "../components/pages/corporate/CorporatePriceTable.astro";
 
 const base = import.meta.env.BASE_URL;
 ---
@@ -30,9 +30,7 @@ const base = import.meta.env.BASE_URL;
 
     <CorporateClients base={base} />
 
-    <section class="price-rates" id="prices" data-reveal="scroll">
-      <PriceRates base={base} />
-    </section>
+    <CorporatePriceTable />
 
     <Faq />
   </main>

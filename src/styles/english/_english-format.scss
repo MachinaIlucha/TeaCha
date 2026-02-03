@@ -17,8 +17,9 @@
   --enFormat-gap: 14px;
 }
 
-.enFormat__title {
-  margin-bottom: 14px;
+/* remove side paddings from container only */
+.enFormat > .container {
+  padding-inline: 0;
 }
 
 /* base card */

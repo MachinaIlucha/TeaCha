@@ -6,8 +6,9 @@
   --cn-gap: 14px;
 }
 
-.cnWhy__title {
-  margin-bottom: 14px;
+/* remove side paddings from container only */
+.cnWhy > .container {
+  padding-inline: 0;
 }
 
 /* grid (общая) */

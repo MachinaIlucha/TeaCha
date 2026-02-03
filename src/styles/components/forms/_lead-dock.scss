@@ -55,13 +55,14 @@ body {
   opacity: 1;
   transform: translateY(0);
   transition:
-    opacity var(--dur-2) var(--ease),
-    transform var(--dur-2) var(--ease);
+    opacity 420ms var(--ease),
+    transform 420ms var(--ease);
 
   &.is-hidden {
     opacity: 0;
     transform: translateY(18px);
     pointer-events: none;
+    transition-duration: 220ms;
   }
 
   /* =========================
@@ -111,6 +112,14 @@ body {
     transition:
       transform var(--dur-1) var(--ease),
       box-shadow var(--dur-1) var(--ease);
+  }
+
+  &__btn--submit {
+    display: none;
+  }
+
+  &__btn--modal {
+    display: inline-flex;
   }
 
   &__btn:hover {
@@ -228,6 +237,14 @@ body {
       height: var(--leadDock-btn-h);
       padding-inline: 22px;
       font-size: 12px;
+    }
+
+    &__btn--submit {
+      display: inline-flex;
+    }
+
+    &__btn--modal {
+      display: none;
     }
 
     &__btnIcon img {

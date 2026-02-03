@@ -6,8 +6,9 @@
   --cnF-gap: 14px;
 }
 
-.cnFormat__title {
-  margin-bottom: 14px;
+/* remove side paddings from container only */
+.cnFormat > .container {
+  padding-inline: 0;
 }
 
 .cnGrid--format .cnCard {
@@ -77,16 +78,6 @@
   font-weight: 950;
   color: color-mix(in srgb, var(--white) 92%, transparent);
   text-wrap: balance;
-}
-
-/* online accent */
-.cnCard--accentOnline {
-  border-color: color-mix(in srgb, var(--red) 32%, transparent);
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--red) 12%, var(--text) 88%) 0%,
-    color-mix(in srgb, var(--red) 6%, var(--text) 94%) 100%
-  );
 }
 
 @media (min-width: 980px) {

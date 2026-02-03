@@ -11,11 +11,11 @@ const { base } = Astro.props;
 <section class="foundersSketch" id="teachers" data-reveal="load">
   <div class="container">
     <!-- Decorative big word ONLY (no black title anymore), limited to container -->
-    <div class="foundersSketch__bgWord" aria-hidden="true">ЗАСНОВНИЦІ</div>
+    <div class="foundersSketch__bgWord" aria-hidden="true" data-reveal-item="1">ЗАСНОВНИЦІ</div>
 
     <!-- CENTER: photo + 2 captions -->
     <div class="foundersSketch__center" data-reveal="load">
-      <div class="foundersSketch__hero" data-reveal-item="1">
+      <div class="foundersSketch__hero" data-reveal-item="2">
         <div class="foundersSketch__blob" aria-hidden="true"></div>
 
         <img
@@ -25,67 +25,75 @@ const { base } = Astro.props;
           loading="lazy"
         />
 
-        <!-- Name #1: left of photo (upper area) -->
-        <div class="foundersSketch__name foundersSketch__name--left" data-reveal-item="2">
-          <div class="foundersSketch__nameText">
-            <span class="first">Дарина</span>
-            <span class="last">Швець</span>
+        <div class="foundersSketch__names" aria-label="Імена засновниць">
+          <!-- Name #1: left of photo (upper area) -->
+          <div class="foundersSketch__name foundersSketch__name--left" data-reveal-item="3">
+            <div class="foundersSketch__nameText">
+              <span class="first">Дарина</span>
+              <span class="last">Швець</span>
+            </div>
+            <span class="foundersSketch__leader foundersSketch__leader--left" aria-hidden="true"></span>
           </div>
-          <span class="foundersSketch__leader foundersSketch__leader--left" aria-hidden="true"></span>
-        </div>
 
-        <!-- Name #2: right of photo (middle/lower area) -->
-        <div class="foundersSketch__name foundersSketch__name--right" data-reveal-item="3">
-          <div class="foundersSketch__nameText">
-            <span class="first">Дарія</span>
-            <span class="last">Позняковська</span>
+          <span class="foundersSketch__namesDivider" aria-hidden="true"></span>
+
+          <!-- Name #2: right of photo (middle/lower area) -->
+          <div class="foundersSketch__name foundersSketch__name--right" data-reveal-item="4">
+            <div class="foundersSketch__nameText">
+              <span class="first">Дарія</span>
+              <span class="last">Позняковська</span>
+            </div>
+            <span class="foundersSketch__leader foundersSketch__leader--right" aria-hidden="true"></span>
           </div>
-          <span class="foundersSketch__leader foundersSketch__leader--right" aria-hidden="true"></span>
         </div>
       </div>
     </div>
 
     <!-- BOTTOM: 5 cards (OSVITA card removed) -->
-    <div class="foundersSketch__cards" data-reveal-item="4" aria-label="Освіта">
-      <div class="stampCard">
-        <div class="stampCard__inner">
-          Червоний диплом магістра<br />
-          КНУ ім. Шевченка<br />
-          (китайська мова та література,<br />
-          англійська мова і переклад)
+    <div class="foundersSketch__cards" data-reveal-item="5" aria-label="Освіта">
+      <div class="foundersSketch__cardsRow foundersSketch__cardsRow--top">
+        <div class="stampCard">
+          <div class="stampCard__inner">
+            Червоний диплом магістра<br />
+            КНУ ім. Шевченка<br />
+            (китайська мова та література,<br />
+            англійська мова і переклад)
+          </div>
+        </div>
+
+        <div class="stampCard">
+          <div class="stampCard__inner">
+            Семестрова програма<br />
+            навчання в Університеті<br />
+            Ціндао, Китай<br />
+            (онлайн)
+          </div>
+        </div>
+
+        <div class="stampCard">
+          <div class="stampCard__inner">
+            Річна програма навчання<br />
+            в Університеті Ціндао, Китай<br />
+            (проживання і навчання<br />
+            в Китаї)
+          </div>
         </div>
       </div>
 
-      <div class="stampCard">
-        <div class="stampCard__inner">
-          Семестрова програма<br />
-          навчання в Університеті<br />
-          Ціндао, Китай<br />
-          (онлайн)
+      <div class="foundersSketch__cardsRow foundersSketch__cardsRow--bottom">
+        <div class="stampCard">
+          <div class="stampCard__inner">
+            Курси інституту<br />
+            Конфуція при КНУ<br />
+            ім. Шевченка
+          </div>
         </div>
-      </div>
 
-      <div class="stampCard">
-        <div class="stampCard__inner">
-          Річна програма навчання<br />
-          в Університеті Ціндао, Китай<br />
-          (проживання і навчання<br />
-          в Китаї)
-        </div>
-      </div>
-
-      <div class="stampCard">
-        <div class="stampCard__inner">
-          Курси інституту<br />
-          Конфуція при КНУ<br />
-          ім. Шевченка
-        </div>
-      </div>
-
-      <div class="stampCard">
-        <div class="stampCard__inner">
-          Керування мовним центром<br />
-          більше чотирьох років
+        <div class="stampCard">
+          <div class="stampCard__inner">
+            Керування мовним центром<br />
+            більше чотирьох років
+          </div>
         </div>
       </div>
     </div>

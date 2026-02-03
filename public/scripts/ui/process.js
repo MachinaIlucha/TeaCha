@@ -1,9 +1,11 @@
-function initProcessReveal() {
-  const section = document.querySelector("[data-process]");
-  if (!section) return;
+import { prefersReducedMotion } from "../core/motion.js";
 
-  const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
-  if (reduceMotion) {
+export const initProcessReveal = () => {
+  const section = document.querySelector("[data-process]");
+  if (!section || section.dataset.processInit === "1") return;
+  section.dataset.processInit = "1";
+
+  if (prefersReducedMotion()) {
     section.classList.add("is-visible");
     return;
   }
@@ -23,10 +25,13 @@ function initProcessReveal() {
   );
 
   io.observe(section);
-}
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initProcessReveal, { once: true });
-} else {
-  initProcessReveal();
-}
+  window.addEventListener(
+    "astro:before-swap",
+    () => {
+      io.disconnect();
+      section.dataset.processInit = "0";
+    },
+    { once: true },
+  );
+};

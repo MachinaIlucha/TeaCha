@@ -1,0 +1,72 @@
+---
+/**
+ * TeaCha website
+ * Design & development: Ілля Пінчук Вадимович
+ * © 2026. All rights reserved.
+ */
+
+type TitlePart =
+  | {
+      text: string;
+      accent?: boolean;
+    }
+  | {
+      br: true;
+    };
+
+const {
+  base,
+  titleParts = [],
+  subtitle = "",
+  ctaText = "ХОЧУ ПРОБНИЙ УРОК",
+  imgSrc,
+  imgAlt = "Фото викладачів",
+} = Astro.props as {
+  base: string;
+  titleParts?: TitlePart[];
+  subtitle?: string;
+  ctaText?: string;
+  imgSrc?: string;
+  imgAlt?: string;
+};
+
+const resolvedImg = imgSrc ?? `${base}img/hero-portrait.jpg`;
+---
+
+<section class="hero hero--lang" data-reveal="load">
+  <div class="container hero__grid">
+    <div class="hero__left">
+      <div class="hero__title" data-reveal-item="1">
+        <div class="hero__titleLine">
+          {
+            titleParts.map((part) => {
+              if ("br" in part) return <br />;
+              return part.accent ? (
+                <span class="hero__accent">{part.text}</span>
+              ) : (
+                part.text
+              );
+            })
+          }
+        </div>
+      </div>
+
+      <p class="hero__subtitle hero__subtitle--big" data-reveal-item="2">
+        {subtitle}
+      </p>
+
+      <div class="hero__cta hero__cta--pill" data-reveal-item="3">
+        <button class="hero__pill" type="button" data-open-modal>
+          {ctaText}
+        </button>
+      </div>
+    </div>
+
+    <div class="hero__right" data-reveal-item="4">
+      <div class="heroPhoto">
+        <div class="heroPhoto__bg" aria-hidden="true"></div>
+        <img class="heroPhoto__img" src={resolvedImg} alt={imgAlt} loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>

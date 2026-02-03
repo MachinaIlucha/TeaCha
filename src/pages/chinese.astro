@@ -7,20 +7,34 @@
 
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-import ChineseHero from "../components/pages/chinese/ChineseHero.astro";
+import LanguageHero from "../components/sections/LanguageHero.astro";
 import ChineseWhy from "../components/pages/chinese/ChineseWhy.astro";
 import ChineseFormat from "../components/pages/chinese/ChineseFormat.astro";
 
 import Process from "../components/sections/Process.astro";
 import PriceRates from "../components/pages/price/PriceRates.astro";
-import Reviews from "../components/Reviews.astro";
+import Reviews from "../components/sections/Reviews.astro";
 import Faq from "../components/sections/Faq.astro";
 
 const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title="Китайська" bodyClass="page-chinese">
-  <ChineseHero base={base} />
+  <LanguageHero
+    base={base}
+    titleParts={[
+      { text: "ПОЧНИ" },
+      { br: true },
+      { text: "ВИВЧАТИ" },
+      { br: true },
+      { text: "МОВУ" },
+      { br: true },
+      { text: "ДЛЯ НОВИХ" },
+      { br: true },
+      { text: "МОЖЛИВОСТЕЙ", accent: true },
+    ]}
+    subtitle="Онлайн та офлайн у Києві • індивідуальний план • чітка структура уроків"
+  />
 
   <ChineseWhy />
   <Process />

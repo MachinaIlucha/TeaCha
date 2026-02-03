@@ -1,13 +1,6 @@
-const qs = (sel, root = document) => root.querySelector(sel);
-
-function escapeHtml(str) {
-  return String(str ?? "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
+import { qs } from "../core/dom.js";
+import { escapeHtml } from "../core/escape.js";
+import { prefersReducedMotion } from "../core/motion.js";
 
 async function predecode(src) {
   if (!src) return;
@@ -273,9 +266,7 @@ export function initReviews() {
   predecode(next0?.img);
 
   // ---- AUTOPLAY (stable) ----
-  const reduceMotion = window.matchMedia?.(
-    "(prefers-reduced-motion: reduce)",
-  )?.matches;
+  const reduceMotion = prefersReducedMotion();
 
   const AUTOPLAY_MS = 5000;
 

@@ -24,45 +24,59 @@ const { base = "/" } = Astro.props;
         </div>
       </header>
 
-      <form
-        class="startLead__form"
-        id="start-lead-form"
-        action="#"
-        method="post"
-        data-reveal-item="2"
-      >
-        <div class="startLead__fields" data-reveal-item="3">
-          <input
-            class="leadField__input"
-            name="name"
-            type="text"
-            placeholder="ІМʼЯ"
-            autocomplete="name"
-            required
-          />
+      <div class="startLead__formWrap">
+        <form
+          class="startLead__form"
+          id="start-lead-form"
+          action="#"
+          method="post"
+          data-reveal-item="2"
+        >
+          <p class="startLead__formTitle">Напиши нам</p>
 
-          <input
-            class="leadField__input"
-            name="contact"
-            type="text"
-            placeholder="ТЕЛЕФОН АБО НІК TELEGRAM"
-            autocomplete="tel"
-            required
-          />
-        </div>
+          <div class="startLead__fields" data-reveal-item="3">
+            <input
+              class="leadField__input"
+              name="name"
+              type="text"
+              placeholder="ІМ'Я"
+              autocomplete="name"
+              required
+            />
 
-        <div class="startLead__consent" data-reveal-item="4">
-          <PrivacyConsent className="price-consent--dark" />
-        </div>
-
-        <div class="startLead__cta" data-reveal-item="5">
-          <div class="startLead__ctaInner">
-            <button class="btn btn--startLead" type="submit">
-              ЗАПИСАТИСЯ НА ПРОБНИЙ УРОК
-            </button>
+            <input
+              class="leadField__input"
+              name="contact"
+              type="text"
+              placeholder="ТЕЛЕФОН АБО НІК TELEGRAM"
+              autocomplete="tel"
+              required
+            />
           </div>
+
+          <div class="startLead__cta" data-reveal-item="4">
+            <div class="startLead__ctaInner">
+              <button class="btn btn--startLead" type="submit">
+                ЗАПИСАТИСЯ НА ПРОБНИЙ УРОК
+              </button>
+            </div>
+          </div>
+
+          <div class="startLead__consent" data-reveal-item="5">
+            <PrivacyConsent className="price-consent--dark" />
+          </div>
+        </form>
+
+        <div class="startLead__drops startLead__drops--back" aria-hidden="true">
+          <div class="startLead__drop startLead__drop--1"></div>
+          <div class="startLead__drop startLead__drop--3"></div>
         </div>
-      </form>
+
+        <div class="startLead__drops startLead__drops--front" aria-hidden="true">
+          <div class="startLead__drop startLead__drop--4"></div>
+          <div class="startLead__drop startLead__drop--2"></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
