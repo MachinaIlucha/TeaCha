@@ -13,7 +13,9 @@ const pathname = Astro.url.pathname;
 const isHome = pathname === "/";
 
 // ✅ по умолчанию reveal включен
-const { reveal = true } = Astro.props;
+const { reveal = true, bodyClass = "" } = Astro.props;
+
+const bodyClassName = [bodyClass, isHome ? "page--home" : ""].filter(Boolean).join(" ");
 
 const base = import.meta.env.BASE_URL;
 ---
@@ -44,7 +46,7 @@ const base = import.meta.env.BASE_URL;
     />
   </head>
 
-  <body {...(!reveal ? { "data-reveal-off": "" } : {})}>
+  <body class={bodyClassName} {...(!reveal ? { "data-reveal-off": "" } : {})}>
     <Header />
 
     <main>

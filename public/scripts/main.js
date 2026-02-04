@@ -22,6 +22,7 @@ import "./ui/reveal.js";
 import { initHeroLoadReveal } from "./ui/hero-load-reveal.js";
 import { initFaq } from "./features/faq.js";
 import { initStartLead } from "./lead/startLead.js";
+import { initFooterLead } from "./lead/footerLead.js";
 import { initLeadDock } from "./features/leadDock.js";
 
 const boot = () => {
@@ -32,6 +33,7 @@ const boot = () => {
   initPrices();
   initMarquee();
   initStartLead();
+  initFooterLead();
   initLeadDock();
   initFactsReveal();
   initProcessReveal();

@@ -1,0 +1,149 @@
+/*!
+ * TeaCha website
+ * Section shell (A/B backgrounds + textures)
+ * © 2026. All rights reserved.
+ */
+
+.sectionShell {
+  position: relative;
+  isolation: isolate;
+  z-index: 0;
+
+  background-color: var(--section-a-bg);
+  --section-bg: var(--section-a-bg);
+  --bg: var(--section-a-bg);
+}
+
+.sectionShell.section--a {
+  background-color: var(--section-a-bg);
+  --section-bg: var(--section-a-bg);
+  --bg: var(--section-a-bg);
+}
+
+.sectionShell.section--b {
+  background-color: var(--section-b1-bg);
+  --section-bg: var(--section-b1-bg);
+  --bg: var(--section-b1-bg);
+
+  box-shadow: none;
+}
+
+.sectionShell.section--b::before,
+.sectionShell.section--b::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.sectionShell.section--b::before {
+  background:
+    radial-gradient(
+      120% 90% at 12% 0%,
+      rgba(255, 255, 255, 0.35),
+      rgba(255, 255, 255, 0) 58%
+    ),
+    radial-gradient(
+      120% 90% at 88% 100%,
+      rgba(0, 0, 0, 0.03),
+      rgba(0, 0, 0, 0) 58%
+    );
+  opacity: 0.35;
+}
+
+.sectionShell.section--b::after {
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      var(--section-b1-ink) 0,
+      var(--section-b1-ink) 1px,
+      transparent 1px,
+      transparent 6px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(43, 46, 68, 0.085) 0,
+      rgba(43, 46, 68, 0.085) 1px,
+      transparent 1px,
+      transparent 12px
+    );
+  opacity: 0.9;
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(0, 0, 0, 1) 18%,
+    rgba(0, 0, 0, 1) 82%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(0, 0, 0, 1) 18%,
+    rgba(0, 0, 0, 1) 82%,
+    transparent 100%
+  );
+}
+
+.sectionShell.section--b.section--ink {
+  background-color: var(--section-b2-bg);
+  --section-bg: var(--section-b2-bg);
+  --bg: var(--section-b2-bg);
+
+  color: var(--section-b2-text);
+  --text: var(--section-b2-text);
+  --color-text: var(--section-b2-text);
+  --muted: var(--section-b2-muted);
+  --color-soft: var(--section-b2-soft);
+
+  --handnote-color: color-mix(in srgb, var(--section-b2-text) 70%, var(--accent) 30%);
+  --handnote-line: color-mix(in srgb, var(--accent) 42%, transparent);
+  --marker-color: color-mix(in srgb, var(--accent) 48%, transparent);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.sectionShell.section--b.section--ink::before {
+  background:
+    radial-gradient(
+      120% 90% at 18% 0%,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0) 60%
+    ),
+    radial-gradient(
+      120% 90% at 82% 100%,
+      rgba(0, 0, 0, 0.4),
+      rgba(0, 0, 0, 0) 60%
+    );
+  opacity: 0.9;
+}
+
+.sectionShell.section--b.section--ink::after {
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.04) 0,
+      rgba(255, 255, 255, 0.04) 1px,
+      transparent 1px,
+      transparent 7px
+    );
+  opacity: 0.65;
+}
+
+.sectionShell.section--photo {
+  background-color: transparent;
+  --section-bg: transparent;
+  --bg: transparent;
+  box-shadow: none;
+
+  --marker-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  --handnote-color: color-mix(in srgb, var(--white) 88%, transparent);
+  --handnote-line: color-mix(in srgb, var(--white) 65%, transparent);
+}
+
+.sectionShell.section--photo::before,
+.sectionShell.section--photo::after {
+  opacity: 0;
+}

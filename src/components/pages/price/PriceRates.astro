@@ -3,17 +3,25 @@
  * TeaCha website
  * © 2026. All rights reserved.
  */
+const { className = "" } = Astro.props;
 ---
 
-<section class="priceRates" id="prices" data-prices>
+<section class={`priceRates ${className}`} id="prices" data-prices>
   <div class="container priceRates__container">
     <div class="priceRates__inner">
       <p class="priceRates__hint" data-price-item="1">
         Наведи на ціну та натисни, щоб записатися
       </p>
 
-      <header class="sectionTitle sectionTitle--center sectionTitle--accentBottom" data-price-item="2">
-        <h2 class="sectionTitle__line sectionTitle__line--a">ВАРТІСТЬ</h2>
+      <header
+        class="sectionTitle sectionTitle--center sectionTitle--accentBottom sectionTitle--stamped"
+        data-price-item="2"
+      >
+        <span class="brandStamp" aria-hidden="true"></span>
+        <span class="handNote" aria-hidden="true">note</span>
+        <h2 class="sectionTitle__line sectionTitle__line--a">
+          <span class="marker">ВАРТІСТЬ</span>
+        </h2>
         <div class="sectionTitle__line sectionTitle__line--b">[ НАВЧАННЯ ]</div>
       </header>
 

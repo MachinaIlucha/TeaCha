@@ -28,10 +28,11 @@ const {
       wide: true,
     },
   ] satisfies FactItem[],
-} = Astro.props as { items?: FactItem[] };
+  className = "",
+} = Astro.props as { items?: FactItem[]; className?: string };
 ---
 
-<section class="facts" data-facts>
+<section class={`facts ${className}`} data-facts>
   <div class="facts__bg" aria-hidden="true"></div>
 
   <!-- ✅ используем общий container -->

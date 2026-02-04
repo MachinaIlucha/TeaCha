@@ -5,11 +5,12 @@
  * © 2026. All rights reserved.
  */
 
-const { base } = Astro.props;
+const { base, className = "" } = Astro.props;
 ---
 
-<section class="foundersSketch" id="teachers" data-reveal="load">
+<section class={`foundersSketch ${className}`} id="teachers" data-reveal="load">
   <div class="container">
+    <span class="foundersSketch__note handNote" aria-hidden="true">note</span>
     <!-- Decorative big word ONLY (no black title anymore), limited to container -->
     <div class="foundersSketch__bgWord" aria-hidden="true" data-reveal-item="1">ЗАСНОВНИЦІ</div>
 

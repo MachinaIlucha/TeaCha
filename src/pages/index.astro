@@ -18,12 +18,12 @@ const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout>
-  <HomeHero />
+  <HomeHero className="sectionShell section--a" />
 
-  <Teachers base={base} />
-  <Facts ... />
-  <Process />
-  <PriceRates base={base} />
-  <Reviews />
-  <Faq />
+  <Teachers base={base} className="sectionShell section--b" />
+  <Facts className="sectionShell section--a" />
+  <Process className="sectionShell section--b" />
+  <PriceRates base={base} className="sectionShell section--a" />
+  <Reviews className="sectionShell section--b section--ink" />
+  <Faq className="sectionShell section--a" />
 </BaseLayout>

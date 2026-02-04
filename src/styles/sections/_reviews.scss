@@ -41,6 +41,15 @@
   margin-top: 0 !important;
 }
 
+/* ensure "ВІД" stays visible above the brush */
+.r2 .sectionTitle__line--a {
+  color: var(--section-b2-text);
+}
+
+.r2 .sectionTitle__line--a .marker {
+  z-index: 1;
+}
+
 /* Nav */
 .r2HeadNav {
   display: inline-flex;
@@ -117,14 +126,20 @@
 /* ---------- Card ---------- */
 
 .r2Card {
-  background: var(--color-surface);
+  background: transparent;
+  border: 0;
   border-radius: var(--radius-xl);
   overflow: hidden;
-  box-shadow: var(--shadow-1);
+  box-shadow: none;
 
   display: grid;
   grid-template-columns: 1fr; /* mobile */
   min-height: 0;
+
+  /* keep ink readable even inside dark section shells */
+  --r2-ink: rgba(255, 255, 255, 0.92);
+  --r2-muted: rgba(255, 255, 255, 0.68);
+  color: var(--r2-ink);
 }
 
 /* ---------- Media ---------- */
@@ -136,7 +151,8 @@
   aspect-ratio: 3 / 4; /* mobile */
   width: 100%;
 
-  background: var(--color-soft);
+  background: transparent;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
 }
 
 /* media layers: ONLY opacity */
@@ -266,20 +282,21 @@
   margin: 0;
   font-size: 16px;
   line-height: 1.55;
-  color: color-mix(in srgb, var(--text) 92%, black 0%);
+  color: var(--r2-ink);
 }
 
 .r2Row strong {
   font-weight: 900;
   font-size: 20px;
   line-height: 1.35;
+  color: rgba(255, 230, 170, 0.92);
 }
 
 .r2Meta {
   display: inline-block;
   margin: 0 8px 0 6px;
   font-weight: 800;
-  color: color-mix(in srgb, var(--text) 65%, transparent);
+  color: var(--r2-muted);
 }
 
 .r2Row .r2Meta + span {
@@ -294,32 +311,45 @@
   box-sizing: border-box;
 
   position: relative;
-  border-radius: var(--radius-lg);
+  border-radius: 0;
+  background: transparent;
+  color: var(--r2-ink);
 
-  /* строго бренд */
-  background: var(--color-brand);
-  color: var(--white);
-
-  padding: 22px 22px 22px 58px;
-  box-shadow: 6px 6px 0 color-mix(in srgb, var(--red) 75%, transparent);
+  padding: 8px 0 18px 18px;
+  background-image: url("/img/quote.png");
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-size: 260px 10px;
+  box-shadow: none;
 }
 
 .r2Quote__mark {
   position: absolute;
-  left: 18px;
-  top: 18px;
-  font-size: 44px;
-  line-height: 1;
-  font-weight: 900;
-  color: color-mix(in srgb, var(--red) 60%, white 40%);
+  left: -2px;
+  top: -30px;
+  width: 38px;
+  height: 30px;
+  background: color-mix(in srgb, var(--red) 85%, #2b2e44 15%);
+  -webkit-mask: url("/img/quote-marks.png") center / contain no-repeat;
+  mask: url("/img/quote-marks.png") center / contain no-repeat;
+  font-size: 0;
+  line-height: 0;
+  opacity: 0.9;
 }
 
 .r2Quote__text {
   margin: 0;
   font-size: 15px;
   line-height: 1.6;
-  color: color-mix(in srgb, var(--white) 92%, transparent);
+  color: var(--r2-ink);
 }
+
+@supports not ((-webkit-mask: url("")) or (mask: url(""))) {
+  .r2Quote__mark {
+    background: url("/img/quote-marks.png") center / contain no-repeat;
+  }
+}
+
 
 /* ---------- Mobile overlay fix ---------- */
 
@@ -371,7 +401,7 @@
   }
 }
 
-/* ---------- Desktop (keep behavior) ---------- */
+  /* ---------- Desktop (keep behavior) ---------- */
 
 @media (min-width: 980px) {
   .r2Card {
@@ -445,7 +475,7 @@
   }
 
   .r2Quote {
-    box-shadow: 10px 10px 0 color-mix(in srgb, var(--red) 75%, transparent);
+    box-shadow: none;
   }
 
   .r2 > .container {

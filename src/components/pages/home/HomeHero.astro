@@ -5,16 +5,19 @@
  * © 2026. All rights reserved.
  */
 const base = import.meta.env.BASE_URL;
+const { className = "" } = Astro.props;
 ---
 
-<section class="hero" id="school" data-reveal="load">
+<section class={`hero ${className}`} id="school" data-reveal="load">
   <div class="container hero__grid">
     <div class="hero__left">
       <div class="hero__title" data-reveal-item="1">
         <div class="hero__titleLine">
           <span class="tea">TEA</span><span class="cha">CHA</span> -
         </div>
-        <div class="hero__titleLine">ДВІ КУЛЬТУРИ В ОДНОМУ ПРОСТОРІ</div>
+        <div class="hero__titleLine">
+          ДВІ <span class="marker">КУЛЬТУРИ</span> В ОДНОМУ ПРОСТОРІ
+        </div>
       </div>
 
       <p class="hero__subtitle hero__subtitle--big" data-reveal-item="2">

@@ -7,10 +7,12 @@
 
 .faq {
   padding: 56px 0 80px;
-  background: transparent;
+  background: var(--section-bg, transparent);
 
   &__head {
     margin-bottom: 28px;
+    position: relative;
+    padding-top: 18px;
   }
 
   /* corporate heading (if present) */

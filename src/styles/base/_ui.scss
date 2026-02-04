@@ -252,6 +252,7 @@
   --st-track: -0.03em;
 
   margin: 0 0 34px;
+  position: relative;
 }
 
 .sectionTitle--center {
@@ -311,6 +312,149 @@
 
   .sectionTitle--inline {
     display: grid;
+  }
+}
+
+/* =========================================
+   Brand accents (stamp + marker + notes)
+========================================= */
+
+.sectionTitle--stamped {
+  padding-top: 18px;
+}
+
+.sectionTitle--inline .handNote {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  margin-bottom: 0;
+  transform: translate(-50%, -120%) rotate(-2deg);
+}
+
+.brandStamp {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  background: var(--accent);
+  box-shadow: 0 8px 18px rgba(219, 31, 50, 0.28);
+
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, -50%) rotate(-10deg);
+  opacity: 0.95;
+  pointer-events: none;
+}
+
+.brandStamp::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 3px;
+  border: 1.5px solid rgba(255, 255, 255, 0.75);
+}
+
+.marker {
+  position: relative;
+  display: inline-block;
+  z-index: 0;
+}
+
+.marker::after {
+  content: "";
+  position: absolute;
+  left: -18%;
+  right: -18%;
+  top: 55%;
+  height: 3em;
+  background: color-mix(in srgb, #7A1E1E 82%, transparent);
+  -webkit-mask: url("/img/chinese-brush-stroke.png") center / 100% 100% no-repeat;
+  mask: url("/img/chinese-brush-stroke.png") center / 100% 100% no-repeat;
+  border-radius: 0;
+  transform: translateY(-50%) rotate(-1.5deg);
+  z-index: -1;
+}
+
+.marker--round::after {
+  -webkit-mask: url("/img/chinese-brush-stroke-round.png") center / 100% 100% no-repeat;
+  mask: url("/img/chinese-brush-stroke-round.png") center / 100% 100% no-repeat;
+}
+
+/* Reviews-only: circular brush centered behind "ВІД" */
+.r2 .marker--round::after {
+  width: 3em;
+  height: 3em;
+  left: -28%;
+  right: auto;
+}
+
+@supports not ((-webkit-mask: url("")) or (mask: url(""))) {
+  .marker::after {
+    background: url("/img/chinese-brush-stroke.png") center / 100% 100% no-repeat;
+  }
+}
+
+.handNote {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-style: italic;
+
+  color: var(--handnote-color, var(--accent));
+  margin-bottom: 10px;
+  transform: rotate(-2deg);
+}
+
+.handNote::after {
+  content: "";
+  width: 34px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(
+    --handnote-line,
+    color-mix(in srgb, var(--accent) 30%, transparent)
+  );
+  transform: rotate(-4deg);
+}
+
+.handNote--light {
+  --handnote-color: color-mix(in srgb, var(--white) 90%, transparent);
+  --handnote-line: color-mix(in srgb, var(--white) 65%, transparent);
+}
+
+/* =========================================
+   Micro stamp for cards
+========================================= */
+
+:where(.facts__card, .priceCard, .r2Card) {
+  position: relative;
+}
+
+:where(.facts__card, .priceCard, .r2Card)::after {
+  content: "✿";
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-size: 16px;
+  line-height: 1;
+  color: var(--accent);
+  opacity: 0.18;
+  transform: rotate(-12deg) scale(0.9);
+  transition:
+    opacity var(--dur-1) var(--ease),
+    transform var(--dur-1) var(--ease);
+  pointer-events: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  :where(.facts__card, .priceCard, .r2Card):hover::after {
+    opacity: 0.55;
+    transform: rotate(-12deg) scale(1);
   }
 }
 

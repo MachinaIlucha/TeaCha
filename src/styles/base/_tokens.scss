@@ -16,6 +16,15 @@
   --color-border: #d9dce6;
   --color-soft: #eef0f4;
 
+  /* Section shells */
+  --section-a-bg: var(--color-bg);
+  --section-b1-bg: #eef0f4;
+  --section-b1-ink: rgba(43, 46, 68, 0.06);
+  --section-b2-bg: #23263a;
+  --section-b2-text: #f7f7fb;
+  --section-b2-muted: rgba(247, 247, 251, 0.7);
+  --section-b2-soft: rgba(255, 255, 255, 0.08);
+
   /* Shadows */
   --shadow-1: 0 10px 30px rgba(0, 0, 0, 0.08);
   --shadow-2: 0 18px 55px rgba(0, 0, 0, 0.14);

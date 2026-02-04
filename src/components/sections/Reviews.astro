@@ -11,10 +11,12 @@ const {
   titleTop = "ВІД",
   titleBottom = "ГУКИ",
   accent = "bottom", // "bottom" | "top"
+  className = "",
 } = Astro.props as {
   titleTop?: string;
   titleBottom?: string;
   accent?: "bottom" | "top";
+  className?: string;
 };
 
 const accentClass = accent === "top" ? "sectionTitle--accentTop" : "";
@@ -139,18 +141,20 @@ const reviews: Review[] = [
 const first = reviews[0];
 ---
 
-<section class="r2" id="reviews" data-r2 data-reveal="scroll" tabindex="0">
+<section class={`r2 ${className}`} id="reviews" data-r2 data-reveal="scroll" tabindex="0">
   <div class="container" data-reveal-item="1">
     <div class="r2__head" data-reveal-item="2">
       <header
-        class={`sectionTitle sectionTitle--center sectionTitle--inline ${accentClass}`}
+        class={`sectionTitle sectionTitle--center sectionTitle--inline sectionTitle--stamped ${accentClass}`}
         data-reveal="scroll"
       >
+        <span class="brandStamp" aria-hidden="true"></span>
+        <span class="handNote" aria-hidden="true">case</span>
         <h2
           class="sectionTitle__line sectionTitle__line--a"
           data-reveal-item="1"
         >
-          {titleTop}
+          <span class="marker marker--round">{titleTop}</span>
         </h2>
         <div
           class="sectionTitle__line sectionTitle__line--b"

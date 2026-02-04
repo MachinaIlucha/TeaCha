@@ -14,7 +14,7 @@
   /* Local aliases from tokens */
   --fs-ink: var(--color-brand);
   --fs-accent: var(--accent);
-  --fs-bg: var(--color-bg);
+  --fs-bg: var(--section-bg, var(--color-bg));
   --fs-surface: var(--color-surface);
   --fs-border: var(--color-border);
 
@@ -34,6 +34,15 @@
 
 .foundersSketch .container {
   position: relative;
+}
+
+/* handwritten note */
+.foundersSketch__note {
+  position: absolute;
+  top: 14px;
+  left: var(--gutter);
+  z-index: 2;
+  pointer-events: none;
 }
 
 /* =========================

@@ -1,13 +1,15 @@
 ---
 import { faqHome, faqCorporate } from "../../data/faqData.js";
 
+const { className = "" } = Astro.props;
+
 const path = Astro.url?.pathname ?? "/";
 const isCorporate = path.startsWith("/corporate");
 
 const items = isCorporate ? faqCorporate : faqHome;
 
 // ✅ всегда cards
-const sectionClass = "faq faq--cards";
+const sectionClass = `faq faq--cards ${className}`.trim();
 
 const mid = Math.ceil(items.length / 2);
 const left = items.slice(0, mid);
@@ -23,7 +25,9 @@ const right = items.slice(mid);
 >
   <div class="container">
     <div class="faq__head" data-reveal-item="1">
-      <h2 class="faq__mega">FAQ</h2>
+      <span class="brandStamp" aria-hidden="true"></span>
+      <span class="handNote" aria-hidden="true">note</span>
+      <h2 class="faq__mega"><span class="marker">FAQ</span></h2>
       <p class="faq__sub">
         Ми знаємо, як важливо мати чіткі відповіді на всі запитання перед
         початком навчання. У цьому розділі ви знайдете всю необхідну інформацію

@@ -7,6 +7,9 @@
 .hero {
   position: relative;
   padding: 28px 0 20px;
+  isolation: isolate;
+
+  --hero-bg: url("/img/hero-main-background.png");
 
   /* локальные токены */
   --ease-hero: var(--ease, cubic-bezier(0.2, 0.8, 0.2, 1));
@@ -33,6 +36,32 @@
     display: grid;
     grid-template-columns: 1fr;
     align-items: start;
+  }
+
+  /* =======================
+     BACKGROUND IMAGE + GRAIN
+     ======================= */
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background: var(--hero-bg) center / cover no-repeat;
+    filter: blur(10px);
+    transform: scale(1.03);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.28;
+    mix-blend-mode: multiply;
+    background-image: url("/img/noise-grain.png");
+    background-size: 220px 220px;
+    background-repeat: repeat;
   }
 
   &__left {

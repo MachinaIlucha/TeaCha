@@ -6,11 +6,11 @@
 
 import PrivacyConsent from "../forms/PrivacyConsent.astro";
 
-const { base = "/" } = Astro.props;
+const { base = "/", className = "" } = Astro.props;
 ---
 
 <section
-  class="startLead"
+  class={`startLead ${className}`}
   id="start-lead"
   data-reveal="scroll"
   style={`--startlead-bg: url(${base}img/books-on-shelf.png);`}
@@ -32,50 +32,46 @@ const { base = "/" } = Astro.props;
           method="post"
           data-reveal-item="2"
         >
-          <p class="startLead__formTitle">Напиши нам</p>
-
           <div class="startLead__fields" data-reveal-item="3">
-            <input
-              class="leadField__input"
-              name="name"
-              type="text"
-              placeholder="ІМ'Я"
-              autocomplete="name"
-              required
-            />
+            <label class="startLeadField">
+              <span class="startLeadField__label">ІМ'Я</span>
+              <input
+                class="startLeadField__input"
+                name="name"
+                type="text"
+                autocomplete="name"
+                required
+              />
+            </label>
 
-            <input
-              class="leadField__input"
-              name="contact"
-              type="text"
-              placeholder="ТЕЛЕФОН АБО НІК TELEGRAM"
-              autocomplete="tel"
-              required
-            />
+            <label class="startLeadField">
+              <span class="startLeadField__label">ТЕЛЕФОН АБО НІК TELEGRAM</span>
+              <input
+                class="startLeadField__input"
+                name="contact"
+                type="text"
+                autocomplete="tel"
+                required
+              />
+            </label>
           </div>
 
-          <div class="startLead__cta" data-reveal-item="4">
-            <div class="startLead__ctaInner">
-              <button class="btn btn--startLead" type="submit">
-                ЗАПИСАТИСЯ НА ПРОБНИЙ УРОК
-              </button>
-            </div>
+          <div class="startLead__consent" data-reveal-item="4">
+            <PrivacyConsent className="consent--dark" />
           </div>
 
-          <div class="startLead__consent" data-reveal-item="5">
-            <PrivacyConsent className="price-consent--dark" />
+          <div class="startLead__cta" data-reveal-item="5">
+            <button class="startLead__submit" type="submit">
+              ЗАПИСАТИСЯ НА ПРОБНИЙ УРОК
+            </button>
           </div>
         </form>
-
-        <div class="startLead__drops startLead__drops--back" aria-hidden="true">
-          <div class="startLead__drop startLead__drop--1"></div>
-          <div class="startLead__drop startLead__drop--3"></div>
-        </div>
-
-        <div class="startLead__drops startLead__drops--front" aria-hidden="true">
-          <div class="startLead__drop startLead__drop--4"></div>
-          <div class="startLead__drop startLead__drop--2"></div>
-        </div>
+        <img
+          class="startLead__note"
+          src={`${base}img/messenger-sticker.png`}
+          alt="Наклейка: напишемо в месенджер"
+          loading="lazy"
+        />
       </div>
     </div>
   </div>

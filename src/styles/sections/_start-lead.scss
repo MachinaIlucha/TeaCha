@@ -1,15 +1,9 @@
-/* StartLead (mobile-first) */
+/* StartLead (redesigned form) */
 .startLead {
   position: relative;
   isolation: isolate;
   padding-block: var(--section-py-compact);
-
-  --sl-text: #fff;
-  --sl-text-dim: #fff;
-  --sl-card-bg: #1f1f1f;
-  --sl-glass: rgba(31, 31, 31, 0.68);
-  --sl-glass-border: rgba(255, 255, 255, 0.18);
-  --sl-glass-shadow: 20px 20px 40px -6px rgba(0, 0, 0, 0.2);
+  color: #fff;
 }
 
 .startLead::before {
@@ -31,304 +25,126 @@
 .startLead__grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 22px;
+  gap: 28px;
   align-items: start;
 }
 
-/* Если нужно фиксированно слева + без нижнего отступа */
 .startLead__copy .sectionTitle {
   margin: 0;
   text-align: left;
 }
 
-/* ===== SectionTitle (через переменные компонента) ===== */
 .startLead .sectionTitle--startLead {
-  /* Цвета берём из локальных токенов секции */
-  --st-a: var(--sl-text-dim);
-  --st-b: var(--sl-text);
-  --st-track: normal;
+  --st-a: rgba(255, 255, 255, 0.85);
+  --st-b: #ffffff;
+  --st-track: -0.02em;
   --st-lh: 0.95;
 }
 
-/* То, чего нет в компоненте */
 .startLead .sectionTitle--startLead .sectionTitle__line {
-  text-transform: none; /* глобально uppercase */
-  text-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+  text-transform: none;
+  text-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
 }
 
-/* Разные размеры строк (если реально нужно) */
-.startLead .sectionTitle--startLead .sectionTitle__line--a {
-  font-size: clamp(44px, 5.6vw, 86px);
-}
-
-.startLead .sectionTitle--startLead .sectionTitle__line--b {
-  font-size: clamp(36px, 4.6vw, 92px);
-  white-space: nowrap;
-  letter-spacing: -0.02em;
-  margin-top: 10px; /* у глобалки есть, но пусть будет явно */
-}
-
-@media (max-width: 1180px) {
-  .startLead .sectionTitle--startLead .sectionTitle__line--b {
-    letter-spacing: -0.03em;
-  }
-}
-
-/* ===== Glassmorphic form ===== */
 .startLead__formWrap {
   position: relative;
-  display: inline-flex;
-  justify-self: center;
-  width: 350px;
-  max-width: 350px;
+  width: min(511px, 100%);
+  margin-inline: auto;
 }
 
 .startLead__form {
-  background: var(--sl-glass);
-  padding: 2em;
-  min-height: 260px;
-  border-radius: 20px;
-  border-left: 1px solid var(--sl-glass-border);
-  border-top: 1px solid var(--sl-glass-border);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: var(--sl-glass-shadow);
-  text-align: center;
-  position: relative;
-  transition: all 0.5s ease;
-  font-family: "Montserrat", sans-serif;
-  z-index: 1;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Override global reveal transition for the form (keep reveal opacity but speed transform) */
-html.js .startLead .startLead__form[data-reveal-item] {
-  transition: opacity 650ms ease, transform 0.5s ease !important;
-}
-
-.startLead__formTitle {
-  font-weight: 500;
-  color: #fff;
-  opacity: 1;
-  font-size: 1.2rem;
-  margin-top: 0;
-  margin-bottom: 32px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(180deg, #2b2b2b 0%, #242424 100%);
+  border-radius: 24px;
+  padding: 40px;
+  display: grid;
+  gap: 18px;
+  min-height: 375px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
 }
 
 .startLead__fields {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 0;
+  display: grid;
+  gap: 18px;
 }
 
-.leadField__input {
+.startLeadField {
+  display: grid;
+  gap: 8px;
+}
+
+.startLeadField__label {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.startLeadField__input {
+  width: 100%;
   background: transparent;
-  width: 290px;
-  padding: 0.75em 0.9em;
-  margin-bottom: 1.1em;
-  border: none;
-  border-left: 1px solid var(--sl-glass-border);
-  border-top: 1px solid var(--sl-glass-border);
-  border-radius: 5000px;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  box-shadow: 4px 4px 60px rgba(0, 0, 0, 0.2);
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.65);
   color: #fff;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 500;
-  font-size: 1rem;
-  letter-spacing: normal;
-  text-transform: none;
-  transition: all 0.2s ease-in-out;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
-  }
-
-  &:focus {
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
-  }
+  font-size: 14px;
+  padding: 4px 0 8px;
+  outline: none;
 }
 
-.startLead .startLead__formWrap.is-form-hovered form.startLead__form {
-  transform: scale(1.02);
+.startLeadField__input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
 }
 
-.startLead__formWrap.is-form-hovered .startLead__drop--1 {
-  transform: translate(-6px, -6px);
+.startLeadField__input:focus {
+  border-bottom-color: rgba(255, 255, 255, 0.95);
 }
 
-.startLead__formWrap.is-form-hovered .startLead__drop--2 {
-  transform: translate(6px, 6px);
+.startLead__consent {
+  margin-top: 6px;
 }
 
-.startLead__formWrap.is-form-hovered .startLead__drop--3 {
-  transform: translateY(-50%) translate(8px, 6px);
-}
-
-.startLead__formWrap.is-form-hovered .startLead__drop--4 {
-  transform: translate(8px, -8px);
-}
-
-/* Consent */
-.startLead .price-consent--dark {
-  font-size: 12px;
-  line-height: 1.25;
-  color: #ddd;
-  justify-content: center;
-  text-align: center;
-  margin-top: 14px;
-  gap: 6px;
-}
-
-.startLead .price-consent--dark a {
-  text-decoration: none;
-  color: #ddd;
-}
-
-.startLead .price-consent--dark a:hover {
-  text-shadow: 2px 2px 6px #00000040;
-}
-
-.startLead .price-consent--dark a:active {
-  text-shadow: none;
-}
-
-/* ===== CTA ===== */
 .startLead__cta {
-  display: flex;
-  justify-content: center;
-  margin-top: 0;
+  margin-top: 6px;
 }
 
-.startLead__ctaInner {
-  display: inline-flex;
-  align-items: center;
-  max-width: 100%;
-}
-
-.startLead .btn--startLead {
-  margin-top: 10px;
-  width: 190px;
-  min-width: 0;
-  height: auto;
-  padding: 0.7em 0.9em;
-  font-size: 0.75rem;
-  font-weight: 500;
-  line-height: 1.15;
-  letter-spacing: normal;
-  text-transform: none;
-  white-space: normal;
-  text-align: center;
-
-  background: transparent;
-  color: #fff;
-  border: none;
-  border-left: 1px solid var(--sl-glass-border);
-  border-top: 1px solid var(--sl-glass-border);
-  border-radius: 5000px;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  box-shadow: 4px 4px 60px rgba(0, 0, 0, 0.2);
-  transition: all 0.2s ease-in-out;
-  transform: none;
-}
-
-.startLead .btn--startLead:hover {
+.startLead__submit {
+  width: 100%;
+  border: 2px solid #f4f4f4;
+  border-radius: 999px;
+  background: #f4f4f4;
+  color: #141414;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  padding: 14px 18px;
+  font-size: 14px;
   cursor: pointer;
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
-  transform: none;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.25);
+  transition: transform 0.15s ease, filter 0.15s ease, background-color 0.15s ease, color 0.15s ease;
 }
 
-.startLead .btn--startLead:active {
-  background: rgba(255, 255, 255, 0.2);
-  transform: none;
+@media (hover: hover) and (pointer: fine) {
+  .startLead__submit:hover {
+    transform: translateY(-1px);
+    filter: brightness(0.98);
+    background: transparent;
+    color: #f4f4f4;
+  }
 }
 
-.startLead .btn--startLead:focus-visible {
-  outline: none;
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 4px 4px 60px 8px rgba(0, 0, 0, 0.2);
+.startLead__submit:active {
+  transform: translateY(0);
+  filter: brightness(0.96);
 }
 
-.startLead__drops {
+.startLead__note {
   position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.startLead__drops--back {
-  z-index: 0;
-}
-
-.startLead__drops--front {
-  z-index: 2;
-}
-
-.startLead__drop {
-  background: var(--sl-glass);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-radius: 10px;
-  border-left: 1px solid var(--sl-glass-border);
-  border-top: 1px solid var(--sl-glass-border);
-  box-shadow: 10px 10px 60px -8px rgba(0, 0, 0, 0.2);
-  position: absolute;
-  transition: all 0.5s ease;
-}
-
-.startLead__drop--1 {
-  height: 60px;
-  width: 60px;
-  top: -10px;
-  left: -25px;
-}
-
-.startLead__drop--2 {
-  height: 60px;
-  width: 60px;
-  bottom: -26px;
-  right: -25px;
-}
-
-.startLead__drop--3 {
-  height: 80px;
-  width: 80px;
-  top: 52%;
-  right: -35px;
-  transform: translateY(-50%);
-}
-
-.startLead__drop--4 {
-  height: 90px;
-  width: 90px;
-  top: -40px;
-  right: -30px;
-}
-
-.startLead ::placeholder {
-  font-family: "Montserrat", sans-serif;
-  font-weight: 400;
-  color: #fff;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-}
-
-.startLead a,
-.startLead input:focus,
-.startLead select:focus,
-.startLead textarea:focus,
-.startLead button:focus {
-  outline: none;
+  right: -4px;
+  bottom: -12px;
+  width: min(150px, 46%);
+  height: auto;
+  transform: rotate(-6deg);
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.25));
 }
 
 /* Desktop */
@@ -340,6 +156,7 @@ html.js .startLead .startLead__form[data-reveal-item] {
   .startLead__grid {
     grid-template-columns: 1fr auto;
     gap: 46px;
+    align-items: center;
   }
 
   .startLead__copy {
@@ -348,65 +165,7 @@ html.js .startLead .startLead__form[data-reveal-item] {
 
   .startLead__formWrap {
     justify-self: end;
-    width: 420px;
-    max-width: 420px;
-  }
-
-  .startLead__form {
-    padding: 2.4em;
-    min-height: 300px;
-  }
-
-  .startLead__formTitle {
-    font-size: 1.4rem;
-    margin-bottom: 48px;
-  }
-
-  .leadField__input {
-    width: 320px;
-    padding: 0.85em 1em;
-    margin-bottom: 1.4em;
-  }
-
-  .startLead .btn--startLead {
-    width: 270px;
-    height: 50px;
-    margin-top: 30px;
-    padding: 0.75em 0.95em;
-    font-size: 0.8rem;
-  }
-
-  .startLead__drop--1 {
-    height: 80px;
-    width: 80px;
-    top: -30px;
-    left: -30px;
-  }
-
-  .startLead__drop--2 {
-    height: 78px;
-    width: 78px;
-    bottom: -26px;
-    right: -10px;
-  }
-
-  .startLead__drop--3 {
-    height: 112px;
-    width: 104px;
-    top: 52%;
-    right: -46px;
-    transform: translateY(-50%);
-  }
-
-  .startLead__drop--4 {
-    height: 120px;
-    width: 120px;
-    top: -50px;
-    right: -45px;
-  }
-
-  .startLead .price-consent--dark {
-    margin-top: 20px;
+    width: 411px;
   }
 
   .startLead > .container {

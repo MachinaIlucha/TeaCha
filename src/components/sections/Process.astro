@@ -5,6 +5,7 @@ const {
   titleTop = "ПРОЦЕС",
   titleBottom = "НАВЧАННЯ",
   accent = "bottom", // "bottom" | "top"
+  className = "",
   steps = [
     { text: "Знайомство з <br/>вашим запитом" },
     { text: "Оцінка вашого рівня та <br/>підбір зручного формату навчання " },
@@ -17,19 +18,22 @@ const {
   titleTop?: string;
   titleBottom?: string;
   accent?: "bottom" | "top";
+  className?: string;
   steps?: ProcessStep[];
   footnote?: string;
 };
 ---
 
-<section class="process" data-process>
+<section class={`process ${className}`} data-process>
   <div class="container">
     <header
-      class={`sectionTitle sectionTitle--center ${
+      class={`sectionTitle sectionTitle--center sectionTitle--stamped ${
         accent === "top" ? "sectionTitle--accentTop" : "sectionTitle--accentBottom"
       }`}
       data-reveal="scroll"
     >
+      <span class="brandStamp" aria-hidden="true"></span>
+      <span class="handNote" aria-hidden="true">tip</span>
       <h2 class="sectionTitle__line sectionTitle__line--a" data-reveal-item="1">
         {titleTop}
       </h2>
