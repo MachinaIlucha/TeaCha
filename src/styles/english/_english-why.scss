@@ -10,11 +10,6 @@
   --why-gap: 14px;
 }
 
-/* remove side paddings from container only */
-.enWhy > .container {
-  padding-inline: 0;
-}
-
 /* grid */
 .enGrid {
   display: grid;
@@ -23,13 +18,13 @@
   margin-top: 18px;
 }
 
-@media (min-width: 620px) {
+@media (min-width: 40rem) {
   .enGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (min-width: 980px) {
+@media (min-width: 64rem) {
   .enGrid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 18px;
@@ -117,7 +112,7 @@
 }
 
 /* desktop sizes */
-@media (min-width: 980px) {
+@media (min-width: 64rem) {
   .enWhy {
     --why-pad: 22px;
     --why-icon: 44px;
@@ -126,16 +121,6 @@
 
   .enWhy .enCard {
     min-height: 140px;
-  }
-
-  .cnWhy .cnCard__text {
-    font-size: 16px;
-
-    /* ✅ правильный синтаксис: calc внутри min */
-    width: min(
-      34ch,
-      calc(100% - (var(--cn-pad) * 2) - (var(--cn-icon) + var(--cn-gap)) * 2)
-    );
   }
 }
 

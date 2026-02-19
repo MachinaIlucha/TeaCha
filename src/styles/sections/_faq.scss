@@ -6,11 +6,12 @@
 
 
 .faq {
-  padding: 56px 0 80px;
+  --faq-py: 40px;
+  padding-block: var(--faq-py);
   background: var(--section-bg, transparent);
 
   &__head {
-    margin-bottom: 28px;
+    margin-bottom: 34px;
     position: relative;
     padding-top: 18px;
   }
@@ -37,8 +38,6 @@
      Cards Variant (pill)
   ========================= */
   &.faq--cards {
-    /* Section spacing like mock */
-    padding: 86px 0 96px;
     position: relative;
     overflow: hidden;
 
@@ -58,7 +57,6 @@
     /* Header style like mock (centered) */
     .faq__head {
       text-align: center;
-      margin-bottom: 46px;
     }
 
     .faq__mega {
@@ -110,7 +108,7 @@
     }
 
     /* Desktop: 2 columns */
-    @media (min-width: 980px) {
+    @media (min-width: 64rem) {
       .faq__grid {
         grid-template-columns: 1fr 1fr;
         align-items: start;
@@ -332,29 +330,3 @@
   }
 }
 
-/* ===== FAQ: fixed spacing (like Reviews) ===== */
-
-.faq {
-  --faq-py: 40px;
-  padding-block: var(--faq-py);
-}
-
-.faq__head {
-  margin-bottom: 34px;
-}
-
-/* вариант cards тоже не должен раздуваться */
-.faq.faq--cards {
-  padding-block: var(--faq-py);
-}
-
-.faq.faq--cards .faq__head {
-  margin-bottom: 34px;
-}
-
-/* если нужно убрать боковые паддинги контейнера только в FAQ (desktop) */
-@media (min-width: 980px) {
-  .faq > .container {
-    padding-inline: 0;
-  }
-}

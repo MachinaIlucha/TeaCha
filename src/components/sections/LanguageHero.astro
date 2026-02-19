@@ -19,6 +19,7 @@ const {
   titleParts = [],
   subtitle = "",
   ctaText = "ХОЧУ ПРОБНИЙ УРОК",
+  className = "",
   imgSrc,
   imgAlt = "Фото викладачів",
 } = Astro.props as {
@@ -26,14 +27,16 @@ const {
   titleParts?: TitlePart[];
   subtitle?: string;
   ctaText?: string;
+  className?: string;
   imgSrc?: string;
   imgAlt?: string;
 };
 
-const resolvedImg = imgSrc ?? `${base}img/hero-portrait.jpg`;
+const resolvedImg = imgSrc ?? `${base}img/TEACHA/90.jpg`;
+const sectionClass = ["hero", "hero--lang", className].filter(Boolean).join(" ");
 ---
 
-<section class="hero hero--lang" data-reveal="load">
+<section class={sectionClass} data-reveal="load">
   <div class="container hero__grid">
     <div class="hero__left">
       <div class="hero__title" data-reveal-item="1">
@@ -64,7 +67,6 @@ const resolvedImg = imgSrc ?? `${base}img/hero-portrait.jpg`;
 
     <div class="hero__right" data-reveal-item="4">
       <div class="heroPhoto">
-        <div class="heroPhoto__bg" aria-hidden="true"></div>
         <img class="heroPhoto__img" src={resolvedImg} alt={imgAlt} loading="lazy" />
       </div>
     </div>

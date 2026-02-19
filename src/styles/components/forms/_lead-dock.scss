@@ -3,7 +3,7 @@
  * © 2026. All rights reserved.
  *
  * LeadDock — fixed bottom CTA bar
- * Mobile-first, 1 breakpoint: 980px
+ * Mobile-first, 1 breakpoint: 64rem
  */
 
 :root {
@@ -30,7 +30,7 @@
   --leadDock-pad: var(--leadDock-h-mobile);
 }
 
-@media (min-width: 980px) {
+@media (min-width: 64rem) {
   :root {
     --leadDock-pad: var(--leadDock-h);
   }
@@ -155,7 +155,7 @@ body {
 /* =========================
    Desktop layout
 ========================= */
-@media (min-width: 980px) {
+@media (min-width: 64rem) {
   .leadDock {
     height: var(--leadDock-h);
 

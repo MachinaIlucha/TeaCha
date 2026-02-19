@@ -11,7 +11,7 @@
 }
 
 .cHero {
-  padding: 74px 0 44px;
+  padding: 56px 0 34px;
 }
 
 .cHero__grid {
@@ -90,7 +90,11 @@
   object-position: center;
 }
 
-@media (min-width: 980px) {
+@media (min-width: 64rem) {
+  .cHero {
+    padding: 74px 0 44px;
+  }
+
   .cHero__grid {
     grid-template-columns: 1.1fr 0.9fr;
     gap: 26px;
@@ -103,11 +107,5 @@
   }
   .cHero__photo {
     aspect-ratio: 4 / 5;
-  }
-}
-
-@media (max-width: 979px) {
-  .cHero {
-    padding: 56px 0 34px;
   }
 }

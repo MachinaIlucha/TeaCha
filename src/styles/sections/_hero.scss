@@ -6,10 +6,10 @@
 
 .hero {
   position: relative;
-  padding: 28px 0 20px;
+  padding: 28px 0 0;
   isolation: isolate;
 
-  --hero-bg: url("/img/hero-main-background.png");
+  --hero-bg: url("/img/TEACHA/42.jpg");
 
   /* локальные токены */
   --ease-hero: var(--ease, cubic-bezier(0.2, 0.8, 0.2, 1));
@@ -56,12 +56,7 @@
     position: absolute;
     inset: 0;
     z-index: -1;
-    pointer-events: none;
-    opacity: 0.28;
-    mix-blend-mode: multiply;
-    background-image: url("/img/noise-grain.png");
-    background-size: 220px 220px;
-    background-repeat: repeat;
+    display: none;
   }
 
   &__left {
@@ -89,7 +84,7 @@
     line-height: 1.35;
     margin-top: 20px;
     margin-bottom: 0;
-    color: var(--text);
+    color: var(--white);
   }
 
   /* =======================
@@ -99,10 +94,10 @@
     display: flex;
     align-items: stretch;
     flex-wrap: nowrap; /* ✅ в один ряд на мобилке */
-    gap: 10px;
+    gap: clamp(0.5rem, 2.5vw, 0.75rem);
 
     margin-top: 10px;
-    margin-bottom: 18px; /* ✅ чтобы не лезли на mobile badge */
+    margin-bottom: clamp(1rem, 3vw, 1.125rem); /* ✅ чтобы не лезли на mobile badge */
     position: relative;
     z-index: 4;
   }
@@ -129,9 +124,9 @@
     min-width: 0;
     flex: 1 1 0;
 
-    padding: 0 10px;
-    min-height: 40px;
-    font-size: 14px;
+    padding-inline: clamp(0.5rem, 3vw, 0.875rem);
+    min-height: clamp(2.375rem, calc(0.125rem + 10vw), 2.75rem);
+    font-size: clamp(0.8125rem, 3.5vw, 0.9375rem);
 
     cursor: pointer;
 
@@ -189,19 +184,7 @@
     border-radius: var(--radius-xl);
     overflow: hidden;
     min-height: 380px;
-    box-shadow: var(--shadow);
-
-    &__bg {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(
-          1200px 600px at 70% 30%,
-          rgba(0, 0, 0, 0.04),
-          rgba(0, 0, 0, 0) 55%
-        ),
-        linear-gradient(180deg, #f3f3f3 0%, #ffffff 60%);
-    }
+    box-shadow: none;
 
     &__img {
       position: absolute;
@@ -321,49 +304,11 @@
   }
 
   /* =======================
-     ULTRA NARROW (<=360)
-     ======================= */
-  @media (max-width: 360px) {
-    &__modes {
-      margin-bottom: 16px;
-      gap: 8px;
-    }
-
-    .heroPill,
-    .heroLangBtn {
-      min-height: 38px;
-      padding: 0 8px;
-      font-size: 13px;
-    }
-  }
-
-  /* =======================
-     SMALL+ (>=420)
-     ======================= */
-  @media (min-width: 420px) {
-    &__modes {
-      gap: 12px;
-    }
-
-    .heroPill,
-    .heroLangBtn {
-      min-height: 44px;
-      padding: 0 14px;
-      font-size: 15px;
-    }
-  }
-
-  /* =======================
      DESKTOP / TABLET+ (>=980)
      ======================= */
-  @media (min-width: 980px) {
-    padding: 34px 0 24px;
+  @media (min-width: 64rem) {
+    padding: 34px 0 0;
     --badge-hover-scale: 1.055;
-
-    .container.hero__grid {
-      padding-left: 0;
-      padding-right: 0;
-    }
 
     &__grid {
       grid-template-columns: 1.05fr 0.95fr;
@@ -391,7 +336,7 @@
     .heroPill,
     .heroLangBtn {
       flex: 0 0 auto;
-      width: 200px;
+      width: 12.5rem;
       padding: 0 22px;
       min-height: 52px;
       font-size: 17px;

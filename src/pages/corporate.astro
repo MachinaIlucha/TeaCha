@@ -21,17 +21,17 @@ const base = import.meta.env.BASE_URL;
 
 <BaseLayout title="Корпоративне навчання">
   <main class="page-corporate">
-    <CorporateHero base={base} />
-    <CorporateBenefits />
-    <Process />
+    <CorporateHero base={base} className="sectionShell section--a" />
+    <CorporateBenefits className="sectionShell section--b" />
+    <Process className="sectionShell section--a" />
     {/* формат обучения “как и был” — если у тебя уже есть готовый блок (EnglishFormat/ChineseFormat),
         просто импортни его и вставь тут. Я оставляю хук под твой компонент: */}
     <slot />
 
-    <CorporateClients base={base} />
+    <CorporateClients base={base} className="sectionShell section--b" />
 
-    <CorporatePriceTable />
+    <CorporatePriceTable className="sectionShell section--a" />
 
-    <Faq />
+    <Faq className="sectionShell section--a" />
   </main>
 </BaseLayout>

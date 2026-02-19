@@ -128,11 +128,11 @@ export function initReviews() {
     imgEl.alt = `Фото: ${data.name}`;
   };
 
-  // Mobile height stabilization
-  const mqMobile = window.matchMedia?.("(max-width: 979px)");
+  // Mobile height stabilization (matches CSS: desktop starts at 64rem)
+  const mqDesktop = window.matchMedia?.("(min-width: 64rem)");
 
   function syncMobileInfoMinHeight() {
-    if (!mqMobile?.matches) {
+    if (!mqDesktop || mqDesktop.matches) {
       root.style.removeProperty("--r2-info-minh");
       return;
     }
@@ -151,7 +151,7 @@ export function initReviews() {
 
     const stack = document.createElement("div");
     stack.className = "r2TextStack";
-    stack.style.display = "block";
+    stack.style.display = "grid";
 
     const layer = document.createElement("div");
     layer.className = "r2Layer is-front";

@@ -22,6 +22,7 @@ const base = import.meta.env.BASE_URL;
 <BaseLayout title="Англійська" reveal={true} bodyClass="page-english">
   <LanguageHero
     base={base}
+    className="sectionShell section--a"
     titleParts={[
       { text: "АНГЛІЙСЬКА, ", accent: true },
       { text: "ЯКА" },
@@ -36,15 +37,15 @@ const base = import.meta.env.BASE_URL;
     subtitle="Онлайн та офлайн у Києві • індивідуальний план • чітка структура уроків"
   />
 
-  <EnglishWhy />
+  <EnglishWhy className="sectionShell section--b" />
 
-  <Process />
+  <Process className="sectionShell section--a" />
 
-  <EnglishFormat base={base} />
+  <EnglishFormat base={base} className="sectionShell section--b" />
 
-  <PriceRates base={base} />
+  <PriceRates base={base} className="sectionShell section--a" />
 
-  <Reviews />
+  <Reviews className="sectionShell section--b section--ink" />
 
-  <Faq />
+  <Faq className="sectionShell section--a" />
 </BaseLayout>

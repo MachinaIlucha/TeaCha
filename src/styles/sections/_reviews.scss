@@ -96,7 +96,7 @@
   transform: translateY(0);
 }
 
-@media (min-width: 980px) {
+@media (min-width: 64rem) {
   .r2__head {
     display: block;
     margin-bottom: 34px;
@@ -135,6 +135,7 @@
   display: grid;
   grid-template-columns: 1fr; /* mobile */
   min-height: 0;
+  height: auto;
 
   /* keep ink readable even inside dark section shells */
   --r2-ink: rgba(255, 255, 255, 0.92);
@@ -194,6 +195,8 @@
   padding: 18px;
   display: block;
   min-width: 0;
+  min-height: var(--r2-info-minh, auto);
+  overflow-anchor: none;
 }
 
 /* stack wrapper */
@@ -201,24 +204,33 @@
   position: relative;
   width: 100%;
   min-width: 0;
+  display: grid;
+  overflow-anchor: none;
 }
 
 /* text layers: ONLY opacity */
 .r2TextStack .r2Layer {
-  position: absolute;
-  inset: 0;
+  position: relative;
+  inset: auto;
+  grid-area: 1 / 1;
   opacity: 0;
   will-change: opacity;
   transition: opacity 950ms var(--ease);
   width: 100%;
   min-width: 0;
   box-sizing: border-box;
+  pointer-events: none;
 }
 
 /* front in flow (mobile grows by content) */
 .r2TextStack .r2Layer.is-front {
-  position: relative;
   opacity: 1;
+  pointer-events: auto;
+  z-index: 2;
+}
+
+.r2TextStack .r2Layer.is-back {
+  z-index: 1;
 }
 
 .r2Card.is-transitioning .r2TextStack .r2Layer.is-front {
@@ -266,7 +278,7 @@
 .r2Layer[data-r2-back] {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 10px;
   width: 100%;
   min-width: 0;
   box-sizing: border-box;
@@ -306,7 +318,7 @@
 
 /* quote */
 .r2Quote {
-  margin-top: auto;
+  margin-top: 10px;
   width: 100%;
   box-sizing: border-box;
 
@@ -326,7 +338,7 @@
 .r2Quote__mark {
   position: absolute;
   left: -2px;
-  top: -30px;
+  top: -18px;
   width: 38px;
   height: 30px;
   background: color-mix(in srgb, var(--red) 85%, #2b2e44 15%);
@@ -351,61 +363,11 @@
 }
 
 
-/* ---------- Mobile overlay fix ---------- */
-
-@media (max-width: 979px) {
-  .r2Card {
-    height: auto !important;
-  }
-
-  /* stable height (JS sets var) */
-  .r2Info {
-    min-height: var(--r2-info-minh, auto);
-    overflow-anchor: none;
-  }
-
-  /* layers are grid-overlay (not absolute) */
-  .r2TextStack {
-    display: grid;
-    overflow-anchor: none;
-  }
-
-  .r2TextStack .r2Layer {
-    position: relative !important;
-    inset: auto !important;
-
-    grid-area: 1 / 1;
-    width: 100%;
-    min-width: 0;
-
-    pointer-events: none;
-  }
-
-  .r2TextStack .r2Layer.is-front {
-    pointer-events: auto;
-    z-index: 2;
-  }
-
-  .r2TextStack .r2Layer.is-back {
-    z-index: 1;
-  }
-
-  /* quote after text */
-  .r2Quote {
-    margin-top: 10px;
-  }
-
-  .r2Layer[data-r2-front],
-  .r2Layer[data-r2-back] {
-    gap: 10px;
-  }
-}
-
   /* ---------- Desktop (keep behavior) ---------- */
 
-@media (min-width: 980px) {
+@media (min-width: 64rem) {
   .r2Card {
-    grid-template-columns: 560px minmax(0, 1fr);
+    grid-template-columns: 35rem minmax(0, 1fr);
     align-items: stretch;
     height: 640px;
   }
@@ -437,6 +399,7 @@
 
   .r2Layer[data-r2-front],
   .r2Layer[data-r2-back] {
+    gap: 14px;
     height: 100%;
     min-height: 0;
   }
@@ -475,11 +438,12 @@
   }
 
   .r2Quote {
+    margin-top: auto;
     box-shadow: none;
   }
 
-  .r2 > .container {
-    padding-inline: 0;
+  .r2Quote__mark {
+    top: -30px;
   }
 }
 

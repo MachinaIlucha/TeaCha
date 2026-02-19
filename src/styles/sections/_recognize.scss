@@ -79,7 +79,7 @@
 }
 
 /* tablet+ */
-@media (min-width: 980px) {
+@media (min-width: 64rem) {
   .recognize {
     padding: 54px 0 30px;
   }
@@ -97,7 +97,7 @@
 }
 
 /* desktop large */
-@media (min-width: 1200px) {
+@media (min-width: 80rem) {
   .recognize__grid {
     grid-template-columns: 1fr 1fr 1.2fr 1fr;
     grid-template-rows: auto auto;

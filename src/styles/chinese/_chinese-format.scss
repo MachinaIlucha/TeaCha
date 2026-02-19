@@ -6,11 +6,6 @@
   --cnF-gap: 14px;
 }
 
-/* remove side paddings from container only */
-.cnFormat > .container {
-  padding-inline: 0;
-}
-
 .cnGrid--format .cnCard {
   min-height: 140px;
 }
@@ -80,7 +75,7 @@
   text-wrap: balance;
 }
 
-@media (min-width: 980px) {
+@media (min-width: 64rem) {
   .cnFormat {
     --cnF-pad: 22px;
     --cnF-icon: 44px;

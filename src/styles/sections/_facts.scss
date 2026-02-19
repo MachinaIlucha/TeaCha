@@ -15,11 +15,6 @@
   --facts-surface: var(--color-surface);
 }
 
-/* remove horizontal padding only (keep container width) */
-.facts > .container {
-  padding-inline: 0;
-}
-
 /* background (если есть картинка/градиент) */
 .facts__bg {
   position: absolute;
@@ -58,10 +53,14 @@
 }
 
 /* desktop */
-@media (min-width: 980px) {
+@media (min-width: 64rem) {
   .facts__grid {
     grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
     gap: 16px;
+  }
+
+  .facts__card--wide {
+    min-height: clamp(104px, 9vw, 136px);
   }
 }
 
@@ -133,18 +132,7 @@
 
 /* wide card — просто чуть выше на мобилке (как было) */
 .facts__card--wide {
-  min-height: clamp(104px, 9vw, 136px);
-}
-
-@media (max-width: 860px) {
-  .facts__grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
-  .facts__card--wide {
-    min-height: clamp(120px, 16vw, 180px);
-  }
+  min-height: clamp(120px, 16vw, 180px);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -191,10 +179,6 @@
   line-height: 1.25;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.82);
-}
-
-.facts__bg > .container {
-  padding-inline: 0;
 }
 
 /* reveal */

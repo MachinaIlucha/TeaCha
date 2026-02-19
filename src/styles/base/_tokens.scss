@@ -37,8 +37,8 @@
   --radius-pill: 999px;
 
   /* Container */
-  --container-max: 1200px;
-  --gutter: clamp(16px, 3vw, 32px);
+  --container-max: 80rem;
+  --gutter: 1rem;
 
   /* Spacing */
   --space-1: 4px;
@@ -100,4 +100,16 @@
 
   --section-py: clamp(56px, 7vw, 90px);
   --section-py-compact: clamp(40px, 6vw, 32px);
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --gutter: 1.5rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --gutter: 2rem;
+  }
 }

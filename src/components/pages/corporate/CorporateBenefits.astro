@@ -3,9 +3,12 @@
  * TeaCha website
  * © 2026. All rights reserved.
  */
+
+const { className = "" } = Astro.props;
+const sectionClass = ["cBenefits", className].filter(Boolean).join(" ");
 ---
 
-<section class="cBenefits" data-reveal="scroll">
+<section class={sectionClass} data-reveal="scroll">
   <div class="container">
     <div class="cBenefits__grid" data-reveal-item="1">
       <article class="cBCard">

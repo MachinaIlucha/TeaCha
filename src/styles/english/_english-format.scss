@@ -17,11 +17,6 @@
   --enFormat-gap: 14px;
 }
 
-/* remove side paddings from container only */
-.enFormat > .container {
-  padding-inline: 0;
-}
-
 /* base card */
 .enFormat .enCard {
   border-radius: var(--radius-xl);
@@ -162,7 +157,7 @@
 }
 
 /* desktop */
-@media (min-width: 980px) {
+@media (min-width: 64rem) {
   .enFormat {
     --enFormat-pad: 22px;
     --enFormat-icon: 44px;

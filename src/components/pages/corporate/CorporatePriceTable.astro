@@ -4,9 +4,17 @@
  * Design & development: Ілля Пінчук Вадимович
  * © 2026. All rights reserved.
  */
+
+const { className = "", sectionId = "prices" } = Astro.props;
+const sectionClass = ["corpPrice", className].filter(Boolean).join(" ");
+const pricePlans = [
+  { lessons: "8 занять", price: "800 грн" },
+  { lessons: "12 занять", price: "780 грн" },
+  { lessons: "16 занять", price: "750 грн" },
+] as const;
 ---
 
-<section class="corpPrice" id="prices" data-reveal="scroll">
+<section class={sectionClass} id={sectionId} data-reveal="scroll">
   <div class="container">
     <header
       class="sectionTitle sectionTitle--center sectionTitle--accentBottom"
@@ -16,11 +24,30 @@
         ВАРТІСТЬ
       </h2>
       <div class="sectionTitle__line sectionTitle__line--b" data-reveal-item="2">
-        [ КОРПОРАТИВНИХ ЗАНЯТЬ ]
+        <span class="corpPrice__titleBracket" aria-hidden="true">[</span>
+        КОРПОРАТИВНИХ ЗАНЯТЬ
+        <span class="corpPrice__titleBracket" aria-hidden="true">]</span>
       </div>
     </header>
 
     <div class="corpPrice__panel" data-reveal-item="3">
+      <div class="corpPrice__mobileList" role="list" aria-label="Вартість корпоративних занять">
+        <div class="corpPrice__mobileMeta">
+          <div class="corpPrice__stubTop">60 хв</div>
+          <div class="corpPrice__stubBottom">3–6 студентів</div>
+          <div class="corpPrice__mobileLabel">Ціна за один урок</div>
+        </div>
+
+        {
+          pricePlans.map((plan) => (
+            <article class="corpPrice__mobileCard" role="listitem">
+              <h3 class="corpPrice__mobileLessons">{plan.lessons}</h3>
+              <div class="corpPrice__mobilePrice">{plan.price}</div>
+            </article>
+          ))
+        }
+      </div>
+
       <div class="corpPrice__tableWrap" role="region" aria-label="Вартість корпоративних занять">
         <div class="corpPrice__table" role="table" aria-label="Вартість корпоративних занять">
           <div class="corpPrice__row corpPrice__row--head" role="row">
@@ -28,27 +55,25 @@
               <div class="corpPrice__stubTop">60 хв</div>
               <div class="corpPrice__stubBottom">3–6 студентів</div>
             </div>
-            <div class="corpPrice__cell" role="columnheader">8 занять</div>
-            <div class="corpPrice__cell" role="columnheader">12 занять</div>
-            <div class="corpPrice__cell" role="columnheader">16 занять</div>
+            {
+              pricePlans.map((plan) => (
+                <div class="corpPrice__cell" role="columnheader">{plan.lessons}</div>
+              ))
+            }
           </div>
 
           <div class="corpPrice__row" role="row">
             <div class="corpPrice__cell corpPrice__cell--rowhead" role="rowheader">
               Ціна за один<br />урок
             </div>
-            <div class="corpPrice__cell corpPrice__cell--price" role="cell">
-              <a class="corpPrice__cta" href="#start-lead">ЗАПИСАТИСЬ</a>
-              <div class="corpPrice__value">800 грн</div>
-            </div>
-            <div class="corpPrice__cell corpPrice__cell--price" role="cell">
-              <a class="corpPrice__cta" href="#start-lead">ЗАПИСАТИСЬ</a>
-              <div class="corpPrice__value">780 грн</div>
-            </div>
-            <div class="corpPrice__cell corpPrice__cell--price" role="cell">
-              <a class="corpPrice__cta" href="#start-lead">ЗАПИСАТИСЬ</a>
-              <div class="corpPrice__value">750 грн</div>
-            </div>
+            {
+              pricePlans.map((plan) => (
+                <div class="corpPrice__cell corpPrice__cell--price" role="cell">
+                  <a class="corpPrice__cta" href="#start-lead">ЗАПИСАТИСЬ</a>
+                  <div class="corpPrice__value">{plan.price}</div>
+                </div>
+              ))
+            }
           </div>
         </div>
       </div>

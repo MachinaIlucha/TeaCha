@@ -6,11 +6,12 @@
 
 import LanguageHero from "../../sections/LanguageHero.astro";
 
-const { base } = Astro.props;
+const { base, className = "" } = Astro.props;
 ---
 
 <LanguageHero
   base={base}
+  className={className}
   titleParts={[
     { text: "Корпоративна " },
     { text: "англійська", accent: true },

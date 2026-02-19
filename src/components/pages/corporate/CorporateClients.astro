@@ -3,7 +3,8 @@
  * TeaCha website
  * © 2026. All rights reserved.
  */
-const { base } = Astro.props;
+const { base, className = "" } = Astro.props;
+const sectionClass = ["cClients", className].filter(Boolean).join(" ");
 
 /* Подставь свои реальные логотипы из /public/img/clients/ */
 const logos = [
@@ -15,14 +16,15 @@ const logos = [
 ];
 ---
 
-<section class="cClients" data-reveal="scroll">
+<section class={sectionClass} data-reveal="scroll">
   <div class="container">
-    <h2
-      class="section-title section-heading cClients__title"
+    <header
+      class="sectionTitle sectionTitle--center sectionTitle--accentBottom cClients__title"
       data-reveal-item="1"
     >
-      КОРПОРАТИВНІ КЛІЄНТИ:
-    </h2>
+      <h2 class="sectionTitle__line sectionTitle__line--a">КОРПОРАТИВНІ</h2>
+      <div class="sectionTitle__line sectionTitle__line--b">КЛІЄНТИ</div>
+    </header>
 
     <div class="cClients__marquee" data-reveal-item="2" data-marquee>
       <!-- ДВА одинаковых трека для бесшовности -->

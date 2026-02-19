@@ -224,7 +224,7 @@
 .fCard--compact { padding: 18px; min-height: 140px; }
 .fCard--lg { padding: 26px; min-height: 170px; }
 
-@media (min-width: 980px) {
+@media (min-width: 64rem) {
   .fCard,
   .cBCard {
     padding: 26px 26px;
@@ -251,7 +251,7 @@
   --st-lh: 0.9;
   --st-track: -0.03em;
 
-  margin: 0 0 34px;
+  margin: 0 0 26px;
   position: relative;
 }
 
@@ -274,7 +274,7 @@
 
 .sectionTitle__line--b {
   color: var(--st-b);
-  margin-top: 10px;
+  margin-top: 8px;
 }
 
 .sectionTitle--accentTop {
@@ -287,7 +287,17 @@
   justify-items: center;
 }
 
-@media (min-width: 980px) {
+@media (min-width: 40rem) {
+  .sectionTitle {
+    margin-bottom: 34px;
+  }
+
+  .sectionTitle__line--b {
+    margin-top: 10px;
+  }
+}
+
+@media (min-width: 64rem) {
   .sectionTitle--inline {
     display: flex;
     justify-content: center;
@@ -298,20 +308,6 @@
 
   .sectionTitle--inline .sectionTitle__line--b {
     margin-top: 0;
-  }
-}
-
-@media (max-width: 520px) {
-  .sectionTitle {
-    margin-bottom: 26px;
-  }
-
-  .sectionTitle__line--b {
-    margin-top: 8px;
-  }
-
-  .sectionTitle--inline {
-    display: grid;
   }
 }
 
