@@ -328,7 +328,7 @@
   color: var(--r2-ink);
 
   padding: 8px 0 18px 18px;
-  background-image: url("/img/quote.png");
+  background-image: url("/img/reviews/quote.png");
   background-repeat: no-repeat;
   background-position: left bottom;
   background-size: 260px 10px;
@@ -342,8 +342,8 @@
   width: 38px;
   height: 30px;
   background: color-mix(in srgb, var(--red) 85%, #2b2e44 15%);
-  -webkit-mask: url("/img/quote-marks.png") center / contain no-repeat;
-  mask: url("/img/quote-marks.png") center / contain no-repeat;
+  -webkit-mask: url("/img/reviews/quote-marks.png") center / contain no-repeat;
+  mask: url("/img/reviews/quote-marks.png") center / contain no-repeat;
   font-size: 0;
   line-height: 0;
   opacity: 0.9;
@@ -358,7 +358,7 @@
 
 @supports not ((-webkit-mask: url("")) or (mask: url(""))) {
   .r2Quote__mark {
-    background: url("/img/quote-marks.png") center / contain no-repeat;
+    background: url("/img/reviews/quote-marks.png") center / contain no-repeat;
   }
 }
 

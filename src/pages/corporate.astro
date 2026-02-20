@@ -23,7 +23,17 @@ const base = import.meta.env.BASE_URL;
   <main class="page-corporate">
     <CorporateHero base={base} className="sectionShell section--a" />
     <CorporateBenefits className="sectionShell section--b" />
-    <Process className="sectionShell section--a" />
+    <Process
+      className="sectionShell section--a"
+      steps={[
+        { text: "Знайомство з компанією, її<br/>потребами та ціллю навчання" },
+        { text: "Оцінка рівня кожного студента<br/>та формування відповідних груп" },
+        { text: "Індивідуальний навчальний план<br/>під запит компанії та рівень груп" },
+        { text: "Початок<br/>навчання" },
+        { text: "Щомісячна звітність про<br/>відвідуваність і успішність" },
+      ]}
+      footnote="* Кожна корпоративна група отримує план курсу, його опис, перелік лексичних та граматичних тем"
+    />
     {/* формат обучения “как и был” — если у тебя уже есть готовый блок (EnglishFormat/ChineseFormat),
         просто импортни его и вставь тут. Я оставляю хук под твой компонент: */}
     <slot />

@@ -10,18 +10,15 @@ const { base, className = "" } = Astro.props;
 
 <section class={`foundersSketch ${className}`} id="teachers" data-reveal="load">
   <div class="container">
-    <span class="foundersSketch__note handNote" aria-hidden="true">note</span>
     <!-- Decorative big word ONLY (no black title anymore), limited to container -->
     <div class="foundersSketch__bgWord" aria-hidden="true" data-reveal-item="1">ЗАСНОВНИЦІ</div>
 
     <!-- CENTER: photo + 2 captions -->
     <div class="foundersSketch__center" data-reveal="load">
       <div class="foundersSketch__hero" data-reveal-item="2">
-        <div class="foundersSketch__blob" aria-hidden="true"></div>
-
         <img
           class="foundersSketch__photo"
-          src={`${base}img/31.png`}
+          src={`${base}img/founders/teacha-founders-daryna-dariia.png`}
           alt="Дарина та Дарія"
           loading="lazy"
         />

@@ -38,3 +38,31 @@
     box-shadow: 0 18px 38px rgba(219, 31, 50, 0.28);
   }
 }
+
+/* Language pages: no photo background in section shell */
+body.page-english .hero--lang,
+body.page-chinese .hero--lang,
+.page-corporate .hero--lang.sectionShell.section--a {
+  background: #fff;
+  padding-block: 28px;
+}
+
+body.page-english .hero--lang::before,
+body.page-chinese .hero--lang::before,
+.page-corporate .hero--lang.sectionShell.section--a::before {
+  display: none;
+}
+
+body.page-english .hero--lang .hero__subtitle--big,
+body.page-chinese .hero--lang .hero__subtitle--big,
+.page-corporate .hero--lang.sectionShell.section--a .hero__subtitle--big {
+  color: var(--text);
+}
+
+@media (min-width: 64rem) {
+  body.page-english .hero--lang,
+  body.page-chinese .hero--lang,
+  .page-corporate .hero--lang.sectionShell.section--a {
+    padding-block: 34px;
+  }
+}

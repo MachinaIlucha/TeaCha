@@ -111,34 +111,41 @@ html.js [data-reveal-scroll].is-visible .foundersSketch__bgWord[data-reveal-item
   height: clamp(340px, 64vw, 540px);
   margin: 0 auto;
   overflow: visible;
-}
 
-/* soft blob behind photo */
-.foundersSketch__blob {
-  position: absolute;
-  inset: 12% 10% 10% 10%;
-  border-radius: 48% 52% 58% 42% / 52% 44% 56% 48%;
-  opacity: 0.96;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 2%;
+    transform: translateX(-50%);
+    width: min(72%, 460px);
+    height: clamp(30px, 7vw, 54px);
+    border-radius: 999px;
+    pointer-events: none;
+    z-index: 1;
 
-  background:
-    radial-gradient(900px 520px at 30% 20%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 60%),
-    radial-gradient(900px 520px at 80% 30%, rgba(43, 46, 68, 0.06), transparent 62%),
-    linear-gradient(180deg, #ffffff 0%, rgba(246, 247, 251, 0.90) 100%);
-
-  box-shadow: var(--shadow-1);
+    background: radial-gradient(
+      ellipse at center,
+      rgba(16, 24, 40, 0.28) 0%,
+      rgba(16, 24, 40, 0.12) 45%,
+      rgba(16, 24, 40, 0) 76%
+    );
+    filter: blur(8px);
+  }
 }
 
 .foundersSketch__photo {
   position: absolute;
-  top: 3%;
+  top: -40%;
   left: 50%;
   bottom: 0;
   transform: translateX(-50%);
 
-  width: 96%;
-  height: 100%;
+  width: 140%;
+  height: 140%;
   object-fit: contain;
   object-position: bottom center;
+  z-index: 2;
 
   filter: drop-shadow(0 26px 58px rgba(16, 24, 40, 0.22));
 }
@@ -365,7 +372,7 @@ html.js [data-reveal-scroll].is-visible .foundersSketch__bgWord[data-reveal-item
   position: relative;
   border: 0;
 
-  background: url("../../../public/img/frame.svg") center/100% 100% no-repeat;
+  background: url("/img/decor/frame.svg") center/100% 100% no-repeat;
   border-radius: 0;
   box-shadow: none;
   overflow: visible;

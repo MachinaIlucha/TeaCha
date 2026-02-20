@@ -13,7 +13,7 @@ const {
     { text: "Початок<br/>навчання" },
     { text: "Щомісячна звітність <br/>про ваші успіхи" },
   ] satisfies ProcessStep[],
-  footnote = "* Кожна корпоративна група отримує план курсу, його опис, перелік лексичних та граматичних тем",
+  footnote = "",
 } = Astro.props as {
   titleTop?: string;
   titleBottom?: string;
@@ -32,8 +32,6 @@ const {
       }`}
       data-reveal="scroll"
     >
-      <span class="brandStamp" aria-hidden="true"></span>
-      <span class="handNote" aria-hidden="true">tip</span>
       <h2 class="sectionTitle__line sectionTitle__line--a" data-reveal-item="1">
         {titleTop}
       </h2>
@@ -55,6 +53,6 @@ const {
       }
     </ol>
 
-    <!-- <p class="process__note">{footnote}</p> -->
+    {footnote && <p class="process__note">{footnote}</p>}
   </div>
 </section>

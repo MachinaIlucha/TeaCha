@@ -6,13 +6,35 @@
 const { base, className = "" } = Astro.props;
 const sectionClass = ["cClients", className].filter(Boolean).join(" ");
 
-/* Подставь свои реальные логотипы из /public/img/clients/ */
-const logos = [
-  { src: `${base}img/MHP-logo.png`, alt: "MHP logo" },
-  { src: `${base}img/krasty-soft-logo.png`, alt: "Krasty soft logo" },
-  { src: `${base}img/miko-logo.png`, alt: "Miko logo" },
-  { src: `${base}img/overdone-logo.jpg`, alt: "Overdone logo" },
-  { src: `${base}img/community-key-logo.jpg`, alt: "Comunity key logo" },
+const clients = [
+  {
+    src: `${base}img/corporate/clients/rooms8studio.svg`,
+    alt: "Room 8 Studio logo",
+    name: "Room 8 Studio",
+    details: "розробка відеоігор, підтримка команд GameDev",
+    href: "https://room8studio.com/",
+  },
+  {
+    src: `${base}img/corporate/clients/snt_ukraine_logo.svg`,
+    alt: "SNT Ukraine logo",
+    name: "SNT Ukraine",
+    details: "інтеграція телекомунікаційних та корпоративних IT-систем",
+    href: "https://snt.ua/",
+  },
+  {
+    src: `${base}img/corporate/clients/seediun_logo.png`,
+    alt: "Seedium.io logo",
+    name: "Seedium.io",
+    details: "full-stack development, UI/UX, DevOps",
+    href: "https://seedium.io/",
+  },
+  {
+    src: `${base}img/corporate/clients/panorama.png`,
+    alt: "Chevalier Panorama logo",
+    name: "Chevalier Panorama / Chevalier Hotel",
+    details: "готельний комплекс",
+    href: "https://chevalier-panorama.com/",
+  },
 ];
 ---
 
@@ -26,32 +48,31 @@ const logos = [
       <div class="sectionTitle__line sectionTitle__line--b">КЛІЄНТИ</div>
     </header>
 
-    <div class="cClients__marquee" data-reveal-item="2" data-marquee>
-      <!-- ДВА одинаковых трека для бесшовности -->
-      <div class="cClients__track" data-marquee-track>
-        {
-          logos.map((l) => (
-            <div class="cClients__item">
+    <div class="cClients__grid" data-reveal-item="2">
+      {
+        clients.map((client) => (
+          <a
+            class="cClients__card"
+            href={client.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${client.name}: перейти на сайт`}
+          >
+            <div class="cClients__logoWrap">
               <img
                 class="cClients__logo"
-                src={l.src}
-                alt={l.alt}
+                src={client.src}
+                alt={client.alt}
                 loading="lazy"
               />
             </div>
-          ))
-        }
-      </div>
-
-      <div class="cClients__track" aria-hidden="true">
-        {
-          logos.map((l) => (
-            <div class="cClients__item">
-              <img class="cClients__logo" src={l.src} alt="" loading="lazy" />
-            </div>
-          ))
-        }
-      </div>
+            <p class="cClients__text">
+              <strong>{client.name}</strong>{" "}
+              <span class="cClients__details">({client.details})</span>
+            </p>
+          </a>
+        ))
+      }
     </div>
   </div>
 </section>

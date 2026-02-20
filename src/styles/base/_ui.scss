@@ -364,16 +364,16 @@
   top: 55%;
   height: 3em;
   background: color-mix(in srgb, #7A1E1E 82%, transparent);
-  -webkit-mask: url("/img/chinese-brush-stroke.png") center / 100% 100% no-repeat;
-  mask: url("/img/chinese-brush-stroke.png") center / 100% 100% no-repeat;
+  -webkit-mask: url("/img/decor/chinese-brush-stroke.png") center / 100% 100% no-repeat;
+  mask: url("/img/decor/chinese-brush-stroke.png") center / 100% 100% no-repeat;
   border-radius: 0;
   transform: translateY(-50%) rotate(-1.5deg);
   z-index: -1;
 }
 
 .marker--round::after {
-  -webkit-mask: url("/img/chinese-brush-stroke-round.png") center / 100% 100% no-repeat;
-  mask: url("/img/chinese-brush-stroke-round.png") center / 100% 100% no-repeat;
+  -webkit-mask: url("/img/decor/chinese-brush-stroke-round.png") center / 100% 100% no-repeat;
+  mask: url("/img/decor/chinese-brush-stroke-round.png") center / 100% 100% no-repeat;
 }
 
 /* Reviews-only: circular brush centered behind "ВІД" */
@@ -386,7 +386,7 @@
 
 @supports not ((-webkit-mask: url("")) or (mask: url(""))) {
   .marker::after {
-    background: url("/img/chinese-brush-stroke.png") center / 100% 100% no-repeat;
+    background: url("/img/decor/chinese-brush-stroke.png") center / 100% 100% no-repeat;
   }
 }
 

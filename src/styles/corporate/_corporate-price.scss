@@ -3,7 +3,7 @@
    ======================================= */
 
 .corpPrice {
-  padding: 52px 0 66px;
+  padding: 32px 0 40px;
 }
 
 .corpPrice__titleBracket {
@@ -202,9 +202,16 @@
   margin-top: 6px;
 }
 
+/* keep closing bracket on same line in 1344-1404px range */
+@media (min-width: 84rem) and (max-width: 87.75rem) {
+  .corpPrice .sectionTitle__line--b {
+    white-space: nowrap;
+  }
+}
+
 @media (min-width: 64rem) {
   .corpPrice {
-    padding: 64px 0 78px;
+    padding: 42px 0 50px;
   }
 
   .corpPrice__mobileList {

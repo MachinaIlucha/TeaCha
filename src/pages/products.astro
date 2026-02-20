@@ -8,7 +8,6 @@ const base = import.meta.env.BASE_URL;
   <section class="productsPage sectionShell section--b section--ink">
     <div class="container">
       <header class="productsPage__head">
-        <span class="handNote handNote--light">Крамниця TeaCha</span>
         <h1 class="sectionTitle sectionTitle--inline sectionTitle--center">
           <span class="sectionTitle__line sectionTitle__line--a">НАША</span>
           <span class="sectionTitle__line sectionTitle__line--b">ПРОДУКЦІЯ</span>
@@ -17,75 +16,64 @@ const base = import.meta.env.BASE_URL;
 
       <div class="productsGrid">
         <article class="productCard">
-          <div class="productCard__media">
-            <img class="productCard__img" src={`${base}img/books-on-shelf.png`} alt="Стартова картка TeaCha A1" loading="lazy" />
+          <div
+            class="productCard__media productCard__media--scroll"
+            aria-label="Перша футболка: фото 1 і фото 2"
+          >
+            <div class="productCard__mediaTrack">
+              <img
+                class="productCard__img"
+                src={`${base}img/products/teacha-first-tshirt-front.jpg`}
+                alt="Перша футболка TeaCha, фото 1"
+                loading="lazy"
+              />
+              <img
+                class="productCard__img"
+                src={`${base}img/products/teacha-first-tshirt-back.jpg`}
+                alt="Перша футболка TeaCha, фото 2"
+                loading="lazy"
+              />
+            </div>
           </div>
-          <h3 class="productCard__name">Стартова картка TeaCha A1</h3>
-          <p class="productCard__price">390 грн</p>
+          <h3 class="productCard__name">Перша футболка</h3>
+          <p class="productCard__price">750 грн</p>
+        </article>
+
+        <article class="productCard">
+          <div
+            class="productCard__media productCard__media--scroll"
+            aria-label="Друга футболка: фото 1 і фото 2"
+          >
+            <div class="productCard__mediaTrack">
+              <img
+                class="productCard__img"
+                src={`${base}img/products/teacha-second-tshirt-front.jpg`}
+                alt="Друга футболка TeaCha, фото 1"
+                loading="lazy"
+              />
+              <img
+                class="productCard__img"
+                src={`${base}img/products/teacha-second-tshirt-back.jpg`}
+                alt="Друга футболка TeaCha, фото 2"
+                loading="lazy"
+              />
+            </div>
+          </div>
+          <h3 class="productCard__name">Друга футболка</h3>
+          <p class="productCard__price">750 грн</p>
         </article>
 
         <article class="productCard">
           <div class="productCard__media">
-            <img class="productCard__img" src={`${base}img/chinese-scroll.png`} alt="Робочий зошит TeaCha A2" loading="lazy" />
+            <img
+              class="productCard__img"
+              src={`${base}img/products/teacha-stickers-pack.jpg`}
+              alt="Наліпки TeaCha"
+              loading="lazy"
+            />
           </div>
-          <h3 class="productCard__name">Робочий зошит TeaCha A2</h3>
-          <p class="productCard__price">520 грн</p>
-        </article>
-
-        <article class="productCard">
-          <div class="productCard__media">
-            <img class="productCard__img" src={`${base}img/doodle-hand.png`} alt="Набір карток TeaCha" loading="lazy" />
-          </div>
-          <h3 class="productCard__name">Набір карток TeaCha</h3>
-          <p class="productCard__price">340 грн</p>
-        </article>
-
-        <article class="productCard">
-          <div class="productCard__media">
-            <img class="productCard__img" src={`${base}img/hero-portrait.jpg`} alt="Плакат Chinese Basics" loading="lazy" />
-          </div>
-          <h3 class="productCard__name">Плакат Chinese Basics</h3>
-          <p class="productCard__price">290 грн</p>
-        </article>
-
-        <article class="productCard">
-          <div class="productCard__media">
-            <img class="productCard__img" src={`${base}img/teachers.png`} alt="Workbook Speaking Pack" loading="lazy" />
-          </div>
-          <h3 class="productCard__name">Workbook Speaking Pack</h3>
-          <p class="productCard__price">610 грн</p>
-        </article>
-
-        <article class="productCard">
-          <div class="productCard__media">
-            <img class="productCard__img" src={`${base}img/icon-handwrite-black.png`} alt="Каліграфічний набір" loading="lazy" />
-          </div>
-          <h3 class="productCard__name">Каліграфічний набір</h3>
-          <p class="productCard__price">450 грн</p>
-        </article>
-
-        <article class="productCard">
-          <div class="productCard__media">
-            <img class="productCard__img" src={`${base}img/icon-smile.png`} alt="Набір мотиваційних стікерів" loading="lazy" />
-          </div>
-          <h3 class="productCard__name">Набір мотиваційних стікерів</h3>
-          <p class="productCard__price">190 грн</p>
-        </article>
-
-        <article class="productCard">
-          <div class="productCard__media">
-            <img class="productCard__img" src={`${base}img/messenger-sticker.png`} alt="Messenger Pack TeaCha" loading="lazy" />
-          </div>
-          <h3 class="productCard__name">Messenger Pack TeaCha</h3>
-          <p class="productCard__price">230 грн</p>
-        </article>
-
-        <article class="productCard">
-          <div class="productCard__media">
-            <img class="productCard__img" src={`${base}img/chinese-brush-stroke-round.png`} alt="Міні набір символів Hanzi" loading="lazy" />
-          </div>
-          <h3 class="productCard__name">Міні набір символів Hanzi</h3>
-          <p class="productCard__price">310 грн</p>
+          <h3 class="productCard__name">Наліпки</h3>
+          <p class="productCard__price">100 грн</p>
         </article>
       </div>
     </div>

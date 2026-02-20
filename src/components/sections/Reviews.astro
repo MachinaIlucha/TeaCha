@@ -51,7 +51,7 @@ const reviews: Review[] = [
     },
     quote:
       "Я дуже задоволений навчанням у школі англійської мови TEACHA. Викладачі працюють на результат, заняття проходять у дружній і комфортній атмосфері, що допомагає зняти мовний бар’єр. Особливо ціную індивідуальний підхід і підтримку вчителя. Завдяки TEACHA я значно покращив англійську та став упевненішим у спілкуванні. Рекомендую всім, хто шукає якісне навчання!",
-    img: `${base}img/review-1.jpg`,
+    img: `${base}img/reviews/student-review-viacheslav.jpg`,
   },
   {
     name: "НАТАЛІЯ",
@@ -72,7 +72,7 @@ const reviews: Review[] = [
     },
     quote:
       "Дуже дякую TeaCha! Донька з великим задоволенням ходить на заняття з китайської мови. Подача матеріалу і майстерність вчителя — і вивчення мови йде дуже легко!!!! А головне — за короткий час гарний результат!!!! Дуже-дуже рекомендую!!!!",
-    img: `${base}img/review-2.jpg`,
+    img: `${base}img/reviews/student-review-nataliia.jpg`,
   },
   {
     name: "АНЯ",
@@ -92,7 +92,7 @@ const reviews: Review[] = [
     },
     quote:
       "Добрий день! Щиро дякую вам за всі заняття, які ми мали разом: ви багато чому мене навчили, допомогли з підготовкою, завжди дарували приємний настрій і дали змогу вступити туди, куди я хотіла - величезне дякую!",
-    img: `${base}img/review-3.jpg`,
+    img: `${base}img/reviews/student-review-ania.jpg`,
   },
   {
     name: "ОЛЕНА",
@@ -113,7 +113,7 @@ const reviews: Review[] = [
     },
     quote:
       "Це мій 105 підхід до вивчення англійської і лише перший вдалий, бо насправді бачу і відчуваю результат. Заняття цікаві і їх хочеться відвідувати, а не оце «треба». Завжди дуже прискіпливо до всього відношусь і як людина, яка трохи розуміється на навчанні персоналу, можу з впевненістю сказати, що Дарина, як то кажуть, викладач від Бога. Завжди все чітко, зрозуміло, структуровано і головне доведено майже до ідеалу ❤️",
-    img: `${base}img/review-4.jpg`,
+    img: `${base}img/reviews/student-review-olena.jpg`,
   },
   {
     name: "ЮЛІЯ",
@@ -134,7 +134,7 @@ const reviews: Review[] = [
     },
     quote:
       "Завдяки вашому мовному центру я швидко та якісно підготувалась до співбесіди на роботу своєї мрії 😍 Викладач англійської — справжній професіонал, який знайде підхід до будь-якої людини з будь-яким рівнем знань 🥰",
-    img: `${base}img/review-5.jpg`,
+    img: `${base}img/reviews/student-review-yuliia.jpg`,
   },
 ];
 
@@ -145,16 +145,14 @@ const first = reviews[0];
   <div class="container" data-reveal-item="1">
     <div class="r2__head" data-reveal-item="2">
       <header
-        class={`sectionTitle sectionTitle--center sectionTitle--inline sectionTitle--stamped ${accentClass}`}
+        class={`sectionTitle sectionTitle--center sectionTitle--inline ${accentClass}`}
         data-reveal="scroll"
       >
-        <span class="brandStamp" aria-hidden="true"></span>
-        <span class="handNote" aria-hidden="true">case</span>
         <h2
           class="sectionTitle__line sectionTitle__line--a"
           data-reveal-item="1"
         >
-          <span class="marker marker--round">{titleTop}</span>
+          {titleTop}
         </h2>
         <div
           class="sectionTitle__line sectionTitle__line--b"
