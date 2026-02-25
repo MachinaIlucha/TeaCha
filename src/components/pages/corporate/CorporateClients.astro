@@ -48,7 +48,30 @@ const clients = [
       <div class="sectionTitle__line sectionTitle__line--b">КЛІЄНТИ</div>
     </header>
 
-    <div class="cClients__grid" data-reveal-item="2">
+    <div
+      class="cClients__compact"
+      data-reveal-item="2"
+      aria-label="Компанії, з якими ми працюємо"
+    >
+      <span class="cClients__compactLabel">Компанії:</span>
+      <div class="cClients__compactTrack">
+        {
+          clients.map((client) => (
+            <a
+              class="cClients__compactItem"
+              href={client.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${client.name}: перейти на сайт`}
+            >
+              {client.name}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="cClients__grid" data-reveal-item="3">
       {
         clients.map((client) => (
           <a

@@ -1,11 +1,65 @@
 .cClients {
-  padding: 56px 0 60px;
+  padding: 40px 0 46px;
 }
 
 .cClients__grid {
-  display: grid;
+  display: none;
   grid-template-columns: 1fr;
   gap: 16px;
+}
+
+.cClients__compact {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(229, 231, 235, 0.9);
+  background: rgba(241, 242, 244, 0.96);
+  box-shadow: 0 6px 14px rgba(16, 24, 40, 0.05);
+}
+
+.cClients__compactLabel {
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 800;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.cClients__compactTrack {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex: 1 1 auto;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.cClients__compactTrack::-webkit-scrollbar {
+  display: none;
+}
+
+.cClients__compactItem {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 7px 11px;
+  border-radius: 999px;
+  border: 1px solid rgba(17, 24, 39, 0.08);
+  background: rgba(255, 255, 255, 0.88);
+}
+
+.cClients__compactItem:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--red) 35%, white 65%);
+  outline-offset: 2px;
 }
 
 .cClients__card {
@@ -70,6 +124,10 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
+  .cClients__compactItem:hover {
+    background: #fff;
+  }
+
   .cClients__card:hover {
     transform: translateY(-2px);
     background: #eceff2;
@@ -88,13 +146,23 @@
 
 @media (prefers-reduced-motion: reduce) {
   .cClients__card,
-  .cClients__logo {
+  .cClients__logo,
+  .cClients__compactItem {
     transition: none !important;
   }
 }
 
 @media (min-width: 64rem) {
+  .cClients {
+    padding: 56px 0 60px;
+  }
+
+  .cClients__compact {
+    display: none;
+  }
+
   .cClients__grid {
+    display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 18px;
   }

@@ -1,5 +1,83 @@
 ---
-type ProcessStep = { text: string };
+type ProcessIcon = "brief" | "target" | "map" | "rocket" | "chart";
+
+type ProcessStep = {
+  text?: string;
+  title?: string;
+  description?: string;
+  icon?: ProcessIcon;
+};
+
+type NormalizedProcessStep = {
+  title: string;
+  description: string;
+  icon: ProcessIcon;
+  desktopText: string;
+};
+
+const PROCESS_ICON_FALLBACK: ProcessIcon[] = ["brief", "target", "map", "rocket", "chart"];
+
+const PROCESS_ICON_PATHS: Record<ProcessIcon, string> = {
+  brief: `
+    <rect x="3.5" y="7.5" width="17" height="12.5" rx="2.5"></rect>
+    <path d="M9 7.5V6a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 6v1.5"></path>
+    <path d="M3.5 12.25h17"></path>
+  `,
+  target: `
+    <circle cx="12" cy="12" r="7.5"></circle>
+    <circle cx="12" cy="12" r="3"></circle>
+    <path d="m16.9 7.1 2.6-2.6"></path>
+  `,
+  map: `
+    <path d="M4.7 5.4 9 3.8a2 2 0 0 1 1.4 0L14.5 5l4-1.5a1 1 0 0 1 1.35.94v14a1 1 0 0 1-.65.94L14.5 21l-4.1-1.2a2 2 0 0 0-1.4 0L4.5 21a1 1 0 0 1-1.35-.94v-14a1 1 0 0 1 .55-.9Z"></path>
+    <path d="M9.7 4v15.8"></path>
+    <path d="M14.3 5v15.8"></path>
+  `,
+  rocket: `
+    <path d="M12.5 4.2c3.7.2 6 2.5 6.3 6.2-2.6.9-4.7 3-5.6 5.6-3.7-.2-6-2.5-6.3-6.2.9-2.6 3-4.7 5.6-5.6Z"></path>
+    <circle cx="13.8" cy="9.7" r="1.3"></circle>
+    <path d="M8.1 14.8 5.3 17.6"></path>
+    <path d="M9.8 16.5 7 19.3"></path>
+  `,
+  chart: `
+    <path d="M4 19.5h16"></path>
+    <path d="M7 15.7v-4.2"></path>
+    <path d="M12 15.7V8.8"></path>
+    <path d="M17 15.7v-2.9"></path>
+    <path d="m6.3 9.8 4.5-3.4 3.2 2.2 3.7-2.6"></path>
+  `,
+};
+
+const normalizeLegacyText = (raw: string): string[] =>
+  raw
+    .replace(/<br\s*\/?>/gi, "\n")
+    .split("\n")
+    .map((part) => part.replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim())
+    .filter(Boolean);
+
+const normalizeStep = (step: ProcessStep, idx: number): NormalizedProcessStep => {
+  const icon = step.icon ?? PROCESS_ICON_FALLBACK[idx % PROCESS_ICON_FALLBACK.length];
+
+  if (step.title || step.description) {
+    const title = (step.title ?? `Крок ${idx + 1}`).trim();
+    const description = (step.description ?? "").trim();
+    return {
+      title,
+      description,
+      icon,
+      desktopText: [title, description].filter(Boolean).join("\n"),
+    };
+  }
+
+  const legacyParts = normalizeLegacyText(step.text ?? "");
+  const [title = `Крок ${idx + 1}`, ...rest] = legacyParts;
+  return {
+    title,
+    description: rest.join(" "),
+    icon,
+    desktopText: (legacyParts.length ? legacyParts : [title]).join("\n"),
+  };
+};
 
 const {
   titleTop = "ПРОЦЕС",
@@ -8,7 +86,7 @@ const {
   className = "",
   steps = [
     { text: "Знайомство з <br/>вашим запитом" },
-    { text: "Оцінка вашого рівня та <br/>підбір зручного формату навчання " },
+    { text: "Оцінка вашого рівня та <br/>підбір зручного формату навчання" },
     { text: "Створення індивідуального <br/>навчального плану" },
     { text: "Початок<br/>навчання" },
     { text: "Щомісячна звітність <br/>про ваші успіхи" },
@@ -22,6 +100,8 @@ const {
   steps?: ProcessStep[];
   footnote?: string;
 };
+
+const normalizedSteps = steps.map(normalizeStep);
 ---
 
 <section class={`process ${className}`} data-process>
@@ -42,11 +122,29 @@ const {
 
     <ol class="process__timeline" aria-label="Процес навчання">
       {
-        steps.map((s, idx) => (
+        normalizedSteps.map((step, idx) => (
           <li class="process__item">
-            <div class="process__content" set:html={s.text} />
             <div class="process__node">
               <span class="process__num">{idx + 1}</span>
+            </div>
+            <div class="process__content">
+              <p class="process__desktop">{step.desktopText}</p>
+              <div class="process__mobile">
+                <div class="process__meta">
+                  <span class="process__icon" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      set:html={PROCESS_ICON_PATHS[step.icon]}
+                    />
+                  </span>
+                </div>
+                <p class="process__mobileText">{step.desktopText}</p>
+              </div>
             </div>
           </li>
         ))

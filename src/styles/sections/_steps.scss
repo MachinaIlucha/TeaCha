@@ -65,6 +65,24 @@
   margin-top: 14px;
 }
 
+.steps__bottom .pill {
+  background: var(--red);
+  color: var(--white);
+  border-color: var(--red);
+  box-shadow:
+    0 2px 0 rgba(0, 0, 0, 0.16),
+    0 14px 30px rgba(219, 31, 50, 0.24);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .steps__bottom .pill:hover {
+    box-shadow:
+      0 2px 0 rgba(0, 0, 0, 0.18),
+      0 18px 38px rgba(219, 31, 50, 0.28);
+    filter: brightness(0.985);
+  }
+}
+
 @media (min-width: 64rem) {
   .steps {
     padding: 40px 0 60px;

@@ -323,22 +323,26 @@
   box-sizing: border-box;
 
   position: relative;
-  border-radius: 0;
-  background: transparent;
+  z-index: 1;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: #232742;
   color: var(--r2-ink);
 
-  padding: 8px 0 18px 18px;
+  padding: 14px 14px 14px 18px;
   background-image: url("/img/reviews/quote.png");
   background-repeat: no-repeat;
-  background-position: left bottom;
+  background-position: 12px calc(100% - 8px);
   background-size: 260px 10px;
-  box-shadow: none;
+  box-shadow:
+    -8px 8px 0 #9b2239,
+    0 10px 24px rgba(0, 0, 0, 0.2);
 }
 
 .r2Quote__mark {
   position: absolute;
-  left: -2px;
-  top: -18px;
+  left: 10px;
+  top: -20px;
   width: 38px;
   height: 30px;
   background: color-mix(in srgb, var(--red) 85%, #2b2e44 15%);
@@ -439,11 +443,10 @@
 
   .r2Quote {
     margin-top: auto;
-    box-shadow: none;
   }
 
   .r2Quote__mark {
-    top: -30px;
+    top: -36px;
   }
 }
 

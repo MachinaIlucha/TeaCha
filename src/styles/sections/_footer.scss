@@ -174,7 +174,7 @@
   min-height: 52px;
   border: 0;
   border-radius: 999px;
-  background: #1f1f1f;
+  background: var(--red);
   color: #fff;
   font-weight: 900;
   letter-spacing: 0.02em;
@@ -182,7 +182,7 @@
   padding: 16px 24px;
   font-size: 13px;
   cursor: pointer;
-  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 14px 30px rgba(219, 31, 50, 0.24);
   transition:
     transform 0.15s ease,
     box-shadow 0.15s ease,
@@ -191,8 +191,8 @@
 
 .footerForm__submit:hover {
   transform: translateY(-1px);
-  filter: brightness(1.03);
-  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.24);
+  filter: brightness(0.985);
+  box-shadow: 0 18px 38px rgba(219, 31, 50, 0.28);
 }
 
 .footerForm__submit:active {

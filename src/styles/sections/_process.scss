@@ -15,6 +15,27 @@
   --p-node-border: rgba(43, 46, 68, 0.08);
   --p-node-ring: var(--bg);
   --p-num: rgba(43, 46, 68, 0.95);
+  --p-card-bg: rgba(255, 255, 255, 0.78);
+  --p-card-border: rgba(43, 46, 68, 0.1);
+  --p-card-shadow: 0 8px 20px rgba(28, 33, 58, 0.04);
+  --p-marker: rgba(43, 46, 68, 0.52);
+}
+
+.processDivider {
+  padding-block: 0;
+  overflow: hidden;
+}
+
+.processDivider__band {
+  width: 100%;
+  height: clamp(216px, 27vw, 396px);
+  border-radius: 0;
+  pointer-events: none;
+
+  background: url("/img/process/teacha-learning-process-divider.jpg") center / cover no-repeat;
+  filter: blur(4px);
+  transform: none;
+  opacity: 0.98;
 }
 
 @supports (color: color-mix(in srgb, red, white)) {
@@ -22,6 +43,10 @@
     --p-line: color-mix(in srgb, var(--color-brand) 90%, transparent);
     --p-node-border: color-mix(in srgb, var(--color-brand) 10%, transparent);
     --p-num: color-mix(in srgb, var(--color-brand) 95%, transparent);
+    --p-card-bg: color-mix(in srgb, white 88%, var(--color-soft) 12%);
+    --p-card-border: color-mix(in srgb, var(--color-brand) 12%, transparent);
+    --p-card-shadow: 0 8px 20px color-mix(in srgb, var(--color-brand) 8%, transparent);
+    --p-marker: color-mix(in srgb, var(--color-brand) 58%, transparent);
   }
 }
 
@@ -97,7 +122,7 @@
 
 .process__num {
   font-size: 22px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1;
   color: var(--p-num);
 }
@@ -105,10 +130,6 @@
 .process__content {
   grid-column: 2;
   min-width: 0;
-
-  font-size: clamp(18px, 1.8vw, 24px);
-  line-height: 1.25;
-  color: var(--text);
 
   hyphens: none;
   -webkit-hyphens: none;
@@ -128,6 +149,56 @@
   max-inline-size: 28ch;
 }
 
+.process__desktop {
+  margin: 0;
+  font-size: clamp(18px, 1.8vw, 24px);
+  line-height: 1.25;
+  color: var(--text);
+  white-space: pre-line;
+}
+
+.process__mobile {
+  display: none;
+}
+
+.process__meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.process__icon {
+  display: none;
+}
+
+.process__icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.process__title {
+  margin: 0;
+  font-size: clamp(18px, 1.8vw, 24px);
+  line-height: 1.32;
+  font-weight: 600;
+  color: var(--text);
+  text-wrap: balance;
+}
+
+.process__desc {
+  margin: 0;
+  font-size: clamp(15px, 1.35vw, 18px);
+  line-height: 1.55;
+  font-weight: 350;
+  color: var(--muted);
+}
+
+.process__mobileText {
+  margin: 0;
+  display: none;
+}
+
 .process__note {
   margin: clamp(18px, 3vw, 34px) 0 0;
   font-size: 16px;
@@ -145,6 +216,155 @@
 .process.is-visible .process__content {
   opacity: 1;
   transform: none;
+}
+
+/* -------------------- */
+/* PHONE-ONLY VARIANT   */
+/* -------------------- */
+
+@media (max-width: 63.999rem) {
+  .process {
+    --p-line: rgba(43, 46, 68, 0.24);
+    --p-marker: rgba(43, 46, 68, 0.56);
+  }
+
+  @supports (color: color-mix(in srgb, red, white)) {
+    .process {
+      --p-line: color-mix(in srgb, var(--color-brand) 32%, transparent);
+      --p-marker: color-mix(in srgb, var(--color-brand) 58%, transparent);
+    }
+  }
+
+  .process__timeline {
+    --node: auto;
+    padding-left: 0;
+    row-gap: clamp(24px, 5vw, 32px);
+  }
+
+  .process__timeline::before {
+    left: 8px;
+    top: 14px;
+    bottom: 14px;
+    width: 1px;
+  }
+
+  .process__item {
+    display: block;
+    position: relative;
+    padding-left: 28px;
+  }
+
+  .process__item::before {
+    content: "";
+    position: absolute;
+    left: 8px;
+    top: 22px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1.5px solid var(--p-marker);
+    background: var(--bg);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.95);
+    transform: translate(-50%, -50%);
+    z-index: 2;
+  }
+
+  .process__node {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: auto;
+    height: auto;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .process__num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.72em;
+    height: 1.72em;
+    font-size: clamp(30px, 8vw, 38px);
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    padding: 0;
+    border-radius: 50%;
+    border: 1px solid var(--p-card-border);
+    background: rgba(255, 255, 255, 0.58);
+    flex: 0 0 auto;
+  }
+
+  .process__content {
+    display: block;
+    justify-self: auto;
+    text-align: left;
+    max-inline-size: none;
+    margin: 0;
+    text-wrap: pretty;
+    padding: clamp(16px, 3.8vw, 20px);
+    border-radius: 16px;
+    border: 1px solid var(--p-card-border);
+    background: var(--p-card-bg);
+    box-shadow: var(--p-card-shadow);
+  }
+
+  .process__desktop {
+    display: none;
+  }
+
+  .process__mobile {
+    display: block;
+  }
+
+  .process__meta {
+    justify-content: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .process__icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    border: 1px solid var(--p-card-border);
+    color: var(--p-num);
+    display: inline-grid;
+    place-items: center;
+    flex: 0 0 auto;
+  }
+
+  .process__icon svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .process__mobileText {
+    display: block;
+    font-size: clamp(15px, 4.2vw, 17px);
+    line-height: 1.48;
+    font-weight: 580;
+    color: var(--text);
+    white-space: pre-line;
+  }
+
+  @supports (color: color-mix(in srgb, red, white)) {
+    .process__item::before {
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--bg) 94%, white);
+    }
+
+    .process__mobileText {
+      color: color-mix(in srgb, var(--text) 96%, transparent);
+    }
+  }
 }
 
 /* -------------------- */
@@ -257,11 +477,8 @@
   }
 
   @media (min-width: 80rem) {
-    .process__content {
-      white-space: nowrap;
-      overflow-wrap: normal;
-      word-break: normal;
-      max-inline-size: 56ch;
+    .process__desktop {
+      white-space: pre-line;
     }
   }
 }

@@ -74,13 +74,18 @@
   width: 100%;
   height: auto;
   display: block;
-  object-fit: contain;
-  background: rgba(255, 255, 255, 0.94);
+  background: transparent;
   border-radius: 10px;
 }
 
 .productCard__media--scroll .productCard__img {
   min-height: 0;
+}
+
+.productCard__img--stickersAlt {
+  aspect-ratio: 913 / 1280;
+  object-fit: cover;
+  object-position: center;
 }
 
 .productCard__name {
@@ -110,6 +115,10 @@
   }
 
   .productsGrid .productCard:nth-child(-n + 2) {
+    grid-column: 1 / -1;
+  }
+
+  .productsGrid .productCard--wide {
     grid-column: 1 / -1;
   }
 }

@@ -17,14 +17,14 @@
 
   /* colors */
   --leadDock-bg: #fff;
-  --leadDock-ink: #242424;
+  --leadDock-ink: var(--red);
   --leadDock-line: rgba(36, 36, 36, 0.45);
   --leadDock-line-focus: rgba(36, 36, 36, 0.95);
 
   /* effects */
   --leadDock-shadow: 0 -14px 34px rgba(0, 0, 0, 0.12);
-  --leadDock-btn-shadow: 0 12px 26px rgba(0, 0, 0, 0.18);
-  --leadDock-btn-shadow-hover: 0 16px 32px rgba(0, 0, 0, 0.22);
+  --leadDock-btn-shadow: 0 14px 30px rgba(219, 31, 50, 0.24);
+  --leadDock-btn-shadow-hover: 0 18px 38px rgba(219, 31, 50, 0.28);
 
   /* page offset so dock doesn't cover content */
   --leadDock-pad: var(--leadDock-h-mobile);

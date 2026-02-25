@@ -126,7 +126,7 @@
 
 .priceCard__cap {
   font-size: clamp(22px, 2.1vw, 26px);
-  font-weight: 900;
+  font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.02em;
   color: var(--text);
@@ -144,7 +144,7 @@
 .priceCard__split {
   margin-top: 14px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
   align-items: start;
 }
@@ -153,6 +153,7 @@
   display: grid;
   gap: 4px;
   justify-items: start;
+  min-width: 0;
 }
 
 .priceCard__col--strong {
@@ -166,6 +167,7 @@
   line-height: 1.05;
   letter-spacing: -0.02em;
   color: var(--text);
+  white-space: nowrap;
 }
 
 .priceCard__value--strong {
@@ -184,9 +186,10 @@
   margin-top: 2px;
   font-size: 13px;
   line-height: 1.2;
-  font-weight: 650;
+  font-weight: 600;
   letter-spacing: 0.01em;
   color: rgba(43, 46, 68, 0.72);
+  white-space: nowrap;
 }
 
 @supports (color: color-mix(in srgb, red, white)) {
@@ -247,6 +250,41 @@
 @media (hover: none), (pointer: coarse) {
   .priceCard__cta {
     display: none;
+  }
+}
+
+@media (max-width: 30rem) {
+  .priceCard {
+    padding: 20px 16px 16px;
+    min-height: 132px;
+  }
+
+  .priceCard__cap {
+    font-size: clamp(18px, 5.2vw, 22px);
+    font-weight: 700;
+  }
+
+  .priceCard__split {
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+    gap: 6px;
+  }
+
+  .priceCard__value {
+    font-size: clamp(19px, 5.6vw, 22px);
+  }
+
+  .priceCard__value--strong {
+    font-size: clamp(19px, 5.6vw, 22px);
+    font-weight: 900;
+  }
+
+  .priceCard__cur {
+    margin-left: 0;
+  }
+
+  .priceCard__meta {
+    font-size: 12px;
+    font-weight: 550;
   }
 }
 

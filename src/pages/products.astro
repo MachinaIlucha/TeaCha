@@ -63,14 +63,25 @@ const base = import.meta.env.BASE_URL;
           <p class="productCard__price">750 грн</p>
         </article>
 
-        <article class="productCard">
-          <div class="productCard__media">
-            <img
-              class="productCard__img"
-              src={`${base}img/products/teacha-stickers-pack.jpg`}
-              alt="Наліпки TeaCha"
-              loading="lazy"
-            />
+        <article class="productCard productCard--wide">
+          <div
+            class="productCard__media productCard__media--scroll"
+            aria-label="Наліпки TeaCha: фото 1 і фото 2"
+          >
+            <div class="productCard__mediaTrack">
+              <img
+                class="productCard__img"
+                src={`${base}img/products/teacha-stickers-pack.jpg`}
+                alt="Наліпки TeaCha, фото 1"
+                loading="lazy"
+              />
+              <img
+                class="productCard__img productCard__img--stickersAlt"
+                src={`${base}img/products/teacha-stickers-pack-alt.jpg`}
+                alt="Наліпки TeaCha, фото 2"
+                loading="lazy"
+              />
+            </div>
           </div>
           <h3 class="productCard__name">Наліпки</h3>
           <p class="productCard__price">100 грн</p>
