@@ -17,25 +17,8 @@ HEADER_CSS='/*!
  * © 2026. All rights reserved.
  */'
 
-is_astros_header_inside_frontmatter() {
-  local file="$1"
-  awk '
-    BEGIN { fm=0; started=0 }
-    NR==1 { sub(/^\xef\xbb\xbf/, "", $0) }
-    {
-      if (!started && $0 ~ /^[[:space:]]*---[[:space:]]*$/) { fm=1; started=1; next }
-      if (fm && $0 ~ /^[[:space:]]*---[[:space:]]*$/) { exit }
-      if (fm && $0 ~ /TeaCha website/) { print "yes"; exit }
-    }
-  ' "$file"
-}
-
 fix_astro() {
   local file="$1"
-
-  if [[ "$(is_astros_header_inside_frontmatter "$file" || true)" == "yes" ]]; then
-    return 0
-  fi
 
   local tmp
   tmp="$(mktemp)"
@@ -43,46 +26,118 @@ fix_astro() {
   awk -v HEADER="$HEADER_JS" '
     function is_blank(s) { return s ~ /^[[:space:]]*$/ }
     function is_delim(s) { return s ~ /^[[:space:]]*---[[:space:]]*$/ }
+    function starts_comment(s) { return s ~ /^[[:space:]]*\/\*/ }
+    function strip_bom(s) { sub(/^\xef\xbb\xbf/, "", s); return s }
+
+    function block_has_teacha(arr, from, to, i) {
+      for (i = from; i <= to; i++) {
+        if (arr[i] ~ /TeaCha website/) return 1
+      }
+      return 0
+    }
+
+    function skip_leading_teacha_comment(arr, n, pos, j) {
+      if (!starts_comment(arr[pos])) return pos
+      j = pos
+      while (j <= n) {
+        if (arr[j] ~ /\*\//) break
+        j++
+      }
+      if (j > n) return pos
+      if (!block_has_teacha(arr, pos, j)) return pos
+
+      j++
+      while (j <= n && is_blank(arr[j])) j++
+      return j
+    }
+
+    function filter_teacha_blocks(arr, from, to, out, i, j, k, has, count) {
+      count = 0
+      i = from
+      while (i <= to) {
+        if (starts_comment(arr[i])) {
+          j = i
+          while (j <= to) {
+            if (arr[j] ~ /\*\//) break
+            j++
+          }
+          if (j <= to) {
+            has = 0
+            for (k = i; k <= j; k++) {
+              if (arr[k] ~ /TeaCha website/) {
+                has = 1
+                break
+              }
+            }
+            if (has) {
+              i = j + 1
+              while (i <= to && is_blank(arr[i])) i++
+              continue
+            }
+          }
+        }
+
+        out[++count] = arr[i]
+        i++
+      }
+
+      while (count > 0 && is_blank(out[1])) {
+        for (i = 1; i < count; i++) out[i] = out[i + 1]
+        delete out[count]
+        count--
+      }
+
+      return count
+    }
 
     BEGIN { n=0 }
 
     {
       line=$0
-      if (NR==1) sub(/^\xef\xbb\xbf/, "", line)
+      if (NR==1) line = strip_bom(line)
       lines[++n]=line
     }
 
     END {
-      i=1
-
-      # remove leading header block if it contains "TeaCha website"
-      if (i <= n && lines[i] ~ /^[[:space:]]*\/\*\*!?/ ) {
-        start=i
-        found=0
-        j=i
-        while (j <= n) {
-          if (lines[j] ~ /TeaCha website/) found=1
-          if (lines[j] ~ /\*\//) { end=j; break }
-          j++
-        }
-        if (found && end > 0) {
-          i=end+1
-          while (i <= n && is_blank(lines[i])) i++
-        }
+      if (n == 0) {
+        print "---"
+        print HEADER "\n"
+        print "---"
+        exit
       }
+
+      i = 1
+      while (i <= n && is_blank(lines[i])) i++
+      i = skip_leading_teacha_comment(lines, n, i)
+      while (i <= n && is_blank(lines[i])) i++
 
       if (i <= n && is_delim(lines[i])) {
-        # has frontmatter: insert header right after opening ---
-        print lines[i]
-        print HEADER "\n"
-        for (k=i+1; k<=n; k++) print lines[k]
-      } else {
-        # no frontmatter: create it
-        print "---"
-        print HEADER "\n"
-        print "---"
-        for (k=i; k<=n; k++) print lines[k]
+        fm_end = 0
+        for (j = i + 1; j <= n; j++) {
+          if (is_delim(lines[j])) {
+            fm_end = j
+            break
+          }
+        }
+
+        if (fm_end > 0) {
+          print lines[i]
+          print HEADER "\n"
+
+          fm_count = filter_teacha_blocks(lines, i + 1, fm_end - 1, fm)
+          for (k = 1; k <= fm_count; k++) print fm[k]
+
+          print lines[fm_end]
+          for (k = fm_end + 1; k <= n; k++) print lines[k]
+          exit
+        }
       }
+
+      # no frontmatter: create it
+      print "---"
+      print HEADER "\n"
+      print "---"
+      for (k=i; k<=n; k++) print lines[k]
     }
   ' "$file" > "$tmp"
 
@@ -97,32 +152,46 @@ fix_scss() {
 
   awk -v HEADER="$HEADER_CSS" '
     function is_blank(s) { return s ~ /^[[:space:]]*$/ }
+    function starts_comment(s) { return s ~ /^[[:space:]]*\/\*/ }
+    function strip_bom(s) { sub(/^\xef\xbb\xbf/, "", s); return s }
 
     BEGIN { n=0 }
     {
       line=$0
-      if (NR==1) sub(/^\xef\xbb\xbf/, "", line)
+      if (NR==1) line = strip_bom(line)
       lines[++n]=line
     }
 
     END {
-      # If header exists near top, normalize /** -> /*! if needed
-      has=0
-      for (i=1; i<=n && i<=30; i++) {
-        if (lines[i] ~ /TeaCha website/) { has=1; break }
-      }
+      i = 1
+      while (i <= n && is_blank(lines[i])) i++
 
-      if (has) {
-        if (lines[1] ~ /^[[:space:]]*\/\*\*/ ) {
-          sub(/\/\*\*/, "/*!", lines[1])
+      # Remove one or more leading TeaCha comment blocks.
+      while (i <= n && starts_comment(lines[i])) {
+        j = i
+        while (j <= n) {
+          if (lines[j] ~ /\*\//) break
+          j++
         }
-        for (i=1; i<=n; i++) print lines[i]
-        exit
+
+        if (j > n) break
+
+        has = 0
+        for (k = i; k <= j; k++) {
+          if (lines[k] ~ /TeaCha website/) {
+            has = 1
+            break
+          }
+        }
+
+        if (!has) break
+
+        i = j + 1
+        while (i <= n && is_blank(lines[i])) i++
       }
 
-      # else prepend CSS header + blank line
       print HEADER "\n"
-      for (i=1; i<=n; i++) print lines[i]
+      for (k = i; k <= n; k++) print lines[k]
     }
   ' "$file" > "$tmp"
 

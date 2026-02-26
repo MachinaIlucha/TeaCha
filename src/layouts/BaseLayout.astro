@@ -1,4 +1,10 @@
 ---
+/**
+ * TeaCha website
+ * Design & development: Ілля Пінчук Вадимович
+ * © 2026. All rights reserved.
+ */
+
 import "../styles/main.scss";
 import { ClientRouter } from "astro:transitions";
 import { siteText } from "../data/siteText";
@@ -56,6 +62,7 @@ const logoImage = resolveAssetPath("img/layout/logo.png");
 const heroBackgroundImage = resolveAssetPath("img/hero/home/home-hero-background.webp");
 const processDividerImage = resolveAssetPath("img/process/teacha-learning-process-divider.webp");
 const reviewQuoteMarksImage = resolveAssetPath("img/reviews/quote-marks.png");
+const assetVarStyle = `--asset-hero-home-bg:url(${heroBackgroundImage});--asset-process-divider:url(${processDividerImage});--asset-reviews-quote:url(${reviewQuoteMarksImage});`;
 const contact = siteText.shared.contact;
 
 const toAbsoluteUrl = (value: string) => {
@@ -204,14 +211,12 @@ const jsonLdItems = [organizationSchema, websiteSchema, webpageSchema, breadcrum
     <ClientRouter />
     <noscript>
       <style>
-        {`
-          html.js [data-reveal="load"] [data-reveal-item],
-          html.js [data-reveal-load] [data-reveal-item]{
-            opacity:1 !important;
-            transform:none !important;
-            transition:none !important;
-          }
-        `}
+        html.js [data-reveal="load"] [data-reveal-item],
+        html.js [data-reveal-load] [data-reveal-item]{
+          opacity:1 !important;
+          transform:none !important;
+          transition:none !important;
+        }
       </style>
     </noscript>
 
@@ -252,13 +257,6 @@ const jsonLdItems = [organizationSchema, websiteSchema, webpageSchema, breadcrum
       ))
     }
     <script type="application/json" id="teacha-client-text" set:html={clientTextJson}></script>
-    <style is:inline>{`
-      :root {
-        --asset-hero-home-bg: url("${heroBackgroundImage}");
-        --asset-process-divider: url("${processDividerImage}");
-        --asset-reviews-quote: url("${reviewQuoteMarksImage}");
-      }
-    `}</style>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -268,7 +266,7 @@ const jsonLdItems = [organizationSchema, websiteSchema, webpageSchema, breadcrum
     />
   </head>
 
-  <body class={bodyClassName} {...(!reveal ? { "data-reveal-off": "" } : {})}>
+  <body class={bodyClassName} style={assetVarStyle} {...(!reveal ? { "data-reveal-off": "" } : {})}>
     <Header />
 
     <main>
