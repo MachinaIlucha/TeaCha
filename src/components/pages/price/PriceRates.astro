@@ -4,6 +4,7 @@
  * © 2026. All rights reserved.
  */
 const { className = "" } = Astro.props;
+const contactHref = "#contacts";
 ---
 
 <section class={`priceRates ${className}`} id="prices" data-prices>
@@ -27,7 +28,7 @@ const { className = "" } = Astro.props;
 
           <div class="priceCards" role="list">
             <article class="priceCard" role="listitem">
-              <a class="priceCard__cta" href="#start-lead">ЗАПИСАТИСЬ</a>
+              <a class="priceCard__cta" href={contactHref}>ЗАПИСАТИСЬ</a>
               <div class="priceCard__cap">1 урок</div>
               <div class="priceCard__single">
                 <div class="priceCard__value" data-price="individual.1.total">—</div>
@@ -36,7 +37,7 @@ const { className = "" } = Astro.props;
             </article>
 
             <article class="priceCard" role="listitem">
-              <a class="priceCard__cta" href="#start-lead">ЗАПИСАТИСЬ</a>
+              <a class="priceCard__cta" href={contactHref}>ЗАПИСАТИСЬ</a>
               <div class="priceCard__cap">8 уроків</div>
               <div class="priceCard__split">
                 <div class="priceCard__col">
@@ -51,7 +52,7 @@ const { className = "" } = Astro.props;
             </article>
 
             <article class="priceCard" role="listitem">
-              <a class="priceCard__cta" href="#start-lead">ЗАПИСАТИСЬ</a>
+              <a class="priceCard__cta" href={contactHref}>ЗАПИСАТИСЬ</a>
               <div class="priceCard__cap">12 уроків</div>
               <div class="priceCard__split">
                 <div class="priceCard__col">
@@ -66,7 +67,7 @@ const { className = "" } = Astro.props;
             </article>
 
             <article class="priceCard" role="listitem">
-              <a class="priceCard__cta" href="#start-lead">ЗАПИСАТИСЬ</a>
+              <a class="priceCard__cta" href={contactHref}>ЗАПИСАТИСЬ</a>
               <div class="priceCard__cap">24 уроки</div>
               <div class="priceCard__split">
                 <div class="priceCard__col">
@@ -83,11 +84,11 @@ const { className = "" } = Astro.props;
         </section>
 
         <section class="priceGroup" aria-label="Парне навчання">
-          <h3 class="priceGroup__title">Парне (за 1 люд.)</h3>
+          <h3 class="priceGroup__title">Парне (за 1 ос.)</h3>
 
           <div class="priceCards" role="list">
             <article class="priceCard" role="listitem">
-              <a class="priceCard__cta" href="#start-lead">ЗАПИСАТИСЬ</a>
+              <a class="priceCard__cta" href={contactHref}>ЗАПИСАТИСЬ</a>
               <div class="priceCard__cap">1 урок</div>
               <div class="priceCard__single">
                 <div class="priceCard__value" data-price="pair.1.total">—</div>
@@ -96,7 +97,7 @@ const { className = "" } = Astro.props;
             </article>
 
             <article class="priceCard" role="listitem">
-              <a class="priceCard__cta" href="#start-lead">ЗАПИСАТИСЬ</a>
+              <a class="priceCard__cta" href={contactHref}>ЗАПИСАТИСЬ</a>
               <div class="priceCard__cap">8 уроків</div>
               <div class="priceCard__split">
                 <div class="priceCard__col">
@@ -111,7 +112,7 @@ const { className = "" } = Astro.props;
             </article>
 
             <article class="priceCard" role="listitem">
-              <a class="priceCard__cta" href="#start-lead">ЗАПИСАТИСЬ</a>
+              <a class="priceCard__cta" href={contactHref}>ЗАПИСАТИСЬ</a>
               <div class="priceCard__cap">12 уроків</div>
               <div class="priceCard__split">
                 <div class="priceCard__col">
@@ -126,7 +127,7 @@ const { className = "" } = Astro.props;
             </article>
 
             <article class="priceCard" role="listitem">
-              <a class="priceCard__cta" href="#start-lead">ЗАПИСАТИСЬ</a>
+              <a class="priceCard__cta" href={contactHref}>ЗАПИСАТИСЬ</a>
               <div class="priceCard__cap">24 уроки</div>
               <div class="priceCard__split">
                 <div class="priceCard__col">
@@ -143,11 +144,11 @@ const { className = "" } = Astro.props;
         </section>
 
         <section class="priceGroup" aria-label="Групове навчання">
-          <h3 class="priceGroup__title">Групове (3–5 люд.)</h3>
+          <h3 class="priceGroup__title">Групове (3–5 ос.)</h3>
 
           <div class="priceCards" role="list">
             <article class="priceCard" role="listitem">
-              <a class="priceCard__cta" href="#start-lead">ЗАПИСАТИСЬ</a>
+              <a class="priceCard__cta" href={contactHref}>ЗАПИСАТИСЬ</a>
               <div class="priceCard__cap">1 урок</div>
               <div class="priceCard__single">
                 <div class="priceCard__value" data-price="group.1.total">—</div>
@@ -156,7 +157,7 @@ const { className = "" } = Astro.props;
             </article>
 
             <article class="priceCard" role="listitem">
-              <a class="priceCard__cta" href="#start-lead">ЗАПИСАТИСЬ</a>
+              <a class="priceCard__cta" href={contactHref}>ЗАПИСАТИСЬ</a>
               <div class="priceCard__cap">8 уроків</div>
               <div class="priceCard__split">
                 <div class="priceCard__col">
@@ -171,7 +172,7 @@ const { className = "" } = Astro.props;
             </article>
 
             <article class="priceCard" role="listitem">
-              <a class="priceCard__cta" href="#start-lead">ЗАПИСАТИСЬ</a>
+              <a class="priceCard__cta" href={contactHref}>ЗАПИСАТИСЬ</a>
               <div class="priceCard__cap">12 уроків</div>
               <div class="priceCard__split">
                 <div class="priceCard__col">
@@ -186,7 +187,7 @@ const { className = "" } = Astro.props;
             </article>
 
             <article class="priceCard" role="listitem">
-              <a class="priceCard__cta" href="#start-lead">ЗАПИСАТИСЬ</a>
+              <a class="priceCard__cta" href={contactHref}>ЗАПИСАТИСЬ</a>
               <div class="priceCard__cap">24 уроки</div>
               <div class="priceCard__split">
                 <div class="priceCard__col">
@@ -207,7 +208,7 @@ const { className = "" } = Astro.props;
 
           <div class="priceCards priceCards--single" role="list">
             <article class="priceCard" role="listitem">
-              <a class="priceCard__cta" href="#start-lead">ЗАПИСАТИСЬ</a>
+              <a class="priceCard__cta" href={contactHref}>ЗАПИСАТИСЬ</a>
               <div class="priceCard__cap">Пробне</div>
               <div class="priceCard__single">
                 <div class="priceCard__value" data-price="trial.1.total">—</div>

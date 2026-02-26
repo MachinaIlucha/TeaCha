@@ -49,17 +49,16 @@
 .footer__infoRow {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 12px 28px;
+  gap: 14px 28px;
   align-items: center;
   justify-items: center;
   text-align: center;
 }
 
 .footer__contactsRow {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px 18px;
+  display: grid;
+  gap: 6px;
+  justify-items: center;
   justify-self: center;
 }
 
@@ -77,6 +76,12 @@
   align-items: center;
   justify-content: center;
   justify-self: center;
+}
+
+.footer__rightCol {
+  display: grid;
+  gap: 10px;
+  justify-items: center;
 }
 
 .footer__main {
@@ -215,13 +220,13 @@
 .footer__text {
   color: rgba(255, 255, 255, 0.85);
   font-size: 13px;
+  overflow-wrap: anywhere;
 }
 
 .footer__linksRow {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px 22px;
+  display: grid;
+  gap: 8px;
+  justify-items: center;
   justify-self: center;
 }
 
@@ -286,18 +291,30 @@
 
 @media (min-width: 48rem) {
   .footer__infoRow {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) auto;
+    grid-template-columns: minmax(0, 1fr) auto;
     justify-items: stretch;
+    align-items: start;
     text-align: left;
   }
 
   .footer__contactsRow {
     justify-self: start;
+    justify-items: start;
+  }
+
+  .footer__rightCol {
+    justify-self: end;
+    justify-items: end;
   }
 
   .footer__social {
     justify-content: flex-end;
     justify-self: end;
+  }
+
+  .footer__linksRow {
+    justify-items: end;
+    text-align: right;
   }
 
   .footerForm__fields {
@@ -325,14 +342,6 @@
 
   .footerForm__submit {
     width: clamp(220px, 18vw, 290px);
-  }
-}
-
-@media (min-width: 80rem) {
-  .footer__contactsRow,
-  .footer__linksRow {
-    flex-wrap: nowrap;
-    white-space: nowrap;
   }
 }
 

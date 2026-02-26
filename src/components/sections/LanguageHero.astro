@@ -22,6 +22,11 @@ const {
   className = "",
   imgSrc,
   imgAlt = "Фото викладачів",
+  imgLoading = "lazy",
+  imgDecoding = "async",
+  imgFetchpriority = "auto",
+  imgWidth = 1659,
+  imgHeight = 2488,
 } = Astro.props as {
   base: string;
   titleParts?: TitlePart[];
@@ -30,16 +35,21 @@ const {
   className?: string;
   imgSrc?: string;
   imgAlt?: string;
+  imgLoading?: "lazy" | "eager";
+  imgDecoding?: "sync" | "async" | "auto";
+  imgFetchpriority?: "high" | "low" | "auto";
+  imgWidth?: number;
+  imgHeight?: number;
 };
 
-const resolvedImg = imgSrc ?? `${base}img/hero/chinese/chinese-language-hero.jpg`;
+const resolvedImg = imgSrc ?? `${base}img/hero/chinese/chinese-language-hero.webp`;
 const sectionClass = ["hero", "hero--lang", className].filter(Boolean).join(" ");
 ---
 
 <section class={sectionClass} data-reveal="load">
   <div class="container hero__grid">
     <div class="hero__left">
-      <div class="hero__title" data-reveal-item="1">
+      <h1 class="hero__title" data-reveal-item="1">
         <div class="hero__titleLine">
           {
             titleParts.map((part) => {
@@ -52,7 +62,7 @@ const sectionClass = ["hero", "hero--lang", className].filter(Boolean).join(" ")
             })
           }
         </div>
-      </div>
+      </h1>
 
       <p class="hero__subtitle hero__subtitle--big" data-reveal-item="2">
         {subtitle}
@@ -67,7 +77,16 @@ const sectionClass = ["hero", "hero--lang", className].filter(Boolean).join(" ")
 
     <div class="hero__right" data-reveal-item="4">
       <div class="heroPhoto">
-        <img class="heroPhoto__img" src={resolvedImg} alt={imgAlt} loading="lazy" />
+        <img
+          class="heroPhoto__img"
+          src={resolvedImg}
+          alt={imgAlt}
+          loading={imgLoading}
+          decoding={imgDecoding}
+          fetchpriority={imgFetchpriority}
+          width={imgWidth}
+          height={imgHeight}
+        />
       </div>
     </div>
   </div>

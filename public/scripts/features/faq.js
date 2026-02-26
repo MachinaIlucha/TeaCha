@@ -7,173 +7,138 @@
  *  [data-faq] -> [data-faq-item] -> button.faqItem__btn + .faqItem__panel[hidden]
  */
 
-import { qs, qsa } from "../core/dom.js";
+import { qsa } from "../core/dom.js";
 import { prefersReducedMotion } from "../core/motion.js";
 
 function setExpanded(btn, expanded) {
   btn.setAttribute("aria-expanded", expanded ? "true" : "false");
 }
 
-function animateOpen(panel) {
+function clearPanelRuntime(panel) {
+  if (panel.__faqRaf) {
+    cancelAnimationFrame(panel.__faqRaf);
+    panel.__faqRaf = 0;
+  }
+  if (panel.__faqOnEnd) {
+    panel.removeEventListener("transitionend", panel.__faqOnEnd);
+    panel.__faqOnEnd = null;
+  }
+}
+
+function animatePanel(panel, shouldOpen) {
   if (!panel) return;
 
+  clearPanelRuntime(panel);
   panel.hidden = false;
 
   if (prefersReducedMotion()) {
-    panel.style.height = "auto";
+    panel.hidden = !shouldOpen;
+    panel.style.height = shouldOpen ? "auto" : "0px";
     panel.style.overflow = "";
     return;
   }
 
-  panel.style.overflow = "hidden";
-  panel.style.height = "0px";
-
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      const target = panel.scrollHeight;
-      panel.style.height = `${target}px`;
-
-      const onEnd = (e) => {
-        if (e.target !== panel) return;
-        if (e.propertyName !== "height") return;
-        panel.removeEventListener("transitionend", onEnd);
-
-        panel.style.height = "auto";
-        panel.style.overflow = "";
-      };
-
-      panel.addEventListener("transitionend", onEnd);
-    });
-  });
-}
-
-function animateClose(panel) {
-  if (!panel) return;
-
-  if (prefersReducedMotion()) {
-    panel.hidden = true;
-    panel.style.height = "0px";
-    panel.style.overflow = "";
-    return;
-  }
-
-  const start = panel.scrollHeight;
+  const start = panel.getBoundingClientRect().height;
   panel.style.overflow = "hidden";
   panel.style.height = `${start}px`;
 
-  // reflow
   panel.offsetHeight;
 
-  requestAnimationFrame(() => {
-    panel.style.height = "0px";
+  const target = shouldOpen ? panel.scrollHeight : 0;
+  if (Math.round(start) === Math.round(target)) {
+    panel.hidden = !shouldOpen;
+    panel.style.height = shouldOpen ? "auto" : "0px";
+    panel.style.overflow = "";
+    return;
+  }
+
+  panel.__faqRaf = requestAnimationFrame(() => {
+    panel.style.height = `${target}px`;
 
     const onEnd = (e) => {
-      if (e.target !== panel) return;
-      if (e.propertyName !== "height") return;
+      if (e.target !== panel || e.propertyName !== "height") return;
       panel.removeEventListener("transitionend", onEnd);
+      panel.__faqOnEnd = null;
 
-      panel.hidden = true;
+      panel.hidden = !shouldOpen;
+      panel.style.height = shouldOpen ? "auto" : "0px";
       panel.style.overflow = "";
-      panel.style.height = "0px";
     };
 
+    panel.__faqOnEnd = onEnd;
     panel.addEventListener("transitionend", onEnd);
   });
 }
 
 export function initFaq() {
-  const root = qs("[data-faq]");
-  if (!root) return;
+  const roots = qsa("[data-faq]");
+  if (!roots.length) return;
 
-  // ✅ guard from double init
-  if (root.dataset.faqInit === "1") return;
-  root.dataset.faqInit = "1";
+  roots.forEach((root) => {
+    if (root.dataset.faqInit === "1") return;
+    root.dataset.faqInit = "1";
 
-  const items = qsa("[data-faq-item]", root);
-  if (!items.length) return;
+    const items = qsa("[data-faq-item]", root);
+    if (!items.length) return;
 
-  const listeners = [];
+    const closeItem = (item) => {
+      const btn = item.querySelector(".faqItem__btn");
+      const panel = item.querySelector(".faqItem__panel");
+      if (!btn || !panel) return;
 
-  const closeItem = (item) => {
-    const btn = qs(".faqItem__btn", item);
-    const panel = qs(".faqItem__panel", item);
-
-    item.classList.remove("is-open");
-    if (btn) setExpanded(btn, false);
-    if (panel) animateClose(panel);
-  };
-
-  const openItem = (item) => {
-    const btn = qs(".faqItem__btn", item);
-    const panel = qs(".faqItem__panel", item);
-
-    item.classList.add("is-open");
-    if (btn) setExpanded(btn, true);
-    if (panel) animateOpen(panel);
-  };
-
-
-  const toggleItem = (item) => {
-    const isOpen = item.classList.contains("is-open");
-    if (isOpen) closeItem(item);
-    else openItem(item);
-  };
-
-  items.forEach((item) => {
-    const btn = qs(".faqItem__btn", item);
-    const panel = qs(".faqItem__panel", item);
-    if (!btn || !panel) return;
-
-    // normalize initial state
-    const expanded = btn.getAttribute("aria-expanded") === "true";
-    if (expanded) {
-      item.classList.add("is-open");
-      panel.hidden = false;
-      panel.style.height = "auto";
-    } else {
       item.classList.remove("is-open");
-      panel.hidden = true;
-      panel.style.height = "0px";
-    }
-
-    // ✅ prevent double binding per item
-    if (item.dataset.faqBound === "1") return;
-    item.dataset.faqBound = "1";
-
-    // ✅ block "outside click closers" (very common on sites)
-    const stop = (e) => {
-      e.stopPropagation();
-      if (typeof e.stopImmediatePropagation === "function") {
-        e.stopImmediatePropagation();
-      }
+      setExpanded(btn, false);
+      animatePanel(panel, false);
     };
 
-    // capture pointerdown early (before any document click closers)
-    const onPointerDown = (e) => {
-      if (e.target && btn.contains(e.target)) stop(e);
+    const openItem = (item) => {
+      const btn = item.querySelector(".faqItem__btn");
+      const panel = item.querySelector(".faqItem__panel");
+      if (!btn || !panel) return;
+
+      item.classList.add("is-open");
+      setExpanded(btn, true);
+      animatePanel(panel, true);
     };
 
-    // click toggler (also blocks bubbling)
+    items.forEach((item) => {
+      const btn = item.querySelector(".faqItem__btn");
+      const panel = item.querySelector(".faqItem__panel");
+      if (!btn || !panel) return;
+
+      const expanded = btn.getAttribute("aria-expanded") === "true";
+      item.classList.toggle("is-open", expanded);
+      panel.hidden = !expanded;
+      panel.style.height = expanded ? "auto" : "0px";
+      panel.style.overflow = "";
+    });
+
     const onClick = (e) => {
+      if (!(e.target instanceof Element)) return;
+      const btn = e.target.closest(".faqItem__btn");
+      if (!btn || !root.contains(btn)) return;
+
       e.preventDefault();
-      stop(e);
-      toggleItem(item);
+      const item = btn.closest("[data-faq-item]");
+      if (!item) return;
+
+      const expanded = btn.getAttribute("aria-expanded") === "true";
+      if (expanded) closeItem(item);
+      else openItem(item);
     };
 
-    btn.addEventListener("pointerdown", onPointerDown, true);
-    btn.addEventListener("click", onClick);
+    root.addEventListener("click", onClick);
 
-    listeners.push(() =>
-      btn.removeEventListener("pointerdown", onPointerDown, true),
-    );
-    listeners.push(() => btn.removeEventListener("click", onClick));
+    const cleanup = () => {
+      root.removeEventListener("click", onClick);
+      root.dataset.faqInit = "0";
+
+      items.forEach((item) => {
+        const panel = item.querySelector(".faqItem__panel");
+        if (panel) clearPanelRuntime(panel);
+      });
+    };
+
+    window.addEventListener("astro:before-swap", cleanup, { once: true });
   });
-
-  // cleanup on astro navigation
-  const cleanup = () => {
-    listeners.forEach((off) => off());
-    root.dataset.faqInit = "0";
-  };
-
-  window.addEventListener("astro:before-swap", cleanup, { once: true });
 }

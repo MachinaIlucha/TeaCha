@@ -10,6 +10,8 @@ const { base, className = "" } = Astro.props;
 
 <section class={`foundersSketch ${className}`} id="teachers" data-reveal="load">
   <div class="container">
+    <h2 class="visuallyHidden">Засновниці та команда школи TeaCha</h2>
+
     <!-- Decorative big word ONLY (no black title anymore), limited to container -->
     <div class="foundersSketch__bgWord" aria-hidden="true" data-reveal-item="1">ЗАСНОВНИЦІ</div>
 
@@ -18,9 +20,12 @@ const { base, className = "" } = Astro.props;
       <div class="foundersSketch__hero" data-reveal-item="2">
         <img
           class="foundersSketch__photo"
-          src={`${base}img/founders/teacha-founders-daryna-dariia.png`}
+          src={`${base}img/founders/teacha-founders-daryna-dariia.webp`}
           alt="Дарина та Дарія"
           loading="lazy"
+          decoding="async"
+          width="848"
+          height="1264"
         />
 
         <div class="foundersSketch__names" aria-label="Імена засновниць">

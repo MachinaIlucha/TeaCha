@@ -14,7 +14,29 @@ const sectionClass = `faq faq--cards ${className}`.trim();
 const mid = Math.ceil(items.length / 2);
 const left = items.slice(0, mid);
 const right = items.slice(mid);
+
+const plainText = (value: string) =>
+  value
+    .replace(/<br\s*\/?>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: items.map((item) => ({
+    "@type": "Question",
+    name: plainText(item.q),
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: plainText(item.a),
+    },
+  })),
+};
 ---
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
 <section
   class={sectionClass}
@@ -29,42 +51,76 @@ const right = items.slice(mid);
       <p class="faq__sub">
         Ми знаємо, як важливо мати чіткі відповіді на всі запитання перед
         початком навчання. У цьому розділі ви знайдете всю необхідну інформацію
-        про наші курси
+        про наш мовний центр
       </p>
     </div>
 
     <div class="faq__grid" data-reveal-item="2">
       <div class="faq__col">
         {
-          left.map((it) => (
-            <article class="faqItem" data-faq-item>
-              <button class="faqItem__btn" type="button" aria-expanded="false">
-                <span class="faqItem__q">{it.q}</span>
-                <span class="faqItem__icon" aria-hidden="true" />
-              </button>
+          left.map((it, idx) => {
+            const btnId = `faq-btn-l-${idx + 1}`;
+            const panelId = `faq-panel-l-${idx + 1}`;
 
-              <div class="faqItem__panel" hidden>
-                <div class="faqItem__answer" set:html={it.a} />
-              </div>
-            </article>
-          ))
+            return (
+              <article class="faqItem" data-faq-item>
+                <button
+                  class="faqItem__btn"
+                  id={btnId}
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls={panelId}
+                >
+                  <span class="faqItem__q">{it.q}</span>
+                  <span class="faqItem__icon" aria-hidden="true" />
+                </button>
+
+                <div
+                  class="faqItem__panel"
+                  id={panelId}
+                  role="region"
+                  aria-labelledby={btnId}
+                  hidden
+                >
+                  <div class="faqItem__answer" set:html={it.a} />
+                </div>
+              </article>
+            );
+          })
         }
       </div>
 
       <div class="faq__col">
         {
-          right.map((it) => (
-            <article class="faqItem" data-faq-item>
-              <button class="faqItem__btn" type="button" aria-expanded="false">
-                <span class="faqItem__q">{it.q}</span>
-                <span class="faqItem__icon" aria-hidden="true" />
-              </button>
+          right.map((it, idx) => {
+            const btnId = `faq-btn-r-${idx + 1}`;
+            const panelId = `faq-panel-r-${idx + 1}`;
 
-              <div class="faqItem__panel" hidden>
-                <div class="faqItem__answer" set:html={it.a} />
-              </div>
-            </article>
-          ))
+            return (
+              <article class="faqItem" data-faq-item>
+                <button
+                  class="faqItem__btn"
+                  id={btnId}
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls={panelId}
+                >
+                  <span class="faqItem__q">{it.q}</span>
+                  <span class="faqItem__icon" aria-hidden="true" />
+                </button>
+
+                <div
+                  class="faqItem__panel"
+                  id={panelId}
+                  role="region"
+                  aria-labelledby={btnId}
+                  hidden
+                >
+                  <div class="faqItem__answer" set:html={it.a} />
+                </div>
+              </article>
+            );
+          })
         }
       </div>
     </div>

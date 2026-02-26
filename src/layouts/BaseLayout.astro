@@ -12,12 +12,182 @@ import LeadDock from "../components/forms/LeadDock.astro";
 const pathname = Astro.url.pathname;
 const isHome = pathname === "/";
 
-// ✅ по умолчанию reveal включен
-const { reveal = true, bodyClass = "" } = Astro.props;
+type JsonLd = Record<string, unknown>;
+type BreadcrumbItem = { name: string; href: string };
+
+const {
+  reveal = true,
+  bodyClass = "",
+  title,
+  description,
+  canonical,
+  ogImage,
+  ogImageAlt,
+  noindex = false,
+  hreflangs = [],
+  breadcrumbs = [],
+  jsonLd = [],
+} = Astro.props as {
+  reveal?: boolean;
+  bodyClass?: string;
+  title?: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+  ogImageAlt?: string;
+  noindex?: boolean;
+  hreflangs?: Array<{ lang: string; href: string }>;
+  breadcrumbs?: BreadcrumbItem[];
+  jsonLd?: JsonLd | JsonLd[];
+};
 
 const bodyClassName = [bodyClass, isHome ? "page--home" : ""].filter(Boolean).join(" ");
-
 const base = import.meta.env.BASE_URL;
+const site = Astro.site ?? new URL("https://teacha.pages.dev");
+const siteName = "TeaCha";
+const defaultTitle = "TeaCha - школа англійської та китайської мов у Києві";
+const defaultDescription =
+  "TeaCha - школа англійської та китайської мов у Києві: онлайн та офлайн курси, індивідуальні заняття, міні-групи й корпоративне навчання.";
+const defaultOgImage = "/img/hero/home/home-hero-background.jpg";
+
+const toAbsoluteUrl = (value: string) => {
+  try {
+    return new URL(value).toString();
+  } catch {
+    return new URL(value.replace(/^\/+/, ""), site).toString();
+  }
+};
+
+const pageTitleRaw = title?.trim() ?? "";
+const metaTitle = pageTitleRaw
+  ? (pageTitleRaw.includes(siteName) ? pageTitleRaw : `${pageTitleRaw} | ${siteName}`)
+  : defaultTitle;
+const metaDescription = description?.trim() || defaultDescription;
+const canonicalUrl = toAbsoluteUrl(canonical ?? pathname);
+const ogImageUrl = toAbsoluteUrl(ogImage ?? defaultOgImage);
+const robotsContent = noindex
+  ? "noindex, nofollow"
+  : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1";
+
+const alternateLinks = (hreflangs.length
+  ? hreflangs
+  : [
+      { lang: "uk", href: canonicalUrl },
+      { lang: "x-default", href: canonicalUrl },
+    ]
+).map((item) => ({
+  hreflang: item.lang,
+  href: toAbsoluteUrl(item.href),
+}));
+
+const normalizedBreadcrumbs = breadcrumbs.filter((item) => item?.name && item?.href);
+const breadcrumbTrail = normalizedBreadcrumbs.length
+  ? [
+      { name: "Головна", href: "/" },
+      ...normalizedBreadcrumbs.filter((item) => item.href !== "/" && item.href !== ""),
+    ]
+  : [];
+
+const seoLinks = [
+  { href: `${base}english`, label: "Курси англійської TeaCha" },
+  { href: `${base}chinese`, label: "Курси китайської TeaCha" },
+  { href: `${base}corporate`, label: "Корпоративне навчання TeaCha" },
+  { href: `${base}prices`, label: "Ціни на навчання TeaCha" },
+  { href: `${base}products`, label: "Продукція TeaCha" },
+];
+
+const siteUrl = site.toString();
+
+const organizationSchema: JsonLd = {
+  "@context": "https://schema.org",
+  "@type": ["EducationalOrganization", "LocalBusiness"],
+  name: siteName,
+  url: siteUrl,
+  image: ogImageUrl,
+  logo: toAbsoluteUrl("/img/layout/logo.png"),
+  email: "teachaschoolkyiv@gmail.com",
+  telephone: "+380634602120",
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      contactType: "customer support",
+      telephone: "+380634602120",
+      areaServed: "UA",
+      availableLanguage: ["uk"],
+    },
+  ],
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday",
+      ],
+      opens: "09:00",
+      closes: "21:00",
+    },
+  ],
+  sameAs: [
+    "https://www.instagram.com/teacha_english_chinese?igsh=MW15MzJpdmVqemRidg==",
+    "https://www.tiktok.com/@school.teacha?_r=1&_t=ZM-92xtLcPpblU",
+  ],
+  address: {
+    "@type": "PostalAddress",
+    addressCountry: "UA",
+    addressLocality: "Київ",
+    streetAddress: "проспект Академіка Палладіна, 44а",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 50.47026,
+    longitude: 30.357656,
+  },
+  hasMap: "https://maps.google.com/?q=50.47026,30.357656",
+};
+
+const websiteSchema: JsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: siteName,
+  url: siteUrl,
+  inLanguage: "uk-UA",
+};
+
+const webpageSchema: JsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: metaTitle,
+  description: metaDescription,
+  url: canonicalUrl,
+  inLanguage: "uk-UA",
+  isPartOf: {
+    "@type": "WebSite",
+    name: siteName,
+    url: siteUrl,
+  },
+};
+
+const breadcrumbSchema: JsonLd | null = breadcrumbTrail.length
+  ? {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: breadcrumbTrail.map((item, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: item.name,
+        item: toAbsoluteUrl(item.href),
+      })),
+    }
+  : null;
+
+const customJsonLd = (Array.isArray(jsonLd) ? jsonLd : [jsonLd]).filter(Boolean);
+const jsonLdItems = [organizationSchema, websiteSchema, webpageSchema, breadcrumbSchema, ...customJsonLd]
+  .filter(Boolean);
 ---
 
 <!doctype html>
@@ -38,7 +208,42 @@ const base = import.meta.env.BASE_URL;
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>TeaCha</title>
+    <title>{metaTitle}</title>
+    <meta name="description" content={metaDescription} />
+    <meta name="robots" content={robotsContent} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta name="theme-color" content="#f6efe3" />
+    <link rel="icon" type="image/png" href={`${base}img/layout/logo.png`} />
+    <link rel="shortcut icon" href={`${base}img/layout/logo.png`} />
+    <link rel="apple-touch-icon" href={`${base}img/layout/logo.png`} />
+
+    {
+      alternateLinks.map((link) => (
+        <link rel="alternate" hreflang={link.hreflang} href={link.href} />
+      ))
+    }
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="uk_UA" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={metaTitle} />
+    <meta property="og:description" content={metaDescription} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:alt" content={ogImageAlt ?? metaTitle} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={metaTitle} />
+    <meta name="twitter:description" content={metaDescription} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    {
+      jsonLdItems.map((item) => (
+        <script type="application/ld+json" set:html={JSON.stringify(item)} />
+      ))
+    }
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap"
@@ -52,6 +257,14 @@ const base = import.meta.env.BASE_URL;
     <main>
       <slot />
     </main>
+
+    <nav class="visuallyHidden" aria-hidden="true" data-seo-links>
+      {
+        seoLinks.map((item) => (
+          <a href={item.href} tabindex="-1">{item.label}</a>
+        ))
+      }
+    </nav>
 
     <StartLead base={base} />
     <Footer />

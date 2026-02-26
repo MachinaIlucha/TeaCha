@@ -51,7 +51,7 @@ const reviews: Review[] = [
     },
     quote:
       "Я дуже задоволений навчанням у школі англійської мови TEACHA. Викладачі працюють на результат, заняття проходять у дружній і комфортній атмосфері, що допомагає зняти мовний бар’єр. Особливо ціную індивідуальний підхід і підтримку вчителя. Завдяки TEACHA я значно покращив англійську та став упевненішим у спілкуванні. Рекомендую всім, хто шукає якісне навчання!",
-    img: `${base}img/reviews/student-review-viacheslav.jpg`,
+    img: `${base}img/reviews/student-review-viacheslav.webp`,
   },
   {
     name: "НАТАЛІЯ",
@@ -72,7 +72,7 @@ const reviews: Review[] = [
     },
     quote:
       "Дуже дякую TeaCha! Донька з великим задоволенням ходить на заняття з китайської мови. Подача матеріалу і майстерність вчителя — і вивчення мови йде дуже легко!!!! А головне — за короткий час гарний результат!!!! Дуже-дуже рекомендую!!!!",
-    img: `${base}img/reviews/student-review-nataliia.jpg`,
+    img: `${base}img/reviews/student-review-nataliia.webp`,
   },
   {
     name: "АНЯ",
@@ -92,7 +92,7 @@ const reviews: Review[] = [
     },
     quote:
       "Добрий день! Щиро дякую вам за всі заняття, які ми мали разом: ви багато чому мене навчили, допомогли з підготовкою, завжди дарували приємний настрій і дали змогу вступити туди, куди я хотіла - величезне дякую!",
-    img: `${base}img/reviews/student-review-ania.jpg`,
+    img: `${base}img/reviews/student-review-ania.webp`,
   },
   {
     name: "ОЛЕНА",
@@ -113,7 +113,7 @@ const reviews: Review[] = [
     },
     quote:
       "Це мій 105 підхід до вивчення англійської і лише перший вдалий, бо насправді бачу і відчуваю результат. Заняття цікаві і їх хочеться відвідувати, а не оце «треба». Завжди дуже прискіпливо до всього відношусь і як людина, яка трохи розуміється на навчанні персоналу, можу з впевненістю сказати, що Дарина, як то кажуть, викладач від Бога. Завжди все чітко, зрозуміло, структуровано і головне доведено майже до ідеалу ❤️",
-    img: `${base}img/reviews/student-review-olena.jpg`,
+    img: `${base}img/reviews/student-review-olena.webp`,
   },
   {
     name: "ЮЛІЯ",
@@ -134,12 +134,38 @@ const reviews: Review[] = [
     },
     quote:
       "Завдяки вашому мовному центру я швидко та якісно підготувалась до співбесіди на роботу своєї мрії 😍 Викладач англійської — справжній професіонал, який знайде підхід до будь-якої людини з будь-яким рівнем знань 🥰",
-    img: `${base}img/reviews/student-review-yuliia.jpg`,
+    img: `${base}img/reviews/student-review-yuliia.webp`,
   },
 ];
 
+const reviewsSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "Відгуки студентів TeaCha",
+  itemListElement: reviews.map((review, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    item: {
+      "@type": "Review",
+      inLanguage: "uk-UA",
+      author: {
+        "@type": "Person",
+        name: review.name,
+      },
+      reviewBody: review.quote,
+      itemReviewed: {
+        "@type": "EducationalOrganization",
+        name: "TeaCha",
+        url: "https://teacha.pages.dev/",
+      },
+    },
+  })),
+};
+
 const first = reviews[0];
 ---
+
+<script type="application/ld+json" set:html={JSON.stringify(reviewsSchema)} />
 
 <section class={`r2 ${className}`} id="reviews" data-r2 data-reveal="scroll" tabindex="0">
   <div class="container" data-reveal-item="1">
@@ -192,6 +218,7 @@ const first = reviews[0];
             src={first.img}
             alt={`Фото: ${first.name}`}
             loading="lazy"
+            decoding="async"
             width="960"
             height="1280"
           />
@@ -200,6 +227,7 @@ const first = reviews[0];
             data-r2-back-img
             alt=""
             loading="lazy"
+            decoding="async"
             width="960"
             height="1280"
           />

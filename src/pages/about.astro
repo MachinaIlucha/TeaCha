@@ -1,0 +1,44 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="Про нас" description="Команда TeaCha" bodyClass="page-about">
+  <section class="aboutTeam" aria-labelledby="about-team-title" data-reveal="load">
+    <div class="aboutTeam__inner" data-reveal-item="1">
+      <h2 id="about-team-title">Засновниці<br/>мовного центру</h2>
+      <p class="aboutTeam__lead">Ми об’єднуємо досвід, підтримку та сучасний підхід, щоб навчання було живим та результативним.</p>
+      <span class="aboutTeam__watermark" aria-hidden="true">TEAM</span>
+
+      <div class="aboutTeam__cards">
+        <article class="aboutTeamCard">
+          <img src={`${base}img/about/teacha-about-daryna-shvets.jpg`} alt="Дарина Швець - TeaCha" />
+          <div class="aboutTeamCard__content">
+            <h3>Дарина Швець</h3>
+          </div>
+        </article>
+
+        <article class="aboutTeamCard aboutTeamCard--center">
+          <img src={`${base}img/about/teacha-about-team-center.jpg`} alt="Команда TeaCha" />
+        </article>
+
+        <article class="aboutTeamCard">
+          <img src={`${base}img/about/teacha-about-dariia-pozniakovska.jpg`} alt="Дарія Позняковська - TeaCha" />
+          <div class="aboutTeamCard__content">
+            <h3>Дарія Позняковська</h3>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="aboutGallery" aria-label="Команда TeaCha">
+    <div class="aboutGallery__grid">
+      <div class="aboutCard aboutCard--1" style={`--img: url(${base}img/about/teacha-about-team-01.jpg);`}></div>
+      <div class="aboutCard aboutCard--2" style={`--img: url(${base}img/about/teacha-about-team-02.jpg);`}></div>
+      <div class="aboutCard aboutCard--3" style={`--img: url(${base}img/about/teacha-about-team-03.jpg);`}></div>
+      <div class="aboutCard aboutCard--4" style={`--img: url(${base}img/about/teacha-about-team-04.jpg);`}></div>
+      <div class="aboutCard aboutCard--5" style={`--img: url(${base}img/founders/teacha-founders-daryna-dariia.webp);`}></div>
+    </div>
+  </section>
+</BaseLayout>

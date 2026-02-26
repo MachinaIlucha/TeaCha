@@ -6,6 +6,22 @@
   padding: 32px 0 40px;
 }
 
+.corpPrice__hint {
+  margin: 0 0 12px;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(43, 46, 68, 0.55);
+}
+
+@supports (color: color-mix(in srgb, red, white)) {
+  .corpPrice__hint {
+    color: color-mix(in srgb, var(--text) 55%, transparent);
+  }
+}
+
 .corpPrice__titleBracket {
   display: none;
 }
@@ -212,6 +228,11 @@
 @media (min-width: 64rem) {
   .corpPrice {
     padding: 42px 0 50px;
+  }
+
+  .corpPrice__hint {
+    margin-bottom: 14px;
+    font-size: 14px;
   }
 
   .corpPrice__mobileList {

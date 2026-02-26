@@ -1,0 +1,39 @@
+---
+/**
+ * TeaCha website
+ * Design & development: Ілля Пінчук Вадимович
+ * © 2026. All rights reserved.
+ */
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PriceRates from "../components/pages/price/PriceRates.astro";
+import CorporatePriceTable from "../components/pages/corporate/CorporatePriceTable.astro";
+import Faq from "../components/sections/Faq.astro";
+
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout
+  title="Ціни на курси англійської та китайської"
+  description="Актуальні ціни TeaCha на індивідуальне, парне, групове та корпоративне навчання англійської і китайської мов у Києві та онлайн."
+  ogImage="/img/hero/home/home-hero-background.jpg"
+  breadcrumbs={[{ name: "Ціни", href: "/prices/" }]}
+  bodyClass="page-price"
+>
+  <section class="sectionShell section--a landingLinks">
+    <div class="container">
+      <h1 class="sectionTitle sectionTitle--center sectionTitle--accentBottom landingLinks__title landingLinks__title--price">
+        <span class="sectionTitle__line sectionTitle__line--a">Ціни навчання</span>
+        <span class="sectionTitle__line sectionTitle__line--b">в TeaCha</span>
+      </h1>
+      <p class="landingLinks__lead landingLinks__lead--price">
+        Оберіть формат занять, порівняйте тарифи та запишіться на консультацію для підбору
+        оптимальної програми.
+      </p>
+    </div>
+  </section>
+
+  <PriceRates base={base} className="sectionShell section--a" />
+  <CorporatePriceTable className="sectionShell section--b" sectionId="corporate-prices" />
+  <Faq className="sectionShell section--b" />
+</BaseLayout>

@@ -11,12 +11,22 @@ const { className = "" } = Astro.props;
 <section class={`hero ${className}`} id="school" data-reveal="load">
   <div class="container hero__grid">
     <div class="hero__left">
-      <div class="hero__title" data-reveal-item="1">
+      <h1 class="visuallyHidden">
+        TeaCha - школа англійської та китайської мов онлайн і офлайн у Києві
+      </h1>
+
+      <div class="hero__title" data-reveal-item="1" aria-hidden="true">
         <div class="hero__titleLine">
           <span class="tea">TEA</span><span class="cha">CHA</span> -
         </div>
         <div class="hero__titleLine">
-          ДВІ КУЛЬТУРИ В ОДНОМУ ПРОСТОРІ
+          ДВІ КУЛЬТУРИ
+        </div>
+        <div class="hero__titleLine">
+          В ОДНОМУ
+        </div>
+        <div class="hero__titleLine">
+          ПРОСТОРІ
         </div>
       </div>
 
@@ -49,9 +59,13 @@ const { className = "" } = Astro.props;
       <div class="heroPhoto">
         <img
           class="heroPhoto__img"
-          src={`${base}img/hero/home/home-hero-teacha-team.png`}
-          alt="Фото викладачів"
+          src={`${base}img/hero/home/home-hero-teacha-team.webp`}
+          alt="Команда викладачів TeaCha"
           loading="eager"
+          fetchpriority="high"
+          decoding="async"
+          width="853"
+          height="1280"
         />
       </div>
     </div>

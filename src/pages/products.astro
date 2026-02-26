@@ -4,7 +4,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 const base = import.meta.env.BASE_URL;
 ---
 
-<BaseLayout bodyClass="page--products">
+<BaseLayout
+  title="Продукція TeaCha"
+  description="Фірмова продукція TeaCha: футболки та наліпки."
+  ogImage="/img/products/teacha-first-tshirt-front.jpg"
+  breadcrumbs={[{ name: "Продукція", href: "/products/" }]}
+  bodyClass="page--products"
+>
   <section class="productsPage sectionShell section--b section--ink">
     <div class="container">
       <header class="productsPage__head">
@@ -18,48 +24,60 @@ const base = import.meta.env.BASE_URL;
         <article class="productCard">
           <div
             class="productCard__media productCard__media--scroll"
-            aria-label="Перша футболка: фото 1 і фото 2"
+            aria-label="Футболка Learning English energy: фото 1 і фото 2"
           >
             <div class="productCard__mediaTrack">
               <img
                 class="productCard__img"
-                src={`${base}img/products/teacha-first-tshirt-front.jpg`}
-                alt="Перша футболка TeaCha, фото 1"
+                src={`${base}img/products/teacha-first-tshirt-front.webp`}
+                alt="Футболка Learning English energy TeaCha, фото 1"
                 loading="lazy"
+                decoding="async"
+                width="1181"
+                height="1181"
               />
               <img
                 class="productCard__img"
-                src={`${base}img/products/teacha-first-tshirt-back.jpg`}
-                alt="Перша футболка TeaCha, фото 2"
+                src={`${base}img/products/teacha-first-tshirt-back.webp`}
+                alt="Футболка Learning English energy TeaCha, фото 2"
                 loading="lazy"
+                decoding="async"
+                width="1181"
+                height="1181"
               />
             </div>
           </div>
-          <h3 class="productCard__name">Перша футболка</h3>
+          <h3 class="productCard__name">Футболка Learning English energy</h3>
           <p class="productCard__price">750 грн</p>
         </article>
 
         <article class="productCard">
           <div
             class="productCard__media productCard__media--scroll"
-            aria-label="Друга футболка: фото 1 і фото 2"
+            aria-label="Футболка English learning therapy: фото 1 і фото 2"
           >
             <div class="productCard__mediaTrack">
               <img
                 class="productCard__img"
-                src={`${base}img/products/teacha-second-tshirt-front.jpg`}
-                alt="Друга футболка TeaCha, фото 1"
+                src={`${base}img/products/teacha-second-tshirt-front.webp`}
+                alt="Футболка English learning therapy TeaCha, фото 1"
                 loading="lazy"
+                decoding="async"
+                width="1181"
+                height="1181"
               />
               <img
                 class="productCard__img"
-                src={`${base}img/products/teacha-second-tshirt-back.jpg`}
-                alt="Друга футболка TeaCha, фото 2"
+                src={`${base}img/products/teacha-second-tshirt-back.webp`}
+                alt="Футболка English learning therapy TeaCha, фото 2"
                 loading="lazy"
+                decoding="async"
+                width="1181"
+                height="1181"
               />
             </div>
           </div>
-          <h3 class="productCard__name">Друга футболка</h3>
+          <h3 class="productCard__name">Футболка English learning therapy</h3>
           <p class="productCard__price">750 грн</p>
         </article>
 
@@ -71,15 +89,21 @@ const base = import.meta.env.BASE_URL;
             <div class="productCard__mediaTrack">
               <img
                 class="productCard__img"
-                src={`${base}img/products/teacha-stickers-pack.jpg`}
+                src={`${base}img/products/teacha-stickers-pack.webp`}
                 alt="Наліпки TeaCha, фото 1"
                 loading="lazy"
+                decoding="async"
+                width="913"
+                height="1280"
               />
               <img
                 class="productCard__img productCard__img--stickersAlt"
-                src={`${base}img/products/teacha-stickers-pack-alt.jpg`}
+                src={`${base}img/products/teacha-stickers-pack-alt.webp`}
                 alt="Наліпки TeaCha, фото 2"
                 loading="lazy"
+                decoding="async"
+                width="1659"
+                height="2488"
               />
             </div>
           </div>

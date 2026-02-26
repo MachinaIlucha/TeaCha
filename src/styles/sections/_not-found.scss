@@ -1,0 +1,79 @@
+/*!
+ * TeaCha website
+ * 404 page styles
+ * © 2026. All rights reserved.
+ */
+
+.notFound {
+  min-height: clamp(420px, 62vh, 700px);
+  display: grid;
+  align-items: center;
+  padding: clamp(56px, 8vw, 96px) 0;
+}
+
+.notFound__wrap {
+  max-width: 860px;
+  margin: 0 auto;
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+  border-radius: 28px;
+  background: color-mix(in srgb, var(--white) 88%, transparent);
+  box-shadow:
+    0 24px 42px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  padding: clamp(22px, 3.2vw, 44px);
+  text-align: center;
+}
+
+.notFound__code {
+  margin: 0;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 0.9;
+  font-size: clamp(58px, 13vw, 138px);
+  color: color-mix(in srgb, var(--red) 84%, var(--text));
+  text-shadow: 0 12px 26px rgba(219, 31, 50, 0.22);
+}
+
+.notFound__title {
+  margin: 12px 0 0;
+  font-size: clamp(28px, 5vw, 52px);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.notFound__text {
+  margin: 14px auto 0;
+  max-width: 56ch;
+  font-size: clamp(16px, 2.2vw, 22px);
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--text) 76%, transparent);
+}
+
+.notFound__actions {
+  margin-top: 26px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.notFound__btn {
+  min-width: 170px;
+}
+
+.notFound__btn--solid {
+  border-color: var(--red);
+  background: var(--red);
+  color: var(--white);
+}
+
+@media (min-width: 64rem) {
+  .notFound__actions {
+    gap: 14px;
+  }
+
+  .notFound__btn {
+    min-width: 190px;
+  }
+}

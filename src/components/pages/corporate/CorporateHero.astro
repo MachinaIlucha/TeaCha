@@ -12,11 +12,14 @@ const { base, className = "" } = Astro.props;
 <LanguageHero
   base={base}
   className={className}
-  imgSrc={`${base}img/hero/corporate/corporate-hero-team.jpg`}
+  imgSrc={`${base}img/hero/corporate/corporate-hero-team.webp`}
+  imgAlt="Корпоративне навчання англійської в TeaCha"
+  imgLoading="eager"
+  imgFetchpriority="high"
   titleParts={[
     { text: "Корпоративна " },
     { text: "англійська", accent: true },
     { text: ", яка підсилює вашу команду" },
   ]}
-  subtitle="Персоналізована програма під ваш бізнес, рівень і цілі. Онлайн або офлайн у Києві."
+  subtitle="Персоналізована програма під ваш бізнес. Онлайн або офлайн у Києві."
 />

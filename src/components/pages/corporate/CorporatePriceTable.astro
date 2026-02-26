@@ -7,6 +7,7 @@
 
 const { className = "", sectionId = "prices" } = Astro.props;
 const sectionClass = ["corpPrice", className].filter(Boolean).join(" ");
+const contactHref = "#contacts";
 const pricePlans = [
   { lessons: "8 занять", price: "800 грн" },
   { lessons: "12 занять", price: "780 грн" },
@@ -20,10 +21,13 @@ const pricePlans = [
       class="sectionTitle sectionTitle--center sectionTitle--accentBottom"
       data-reveal="scroll"
     >
-      <h2 class="sectionTitle__line sectionTitle__line--a" data-reveal-item="1">
+      <p class="corpPrice__hint" data-reveal-item="1">
+        НАВЕДИ НА ЦІНУ ТА НАТИСНИ, ЩОБ ЗАПИСАТИСЯ
+      </p>
+      <h2 class="sectionTitle__line sectionTitle__line--a" data-reveal-item="2">
         ВАРТІСТЬ
       </h2>
-      <div class="sectionTitle__line sectionTitle__line--b" data-reveal-item="2">
+      <div class="sectionTitle__line sectionTitle__line--b" data-reveal-item="3">
         <span class="corpPrice__titleBracket" aria-hidden="true">[</span>
         КОРПОРАТИВНИХ ЗАНЯТЬ<span class="corpPrice__titleBracket" aria-hidden="true"
           >]</span
@@ -31,7 +35,7 @@ const pricePlans = [
       </div>
     </header>
 
-    <div class="corpPrice__panel" data-reveal-item="3">
+    <div class="corpPrice__panel" data-reveal-item="4">
       <div class="corpPrice__mobileList" role="list" aria-label="Вартість корпоративних занять">
         <div class="corpPrice__mobileMeta">
           <div class="corpPrice__stubTop">60 хв</div>
@@ -70,7 +74,7 @@ const pricePlans = [
             {
               pricePlans.map((plan) => (
                 <div class="corpPrice__cell corpPrice__cell--price" role="cell">
-                  <a class="corpPrice__cta" href="#start-lead">ЗАПИСАТИСЬ</a>
+                  <a class="corpPrice__cta" href={contactHref}>ЗАПИСАТИСЬ</a>
                   <div class="corpPrice__value">{plan.price}</div>
                 </div>
               ))

@@ -19,11 +19,20 @@ import Faq from "../components/sections/Faq.astro";
 const base = import.meta.env.BASE_URL;
 ---
 
-<BaseLayout title="Китайська" bodyClass="page-chinese">
+<BaseLayout
+  title="Курси китайської мови"
+  description="Курси китайської в TeaCha: індивідуальний план, практика розмовної мови, онлайн та офлайн у Києві."
+  ogImage="/img/hero/chinese/chinese-language-hero.jpg"
+  breadcrumbs={[{ name: "Курси китайської", href: "/chinese/" }]}
+  bodyClass="page-chinese"
+>
   <LanguageHero
     base={base}
     className="sectionShell section--a"
-    imgSrc={`${base}img/hero/chinese/chinese-language-hero.jpg`}
+    imgSrc={`${base}img/hero/chinese/chinese-language-hero.webp`}
+    imgAlt="Заняття з китайської мови в TeaCha"
+    imgLoading="eager"
+    imgFetchpriority="high"
     titleParts={[
       { text: "ПОЧНИ" },
       { br: true },
@@ -35,7 +44,7 @@ const base = import.meta.env.BASE_URL;
       { br: true },
       { text: "МОЖЛИВОСТЕЙ", accent: true },
     ]}
-    subtitle="Онлайн та офлайн у Києві • індивідуальний план • чітка структура уроків"
+    subtitle="Онлайн та офлайн у Києві • Індивідуальний план • Чітка структура уроків"
   />
 
   <ChineseWhy className="sectionShell section--b" />
