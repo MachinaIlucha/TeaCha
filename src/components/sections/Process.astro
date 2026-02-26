@@ -1,4 +1,6 @@
 ---
+import { siteText } from "../../data/siteText";
+
 type ProcessIcon = "brief" | "target" | "map" | "rocket" | "chart";
 
 type ProcessStep = {
@@ -57,9 +59,10 @@ const normalizeLegacyText = (raw: string): string[] =>
 
 const normalizeStep = (step: ProcessStep, idx: number): NormalizedProcessStep => {
   const icon = step.icon ?? PROCESS_ICON_FALLBACK[idx % PROCESS_ICON_FALLBACK.length];
+  const stepLabelPrefix = siteText.sections.process.stepLabelPrefix;
 
   if (step.title || step.description) {
-    const title = (step.title ?? `Крок ${idx + 1}`).trim();
+    const title = (step.title ?? `${stepLabelPrefix} ${idx + 1}`).trim();
     const description = (step.description ?? "").trim();
     return {
       title,
@@ -70,7 +73,7 @@ const normalizeStep = (step: ProcessStep, idx: number): NormalizedProcessStep =>
   }
 
   const legacyParts = normalizeLegacyText(step.text ?? "");
-  const [title = `Крок ${idx + 1}`, ...rest] = legacyParts;
+  const [title = `${stepLabelPrefix} ${idx + 1}`, ...rest] = legacyParts;
   return {
     title,
     description: rest.join(" "),
@@ -80,24 +83,18 @@ const normalizeStep = (step: ProcessStep, idx: number): NormalizedProcessStep =>
 };
 
 const {
-  titleTop = "ПРОЦЕС",
-  titleBottom = "НАВЧАННЯ",
+  titleTop = siteText.sections.process.titleTop,
+  titleBottom = siteText.sections.process.titleBottom,
   accent = "bottom", // "bottom" | "top"
   className = "",
-  steps = [
-    { text: "Знайомство з <br/>вашим запитом" },
-    { text: "Оцінка вашого рівня та <br/>підбір зручного формату навчання" },
-    { text: "Створення індивідуального <br/>навчального плану" },
-    { text: "Початок<br/>навчання" },
-    { text: "Щомісячна звітність <br/>про ваші успіхи" },
-  ] satisfies ProcessStep[],
+  steps = siteText.sections.process.steps satisfies ReadonlyArray<ProcessStep>,
   footnote = "",
 } = Astro.props as {
   titleTop?: string;
   titleBottom?: string;
   accent?: "bottom" | "top";
   className?: string;
-  steps?: ProcessStep[];
+  steps?: ReadonlyArray<ProcessStep>;
   footnote?: string;
 };
 
@@ -120,7 +117,7 @@ const normalizedSteps = steps.map(normalizeStep);
       </div>
     </header>
 
-    <ol class="process__timeline" aria-label="Процес навчання">
+    <ol class="process__timeline" aria-label={siteText.sections.process.ariaLabel}>
       {
         normalizedSteps.map((step, idx) => (
           <li class="process__item">

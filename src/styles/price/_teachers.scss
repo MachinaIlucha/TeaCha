@@ -316,16 +316,16 @@ html.js [data-reveal-scroll].is-visible .foundersSketch__bgWord[data-reveal-item
 
 /* =========================
    BOTTOM CARDS
-   1 col mobile -> 2 cols -> 3 cols
 ========================= */
 
 .foundersSketch__cards {
   position: relative;
   z-index: 1;
-
   margin-top: 38px;
   display: grid;
   gap: 20px;
+  width: 100%;
+  max-width: 100%;
 }
 
 .foundersSketch__cardsRow {
@@ -334,14 +334,14 @@ html.js [data-reveal-scroll].is-visible .foundersSketch__bgWord[data-reveal-item
   gap: 18px;
 }
 
-@media (min-width: 520px) {
+@media (min-width: 560px) {
   .foundersSketch__cardsRow--top {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .foundersSketch__cardsRow--bottom {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    width: min(520px, 100%);
+    width: min(560px, 100%);
     margin-inline: auto;
   }
 }
@@ -364,76 +364,78 @@ html.js [data-reveal-scroll].is-visible .foundersSketch__bgWord[data-reveal-item
 }
 
 /* =========================
-   STAMP CARD — your SVG frame
-   (frame color can be “locked” inside svg)
+   STAMP CARD
 ========================= */
 
 .stampCard {
+  --stamp-line: var(--color-accent);
   position: relative;
-  border: 0;
-
-  background: url("/img/decor/frame.svg") center/100% 100% no-repeat;
-  border-radius: 0;
-  box-shadow: none;
-  overflow: visible;
-
-  filter: drop-shadow(0 18px 40px rgba(16, 24, 40, 0.12));
+  padding: 16px 18px 18px;
+  min-height: 182px;
+  border-top: 0;
+  border-radius: 8px;
+  background: var(--color-surface);
+  box-shadow: 0 30px 40px -20px rgba(43, 46, 68, 0.42);
+  overflow: hidden;
 }
 
-/* optional overlay stroke (if you add separate stroke svg later) */
 .stampCard::before {
   content: "";
   position: absolute;
-  inset: -2px;
+  inset: 0 0 auto 0;
+  height: 6px;
+  background: var(--stamp-line);
+  z-index: 3;
   pointer-events: none;
-  z-index: 1;
-
-  background: none;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  background-position: center;
-
-  opacity: 0.95;
 }
 
-/* flower (brand-ish accent) */
-.stampCard::after {
-  content: "✿";
+.stampCard__icon {
   position: absolute;
-  left: 50%;
-  top: 18px;
-  transform: translateX(-50%);
-  font-size: 30px;
-  line-height: 1;
-  color: var(--accent);
-  opacity: var(--fs-bgword-opacity);
-  z-index: 2;
+  right: 20px;
+  bottom: 22px;
+  width: 64px;
+  height: 64px;
+  display: block;
+  object-fit: contain;
   pointer-events: none;
 }
 
-.stampCard__inner {
-  position: relative;
-  z-index: 2;
-
+.stampCard__text {
+  margin: 0;
   display: grid;
-  place-items: center;
-  text-align: center;
-
-  padding: 58px 20px 34px;
-  min-height: 200px;
-
+  place-items: start;
+  text-align: left;
   letter-spacing: 0.01em;
   color: var(--fs-ink-86);
-
-  font-size: 16px;
-  line-height: 1.18;
-  font-weight: 800;
+  font-size: clamp(15px, 1.05vw, 17px);
+  line-height: 1.16;
+  font-weight: 700;
 }
 
 @supports (color: color-mix(in srgb, red, white)) {
-  .stampCard__inner {
+  .stampCard__text {
     color: color-mix(in srgb, var(--fs-ink) 86%, transparent);
   }
+}
+
+.stampCard--diploma {
+  --stamp-line: #67c6ff;
+}
+
+.stampCard--semester {
+  --stamp-line: #eb3941;
+}
+
+.stampCard--year {
+  --stamp-line: #4f88ff;
+}
+
+.stampCard--confucius {
+  --stamp-line: #8a6dff;
+}
+
+.stampCard--management {
+  --stamp-line: #eb3941;
 }
 
 /* Desktop tweaks */
@@ -453,25 +455,25 @@ html.js [data-reveal-scroll].is-visible .foundersSketch__bgWord[data-reveal-item
     font-size: clamp(84px, 8.6vw, 156px);
   }
 
-  .stampCard__inner {
-    min-height: 212px;
-    padding: 62px 22px 36px;
-    font-size: 15px;
+  .stampCard {
+    min-height: 188px;
+    padding: 18px 22px 20px;
   }
 
   .foundersSketch > .container {
-    padding-inline: 0;
+    padding-inline: var(--gutter);
   }
 }
 
 /* subtle hover lift */
 @media (hover: hover) and (pointer: fine) {
   .stampCard {
-    transition: transform var(--dur-2) var(--ease), filter var(--dur-2) var(--ease);
+    transition: transform var(--dur-2) var(--ease), box-shadow var(--dur-2) var(--ease);
   }
+
   .stampCard:hover {
-    transform: translateY(-2px);
-    filter: drop-shadow(0 26px 64px rgba(16, 24, 40, 0.12));
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 36px 48px -22px rgba(43, 46, 68, 0.42);
   }
 }
 

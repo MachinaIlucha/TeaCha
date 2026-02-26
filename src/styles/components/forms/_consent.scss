@@ -36,6 +36,7 @@
 
 .consent__box,
 .price-consent__box {
+  position: relative;
   width: 22px;
   height: 22px;
   border-radius: 6px;
@@ -46,10 +47,9 @@
 
   border: 1px solid currentColor;
   background: transparent;
-
-  /* ✅ убираем любые "увеличения" при клике/hover */
-  transform: none !important;
+  transform: scale(1);
   transition:
+    transform 250ms cubic-bezier(0.4, 0, 0.23, 1),
     background-color var(--dur-1) var(--ease),
     border-color var(--dur-1) var(--ease),
     color var(--dur-1) var(--ease);
@@ -60,16 +60,32 @@
   cursor: pointer;
 }
 
-/* tick */
+/* Tick stroke (animated draw) */
+.consent__box::after,
+.price-consent__box::after {
+  content: "";
+  position: absolute;
+  top: 55%;
+  left: 26%;
+  width: 0;
+  height: 0;
+  border-right: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+  transform: translate3d(0, 0, 0) rotate(45deg);
+  transform-origin: 0% 100%;
+  opacity: 0;
+}
+
+.consent__check:checked + .consent__box,
+.price-consent__check:checked + .price-consent__box {
+  animation: consent-shrink-bounce 200ms cubic-bezier(0.4, 0, 0.23, 1);
+}
+
 .consent__check:checked + .consent__box::after,
 .price-consent__check:checked + .price-consent__box::after {
-  content: "";
-  width: 10px;
-  height: 6px;
-  border-left: 2px solid currentColor;
-  border-bottom: 2px solid currentColor;
-  transform: rotate(-45deg);
-  margin-top: -1px;
+  opacity: 1;
+  animation: consent-checkbox-check 125ms 250ms cubic-bezier(0.4, 0, 0.23, 1)
+    forwards;
 }
 
 /* Themes (new) */
@@ -118,4 +134,36 @@
   background: rgba(43, 46, 68, 0.92);
   color: #fff;
   border-color: rgba(43, 46, 68, 0.92);
+}
+
+@keyframes consent-shrink-bounce {
+  0% {
+    transform: scale(1);
+  }
+  33% {
+    transform: scale(0.85);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes consent-checkbox-check {
+  0% {
+    width: 0;
+    height: 0;
+    border-color: currentColor;
+    transform: translate3d(0, 0, 0) rotate(45deg);
+  }
+  33% {
+    width: 4px;
+    height: 0;
+    transform: translate3d(0, 0, 0) rotate(45deg);
+  }
+  100% {
+    width: 4px;
+    height: 10px;
+    border-color: currentColor;
+    transform: translate3d(0, -8px, 0) rotate(45deg);
+  }
 }

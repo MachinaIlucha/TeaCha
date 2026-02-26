@@ -6,13 +6,15 @@
  */
 
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { siteText } from "../data/siteText";
 
 const base = import.meta.env.BASE_URL;
+const pageText = siteText.pages.notFound;
 ---
 
 <BaseLayout
-  title="Сторінку не знайдено (404)"
-  description="Сторінка, яку ви шукаєте, не існує. Поверніться на головну TeaCha або оберіть напрям навчання."
+  title={pageText.title}
+  description={pageText.description}
   canonical="/404/"
   ogImage="/img/hero/home/home-hero-background.jpg"
   bodyClass="page-404"
@@ -20,17 +22,17 @@ const base = import.meta.env.BASE_URL;
 >
   <section class="notFound sectionShell section--b" data-reveal="load">
     <div class="container notFound__wrap">
-      <p class="notFound__code" data-reveal-item="1">404</p>
-      <h1 class="notFound__title" data-reveal-item="2">Сторінку не знайдено</h1>
+      <p class="notFound__code" data-reveal-item="1">{pageText.code}</p>
+      <h1 class="notFound__title" data-reveal-item="2">{pageText.heading}</h1>
       <p class="notFound__text" data-reveal-item="3">
-        Перевірте адресу або скористайтеся навігацією нижче, щоб продовжити навчання з TeaCha.
+        {pageText.text}
       </p>
 
       <div class="notFound__actions" data-reveal-item="4">
-        <a class="pill notFound__btn notFound__btn--solid" href={base}>На головну</a>
-        <a class="pill notFound__btn" href={`${base}english`}>Англійська</a>
-        <a class="pill notFound__btn" href={`${base}chinese`}>Китайська</a>
-        <a class="pill notFound__btn" href={`${base}prices`}>Ціни</a>
+        <a class="pill notFound__btn notFound__btn--solid" href={`${base}${pageText.links[0].href}`}>{pageText.links[0].label}</a>
+        <a class="pill notFound__btn" href={`${base}${pageText.links[1].href}`}>{pageText.links[1].label}</a>
+        <a class="pill notFound__btn" href={`${base}${pageText.links[2].href}`}>{pageText.links[2].label}</a>
+        <a class="pill notFound__btn" href={`${base}${pageText.links[3].href}`}>{pageText.links[3].label}</a>
       </div>
     </div>
   </section>

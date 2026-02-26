@@ -1,0 +1,59 @@
+/*!
+ * TeaCha website
+ * Unified section spacing
+ * © 2026. All rights reserved.
+ */
+
+/* Keep all top-level content blocks on one vertical rhythm. */
+section.sectionShell,
+section.hero,
+section.foundersSketch,
+section.facts,
+section.process,
+section.priceRates,
+section.r2,
+section.faq,
+section.enWhy,
+section.enFormat,
+section.cnWhy,
+section.cnFormat,
+section.cHero,
+section.cBenefits,
+section.cClients,
+section.corpPrice,
+section.landingLinks,
+section.productsPage,
+section.notFound,
+section.steps,
+section.startLead,
+.page-about section.aboutTeam,
+.page-about section.aboutGallery,
+.page-about section.aboutContacts {
+  padding-block: var(--section-py);
+}
+
+/* Footer is not a <section>, so align its top spacing explicitly. */
+footer.footer {
+  padding-top: var(--section-py);
+}
+
+/* Override legacy page-specific hero paddings with the same spacing token. */
+body.page-english section.hero--lang,
+body.page-chinese section.hero--lang,
+.page-corporate section.hero--lang.sectionShell.section--a {
+  padding-block: var(--section-py);
+}
+
+/* Heroes keep regular bottom rhythm but a tighter top offset. */
+section.hero,
+body.page-english section.hero--lang,
+body.page-chinese section.hero--lang,
+.page-corporate section.hero--lang.sectionShell.section--a {
+  padding-top: var(--hero-pt);
+}
+
+/* Only home hero should touch next block without bottom gap. */
+section.hero#school {
+  padding-top: var(--home-hero-pt);
+  padding-bottom: 0;
+}

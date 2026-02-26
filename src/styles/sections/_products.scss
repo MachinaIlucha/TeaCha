@@ -9,6 +9,18 @@
   padding-block: var(--section-py);
 }
 
+.productsPage.sectionShell.section--b.section--ink {
+  background: linear-gradient(180deg, #1c1e22 0%, #15171a 100%);
+  background-color: #15171a;
+  --section-bg: #15171a;
+  --bg: #15171a;
+}
+
+.productsPage.sectionShell.section--b.section--ink::before,
+.productsPage.sectionShell.section--b.section--ink::after {
+  display: none;
+}
+
 .productsPage__head {
   display: grid;
   gap: 12px;
@@ -37,11 +49,11 @@
   background:
     radial-gradient(
       120% 110% at 0% 0%,
-      rgba(255, 255, 255, 0.14) 0%,
+      rgba(255, 255, 255, 0.18) 0%,
       rgba(255, 255, 255, 0) 56%
     ),
-    linear-gradient(180deg, rgba(23, 28, 50, 0.95) 0%, rgba(16, 20, 36, 0.95) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+    linear-gradient(180deg, #2a2e34 0%, #23272d 100%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   box-shadow: 0 18px 44px rgba(0, 0, 0, 0.28);
 }
 

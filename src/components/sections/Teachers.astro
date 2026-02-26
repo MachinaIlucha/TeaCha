@@ -5,15 +5,18 @@
  * © 2026. All rights reserved.
  */
 
+import { siteText } from "../../data/siteText";
+
 const { base, className = "" } = Astro.props;
+const teacherText = siteText.sections.teachers;
 ---
 
 <section class={`foundersSketch ${className}`} id="teachers" data-reveal="load">
   <div class="container">
-    <h2 class="visuallyHidden">Засновниці та команда школи TeaCha</h2>
+    <h2 class="visuallyHidden">{teacherText.heading}</h2>
 
     <!-- Decorative big word ONLY (no black title anymore), limited to container -->
-    <div class="foundersSketch__bgWord" aria-hidden="true" data-reveal-item="1">ЗАСНОВНИЦІ</div>
+    <div class="foundersSketch__bgWord" aria-hidden="true" data-reveal-item="1">{teacherText.bgWord}</div>
 
     <!-- CENTER: photo + 2 captions -->
     <div class="foundersSketch__center" data-reveal="load">
@@ -21,19 +24,19 @@ const { base, className = "" } = Astro.props;
         <img
           class="foundersSketch__photo"
           src={`${base}img/founders/teacha-founders-daryna-dariia.webp`}
-          alt="Дарина та Дарія"
+          alt={teacherText.photoAlt}
           loading="lazy"
           decoding="async"
           width="848"
           height="1264"
         />
 
-        <div class="foundersSketch__names" aria-label="Імена засновниць">
+        <div class="foundersSketch__names" aria-label={teacherText.namesAria}>
           <!-- Name #1: left of photo (upper area) -->
           <div class="foundersSketch__name foundersSketch__name--left" data-reveal-item="3">
             <div class="foundersSketch__nameText">
-              <span class="first">Дарина</span>
-              <span class="last">Швець</span>
+              <span class="first">{teacherText.firstName.first}</span>
+              <span class="last">{teacherText.firstName.last}</span>
             </div>
             <span class="foundersSketch__leader foundersSketch__leader--left" aria-hidden="true"></span>
           </div>
@@ -43,8 +46,8 @@ const { base, className = "" } = Astro.props;
           <!-- Name #2: right of photo (middle/lower area) -->
           <div class="foundersSketch__name foundersSketch__name--right" data-reveal-item="4">
             <div class="foundersSketch__nameText">
-              <span class="first">Дарія</span>
-              <span class="last">Позняковська</span>
+              <span class="first">{teacherText.secondName.first}</span>
+              <span class="last">{teacherText.secondName.last}</span>
             </div>
             <span class="foundersSketch__leader foundersSketch__leader--right" aria-hidden="true"></span>
           </div>
@@ -53,50 +56,88 @@ const { base, className = "" } = Astro.props;
     </div>
 
     <!-- BOTTOM: 5 cards (OSVITA card removed) -->
-    <div class="foundersSketch__cards" data-reveal-item="5" aria-label="Освіта">
+    <div class="foundersSketch__cards" data-reveal-item="5" aria-label={teacherText.educationAria}>
       <div class="foundersSketch__cardsRow foundersSketch__cardsRow--top">
-        <div class="stampCard">
-          <div class="stampCard__inner">
-            Червоний диплом магістра<br />
-            КНУ ім. Шевченка<br />
-            (китайська мова та література,<br />
-            англійська мова і переклад)
-          </div>
+        <div class="stampCard stampCard--diploma">
+          <img
+            class="stampCard__icon"
+            src={`${base}img/decor/teacha-founder-education-diploma-icon.png`}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            width="64"
+            height="64"
+          />
+          <p class="stampCard__text">
+            {teacherText.cards[0].text}
+          </p>
         </div>
 
-        <div class="stampCard">
-          <div class="stampCard__inner">
-            Семестрова програма<br />
-            навчання в Університеті<br />
-            Ціндао, Китай<br />
-            (онлайн)
-          </div>
+        <div class="stampCard stampCard--semester">
+          <img
+            class="stampCard__icon"
+            src={`${base}img/decor/teacha-founder-semester-online-study-icon.png`}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            width="64"
+            height="64"
+          />
+          <p class="stampCard__text">
+            {teacherText.cards[1].text}
+          </p>
         </div>
 
-        <div class="stampCard">
-          <div class="stampCard__inner">
-            Річна програма навчання<br />
-            в Університеті Ціндао, Китай<br />
-            (проживання і навчання<br />
-            в Китаї)
-          </div>
+        <div class="stampCard stampCard--year">
+          <img
+            class="stampCard__icon"
+            src={`${base}img/decor/teacha-founder-year-study-china-icon.png`}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            width="64"
+            height="64"
+          />
+          <p class="stampCard__text">
+            {teacherText.cards[2].text}
+          </p>
         </div>
       </div>
 
       <div class="foundersSketch__cardsRow foundersSketch__cardsRow--bottom">
-        <div class="stampCard">
-          <div class="stampCard__inner">
-            Курси інституту<br />
-            Конфуція при КНУ<br />
-            ім. Шевченка
-          </div>
+        <div class="stampCard stampCard--confucius">
+          <img
+            class="stampCard__icon"
+            src={`${base}img/decor/teacha-founder-confucius-course-icon.png`}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            width="64"
+            height="64"
+          />
+          <p class="stampCard__text">
+            {teacherText.cards[3].text}
+          </p>
         </div>
 
-        <div class="stampCard">
-          <div class="stampCard__inner">
-            Керування мовним центром<br />
-            більше чотирьох років
-          </div>
+        <div class="stampCard stampCard--management">
+          <img
+            class="stampCard__icon"
+            src={`${base}img/decor/teacha-founder-language-center-management-icon.png`}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            width="64"
+            height="64"
+          />
+          <p class="stampCard__text">
+            {teacherText.cards[4].text}
+          </p>
         </div>
       </div>
     </div>

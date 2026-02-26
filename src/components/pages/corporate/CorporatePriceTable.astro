@@ -4,15 +4,13 @@
  * Design & development: Ілля Пінчук Вадимович
  * © 2026. All rights reserved.
  */
+import { siteText } from "../../../data/siteText";
 
 const { className = "", sectionId = "prices" } = Astro.props;
 const sectionClass = ["corpPrice", className].filter(Boolean).join(" ");
 const contactHref = "#contacts";
-const pricePlans = [
-  { lessons: "8 занять", price: "800 грн" },
-  { lessons: "12 занять", price: "780 грн" },
-  { lessons: "16 занять", price: "750 грн" },
-] as const;
+const text = siteText.sections.corporatePrice;
+const pricePlans = text.plans;
 ---
 
 <section class={sectionClass} id={sectionId} data-reveal="scroll">
@@ -22,25 +20,25 @@ const pricePlans = [
       data-reveal="scroll"
     >
       <p class="corpPrice__hint" data-reveal-item="1">
-        НАВЕДИ НА ЦІНУ ТА НАТИСНИ, ЩОБ ЗАПИСАТИСЯ
+        {text.hint}
       </p>
       <h2 class="sectionTitle__line sectionTitle__line--a" data-reveal-item="2">
-        ВАРТІСТЬ
+        {text.titleTop}
       </h2>
       <div class="sectionTitle__line sectionTitle__line--b" data-reveal-item="3">
         <span class="corpPrice__titleBracket" aria-hidden="true">[</span>
-        КОРПОРАТИВНИХ ЗАНЯТЬ<span class="corpPrice__titleBracket" aria-hidden="true"
+        {text.titleBottom}<span class="corpPrice__titleBracket" aria-hidden="true"
           >]</span
         >
       </div>
     </header>
 
     <div class="corpPrice__panel" data-reveal-item="4">
-      <div class="corpPrice__mobileList" role="list" aria-label="Вартість корпоративних занять">
+      <div class="corpPrice__mobileList" role="list" aria-label={text.tableAria}>
         <div class="corpPrice__mobileMeta">
-          <div class="corpPrice__stubTop">60 хв</div>
-          <div class="corpPrice__stubBottom">3–6 студентів</div>
-          <div class="corpPrice__mobileLabel">Ціна за один урок</div>
+          <div class="corpPrice__stubTop">{text.stubTop}</div>
+          <div class="corpPrice__stubBottom">{text.stubBottom}</div>
+          <div class="corpPrice__mobileLabel">{text.mobileLabel}</div>
         </div>
 
         {
@@ -53,12 +51,12 @@ const pricePlans = [
         }
       </div>
 
-      <div class="corpPrice__tableWrap" role="region" aria-label="Вартість корпоративних занять">
-        <div class="corpPrice__table" role="table" aria-label="Вартість корпоративних занять">
+      <div class="corpPrice__tableWrap" role="region" aria-label={text.tableAria}>
+        <div class="corpPrice__table" role="table" aria-label={text.tableAria}>
           <div class="corpPrice__row corpPrice__row--head" role="row">
             <div class="corpPrice__cell corpPrice__cell--stub" role="columnheader">
-              <div class="corpPrice__stubTop">60 хв</div>
-              <div class="corpPrice__stubBottom">3–6 студентів</div>
+              <div class="corpPrice__stubTop">{text.stubTop}</div>
+              <div class="corpPrice__stubBottom">{text.stubBottom}</div>
             </div>
             {
               pricePlans.map((plan) => (
@@ -68,13 +66,11 @@ const pricePlans = [
           </div>
 
           <div class="corpPrice__row" role="row">
-            <div class="corpPrice__cell corpPrice__cell--rowhead" role="rowheader">
-              Ціна за один<br />урок
-            </div>
+            <div class="corpPrice__cell corpPrice__cell--rowhead" role="rowheader" set:html={text.rowLabel} />
             {
               pricePlans.map((plan) => (
                 <div class="corpPrice__cell corpPrice__cell--price" role="cell">
-                  <a class="corpPrice__cta" href={contactHref}>ЗАПИСАТИСЬ</a>
+                  <a class="corpPrice__cta" href={contactHref}>{text.cta}</a>
                   <div class="corpPrice__value">{plan.price}</div>
                 </div>
               ))
@@ -84,11 +80,7 @@ const pricePlans = [
       </div>
 
       <div class="corpPrice__notes">
-        <div class="corpPrice__note">*Перший безкоштовний демо-урок</div>
-        <div class="corpPrice__note">*Є можливість індивідуальних занять</div>
-        <div class="corpPrice__note">
-          *Якщо в одній групі студентів більше ніж 6, ціна договірна
-        </div>
+        {text.notes.map((note) => <div class="corpPrice__note">{note}</div>)}
       </div>
     </div>
   </div>

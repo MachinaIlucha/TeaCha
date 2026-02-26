@@ -1,5 +1,8 @@
 import { postLead } from "./api.js";
 import { toast } from "../core/toast.js";
+import { getClientText } from "../core/site-text.js";
+
+const text = getClientText();
 
 export const bindLeadForm = (selector, opts = {}) => {
   const form = document.querySelector(selector);
@@ -22,7 +25,7 @@ export const bindLeadForm = (selector, opts = {}) => {
 
     if (btn) {
       btn.disabled = true;
-      btn.textContent = "Відправляємо…";
+      btn.textContent = text.lead.bind.sendingButton;
     }
 
     try {
@@ -33,11 +36,11 @@ export const bindLeadForm = (selector, opts = {}) => {
       }
     } catch (err) {
       console.error("Lead submit error", err);
-      toast.error("Помилка", "Не вдалося надіслати заявку. Спробуйте ще раз");
+      toast.error(text.lead.bind.errorTitle, text.lead.bind.errorText);
     } finally {
       if (btn) {
         btn.disabled = false;
-        btn.textContent = prevText || "ЗАЛИШИТИ ЗАЯВКУ";
+        btn.textContent = prevText || text.lead.bind.fallbackSubmitButton;
       }
     }
   });

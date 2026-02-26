@@ -4,9 +4,11 @@
  * Design & development: Ілля Пінчук Вадимович
  * © 2026. All rights reserved.
  */
+import { siteText } from "../../../data/siteText";
 
 const { className = "" } = Astro.props;
 const sectionClass = ["enFormat", className].filter(Boolean).join(" ");
+const text = siteText.sections.englishFormat;
 ---
 
 <section class={sectionClass} id="format" data-reveal="scroll">
@@ -16,10 +18,10 @@ const sectionClass = ["enFormat", className].filter(Boolean).join(" ");
       data-reveal="scroll"
     >
       <h2 class="sectionTitle__line sectionTitle__line--a" data-reveal-item="1">
-        ФОРМАТ
+        {text.titleTop}
       </h2>
       <div class="sectionTitle__line sectionTitle__line--b" data-reveal-item="2">
-        [ НАВЧАННЯ ]
+        {text.titleBottom}
       </div>
     </header>
 
@@ -42,8 +44,8 @@ const sectionClass = ["enFormat", className].filter(Boolean).join(" ");
         </span>
 
         <div class="enCard__content">
-          <div class="enCard__k">Тривалість заняття</div>
-          <div class="enCard__v">60/90 хв</div>
+          <div class="enCard__k">{text.durationTitle}</div>
+          <div class="enCard__v">{text.durationValue}</div>
         </div>
       </article>
 
@@ -75,8 +77,8 @@ const sectionClass = ["enFormat", className].filter(Boolean).join(" ");
         </span>
 
         <div class="enCard__content">
-          <div class="enCard__k">Формати</div>
-          <div class="enCard__v">Індивідуальні, парні, групові (3-5 ос.)</div>
+          <div class="enCard__k">{text.formatsTitle}</div>
+          <div class="enCard__v">{text.formatsValue}</div>
         </div>
       </article>
 
@@ -97,8 +99,8 @@ const sectionClass = ["enFormat", className].filter(Boolean).join(" ");
         </span>
 
         <div class="enCard__content">
-          <div class="enCard__k">Офлайн</div>
-          <div class="enCard__v">м.Київ, метро Академмістечко</div>
+          <div class="enCard__k">{text.offlineTitle}</div>
+          <div class="enCard__v">{text.offlineValue}</div>
         </div>
       </article>
 
@@ -126,8 +128,8 @@ const sectionClass = ["enFormat", className].filter(Boolean).join(" ");
         </span>
 
         <div class="enCard__content">
-          <div class="enCard__k">Онлайн</div>
-          <div class="enCard__v">Zoom / Google Meet / Microsoft Teams</div>
+          <div class="enCard__k">{text.onlineTitle}</div>
+          <div class="enCard__v">{text.onlineValue}</div>
         </div>
       </article>
 
@@ -155,10 +157,8 @@ const sectionClass = ["enFormat", className].filter(Boolean).join(" ");
         </span>
 
         <div class="enCard__content">
-          <div class="enCard__k">Матеріали</div>
-          <div class="enCard__v">
-            Доступ до Miro, Canva або Figma з усіма матеріалами з уроків
-          </div>
+          <div class="enCard__k">{text.materialsTitle}</div>
+          <div class="enCard__v">{text.materialsValue}</div>
         </div>
       </article>
 
@@ -181,10 +181,8 @@ const sectionClass = ["enFormat", className].filter(Boolean).join(" ");
         </span>
 
         <div class="enCard__content">
-          <div class="enCard__k">Додатково</div>
-          <div class="enCard__v">
-            Індивідуальна програма навчання + онлайн-словник
-          </div>
+          <div class="enCard__k">{text.extraTitle}</div>
+          <div class="enCard__v">{text.extraValue}</div>
         </div>
       </article>
     </div>

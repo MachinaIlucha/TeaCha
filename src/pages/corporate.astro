@@ -15,24 +15,20 @@ import Process from "../components/sections/Process.astro";
 import Faq from "../components/sections/Faq.astro";
 
 import CorporatePriceTable from "../components/pages/corporate/CorporatePriceTable.astro";
+import { siteText } from "../data/siteText";
 
 const base = import.meta.env.BASE_URL;
+const pageText = siteText.pages.corporate;
 ---
 
-<BaseLayout title="Корпоративне навчання">
+<BaseLayout title={pageText.title}>
   <main class="page-corporate">
     <CorporateHero base={base} className="sectionShell section--a" />
     <CorporateBenefits className="sectionShell section--b" />
     <Process
       className="sectionShell section--a"
-      steps={[
-        { text: "Знайомство з компанією, її<br/>потребами та ціллю навчання" },
-        { text: "Оцінка рівня кожного студента<br/>та формування відповідних груп" },
-        { text: "Індивідуальний навчальний план<br/>під запит компанії та рівень груп" },
-        { text: "Початок<br/>навчання" },
-        { text: "Щомісячна звітність про<br/>відвідуваність і успішність" },
-      ]}
-      footnote="* Кожна корпоративна група отримує план курсу, його опис, перелік лексичних та граматичних тем"
+      steps={pageText.processSteps}
+      footnote={pageText.processFootnote}
     />
     <slot />
 

@@ -1,0 +1,46 @@
+---
+import { siteText } from "../../data/siteText";
+
+type Network = "instagram" | "tiktok";
+type Size = "sm" | "md" | "lg";
+
+const {
+  href,
+  network,
+  ariaLabel,
+  className = "",
+  size = "md",
+} = Astro.props as {
+  href: string;
+  network: Network;
+  ariaLabel?: string;
+  className?: string;
+  size?: Size;
+};
+
+const iconLabel =
+  ariaLabel ??
+  (network === "instagram" ? siteText.shared.social.instagramLabel : siteText.shared.social.tiktokLabel);
+const sizeClass = size !== "md" ? `socialSweep--${size}` : "";
+const classes = ["socialSweep", `socialSweep--${network}`, sizeClass, className]
+  .filter(Boolean)
+  .join(" ");
+---
+
+<a class={classes} href={href} aria-label={iconLabel} target="_blank" rel="noopener">
+  <span class="socialSweep__icon" aria-hidden="true">
+    {
+      network === "instagram" ? (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3.25" y="3.25" width="17.5" height="17.5" rx="5.2"></rect>
+          <circle cx="12" cy="12" r="4"></circle>
+          <circle cx="17.35" cy="6.65" r="1.15" fill="currentColor" stroke="none"></circle>
+        </svg>
+      ) : (
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M15.2 3.2c.26 1.66 1.2 2.77 2.9 3.24v2.27c-1.1-.05-2.08-.39-2.9-.99v4.61a4.75 4.75 0 1 1-4.75-4.75c.35 0 .68.04.99.1v2.33a2.36 2.36 0 1 0 1.43 2.18V3.2h2.33z"></path>
+        </svg>
+      )
+    }
+  </span>
+</a>

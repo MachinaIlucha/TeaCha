@@ -1,0 +1,98 @@
+.socialSweep {
+  --social-size: 44px;
+  --social-icon-size: 34px;
+  --social-color: #334155;
+  --social-ease: cubic-bezier(0.31, -0.105, 0.43, 1.59);
+
+  position: relative;
+  isolation: isolate;
+  display: inline-grid;
+  place-items: center;
+  width: var(--social-size);
+  height: var(--social-size);
+  border-radius: 28%;
+  text-decoration: none;
+  background: #fff;
+  overflow: hidden;
+  opacity: 0.99;
+  box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.18);
+  transition: transform 0.35s var(--social-ease), box-shadow 0.35s var(--social-ease);
+}
+
+.socialSweep::before {
+  content: "";
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  left: -110%;
+  top: 90%;
+  background: var(--social-color);
+  transform: rotate(45deg);
+  transition: all 0.35s var(--social-ease);
+  z-index: 0;
+}
+
+.socialSweep__icon {
+  position: relative;
+  z-index: 1;
+  width: var(--social-icon-size);
+  height: var(--social-icon-size);
+  color: var(--social-color);
+  transform: scale(0.8);
+  transition: all 0.35s var(--social-ease);
+}
+
+.socialSweep__icon > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.socialSweep:hover::before,
+.socialSweep:focus-visible::before {
+  left: -10%;
+  top: -10%;
+}
+
+.socialSweep:hover .socialSweep__icon,
+.socialSweep:focus-visible .socialSweep__icon {
+  color: #fff;
+  transform: scale(1);
+}
+
+.socialSweep:focus-visible {
+  outline: none;
+  box-shadow:
+    var(--focus-ring),
+    0 8px 20px -6px rgba(0, 0, 0, 0.22);
+}
+
+.socialSweep:active {
+  transform: translateY(1px);
+}
+
+.socialSweep--instagram {
+  --social-color: #e1306c;
+}
+
+.socialSweep--tiktok {
+  --social-color: #111827;
+}
+
+.socialSweep--sm {
+  --social-size: 38px;
+  --social-icon-size: 30px;
+}
+
+.socialSweep--lg {
+  --social-size: 90px;
+  --social-icon-size: 54px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .socialSweep,
+  .socialSweep::before,
+  .socialSweep__icon {
+    transition: none !important;
+  }
+}

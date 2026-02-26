@@ -4,9 +4,11 @@
  * Design & development: Ілля Пінчук Вадимович
  * © 2026. All rights reserved.
  */
+import { siteText } from "../../../data/siteText";
 
 const { className = "" } = Astro.props;
 const sectionClass = ["cnWhy", className].filter(Boolean).join(" ");
+const text = siteText.sections.chineseWhy;
 ---
 
 <section class={sectionClass} data-reveal="scroll">
@@ -16,10 +18,10 @@ const sectionClass = ["cnWhy", className].filter(Boolean).join(" ");
       data-reveal="scroll"
     >
       <h2 class="sectionTitle__line sectionTitle__line--a" data-reveal-item="1">
-        ЧОМУ САМЕ
+        {text.titleTop}
       </h2>
       <div class="sectionTitle__line sectionTitle__line--b" data-reveal-item="2">
-        [ TEACHA ]?
+        {text.titleBottom}
       </div>
     </header>
 
@@ -31,7 +33,7 @@ const sectionClass = ["cnWhy", className].filter(Boolean).join(" ");
             <path d="M12 10.5a2 2 0 100-4 2 2 0 000 4z" stroke="currentColor" stroke-width="2"/>
           </svg>
         </div>
-        <div class="cnCard__text">Онлайн та офлайн у Києві</div>
+        <div class="cnCard__text">{text.items[0]}</div>
       </article>
 
       <article class="cnCard">
@@ -41,7 +43,7 @@ const sectionClass = ["cnWhy", className].filter(Boolean).join(" ");
             <path d="M12 21a9 9 0 100-18 9 9 0 000 18z" stroke="currentColor" stroke-width="2"/>
           </svg>
         </div>
-        <div class="cnCard__text">5 років у сфері освіти</div>
+        <div class="cnCard__text">{text.items[1]}</div>
       </article>
 
       <article class="cnCard">
@@ -51,7 +53,7 @@ const sectionClass = ["cnWhy", className].filter(Boolean).join(" ");
             <path d="M3 8v8l9 5 9-5V8" stroke="currentColor" stroke-width="2"/>
           </svg>
         </div>
-        <div class="cnCard__text">Викладачі з вищою педагогічною освітою</div>
+        <div class="cnCard__text">{text.items[2]}</div>
       </article>
 
       <article class="cnCard">
@@ -62,7 +64,7 @@ const sectionClass = ["cnWhy", className].filter(Boolean).join(" ");
           </svg>
         </div>
         <div class="cnCard__text">
-          З нами студенти складають іспити, переїжджають за кордон, проходять співбесіди і отримують підвищення
+          {text.items[3]}
         </div>
       </article>
 
@@ -73,7 +75,7 @@ const sectionClass = ["cnWhy", className].filter(Boolean).join(" ");
             <path d="M9 8h6M9 12h6M9 16h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           </svg>
         </div>
-        <div class="cnCard__text">Індивідуальний навчальний план для кожного</div>
+        <div class="cnCard__text">{text.items[4]}</div>
       </article>
 
       <article class="cnCard">
@@ -83,7 +85,7 @@ const sectionClass = ["cnWhy", className].filter(Boolean).join(" ");
             <path d="M4 7h0M4 12h0M4 17h0" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
           </svg>
         </div>
-        <div class="cnCard__text">Чітка структура уроків і дедлайни навчання</div>
+        <div class="cnCard__text">{text.items[5]}</div>
       </article>
     </div>
   </div>

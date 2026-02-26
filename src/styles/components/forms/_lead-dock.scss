@@ -23,8 +23,8 @@
 
   /* effects */
   --leadDock-shadow: 0 -14px 34px rgba(0, 0, 0, 0.12);
-  --leadDock-btn-shadow: 0 14px 30px rgba(219, 31, 50, 0.24);
-  --leadDock-btn-shadow-hover: 0 18px 38px rgba(219, 31, 50, 0.28);
+  --leadDock-btn-shadow: var(--cta-shadow);
+  --leadDock-btn-shadow-hover: var(--cta-shadow-hover);
 
   /* page offset so dock doesn't cover content */
   --leadDock-pad: var(--leadDock-h-mobile);
@@ -100,7 +100,6 @@ body {
     padding-inline: 22px;
     border-radius: var(--radius-pill);
 
-    background: var(--leadDock-ink);
     color: #fff;
 
     font-weight: 800;
@@ -110,8 +109,9 @@ body {
 
     box-shadow: var(--leadDock-btn-shadow);
     transition:
-      transform var(--dur-1) var(--ease),
-      box-shadow var(--dur-1) var(--ease);
+      transform 220ms var(--ease),
+      box-shadow 220ms var(--ease),
+      background-position 400ms ease-in-out;
   }
 
   &__btn--submit {
@@ -123,12 +123,11 @@ body {
   }
 
   &__btn:hover {
-    transform: translateY(-1px);
-    box-shadow: var(--leadDock-btn-shadow-hover);
+    transform: translateY(-2px) scale(1.02);
   }
 
   &__btn:active {
-    transform: translateY(0);
+    transform: translateY(0) scale(0.99);
   }
 
   &__btn:focus-visible {

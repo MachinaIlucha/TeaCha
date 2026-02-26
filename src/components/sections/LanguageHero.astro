@@ -5,6 +5,8 @@
  * © 2026. All rights reserved.
  */
 
+import { siteText } from "../../data/siteText";
+
 type TitlePart =
   | {
       text: string;
@@ -18,10 +20,10 @@ const {
   base,
   titleParts = [],
   subtitle = "",
-  ctaText = "ХОЧУ ПРОБНИЙ УРОК",
+  ctaText = siteText.sections.languageHero.defaultCtaText,
   className = "",
   imgSrc,
-  imgAlt = "Фото викладачів",
+  imgAlt = siteText.sections.languageHero.defaultImageAlt,
   imgLoading = "lazy",
   imgDecoding = "async",
   imgFetchpriority = "auto",
@@ -29,7 +31,7 @@ const {
   imgHeight = 2488,
 } = Astro.props as {
   base: string;
-  titleParts?: TitlePart[];
+  titleParts?: ReadonlyArray<TitlePart>;
   subtitle?: string;
   ctaText?: string;
   className?: string;

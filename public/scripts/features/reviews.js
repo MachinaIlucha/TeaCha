@@ -1,6 +1,9 @@
 import { qs } from "../core/dom.js";
 import { escapeHtml } from "../core/escape.js";
 import { prefersReducedMotion } from "../core/motion.js";
+import { getClientText } from "../core/site-text.js";
+
+const text = getClientText();
 
 async function predecode(src) {
   if (!src) return;
@@ -92,12 +95,12 @@ export function initReviews() {
     </div>
 
     <div class="r2Body">
-      <p class="r2Row"><strong>Запит:</strong> <span>${escapeHtml(
+      <p class="r2Row"><strong>${escapeHtml(text.reviews.requestLabel)}</strong> <span>${escapeHtml(
         data.request,
       )}</span></p>
 
       <p class="r2Row">
-        <strong>${escapeHtml((data.pointA?.label ?? "Точка А") + ":")}</strong>
+        <strong>${escapeHtml((data.pointA?.label ?? text.reviews.pointADefault) + ":")}</strong>
         <span class="r2Meta">${escapeHtml(
           `${data.pointA?.date ?? ""} • ${data.pointA?.level ?? ""}`.trim(),
         )}</span>
@@ -105,7 +108,7 @@ export function initReviews() {
       </p>
 
       <p class="r2Row">
-        <strong>${escapeHtml((data.pointB?.label ?? "Точка Б") + ":")}</strong>
+        <strong>${escapeHtml((data.pointB?.label ?? text.reviews.pointBDefault) + ":")}</strong>
         <span class="r2Meta">${escapeHtml(
           `${data.pointB?.date ?? ""} • ${data.pointB?.level ?? ""}`.trim(),
         )}</span>
@@ -125,7 +128,7 @@ export function initReviews() {
 
   const setImage = (imgEl, data) => {
     imgEl.src = data.img;
-    imgEl.alt = `Фото: ${data.name}`;
+    imgEl.alt = `${text.reviews.photoAltPrefix}${data.name}`;
   };
 
   // Mobile height stabilization (matches CSS: desktop starts at 64rem)

@@ -1,5 +1,7 @@
 ---
 import "../styles/main.scss";
+import { ClientRouter } from "astro:transitions";
+import { siteText } from "../data/siteText";
 
 import Header from "../components/layout/Header.astro";
 import Footer from "../components/layout/Footer.astro";
@@ -44,11 +46,11 @@ const {
 const bodyClassName = [bodyClass, isHome ? "page--home" : ""].filter(Boolean).join(" ");
 const base = import.meta.env.BASE_URL;
 const site = Astro.site ?? new URL("https://teacha.pages.dev");
-const siteName = "TeaCha";
-const defaultTitle = "TeaCha - школа англійської та китайської мов у Києві";
-const defaultDescription =
-  "TeaCha - школа англійської та китайської мов у Києві: онлайн та офлайн курси, індивідуальні заняття, міні-групи й корпоративне навчання.";
-const defaultOgImage = "/img/hero/home/home-hero-background.jpg";
+const siteName = siteText.seo.siteName;
+const defaultTitle = siteText.seo.defaultTitle;
+const defaultDescription = siteText.seo.defaultDescription;
+const defaultOgImage = siteText.seo.defaultOgImage;
+const contact = siteText.shared.contact;
 
 const toAbsoluteUrl = (value: string) => {
   try {
@@ -83,20 +85,18 @@ const alternateLinks = (hreflangs.length
 const normalizedBreadcrumbs = breadcrumbs.filter((item) => item?.name && item?.href);
 const breadcrumbTrail = normalizedBreadcrumbs.length
   ? [
-      { name: "Головна", href: "/" },
+      { name: siteText.seo.homeBreadcrumb, href: "/" },
       ...normalizedBreadcrumbs.filter((item) => item.href !== "/" && item.href !== ""),
     ]
   : [];
 
-const seoLinks = [
-  { href: `${base}english`, label: "Курси англійської TeaCha" },
-  { href: `${base}chinese`, label: "Курси китайської TeaCha" },
-  { href: `${base}corporate`, label: "Корпоративне навчання TeaCha" },
-  { href: `${base}prices`, label: "Ціни на навчання TeaCha" },
-  { href: `${base}products`, label: "Продукція TeaCha" },
-];
+const seoLinks = siteText.seo.links.map((item) => ({
+  href: `${base}${item.href}`,
+  label: item.label,
+}));
 
 const siteUrl = site.toString();
+const clientTextJson = JSON.stringify(siteText.client).replace(/</g, "\\u003c");
 
 const organizationSchema: JsonLd = {
   "@context": "https://schema.org",
@@ -105,13 +105,13 @@ const organizationSchema: JsonLd = {
   url: siteUrl,
   image: ogImageUrl,
   logo: toAbsoluteUrl("/img/layout/logo.png"),
-  email: "teachaschoolkyiv@gmail.com",
-  telephone: "+380634602120",
+  email: contact.email,
+  telephone: contact.phones[0].raw,
   contactPoint: [
     {
       "@type": "ContactPoint",
       contactType: "customer support",
-      telephone: "+380634602120",
+      telephone: contact.phones[0].raw,
       areaServed: "UA",
       availableLanguage: ["uk"],
     },
@@ -133,21 +133,21 @@ const organizationSchema: JsonLd = {
     },
   ],
   sameAs: [
-    "https://www.instagram.com/teacha_english_chinese?igsh=MW15MzJpdmVqemRidg==",
-    "https://www.tiktok.com/@school.teacha?_r=1&_t=ZM-92xtLcPpblU",
+    contact.instagramUrl,
+    contact.tiktokUrl,
   ],
   address: {
     "@type": "PostalAddress",
     addressCountry: "UA",
-    addressLocality: "Київ",
-    streetAddress: "проспект Академіка Палладіна, 44а",
+    addressLocality: contact.city,
+    streetAddress: contact.street,
   },
   geo: {
     "@type": "GeoCoordinates",
     latitude: 50.47026,
     longitude: 30.357656,
   },
-  hasMap: "https://maps.google.com/?q=50.47026,30.357656",
+  hasMap: contact.mapUrl,
 };
 
 const websiteSchema: JsonLd = {
@@ -193,6 +193,7 @@ const jsonLdItems = [organizationSchema, websiteSchema, webpageSchema, breadcrum
 <!doctype html>
 <html lang="uk" class="js">
   <head>
+    <ClientRouter />
     <noscript>
       <style>
         {`
@@ -242,6 +243,7 @@ const jsonLdItems = [organizationSchema, websiteSchema, webpageSchema, breadcrum
         <script type="application/ld+json" set:html={JSON.stringify(item)} />
       ))
     }
+    <script type="application/json" id="teacha-client-text" set:html={clientTextJson}></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

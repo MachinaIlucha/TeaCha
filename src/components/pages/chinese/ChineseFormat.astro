@@ -4,9 +4,11 @@
  * Design & development: Ілля Пінчук Вадимович
  * © 2026. All rights reserved.
  */
+import { siteText } from "../../../data/siteText";
 
 const { className = "" } = Astro.props;
 const sectionClass = ["cnFormat", className].filter(Boolean).join(" ");
+const text = siteText.sections.chineseFormat;
 ---
 
 <section class={sectionClass} data-reveal="scroll">
@@ -16,10 +18,10 @@ const sectionClass = ["cnFormat", className].filter(Boolean).join(" ");
       data-reveal="scroll"
     >
       <h2 class="sectionTitle__line sectionTitle__line--a" data-reveal-item="1">
-        ФОРМАТ
+        {text.titleTop}
       </h2>
       <div class="sectionTitle__line sectionTitle__line--b" data-reveal-item="2">
-        [ НАВЧАННЯ ]
+        {text.titleBottom}
       </div>
     </header>
 
@@ -39,8 +41,8 @@ const sectionClass = ["cnFormat", className].filter(Boolean).join(" ");
           </svg>
         </div>
         <div class="cnCard__content">
-          <div class="cnCard__k">Тривалість заняття</div>
-          <div class="cnCard__v">60/90 хв</div>
+          <div class="cnCard__k">{text.durationTitle}</div>
+          <div class="cnCard__v">{text.durationValue}</div>
         </div>
       </article>
 
@@ -58,8 +60,8 @@ const sectionClass = ["cnFormat", className].filter(Boolean).join(" ");
           </svg>
         </div>
         <div class="cnCard__content">
-          <div class="cnCard__k">Формати</div>
-          <div class="cnCard__v">Індивідуальні, парні, групові (3-5 ос.)</div>
+          <div class="cnCard__k">{text.formatsTitle}</div>
+          <div class="cnCard__v">{text.formatsValue}</div>
         </div>
       </article>
 
@@ -77,8 +79,8 @@ const sectionClass = ["cnFormat", className].filter(Boolean).join(" ");
           </svg>
         </div>
         <div class="cnCard__content">
-          <div class="cnCard__k">Офлайн</div>
-          <div class="cnCard__v">м.Київ, метро Академмістечко</div>
+          <div class="cnCard__k">{text.offlineTitle}</div>
+          <div class="cnCard__v">{text.offlineValue}</div>
         </div>
       </article>
 
@@ -103,8 +105,8 @@ const sectionClass = ["cnFormat", className].filter(Boolean).join(" ");
           </svg>
         </div>
         <div class="cnCard__content">
-          <div class="cnCard__k">Онлайн</div>
-          <div class="cnCard__v">Zoom / Google Meet / Microsoft Teams</div>
+          <div class="cnCard__k">{text.onlineTitle}</div>
+          <div class="cnCard__v">{text.onlineValue}</div>
         </div>
       </article>
 
@@ -120,10 +122,8 @@ const sectionClass = ["cnFormat", className].filter(Boolean).join(" ");
           </svg>
         </div>
         <div class="cnCard__content">
-          <div class="cnCard__k">Матеріали</div>
-          <div class="cnCard__v">
-            Доступ до Miro, Canva або Figma з усіма матеріалами з уроків
-          </div>
+          <div class="cnCard__k">{text.materialsTitle}</div>
+          <div class="cnCard__v">{text.materialsValue}</div>
         </div>
       </article>
 
@@ -143,10 +143,8 @@ const sectionClass = ["cnFormat", className].filter(Boolean).join(" ");
           </svg>
         </div>
         <div class="cnCard__content">
-          <div class="cnCard__k">Додатково</div>
-          <div class="cnCard__v">
-            Індивідуальна програма навчання + онлайн-словник
-          </div>
+          <div class="cnCard__k">{text.extraTitle}</div>
+          <div class="cnCard__v">{text.extraValue}</div>
         </div>
       </article>
     </div>

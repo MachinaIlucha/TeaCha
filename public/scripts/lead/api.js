@@ -1,17 +1,20 @@
 import { toast } from "../core/toast.js"
+import { getClientText } from "../core/site-text.js";
+
+const text = getClientText();
 
 const userMessageByCode = (code) => {
   switch (code) {
     case "VALIDATION":
-      return "Перевірте ім'я та контакт"
+      return text.lead.api.validation
     case "BAD_REQUEST":
-      return "Не вдалося обробити дані форми"
+      return text.lead.api.badRequest
     case "UPSTREAM":
-      return "Сервіс тимчасово недоступний. Спробуйте пізніше"
+      return text.lead.api.upstream
     case "SERVER_CONFIG":
-      return "Технічні роботи. Спробуйте трохи пізніше"
+      return text.lead.api.serverConfig
     default:
-      return "Не вдалося надіслати заявку. Спробуйте ще раз"
+      return text.lead.api.fallback
   }
 }
 
@@ -25,11 +28,11 @@ export const postLead = async ({ name, contact, source }) => {
   const json = await res.json().catch(() => ({}))
 
   if (!res.ok || !json.ok) {
-    toast.error("Не надіслано", userMessageByCode(json?.code))
+    toast.error(text.lead.api.failedTitle, userMessageByCode(json?.code))
     console.error("Lead submit failed", { status: res.status, json })
     return { ok: false, json, status: res.status }
   }
 
-  toast.success("Надіслано", "Ми скоро напишемо вам 🙂")
+  toast.success(text.lead.api.successTitle, text.lead.api.successText)
   return { ok: true, json, status: res.status }
 }

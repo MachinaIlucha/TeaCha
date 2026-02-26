@@ -1,0 +1,43 @@
+/*!
+ * TeaCha website
+ * Design & development: Ілля Пінчук Вадимович
+ * © 2026. All rights reserved.
+ */
+
+/* Unified red CTA skin: manage gradient and glow in one place */
+.heroPill,
+.heroLangBtn,
+.hero--lang .hero__pill,
+.leadDock__btn,
+.startLead__submit,
+.footerForm__submit,
+.badge--round {
+  background-image: var(--cta-grad);
+  background-size: 240% 100%;
+  background-position: 0% 50%;
+  box-shadow: var(--cta-shadow);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .heroPill:hover,
+  .heroLangBtn:hover,
+  .hero--lang .hero__pill:hover,
+  .leadDock__btn:hover,
+  .startLead__submit:hover,
+  .footerForm__submit:hover,
+  .badge--round:hover {
+    background-position: 100% 50%;
+    box-shadow: var(--cta-shadow-hover);
+    filter: saturate(1.07) brightness(1.03);
+  }
+}
+
+.heroPill:active,
+.heroLangBtn:active,
+.hero--lang .hero__pill:active,
+.leadDock__btn:active,
+.startLead__submit:active,
+.footerForm__submit:active,
+.badge--round:active {
+  filter: brightness(0.98);
+}

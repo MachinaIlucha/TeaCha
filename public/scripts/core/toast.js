@@ -1,6 +1,8 @@
 import { escapeHtml } from "./escape.js";
+import { getClientText } from "./site-text.js";
 
 const root = () => document.querySelector(".toasts");
+const clientText = getClientText();
 
 const show = ({ type = "success", title, text, timeout = 3500 }) => {
   const host = root();
@@ -14,7 +16,7 @@ const show = ({ type = "success", title, text, timeout = 3500 }) => {
       <p class="toast__title">${escapeHtml(title)}</p>
       ${text ? `<p class="toast__text">${escapeHtml(text)}</p>` : ""}
     </div>
-    <button class="toast__close" type="button" aria-label="Закрити">✕</button>
+    <button class="toast__close" type="button" aria-label="${escapeHtml(clientText.toast.closeAria)}">✕</button>
   `;
 
   const close = () => {

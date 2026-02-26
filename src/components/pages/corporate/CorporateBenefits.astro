@@ -3,9 +3,11 @@
  * TeaCha website
  * © 2026. All rights reserved.
  */
+import { siteText } from "../../../data/siteText";
 
 const { className = "" } = Astro.props;
 const sectionClass = ["cBenefits", className].filter(Boolean).join(" ");
+const text = siteText.sections.corporateBenefits;
 ---
 
 <section class={sectionClass} data-reveal="scroll">
@@ -20,10 +22,8 @@ const sectionClass = ["cBenefits", className].filter(Boolean).join(" ");
             <path d="M12 12l8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           </svg>
         </div>
-        <h3 class="cBCard__h">ОРІЄНТАЦІЯ НА ПОТРЕБИ ВАШОЇ КОМПАНІЇ</h3>
-        <p class="cBCard__p">
-          Ми підготуємо персоналізовану навчальну програму, відповідно до ваших потреб.
-        </p>
+        <h3 class="cBCard__h">{text.items[0].title}</h3>
+        <p class="cBCard__p">{text.items[0].text}</p>
       </article>
 
       <article class="cBCard">
@@ -34,10 +34,8 @@ const sectionClass = ["cBenefits", className].filter(Boolean).join(" ");
             <path d="M6 20h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           </svg>
         </div>
-        <h3 class="cBCard__h">ІНДИВІДУАЛЬНИЙ КУРС ЗАМІСТЬ ТИПОВОГО ПІДРУЧНИКА</h3>
-        <p class="cBCard__p">
-          Ми створюємо уроки саме за тими напрямами, з якими працюєте ви, а не використовуємо стандартні курси.
-        </p>
+        <h3 class="cBCard__h">{text.items[1].title}</h3>
+        <p class="cBCard__p">{text.items[1].text}</p>
       </article>
 
       <article class="cBCard">
@@ -49,10 +47,8 @@ const sectionClass = ["cBenefits", className].filter(Boolean).join(" ");
             <path d="M18 8a3 3 0 110 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           </svg>
         </div>
-        <h3 class="cBCard__h">ФОРМУВАННЯ ГРУП</h3>
-        <p class="cBCard__p">
-          Студенти навчаються в групах, підібраних за рівнем володіння мовою та сферою діяльності.
-        </p>
+        <h3 class="cBCard__h">{text.items[2].title}</h3>
+        <p class="cBCard__p">{text.items[2].text}</p>
       </article>
 
       <article class="cBCard">
@@ -64,10 +60,8 @@ const sectionClass = ["cBenefits", className].filter(Boolean).join(" ");
             <path d="M3 16l9 5 9-5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
           </svg>
         </div>
-        <h3 class="cBCard__h">МАТЕРІАЛИ</h3>
-        <p class="cBCard__p">
-          Сучасні іноземні ресурси бізнес-англійської, авторські розробки, актуальні статті, відеоматеріали
-        </p>
+        <h3 class="cBCard__h">{text.items[3].title}</h3>
+        <p class="cBCard__p">{text.items[3].text}</p>
       </article>
     </div>
   </div>

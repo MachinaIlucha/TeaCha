@@ -5,13 +5,17 @@
  * © 2026. All rights reserved.
  */
 
+import { siteText } from "../../data/siteText";
+
 const base = import.meta.env.BASE_URL;
+const forms = siteText.shared.forms;
+const docs = siteText.shared.docs;
 
 const {
   className = "",
   inputClass = "consent__check",
   required = true,
-  invalidMessage = "Потрібно погодитися з політикою конфіденційності"
+  invalidMessage = forms.consentInvalidMessage
 } = Astro.props;
 ---
 
@@ -28,13 +32,13 @@ const {
   <span class="consent__box" aria-hidden="true"></span>
 
   <span class="consent__text">
-    Я підтверджую, що ознайомився(-лася) та погоджуюся з умовами
+    {forms.consentText}
     <a
-      href={`${base}docs/polityka-konfidentsiinosti.pdf`}
+      href={`${base}${docs.privacyFile}`}
       target="_blank"
       rel="noopener"
     >
-      Політики конфіденційності
+      {forms.consentLinkText}
     </a>
   </span>
 </label>

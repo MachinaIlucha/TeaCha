@@ -1,4 +1,7 @@
 import { toast } from "../core/toast.js";
+import { getClientText } from "../core/site-text.js";
+
+const text = getClientText();
 
 const isLetter = (ch) => /[A-Za-zА-Яа-яІіЇїЄєҐґ]/.test(ch);
 
@@ -98,14 +101,14 @@ const isValidTG = (value) => /^@[A-Za-z0-9_]{5,32}$/.test(value);
  */
 const attachUaNativeMessages = ({ nameInput, contactInput, consentInput }) => {
   nameInput?.addEventListener("invalid", () => {
-    nameInput.setCustomValidity("Введіть імʼя");
+    nameInput.setCustomValidity(text.lead.validation.requiredName);
   });
   nameInput?.addEventListener("input", () => {
     nameInput.setCustomValidity("");
   });
 
   contactInput?.addEventListener("invalid", () => {
-    contactInput.setCustomValidity("Введіть телефон або Telegram");
+    contactInput.setCustomValidity(text.lead.validation.requiredContact);
   });
   contactInput?.addEventListener("input", () => {
     contactInput.setCustomValidity("");
@@ -113,7 +116,7 @@ const attachUaNativeMessages = ({ nameInput, contactInput, consentInput }) => {
 
   if (consentInput) {
     consentInput.addEventListener("invalid", () => {
-      consentInput.setCustomValidity("Потрібно підтвердити згоду");
+      consentInput.setCustomValidity(text.lead.validation.requiredConsent);
     });
     consentInput.addEventListener("change", () => {
       consentInput.setCustomValidity("");
@@ -174,12 +177,12 @@ export const attachLeadValidation = (form) => {
 
     if (!isValidName(name)) {
       e.preventDefault();
-      nameInput.setCustomValidity("Імʼя має містити щонайменше 2 літери");
+      nameInput.setCustomValidity(text.lead.validation.invalidName);
       form.reportValidity();
       nameInput.setCustomValidity("");
       toast.error(
-        "Перевірте ім'я",
-        "Мінімум 2 символи. Лише букви, пробіл, ' та ,",
+        text.lead.validation.invalidNameToastTitle,
+        text.lead.validation.invalidNameToastText,
       );
       nameInput.focus();
       return;
@@ -190,12 +193,12 @@ export const attachLeadValidation = (form) => {
     if (mode === "phone") {
       if (!isValidUA(contact)) {
         e.preventDefault();
-        contactInput.setCustomValidity("Формат: +380XXXXXXXXX");
+        contactInput.setCustomValidity(text.lead.validation.invalidPhone);
         form.reportValidity();
         contactInput.setCustomValidity("");
         toast.error(
-          "Перевірте телефон",
-          "Формат: +380XXXXXXXXX (9 цифр після 380)",
+          text.lead.validation.invalidPhoneToastTitle,
+          text.lead.validation.invalidPhoneToastText,
         );
         contactInput.focus();
         return;
@@ -203,26 +206,24 @@ export const attachLeadValidation = (form) => {
     } else if (mode === "tg") {
       if (!isValidTG(contact)) {
         e.preventDefault();
-        contactInput.setCustomValidity("Формат: @username (5–32 символи)");
+        contactInput.setCustomValidity(text.lead.validation.invalidTelegram);
         form.reportValidity();
         contactInput.setCustomValidity("");
         toast.error(
-          "Перевірте Telegram",
-          "Формат: @username (5–32 символи: букви/цифри/_)",
+          text.lead.validation.invalidTelegramToastTitle,
+          text.lead.validation.invalidTelegramToastText,
         );
         contactInput.focus();
         return;
       }
     } else {
       e.preventDefault();
-      contactInput.setCustomValidity(
-        "Вкажіть телефон (+380…) або Telegram (@username)",
-      );
+      contactInput.setCustomValidity(text.lead.validation.invalidContact);
       form.reportValidity();
       contactInput.setCustomValidity("");
       toast.error(
-        "Перевірте контакт",
-        "Вкажіть телефон (+380…) або Telegram (@username)",
+        text.lead.validation.invalidContactToastTitle,
+        text.lead.validation.invalidContactToastText,
       );
       contactInput.focus();
     }

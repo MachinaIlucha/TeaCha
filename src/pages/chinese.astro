@@ -15,36 +15,28 @@ import Process from "../components/sections/Process.astro";
 import PriceRates from "../components/pages/price/PriceRates.astro";
 import Reviews from "../components/sections/Reviews.astro";
 import Faq from "../components/sections/Faq.astro";
+import { siteText } from "../data/siteText";
 
 const base = import.meta.env.BASE_URL;
+const pageText = siteText.pages.chinese;
 ---
 
 <BaseLayout
-  title="Курси китайської мови"
-  description="Курси китайської в TeaCha: індивідуальний план, практика розмовної мови, онлайн та офлайн у Києві."
+  title={pageText.title}
+  description={pageText.description}
   ogImage="/img/hero/chinese/chinese-language-hero.jpg"
-  breadcrumbs={[{ name: "Курси китайської", href: "/chinese/" }]}
+  breadcrumbs={[{ name: pageText.breadcrumb, href: "/chinese/" }]}
   bodyClass="page-chinese"
 >
   <LanguageHero
     base={base}
     className="sectionShell section--a"
     imgSrc={`${base}img/hero/chinese/chinese-language-hero.webp`}
-    imgAlt="Заняття з китайської мови в TeaCha"
+    imgAlt={pageText.hero.imgAlt}
     imgLoading="eager"
     imgFetchpriority="high"
-    titleParts={[
-      { text: "ПОЧНИ" },
-      { br: true },
-      { text: "ВИВЧАТИ" },
-      { br: true },
-      { text: "МОВУ" },
-      { br: true },
-      { text: "ДЛЯ НОВИХ" },
-      { br: true },
-      { text: "МОЖЛИВОСТЕЙ", accent: true },
-    ]}
-    subtitle="Онлайн та офлайн у Києві • Індивідуальний план • Чітка структура уроків"
+    titleParts={pageText.hero.titleParts}
+    subtitle={pageText.hero.subtitle}
   />
 
   <ChineseWhy className="sectionShell section--b" />

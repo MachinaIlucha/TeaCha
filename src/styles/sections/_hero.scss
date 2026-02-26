@@ -109,8 +109,7 @@
     justify-content: center;
 
     border-radius: var(--radius-pill);
-    background-color: var(--red);
-    border: 2px solid var(--red);
+    border: 0;
     color: var(--white);
 
     font-weight: 700;
@@ -130,44 +129,27 @@
 
     cursor: pointer;
 
-    box-shadow:
-      0 2px 0 rgba(0, 0, 0, 0.16),
-      0 8px 18px rgba(219, 31, 50, 0.18);
-
+    transform: translateY(0) scale(1);
     transition:
-      transform var(--dur-hero) var(--ease-hero),
-      box-shadow var(--dur-hero) var(--ease-hero),
-      filter var(--dur-hero) var(--ease-hero);
+      background-position 0.4s ease-in-out,
+      transform 0.22s var(--ease),
+      box-shadow 0.22s var(--ease),
+      filter 0.22s var(--ease);
 
     will-change: transform;
   }
 
   @media (hover: hover) and (pointer: fine) {
-    .heroPill,
-    .heroLangBtn {
-      transition:
-        transform var(--lang-dur) ease,
-        box-shadow var(--lang-dur) ease,
-        filter var(--lang-dur) ease !important;
-    }
-
     .heroPill:hover,
     .heroLangBtn:hover {
-      transform: translateY(var(--lang-hover-y)) !important;
-      filter: brightness(0.985) !important;
-      box-shadow:
-        0 2px 0 rgba(0, 0, 0, 0.18),
-        0 14px 30px rgba(219, 31, 50, 0.24) !important;
+      transform: translateY(-2px) scale(1.02);
     }
   }
 
   .heroPill:active,
   .heroLangBtn:active {
-    transform: translateY(0);
-    filter: brightness(0.95);
-    box-shadow:
-      0 2px 0 rgba(0, 0, 0, 0.18),
-      0 9px 18px rgba(219, 31, 50, 0.2);
+    transform: translateY(0) scale(0.99);
+    filter: brightness(0.98);
   }
 
   .heroPill:focus-visible,
@@ -204,8 +186,6 @@
     width: 104px;
     height: 104px;
     border-radius: 50%;
-
-    background: var(--red);
     color: var(--white);
 
     display: flex;
@@ -340,10 +320,6 @@
       padding: 0 22px;
       min-height: 52px;
       font-size: 17px;
-
-      box-shadow:
-        0 2px 0 rgba(0, 0, 0, 0.18),
-        0 10px 22px rgba(219, 31, 50, 0.22);
     }
 
     /* mobile badge off */

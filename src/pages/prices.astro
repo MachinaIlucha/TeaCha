@@ -9,26 +9,27 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import PriceRates from "../components/pages/price/PriceRates.astro";
 import CorporatePriceTable from "../components/pages/corporate/CorporatePriceTable.astro";
 import Faq from "../components/sections/Faq.astro";
+import { siteText } from "../data/siteText";
 
 const base = import.meta.env.BASE_URL;
+const pageText = siteText.pages.prices;
 ---
 
 <BaseLayout
-  title="Ціни на курси англійської та китайської"
-  description="Актуальні ціни TeaCha на індивідуальне, парне, групове та корпоративне навчання англійської і китайської мов у Києві та онлайн."
+  title={pageText.title}
+  description={pageText.description}
   ogImage="/img/hero/home/home-hero-background.jpg"
-  breadcrumbs={[{ name: "Ціни", href: "/prices/" }]}
+  breadcrumbs={[{ name: pageText.breadcrumb, href: "/prices/" }]}
   bodyClass="page-price"
 >
-  <section class="sectionShell section--a landingLinks">
+  <section class="sectionShell section--a landingLinks" data-reveal="scroll">
     <div class="container">
       <h1 class="sectionTitle sectionTitle--center sectionTitle--accentBottom landingLinks__title landingLinks__title--price">
-        <span class="sectionTitle__line sectionTitle__line--a">Ціни навчання</span>
-        <span class="sectionTitle__line sectionTitle__line--b">в TeaCha</span>
+        <span class="sectionTitle__line sectionTitle__line--a" data-reveal-item="1">{pageText.headingTop}</span>
+        <span class="sectionTitle__line sectionTitle__line--b" data-reveal-item="2">{pageText.headingBottom}</span>
       </h1>
-      <p class="landingLinks__lead landingLinks__lead--price">
-        Оберіть формат занять, порівняйте тарифи та запишіться на консультацію для підбору
-        оптимальної програми.
+      <p class="landingLinks__lead landingLinks__lead--price" data-reveal-item="3">
+        {pageText.lead}
       </p>
     </div>
   </section>

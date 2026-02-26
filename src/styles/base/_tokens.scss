@@ -77,6 +77,18 @@
   /* Focus */
   --focus-ring: 0 0 0 4px rgba(219, 31, 50, 0.18);
 
+  /* CTA gradient (closer to brand accent #DB1F32) */
+  --cta-grad: linear-gradient(
+    110deg,
+    #c91e31 0%,
+    #df3447 32%,
+    #f26374 50%,
+    #df3447 68%,
+    #c91e31 100%
+  );
+  --cta-shadow: 0 5px 15px rgba(219, 31, 50, 0.38);
+  --cta-shadow-hover: 0 8px 20px rgba(219, 31, 50, 0.45);
+
   /* Buttons (общие) */
   --btn-h: 56px;
   --btn-px: 28px;
@@ -98,8 +110,10 @@
   --shadow: var(--shadow-1);
   --container: var(--container-max);
 
-  --section-py: clamp(56px, 7vw, 90px);
-  --section-py-compact: clamp(40px, 6vw, 32px);
+  --section-py: clamp(48px, 6vw, 72px);
+  --section-py-compact: var(--section-py);
+  --hero-pt: clamp(28px, 4vw, 44px);
+  --home-hero-pt: clamp(16px, 2.8vw, 28px);
 }
 
 @media (min-width: 48rem) {

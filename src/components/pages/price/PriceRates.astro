@@ -3,216 +3,219 @@
  * TeaCha website
  * © 2026. All rights reserved.
  */
+import { siteText } from "../../../data/siteText";
+
 const { className = "" } = Astro.props;
 const contactHref = "#contacts";
+const priceText = siteText.sections.priceRates;
 ---
 
 <section class={`priceRates ${className}`} id="prices" data-prices>
   <div class="container priceRates__container">
     <div class="priceRates__inner">
       <p class="priceRates__hint" data-price-item="1">
-        Наведи на ціну та натисни, щоб записатися
+        {priceText.hint}
       </p>
 
       <header
         class="sectionTitle sectionTitle--center sectionTitle--accentBottom sectionTitle--stamped"
         data-price-item="2"
       >
-        <h2 class="sectionTitle__line sectionTitle__line--a">ВАРТІСТЬ</h2>
-        <div class="sectionTitle__line sectionTitle__line--b">[ НАВЧАННЯ ]</div>
+        <h2 class="sectionTitle__line sectionTitle__line--a">{priceText.titleTop}</h2>
+        <div class="sectionTitle__line sectionTitle__line--b">{priceText.titleBottom}</div>
       </header>
 
-      <div class="priceGroups" data-price-item="3" aria-label="Ціни">
-        <section class="priceGroup" aria-label="Індивідуальне навчання">
-          <h3 class="priceGroup__title">Індивідуальне</h3>
+      <div class="priceGroups" data-price-item="3" aria-label={priceText.groupsAria}>
+        <section class="priceGroup" aria-label={priceText.groups[0].ariaLabel}>
+          <h3 class="priceGroup__title">{priceText.groups[0].title}</h3>
 
           <div class="priceCards" role="list">
             <article class="priceCard" role="listitem">
-              <a class="priceCard__cta" href={contactHref}>ЗАПИСАТИСЬ</a>
-              <div class="priceCard__cap">1 урок</div>
+              <a class="priceCard__cta" href={contactHref}>{priceText.cta}</a>
+              <div class="priceCard__cap">{priceText.singleLessonLabel}</div>
               <div class="priceCard__single">
                 <div class="priceCard__value" data-price="individual.1.total">—</div>
-                <div class="priceCard__meta">1 урок</div>
+                <div class="priceCard__meta">{priceText.singleLessonLabel}</div>
               </div>
             </article>
 
             <article class="priceCard" role="listitem">
-              <a class="priceCard__cta" href={contactHref}>ЗАПИСАТИСЬ</a>
-              <div class="priceCard__cap">8 уроків</div>
+              <a class="priceCard__cta" href={contactHref}>{priceText.cta}</a>
+              <div class="priceCard__cap">{priceText.lessons8Label}</div>
               <div class="priceCard__split">
                 <div class="priceCard__col">
                   <div class="priceCard__value" data-price="individual.8.per">—</div>
-                  <div class="priceCard__meta">1 урок</div>
+                  <div class="priceCard__meta">{priceText.singleLessonLabel}</div>
                 </div>
                 <div class="priceCard__col priceCard__col--strong">
                   <div class="priceCard__value priceCard__value--strong" data-price="individual.8.total">—</div>
-                  <div class="priceCard__meta">8 уроків</div>
+                  <div class="priceCard__meta">{priceText.lessons8Label}</div>
                 </div>
               </div>
             </article>
 
             <article class="priceCard" role="listitem">
-              <a class="priceCard__cta" href={contactHref}>ЗАПИСАТИСЬ</a>
-              <div class="priceCard__cap">12 уроків</div>
+              <a class="priceCard__cta" href={contactHref}>{priceText.cta}</a>
+              <div class="priceCard__cap">{priceText.lessons12Label}</div>
               <div class="priceCard__split">
                 <div class="priceCard__col">
                   <div class="priceCard__value" data-price="individual.12.per">—</div>
-                  <div class="priceCard__meta">1 урок</div>
+                  <div class="priceCard__meta">{priceText.singleLessonLabel}</div>
                 </div>
                 <div class="priceCard__col priceCard__col--strong">
                   <div class="priceCard__value priceCard__value--strong" data-price="individual.12.total">—</div>
-                  <div class="priceCard__meta">12 уроків</div>
+                  <div class="priceCard__meta">{priceText.lessons12Label}</div>
                 </div>
               </div>
             </article>
 
             <article class="priceCard" role="listitem">
-              <a class="priceCard__cta" href={contactHref}>ЗАПИСАТИСЬ</a>
-              <div class="priceCard__cap">24 уроки</div>
+              <a class="priceCard__cta" href={contactHref}>{priceText.cta}</a>
+              <div class="priceCard__cap">{priceText.lessons24Label}</div>
               <div class="priceCard__split">
                 <div class="priceCard__col">
                   <div class="priceCard__value" data-price="individual.24.per">—</div>
-                  <div class="priceCard__meta">1 урок</div>
+                  <div class="priceCard__meta">{priceText.singleLessonLabel}</div>
                 </div>
                 <div class="priceCard__col priceCard__col--strong">
                   <div class="priceCard__value priceCard__value--strong" data-price="individual.24.total">—</div>
-                  <div class="priceCard__meta">24 уроки</div>
+                  <div class="priceCard__meta">{priceText.lessons24Label}</div>
                 </div>
               </div>
             </article>
           </div>
         </section>
 
-        <section class="priceGroup" aria-label="Парне навчання">
-          <h3 class="priceGroup__title">Парне (за 1 ос.)</h3>
+        <section class="priceGroup" aria-label={priceText.groups[1].ariaLabel}>
+          <h3 class="priceGroup__title">{priceText.groups[1].title}</h3>
 
           <div class="priceCards" role="list">
             <article class="priceCard" role="listitem">
-              <a class="priceCard__cta" href={contactHref}>ЗАПИСАТИСЬ</a>
-              <div class="priceCard__cap">1 урок</div>
+              <a class="priceCard__cta" href={contactHref}>{priceText.cta}</a>
+              <div class="priceCard__cap">{priceText.singleLessonLabel}</div>
               <div class="priceCard__single">
                 <div class="priceCard__value" data-price="pair.1.total">—</div>
-                <div class="priceCard__meta">1 урок</div>
+                <div class="priceCard__meta">{priceText.singleLessonLabel}</div>
               </div>
             </article>
 
             <article class="priceCard" role="listitem">
-              <a class="priceCard__cta" href={contactHref}>ЗАПИСАТИСЬ</a>
-              <div class="priceCard__cap">8 уроків</div>
+              <a class="priceCard__cta" href={contactHref}>{priceText.cta}</a>
+              <div class="priceCard__cap">{priceText.lessons8Label}</div>
               <div class="priceCard__split">
                 <div class="priceCard__col">
                   <div class="priceCard__value" data-price="pair.8.per">—</div>
-                  <div class="priceCard__meta">1 урок</div>
+                  <div class="priceCard__meta">{priceText.singleLessonLabel}</div>
                 </div>
                 <div class="priceCard__col priceCard__col--strong">
                   <div class="priceCard__value priceCard__value--strong" data-price="pair.8.total">—</div>
-                  <div class="priceCard__meta">8 уроків</div>
+                  <div class="priceCard__meta">{priceText.lessons8Label}</div>
                 </div>
               </div>
             </article>
 
             <article class="priceCard" role="listitem">
-              <a class="priceCard__cta" href={contactHref}>ЗАПИСАТИСЬ</a>
-              <div class="priceCard__cap">12 уроків</div>
+              <a class="priceCard__cta" href={contactHref}>{priceText.cta}</a>
+              <div class="priceCard__cap">{priceText.lessons12Label}</div>
               <div class="priceCard__split">
                 <div class="priceCard__col">
                   <div class="priceCard__value" data-price="pair.12.per">—</div>
-                  <div class="priceCard__meta">1 урок</div>
+                  <div class="priceCard__meta">{priceText.singleLessonLabel}</div>
                 </div>
                 <div class="priceCard__col priceCard__col--strong">
                   <div class="priceCard__value priceCard__value--strong" data-price="pair.12.total">—</div>
-                  <div class="priceCard__meta">12 уроків</div>
+                  <div class="priceCard__meta">{priceText.lessons12Label}</div>
                 </div>
               </div>
             </article>
 
             <article class="priceCard" role="listitem">
-              <a class="priceCard__cta" href={contactHref}>ЗАПИСАТИСЬ</a>
-              <div class="priceCard__cap">24 уроки</div>
+              <a class="priceCard__cta" href={contactHref}>{priceText.cta}</a>
+              <div class="priceCard__cap">{priceText.lessons24Label}</div>
               <div class="priceCard__split">
                 <div class="priceCard__col">
                   <div class="priceCard__value" data-price="pair.24.per">—</div>
-                  <div class="priceCard__meta">1 урок</div>
+                  <div class="priceCard__meta">{priceText.singleLessonLabel}</div>
                 </div>
                 <div class="priceCard__col priceCard__col--strong">
                   <div class="priceCard__value priceCard__value--strong" data-price="pair.24.total">—</div>
-                  <div class="priceCard__meta">24 уроки</div>
+                  <div class="priceCard__meta">{priceText.lessons24Label}</div>
                 </div>
               </div>
             </article>
           </div>
         </section>
 
-        <section class="priceGroup" aria-label="Групове навчання">
-          <h3 class="priceGroup__title">Групове (3–5 ос.)</h3>
+        <section class="priceGroup" aria-label={priceText.groups[2].ariaLabel}>
+          <h3 class="priceGroup__title">{priceText.groups[2].title}</h3>
 
           <div class="priceCards" role="list">
             <article class="priceCard" role="listitem">
-              <a class="priceCard__cta" href={contactHref}>ЗАПИСАТИСЬ</a>
-              <div class="priceCard__cap">1 урок</div>
+              <a class="priceCard__cta" href={contactHref}>{priceText.cta}</a>
+              <div class="priceCard__cap">{priceText.singleLessonLabel}</div>
               <div class="priceCard__single">
                 <div class="priceCard__value" data-price="group.1.total">—</div>
-                <div class="priceCard__meta">1 урок</div>
+                <div class="priceCard__meta">{priceText.singleLessonLabel}</div>
               </div>
             </article>
 
             <article class="priceCard" role="listitem">
-              <a class="priceCard__cta" href={contactHref}>ЗАПИСАТИСЬ</a>
-              <div class="priceCard__cap">8 уроків</div>
+              <a class="priceCard__cta" href={contactHref}>{priceText.cta}</a>
+              <div class="priceCard__cap">{priceText.lessons8Label}</div>
               <div class="priceCard__split">
                 <div class="priceCard__col">
                   <div class="priceCard__value" data-price="group.8.per">—</div>
-                  <div class="priceCard__meta">1 урок</div>
+                  <div class="priceCard__meta">{priceText.singleLessonLabel}</div>
                 </div>
                 <div class="priceCard__col priceCard__col--strong">
                   <div class="priceCard__value priceCard__value--strong" data-price="group.8.total">—</div>
-                  <div class="priceCard__meta">8 уроків</div>
+                  <div class="priceCard__meta">{priceText.lessons8Label}</div>
                 </div>
               </div>
             </article>
 
             <article class="priceCard" role="listitem">
-              <a class="priceCard__cta" href={contactHref}>ЗАПИСАТИСЬ</a>
-              <div class="priceCard__cap">12 уроків</div>
+              <a class="priceCard__cta" href={contactHref}>{priceText.cta}</a>
+              <div class="priceCard__cap">{priceText.lessons12Label}</div>
               <div class="priceCard__split">
                 <div class="priceCard__col">
                   <div class="priceCard__value" data-price="group.12.per">—</div>
-                  <div class="priceCard__meta">1 урок</div>
+                  <div class="priceCard__meta">{priceText.singleLessonLabel}</div>
                 </div>
                 <div class="priceCard__col priceCard__col--strong">
                   <div class="priceCard__value priceCard__value--strong" data-price="group.12.total">—</div>
-                  <div class="priceCard__meta">12 уроків</div>
+                  <div class="priceCard__meta">{priceText.lessons12Label}</div>
                 </div>
               </div>
             </article>
 
             <article class="priceCard" role="listitem">
-              <a class="priceCard__cta" href={contactHref}>ЗАПИСАТИСЬ</a>
-              <div class="priceCard__cap">24 уроки</div>
+              <a class="priceCard__cta" href={contactHref}>{priceText.cta}</a>
+              <div class="priceCard__cap">{priceText.lessons24Label}</div>
               <div class="priceCard__split">
                 <div class="priceCard__col">
                   <div class="priceCard__value" data-price="group.24.per">—</div>
-                  <div class="priceCard__meta">1 урок</div>
+                  <div class="priceCard__meta">{priceText.singleLessonLabel}</div>
                 </div>
                 <div class="priceCard__col priceCard__col--strong">
                   <div class="priceCard__value priceCard__value--strong" data-price="group.24.total">—</div>
-                  <div class="priceCard__meta">24 уроки</div>
+                  <div class="priceCard__meta">{priceText.lessons24Label}</div>
                 </div>
               </div>
             </article>
           </div>
         </section>
 
-        <section class="priceGroup" aria-label="Пробне заняття">
-          <h3 class="priceGroup__title">Пробне заняття</h3>
+        <section class="priceGroup" aria-label={priceText.groups[3].ariaLabel}>
+          <h3 class="priceGroup__title">{priceText.groups[3].title}</h3>
 
           <div class="priceCards priceCards--single" role="list">
             <article class="priceCard" role="listitem">
-              <a class="priceCard__cta" href={contactHref}>ЗАПИСАТИСЬ</a>
-              <div class="priceCard__cap">Пробне</div>
+              <a class="priceCard__cta" href={contactHref}>{priceText.cta}</a>
+              <div class="priceCard__cap">{priceText.trialCardLabel}</div>
               <div class="priceCard__single">
                 <div class="priceCard__value" data-price="trial.1.total">—</div>
-                <div class="priceCard__meta">1 заняття</div>
+                <div class="priceCard__meta">{priceText.trialLessonLabel}</div>
               </div>
             </article>
           </div>

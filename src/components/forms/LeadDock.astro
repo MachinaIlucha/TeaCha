@@ -4,8 +4,11 @@
  * © 2026. All rights reserved.
  */
 
+import { siteText } from "../../data/siteText";
+
 const base = import.meta.env.BASE_URL;
 const { hidden = false } = Astro.props;
+const forms = siteText.shared.forms;
 ---
 
 <div
@@ -31,7 +34,7 @@ const { hidden = false } = Astro.props;
           loading="lazy"
           aria-hidden="true"
         />
-        <div class="leadDock__introText">Запишись на пробний урок</div>
+        <div class="leadDock__introText">{forms.trialLeadTitle}</div>
       </div>
 
       <div class="leadDock__fields">
@@ -44,7 +47,7 @@ const { hidden = false } = Astro.props;
             autocomplete="name"
             required
           />
-          <span class="floatField__label">ІМʼЯ</span>
+          <span class="floatField__label">{forms.nameLabel}</span>
         </label>
 
         <label class="leadDock__field floatField">
@@ -56,7 +59,7 @@ const { hidden = false } = Astro.props;
             autocomplete="tel"
             required
           />
-          <span class="floatField__label">ТЕЛЕФОН АБО НІК TELEGRAM</span>
+          <span class="floatField__label">{forms.contactLabel}</span>
         </label>
       </div>
 
@@ -65,7 +68,7 @@ const { hidden = false } = Astro.props;
         type="button"
         data-open-modal
       >
-        <span class="leadDock__btnText">ХОЧУ ПРОБНЕ ЗАНЯТТЯ</span>
+        <span class="leadDock__btnText">{forms.trialButton}</span>
         <span class="leadDock__btnIcon" aria-hidden="true">
           <img
             src={`${base}img/forms/chinese-scroll.png`}
@@ -77,7 +80,7 @@ const { hidden = false } = Astro.props;
       </button>
 
       <button class="leadDock__btn leadDock__btn--submit" type="submit">
-        <span class="leadDock__btnText">ХОЧУ ПРОБНЕ ЗАНЯТТЯ</span>
+        <span class="leadDock__btnText">{forms.trialButton}</span>
         <span class="leadDock__btnIcon" aria-hidden="true">
           <img
             src={`${base}img/forms/chinese-scroll.png`}

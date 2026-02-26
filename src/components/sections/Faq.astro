@@ -1,12 +1,12 @@
 ---
-import { faqHome, faqCorporate } from "../../data/faqData.js";
+import { siteText } from "../../data/siteText";
 
 const { className = "" } = Astro.props;
 
 const path = Astro.url?.pathname ?? "/";
 const isCorporate = path.startsWith("/corporate");
 
-const items = isCorporate ? faqCorporate : faqHome;
+const items = isCorporate ? siteText.sections.faq.items.corporate : siteText.sections.faq.items.home;
 
 // ✅ всегда cards
 const sectionClass = `faq faq--cards ${className}`.trim();
@@ -47,12 +47,8 @@ const faqSchema = {
 >
   <div class="container">
     <div class="faq__head" data-reveal-item="1">
-      <h2 class="faq__mega">FAQ</h2>
-      <p class="faq__sub">
-        Ми знаємо, як важливо мати чіткі відповіді на всі запитання перед
-        початком навчання. У цьому розділі ви знайдете всю необхідну інформацію
-        про наш мовний центр
-      </p>
+      <h2 class="faq__mega">{siteText.sections.faq.title}</h2>
+      <p class="faq__sub">{siteText.sections.faq.subtitle}</p>
     </div>
 
     <div class="faq__grid" data-reveal-item="2">

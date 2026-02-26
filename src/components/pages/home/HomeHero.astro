@@ -4,46 +4,41 @@
  * Design & development: Ілля Пінчук Вадимович
  * © 2026. All rights reserved.
  */
+import { siteText } from "../../../data/siteText";
+
 const base = import.meta.env.BASE_URL;
 const { className = "" } = Astro.props;
+const heroText = siteText.sections.homeHero;
+const forms = siteText.shared.forms;
+const trialButtonHtml = forms.trialButton.replace(" ", "<br />");
 ---
 
 <section class={`hero ${className}`} id="school" data-reveal="load">
   <div class="container hero__grid">
     <div class="hero__left">
       <h1 class="visuallyHidden">
-        TeaCha - школа англійської та китайської мов онлайн і офлайн у Києві
+        {heroText.hiddenH1}
       </h1>
 
       <div class="hero__title" data-reveal-item="1" aria-hidden="true">
         <div class="hero__titleLine">
           <span class="tea">TEA</span><span class="cha">CHA</span> -
         </div>
-        <div class="hero__titleLine">
-          ДВІ КУЛЬТУРИ
-        </div>
-        <div class="hero__titleLine">
-          В ОДНОМУ
-        </div>
-        <div class="hero__titleLine">
-          ПРОСТОРІ
-        </div>
+        {heroText.titleLines.map((line) => <div class="hero__titleLine">{line}</div>)}
       </div>
 
-      <p class="hero__subtitle hero__subtitle--big" data-reveal-item="2">
-        Ми - центр <br />найпопулярніших мов у світі
-      </p>
+      <p class="hero__subtitle hero__subtitle--big" data-reveal-item="2" set:html={heroText.subtitle} />
 
       <!-- кнопки языков ДОЛЖНЫ появляться раньше badge -->
       <div class="hero__modes" data-reveal-item="3">
-        <a href={`${base}english`} class="heroLangBtn">Англійська</a>
-        <a href={`${base}chinese`} class="heroLangBtn">Китайська</a>
+        <a href={`${base}english`} class="heroLangBtn">{heroText.english}</a>
+        <a href={`${base}chinese`} class="heroLangBtn">{heroText.chinese}</a>
       </div>
 
       <!-- DESKTOP badge (анимация через обертку) -->
       <div class="hero__chips hero__chips--desktop" data-reveal-item="6">
         <button class="badge badge--round" type="button" data-open-modal>
-          <span>ХОЧУ<br />ПРОБНИЙ УРОК</span>
+          <span set:html={trialButtonHtml} />
         </button>
       </div>
     </div>
@@ -52,7 +47,7 @@ const { className = "" } = Astro.props;
       <!-- MOBILE badge (анимация через обертку) -->
       <div class="hero__chips hero__chips--mobile" data-reveal-item="5">
         <button class="badge badge--round" type="button" data-open-modal>
-          <span>ХОЧУ<br />ПРОБНИЙ УРОК</span>
+          <span set:html={trialButtonHtml} />
         </button>
       </div>
 
@@ -60,7 +55,7 @@ const { className = "" } = Astro.props;
         <img
           class="heroPhoto__img"
           src={`${base}img/hero/home/home-hero-teacha-team.webp`}
-          alt="Команда викладачів TeaCha"
+          alt={heroText.teamAlt}
           loading="eager"
           fetchpriority="high"
           decoding="async"

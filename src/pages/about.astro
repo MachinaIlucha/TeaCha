@@ -1,44 +1,185 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { siteText } from "../data/siteText";
+
 const base = import.meta.env.BASE_URL;
+const site = Astro.site ?? new URL("https://teacha.pages.dev");
+const toAbsolute = (path: string) => new URL(path, site).toString();
+const aboutText = siteText.pages.about;
+const contact = siteText.shared.contact;
+
+const aboutContactPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  name: aboutText.schemaPageName,
+  url: toAbsolute("/about/"),
+  mainEntity: {
+    "@type": ["EducationalOrganization", "LocalBusiness"],
+    name: siteText.shared.brandName,
+    url: toAbsolute("/about/"),
+    telephone: contact.phones[0].raw,
+    email: contact.email,
+    hasMap: contact.mapUrl,
+    contactPoint: contact.phones.map((phone) => ({
+      "@type": "ContactPoint",
+      contactType: "customer support",
+      telephone: phone.raw,
+      areaServed: "UA",
+      availableLanguage: ["uk"],
+    })),
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: contact.street,
+      addressLocality: contact.city,
+      addressCountry: "UA",
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 50.47026,
+      longitude: 30.357656,
+    },
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday",
+        ],
+        opens: "09:00",
+        closes: "21:00",
+      },
+    ],
+    sameAs: [contact.instagramUrl, contact.tiktokUrl],
+  },
+};
 ---
 
-<BaseLayout title="Про нас" description="Команда TeaCha" bodyClass="page-about">
+<BaseLayout
+  title={aboutText.title}
+  description={aboutText.description}
+  canonical="/about/"
+  breadcrumbs={[{ name: aboutText.breadcrumb, href: "/about/" }]}
+  jsonLd={[aboutContactPageSchema]}
+  bodyClass="page-about"
+>
+  <h1 class="visuallyHidden">{aboutText.hiddenH1}</h1>
+
   <section class="aboutTeam" aria-labelledby="about-team-title" data-reveal="load">
     <div class="aboutTeam__inner" data-reveal-item="1">
-      <h2 id="about-team-title">Засновниці<br/>мовного центру</h2>
-      <p class="aboutTeam__lead">Ми об’єднуємо досвід, підтримку та сучасний підхід, щоб навчання було живим та результативним.</p>
-      <span class="aboutTeam__watermark" aria-hidden="true">TEAM</span>
+      <h2 id="about-team-title" set:html={aboutText.teamHeading}></h2>
+      <p class="aboutTeam__lead">{aboutText.teamLead}</p>
+      <span class="aboutTeam__watermark" aria-hidden="true">{aboutText.teamWatermark}</span>
 
       <div class="aboutTeam__cards">
         <article class="aboutTeamCard">
-          <img src={`${base}img/about/teacha-about-daryna-shvets.jpg`} alt="Дарина Швець - TeaCha" />
+          <img src={`${base}img/about/teacha-about-daryna-shvets.jpg`} alt={aboutText.founders[0].alt} />
           <div class="aboutTeamCard__content">
-            <h3>Дарина Швець</h3>
+            <h3>{aboutText.founders[0].name}</h3>
           </div>
         </article>
 
         <article class="aboutTeamCard aboutTeamCard--center">
-          <img src={`${base}img/about/teacha-about-team-center.jpg`} alt="Команда TeaCha" />
+          <img src={`${base}img/about/teacha-about-team-center.jpg`} alt={aboutText.teamCenterAlt} />
         </article>
 
         <article class="aboutTeamCard">
-          <img src={`${base}img/about/teacha-about-dariia-pozniakovska.jpg`} alt="Дарія Позняковська - TeaCha" />
+          <img src={`${base}img/about/teacha-about-dariia-pozniakovska.jpg`} alt={aboutText.founders[1].alt} />
           <div class="aboutTeamCard__content">
-            <h3>Дарія Позняковська</h3>
+            <h3>{aboutText.founders[1].name}</h3>
           </div>
         </article>
       </div>
     </div>
   </section>
 
-  <section class="aboutGallery" aria-label="Команда TeaCha">
+  <section class="aboutGallery" aria-label={aboutText.teamGalleryAria}>
     <div class="aboutGallery__grid">
       <div class="aboutCard aboutCard--1" style={`--img: url(${base}img/about/teacha-about-team-01.jpg);`}></div>
       <div class="aboutCard aboutCard--2" style={`--img: url(${base}img/about/teacha-about-team-02.jpg);`}></div>
       <div class="aboutCard aboutCard--3" style={`--img: url(${base}img/about/teacha-about-team-03.jpg);`}></div>
       <div class="aboutCard aboutCard--4" style={`--img: url(${base}img/about/teacha-about-team-04.jpg);`}></div>
       <div class="aboutCard aboutCard--5" style={`--img: url(${base}img/founders/teacha-founders-daryna-dariia.webp);`}></div>
+    </div>
+  </section>
+
+  <section
+    class="aboutContacts"
+    id="contacts"
+    aria-labelledby="about-contacts-title"
+    data-reveal="scroll"
+    itemscope
+    itemtype="https://schema.org/LocalBusiness"
+  >
+    <div class="aboutContacts__inner">
+      <header class="aboutContacts__head sectionTitle sectionTitle--center sectionTitle--accentBottom">
+        <h2 id="about-contacts-title" class="sectionTitle__line sectionTitle__line--a" data-reveal-item="1">
+          {aboutText.contactsHeadingTop}
+        </h2>
+        <div class="sectionTitle__line sectionTitle__line--b" data-reveal-item="2">{aboutText.contactsHeadingBottom}</div>
+        <p class="aboutContacts__lead" itemprop="description" data-reveal-item="3">
+          {aboutText.contactsLead}
+        </p>
+      </header>
+
+      <div class="aboutContacts__grid">
+        <article class="aboutContacts__card" data-reveal-item="4">
+          <h3>{aboutText.contactCardTitle}</h3>
+          <div class="aboutContacts__phones">
+            {
+              contact.phones.map((phone) => (
+                <a class="aboutContacts__link" href={`tel:${phone.raw}`} itemprop="telephone">{phone.label}</a>
+              ))
+            }
+          </div>
+          <a class="aboutContacts__link" href={`mailto:${contact.email}`} itemprop="email">{contact.email}</a>
+        </article>
+
+        <article class="aboutContacts__card" data-reveal-item="5">
+          <h3>{aboutText.locationCardTitle}</h3>
+          <p class="aboutContacts__address" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+            <span itemprop="streetAddress">{contact.street}</span>, <span itemprop="addressLocality">{contact.city}</span>,{" "}
+            <span itemprop="addressCountry">{contact.country}</span>
+          </p>
+          <a class="aboutContacts__link aboutContacts__link--map" href={contact.mapUrl} target="_blank" rel="noopener noreferrer" itemprop="hasMap">
+            {aboutText.openMap}
+          </a>
+        </article>
+
+        <article class="aboutContacts__card" data-reveal-item="6">
+          <h3>{aboutText.hoursCardTitle}</h3>
+          <p class="aboutContacts__time">{contact.openingHoursLabel}</p>
+          <p class="aboutContacts__note">{contact.openingHoursNote}</p>
+          <meta itemprop="openingHours" content={contact.openingHoursMeta} />
+        </article>
+      </div>
+
+      <div class="aboutContacts__map" data-reveal-item="7">
+        <iframe
+          title={contact.mapTitle}
+          src={contact.mapEmbedUrl}
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen
+        ></iframe>
+      </div>
+
+      <div class="aboutContacts__social" data-reveal-item="8" aria-label={contact.socialsAria}>
+        <a href={contact.instagramUrl} target="_blank" rel="noopener noreferrer" itemprop="sameAs">{siteText.shared.social.instagramLabel}</a>
+        <a href={contact.tiktokUrl} target="_blank" rel="noopener noreferrer" itemprop="sameAs">{siteText.shared.social.tiktokLabel}</a>
+      </div>
+    </div>
+
+    <meta itemprop="name" content={siteText.shared.brandName} />
+    <meta itemprop="url" content={toAbsolute("/about/")} />
+    <meta itemprop="image" content={toAbsolute("/img/layout/logo.png")} />
+    <div class="visuallyHidden" itemprop="geo" itemscope itemtype="https://schema.org/GeoCoordinates">
+      <meta itemprop="latitude" content="50.47026" />
+      <meta itemprop="longitude" content="30.357656" />
     </div>
   </section>
 </BaseLayout>

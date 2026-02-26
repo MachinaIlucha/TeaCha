@@ -53,7 +53,8 @@
 }
 
 .startLead__form {
-  background: linear-gradient(180deg, #2b2b2b 0%, #242424 100%);
+  background: linear-gradient(180deg, #1c1e22 0%, #15171a 100%);
+  color: #fff;
   border-radius: 24px;
   padding: clamp(24px, 4vw, 40px);
   display: grid;
@@ -109,9 +110,8 @@
 
 .startLead__submit {
   width: 100%;
-  border: 2px solid var(--red);
+  border: 0;
   border-radius: 999px;
-  background: var(--red);
   color: #fff;
   font-weight: 800;
   letter-spacing: 0.02em;
@@ -119,25 +119,23 @@
   padding: 14px 18px;
   font-size: 14px;
   cursor: pointer;
-  box-shadow:
-    0 2px 0 rgba(0, 0, 0, 0.16),
-    0 14px 30px rgba(219, 31, 50, 0.24);
-  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+  transform: translateY(0) scale(1);
+  transition:
+    background-position 0.4s ease-in-out,
+    transform 0.22s var(--ease),
+    box-shadow 0.22s var(--ease),
+    filter 0.22s var(--ease);
 }
 
 @media (hover: hover) and (pointer: fine) {
   .startLead__submit:hover {
-    transform: translateY(-1px);
-    filter: brightness(0.985);
-    box-shadow:
-      0 2px 0 rgba(0, 0, 0, 0.18),
-      0 18px 38px rgba(219, 31, 50, 0.28);
+    transform: translateY(-2px) scale(1.02);
   }
 }
 
 .startLead__submit:active {
-  transform: translateY(0);
-  filter: brightness(0.95);
+  transform: translateY(0) scale(0.99);
+  filter: brightness(0.98);
 }
 
 .startLead__note {

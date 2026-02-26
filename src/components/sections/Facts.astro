@@ -5,6 +5,8 @@
  * © 2026. All rights reserved.
  */
 
+import { siteText } from "../../data/siteText";
+
 type FactItem = {
   kind: "stat" | "text";
   value?: string;
@@ -14,22 +16,9 @@ type FactItem = {
 };
 
 const {
-  items = [
-    { kind: "stat", value: "200+", label: "студентів" },
-    {
-      kind: "text",
-      text: "Команда викладачів з вищою\nпедагогічною/ філологічною освітою та\nдосвідом викладання",
-      wide: true,
-    },
-    { kind: "text", text: "Онлайн та\nофлайн у м.Київ" },
-    {
-      kind: "text",
-      text: "Індивідуальне, парне, групове та\nкорпоративне навчання",
-      wide: true,
-    },
-  ] satisfies FactItem[],
+  items = siteText.sections.facts.items satisfies ReadonlyArray<FactItem>,
   className = "",
-} = Astro.props as { items?: FactItem[]; className?: string };
+} = Astro.props as { items?: ReadonlyArray<FactItem>; className?: string };
 ---
 
 <section class={`facts ${className}`} data-facts>
@@ -37,8 +26,8 @@ const {
 
   <!-- ✅ используем общий container -->
   <div class="container">
-    <h2 class="visuallyHidden">Переваги навчання в TeaCha</h2>
-    <div class="facts__grid" aria-label="Факти">
+    <h2 class="visuallyHidden">{siteText.sections.facts.heading}</h2>
+    <div class="facts__grid" aria-label={siteText.sections.facts.gridAria}>
       {
         items.map((item) => (
           <article class={`facts__card ${item.wide ? "facts__card--wide" : ""}`}>

@@ -13,29 +13,26 @@
   width: min(100%, 980px);
   height: min(68vh, 520px);
   min-height: 360px;
-  transition: grid-template-columns 500ms ease;
+  transition: all 500ms;
 }
 
 .page-about .aboutCard {
+  position: relative;
   height: 100%;
   border-radius: 18px;
   background-image: var(--img);
   background-position: center;
   background-size: cover;
-  filter: grayscale(10%);
-  transition: filter 250ms ease, transform 250ms ease, opacity 250ms ease;
+  transition: all 500ms;
   box-shadow: 0 10px 24px rgba(16, 24, 40, 0.14);
 }
 
 .page-about .aboutGallery__grid:hover .aboutCard {
-  filter: grayscale(100%);
-  opacity: 0.28;
+  filter: grayscale(100%) opacity(24%);
 }
 
 .page-about .aboutGallery__grid .aboutCard:hover {
-  filter: grayscale(0%);
-  opacity: 1;
-  transform: translateY(-2px);
+  filter: grayscale(0%) opacity(100%);
 }
 
 .page-about .aboutGallery__grid:has(.aboutCard--1:hover) {
@@ -64,6 +61,26 @@
 
 .page-about .aboutCard:nth-child(even) {
   transform: translateY(16px);
+}
+
+.page-about .aboutCard[data-text]::after {
+  content: attr(data-text);
+  position: absolute;
+  bottom: 20px;
+  background: #000;
+  color: #fff;
+  padding: 10px 10px 10px 14px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  transform: translateY(60px);
+  opacity: 0;
+  transition: all 400ms;
+}
+
+.page-about .aboutCard[data-text]:hover::after {
+  transform: translateY(0);
+  opacity: 1;
+  transition-delay: 400ms;
 }
 
 @media (max-width: 860px) {

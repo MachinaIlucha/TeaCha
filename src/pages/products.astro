@@ -1,36 +1,39 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { siteText } from "../data/siteText";
 
 const base = import.meta.env.BASE_URL;
+const pageText = siteText.pages.products;
 ---
 
 <BaseLayout
-  title="Продукція TeaCha"
-  description="Фірмова продукція TeaCha: футболки та наліпки."
+  title={pageText.title}
+  description={pageText.description}
   ogImage="/img/products/teacha-first-tshirt-front.jpg"
-  breadcrumbs={[{ name: "Продукція", href: "/products/" }]}
+  breadcrumbs={[{ name: pageText.breadcrumb, href: "/products/" }]}
   bodyClass="page--products"
 >
   <section class="productsPage sectionShell section--b section--ink">
     <div class="container">
-      <header class="productsPage__head">
+      <header class="productsPage__head" data-reveal="scroll">
         <h1 class="sectionTitle sectionTitle--inline sectionTitle--center">
-          <span class="sectionTitle__line sectionTitle__line--a">НАША</span>
-          <span class="sectionTitle__line sectionTitle__line--b">ПРОДУКЦІЯ</span>
+          <span class="sectionTitle__line sectionTitle__line--a" data-reveal-item="1">{pageText.headingTop}</span>
+          <span class="sectionTitle__line sectionTitle__line--b" data-reveal-item="2">{pageText.headingBottom}</span>
         </h1>
       </header>
 
       <div class="productsGrid">
-        <article class="productCard">
+        <article class="productCard" data-reveal="scroll">
           <div
             class="productCard__media productCard__media--scroll"
-            aria-label="Футболка Learning English energy: фото 1 і фото 2"
+            data-reveal-item="1"
+            aria-label={pageText.items[0].galleryAria}
           >
             <div class="productCard__mediaTrack">
               <img
                 class="productCard__img"
                 src={`${base}img/products/teacha-first-tshirt-front.webp`}
-                alt="Футболка Learning English energy TeaCha, фото 1"
+                alt={pageText.items[0].alt1}
                 loading="lazy"
                 decoding="async"
                 width="1181"
@@ -39,7 +42,7 @@ const base = import.meta.env.BASE_URL;
               <img
                 class="productCard__img"
                 src={`${base}img/products/teacha-first-tshirt-back.webp`}
-                alt="Футболка Learning English energy TeaCha, фото 2"
+                alt={pageText.items[0].alt2}
                 loading="lazy"
                 decoding="async"
                 width="1181"
@@ -47,20 +50,21 @@ const base = import.meta.env.BASE_URL;
               />
             </div>
           </div>
-          <h3 class="productCard__name">Футболка Learning English energy</h3>
-          <p class="productCard__price">750 грн</p>
+          <h3 class="productCard__name" data-reveal-item="2">{pageText.items[0].name}</h3>
+          <p class="productCard__price" data-reveal-item="3">{pageText.items[0].price}</p>
         </article>
 
-        <article class="productCard">
+        <article class="productCard" data-reveal="scroll">
           <div
             class="productCard__media productCard__media--scroll"
-            aria-label="Футболка English learning therapy: фото 1 і фото 2"
+            data-reveal-item="1"
+            aria-label={pageText.items[1].galleryAria}
           >
             <div class="productCard__mediaTrack">
               <img
                 class="productCard__img"
                 src={`${base}img/products/teacha-second-tshirt-front.webp`}
-                alt="Футболка English learning therapy TeaCha, фото 1"
+                alt={pageText.items[1].alt1}
                 loading="lazy"
                 decoding="async"
                 width="1181"
@@ -69,7 +73,7 @@ const base = import.meta.env.BASE_URL;
               <img
                 class="productCard__img"
                 src={`${base}img/products/teacha-second-tshirt-back.webp`}
-                alt="Футболка English learning therapy TeaCha, фото 2"
+                alt={pageText.items[1].alt2}
                 loading="lazy"
                 decoding="async"
                 width="1181"
@@ -77,20 +81,21 @@ const base = import.meta.env.BASE_URL;
               />
             </div>
           </div>
-          <h3 class="productCard__name">Футболка English learning therapy</h3>
-          <p class="productCard__price">750 грн</p>
+          <h3 class="productCard__name" data-reveal-item="2">{pageText.items[1].name}</h3>
+          <p class="productCard__price" data-reveal-item="3">{pageText.items[1].price}</p>
         </article>
 
-        <article class="productCard productCard--wide">
+        <article class="productCard productCard--wide" data-reveal="scroll">
           <div
             class="productCard__media productCard__media--scroll"
-            aria-label="Наліпки TeaCha: фото 1 і фото 2"
+            data-reveal-item="1"
+            aria-label={pageText.items[2].galleryAria}
           >
             <div class="productCard__mediaTrack">
               <img
                 class="productCard__img"
                 src={`${base}img/products/teacha-stickers-pack.webp`}
-                alt="Наліпки TeaCha, фото 1"
+                alt={pageText.items[2].alt1}
                 loading="lazy"
                 decoding="async"
                 width="913"
@@ -99,7 +104,7 @@ const base = import.meta.env.BASE_URL;
               <img
                 class="productCard__img productCard__img--stickersAlt"
                 src={`${base}img/products/teacha-stickers-pack-alt.webp`}
-                alt="Наліпки TeaCha, фото 2"
+                alt={pageText.items[2].alt2}
                 loading="lazy"
                 decoding="async"
                 width="1659"
@@ -107,8 +112,8 @@ const base = import.meta.env.BASE_URL;
               />
             </div>
           </div>
-          <h3 class="productCard__name">Наліпки</h3>
-          <p class="productCard__price">100 грн</p>
+          <h3 class="productCard__name" data-reveal-item="2">{pageText.items[2].name}</h3>
+          <p class="productCard__price" data-reveal-item="3">{pageText.items[2].price}</p>
         </article>
       </div>
     </div>

@@ -1,42 +1,45 @@
----
+﻿---
 /**
  * TeaCha website
  * Design & development: Ілля Пінчук Вадимович
  * © 2026. All rights reserved.
  */
 
+import { siteText } from "../../data/siteText";
+
+const stepsText = siteText.sections.steps;
 ---
 <section class="steps" id="program">
   <div class="container">
     <div class="steps__top">
       <a class="pill" href="#consult"
-        >ЗАГОВОРИТИ МОВОЮ В 3 КРОКИ <span aria-hidden="true">↗</span></a
+        >{stepsText.topCta} <span aria-hidden="true">↗</span></a
       >
     </div>
 
     <div class="steps__grid">
       <article class="stepCard">
-        <div class="stepCard__k">КРОК 1</div>
+        <div class="stepCard__k">{stepsText.card1Title}</div>
         <div class="stepCard__decor" aria-hidden="true">?</div>
-        <div class="stepCard__t">визначте<br />свій рівень</div>
+        <div class="stepCard__t" set:html={stepsText.card1Text} />
       </article>
 
       <article class="stepCard">
-        <div class="stepCard__k">КРОК 2</div>
+        <div class="stepCard__k">{stepsText.card2Title}</div>
         <div class="stepCard__decor" aria-hidden="true">!!!</div>
-        <div class="stepCard__t">поставте<br />мету</div>
+        <div class="stepCard__t" set:html={stepsText.card2Text} />
       </article>
 
       <article class="stepCard">
-        <div class="stepCard__k">КРОК 3</div>
+        <div class="stepCard__k">{stepsText.card3Title}</div>
         <div class="stepCard__decor" aria-hidden="true">↗</div>
-        <div class="stepCard__t">досягніть<br />поставленої мети</div>
+        <div class="stepCard__t" set:html={stepsText.card3Text} />
       </article>
     </div>
 
     <div class="steps__bottom" id="consult">
       <a class="pill" href="#contacts"
-        >Хочу пробний урок <span aria-hidden="true">↗</span></a
+        >{stepsText.bottomCta} <span aria-hidden="true">↗</span></a
       >
     </div>
   </div>

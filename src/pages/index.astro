@@ -13,13 +13,14 @@ import Teachers from "../components/sections/Teachers.astro";
 import Process from "../components/sections/Process.astro";
 import PriceRates from "../components/pages/price/PriceRates.astro";
 import Faq from "../components/sections/Faq.astro";
+import { siteText } from "../data/siteText";
 
 const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout
-  title="Школа англійської та китайської мов"
-  description="TeaCha - школа англійської та китайської мов у Києві: індивідуальні уроки, міні-групи та корпоративне навчання онлайн і офлайн."
+  title={siteText.pages.index.title}
+  description={siteText.pages.index.description}
   ogImage="/img/hero/home/home-hero-background.jpg"
 >
   <HomeHero className="sectionShell section--a" />

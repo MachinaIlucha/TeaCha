@@ -5,22 +5,26 @@
  * © 2026. All rights reserved.
  */
 
-const base = import.meta.env.BASE_URL
-const { id = null, className = "" } = Astro.props
+import { siteText } from "../../data/siteText";
+
+const base = import.meta.env.BASE_URL;
+const { id = null, className = "" } = Astro.props;
+const forms = siteText.shared.forms;
+const docs = siteText.shared.docs;
 ---
 
 <form class={className} id={id}>
   <input
     type="text"
     name="name"
-    placeholder="Ваше імʼя"
+    placeholder={forms.namePlaceholder}
     required
   />
 
   <input
     type="text"
     name="contact"
-    placeholder="Телефон або Telegram"
+    placeholder={forms.contactPlaceholder}
     required
   />
 
@@ -35,18 +39,18 @@ const { id = null, className = "" } = Astro.props
     <span class="price-consent__box" aria-hidden="true"></span>
 
     <span class="price-consent__text">
-      Я підтверджую, що ознайомився(-лася) та погоджуюся з умовами
+      {forms.consentText}
       <a
-        href={`${base}docs/polityka-konfidentsiinosti.pdf`}
+        href={`${base}${docs.privacyFile}`}
         target="_blank"
         rel="noopener"
       >
-        Політики конфіденційності
+        {forms.consentLinkText}
       </a>
     </span>
   </label>
 
   <button type="submit" class="modal__submit">
-    ЗАЛИШИТИ ЗАЯВКУ
+    {forms.submitButton}
   </button>
 </form>

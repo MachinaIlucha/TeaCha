@@ -4,9 +4,11 @@
  * Design & development: Ілля Пінчук Вадимович
  * © 2026. All rights reserved.
  */
+import { siteText } from "../../../data/siteText";
 
 const { className = "" } = Astro.props;
 const sectionClass = ["enWhy", className].filter(Boolean).join(" ");
+const text = siteText.sections.englishWhy;
 ---
 
 <section class={sectionClass} data-reveal="scroll">
@@ -16,10 +18,10 @@ const sectionClass = ["enWhy", className].filter(Boolean).join(" ");
       data-reveal="scroll"
     >
       <h2 class="sectionTitle__line sectionTitle__line--a" data-reveal-item="1">
-        ЧОМУ САМЕ
+        {text.titleTop}
       </h2>
       <div class="sectionTitle__line sectionTitle__line--b" data-reveal-item="2">
-        [ TEACHA ]?
+        {text.titleBottom}
       </div>
     </header>
 
@@ -32,7 +34,7 @@ const sectionClass = ["enWhy", className].filter(Boolean).join(" ");
             <path d="M12 11.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z" stroke="currentColor" stroke-width="2"/>
           </svg>
         </span>
-        <div class="enCard__text">Онлайн та офлайн у Києві</div>
+        <div class="enCard__text">{text.items[0]}</div>
       </article>
 
       <article class="enCard">
@@ -43,7 +45,7 @@ const sectionClass = ["enWhy", className].filter(Boolean).join(" ");
             <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           </svg>
         </span>
-        <div class="enCard__text">5 років у сфері освіти</div>
+        <div class="enCard__text">{text.items[1]}</div>
       </article>
 
       <article class="enCard">
@@ -54,7 +56,7 @@ const sectionClass = ["enWhy", className].filter(Boolean).join(" ");
             <path d="M6 11v5c0 .8 2.7 3 6 3s6-2.2 6-3v-5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
           </svg>
         </span>
-        <div class="enCard__text">Викладачі з вищою педагогічною освітою</div>
+        <div class="enCard__text">{text.items[2]}</div>
       </article>
 
       <article class="enCard">
@@ -67,7 +69,7 @@ const sectionClass = ["enWhy", className].filter(Boolean).join(" ");
           </svg>
         </span>
         <div class="enCard__text">
-          З нами студенти складають іспити, переїжджають за кордон, проходять співбесіди і отримують підвищення
+          {text.items[3]}
         </div>
       </article>
 
@@ -79,7 +81,7 @@ const sectionClass = ["enWhy", className].filter(Boolean).join(" ");
             <path d="M9 7h6M9 11h6M9 15h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           </svg>
         </span>
-        <div class="enCard__text">Індивідуальний навчальний план для кожного</div>
+        <div class="enCard__text">{text.items[4]}</div>
       </article>
 
       <article class="enCard">
@@ -91,7 +93,7 @@ const sectionClass = ["enWhy", className].filter(Boolean).join(" ");
             <path d="M10 8h8M10 13h8M10 18h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           </svg>
         </span>
-        <div class="enCard__text">Чітка структура уроків і дедлайни навчання</div>
+        <div class="enCard__text">{text.items[5]}</div>
       </article>
     </div>
   </div>
