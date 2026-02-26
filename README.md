@@ -1,41 +1,73 @@
-# Astro Starter Kit: Basics
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+# TeaCha Website
 
-## 🚀 Project Structure
+Сайт школы языков TeaCha на `Astro` с деплоем на `Cloudflare Pages`.
 
-Inside of your Astro project, you'll see the following folders and files:
+Прод URL: `https://teacha.pages.dev`
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+## Стек
+
+- `Astro 5`
+- `Sass`
+- `Cloudflare Pages Functions` (API endpoint `/api/lead`)
+
+## Команды
+
+```bash
+npm install
+npm run dev
+npm run build
+npm run preview
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Структура проекта
 
-## 🧞 Commands
+```text
+.
+├─ functions/              # Cloudflare Pages Functions
+│  └─ api/lead.js          # отправка заявок в Telegram
+├─ public/                 # статические файлы, которые должны идти 1:1 в root
+├─ src/
+│  ├─ assets/              # изображения и прочие ассеты проекта
+│  ├─ components/          # Astro-компоненты
+│  ├─ data/                # текстовый контент и маппинг ассетов
+│  ├─ layouts/             # layout'ы страниц
+│  ├─ pages/               # роуты
+│  ├─ scripts/             # клиентский JS
+│  └─ styles/              # SCSS-архитектура
+├─ astro.config.mjs
+└─ package.json
+```
 
-All commands are run from the root of the project, from a terminal:
+## Лиды в Telegram
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+Форма отправляется на `/api/lead`, который работает через Cloudflare Function:
 
-## 👀 Want to learn more?
+- файл: `functions/api/lead.js`
+- метод: `POST`
+- body (`application/json`):
+  - `name` (string, обязательно)
+  - `contact` (string, обязательно)
+  - `source` (string, опционально)
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Для работы на Cloudflare Pages задай переменные окружения:
+
+- `TG_BOT_TOKEN`
+- `TG_CHAT_ID`
+
+Без них endpoint вернет `500 SERVER_CONFIG`.
+
+## Деплой на Cloudflare Pages
+
+Рекомендуемые настройки проекта в Cloudflare:
+
+- Framework preset: `Astro`
+- Build command: `npm run build`
+- Build output directory: `dist`
+- Root directory: `/` (корень репозитория)
+- Functions directory: `functions`
+
+## Важное по ассетам
+
+- Основные изображения лежат в `src/assets` и подключаются из компонентов.
+- `public/` оставляй только для файлов, которые должны быть доступны напрямую по URL (например `robots.txt`, `favicon`, внешние верификационные файлы).
+- Для путей к изображениям используй единый подход через маппинг в `src/data/assetMap.ts`, чтобы избежать проблем на проде.
