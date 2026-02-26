@@ -156,7 +156,11 @@ body {
 ========================= */
 @media (min-width: 64rem) {
   .leadDock {
+    bottom: 0;
+    inset-inline: 0;
     height: var(--leadDock-h);
+    background: var(--leadDock-bg);
+    box-shadow: var(--leadDock-shadow);
 
     &__inner {
       height: var(--leadDock-h);

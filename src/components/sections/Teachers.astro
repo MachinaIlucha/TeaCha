@@ -6,8 +6,9 @@
  */
 
 import { siteText } from "../../data/siteText";
+import { resolveAssetPath } from "../../data/assetMap";
 
-const { base, className = "" } = Astro.props;
+const { className = "" } = Astro.props;
 const teacherText = siteText.sections.teachers;
 ---
 
@@ -23,7 +24,7 @@ const teacherText = siteText.sections.teachers;
       <div class="foundersSketch__hero" data-reveal-item="2">
         <img
           class="foundersSketch__photo"
-          src={`${base}img/founders/teacha-founders-daryna-dariia.webp`}
+          src={resolveAssetPath("img/founders/teacha-founders-daryna-dariia.webp")}
           alt={teacherText.photoAlt}
           loading="lazy"
           decoding="async"
@@ -61,7 +62,7 @@ const teacherText = siteText.sections.teachers;
         <div class="stampCard stampCard--diploma">
           <img
             class="stampCard__icon"
-            src={`${base}img/decor/teacha-founder-education-diploma-icon.png`}
+            src={resolveAssetPath("img/decor/teacha-founder-education-diploma-icon.png")}
             alt=""
             aria-hidden="true"
             loading="lazy"
@@ -77,7 +78,7 @@ const teacherText = siteText.sections.teachers;
         <div class="stampCard stampCard--semester">
           <img
             class="stampCard__icon"
-            src={`${base}img/decor/teacha-founder-semester-online-study-icon.png`}
+            src={resolveAssetPath("img/decor/teacha-founder-semester-online-study-icon.png")}
             alt=""
             aria-hidden="true"
             loading="lazy"
@@ -93,7 +94,7 @@ const teacherText = siteText.sections.teachers;
         <div class="stampCard stampCard--year">
           <img
             class="stampCard__icon"
-            src={`${base}img/decor/teacha-founder-year-study-china-icon.png`}
+            src={resolveAssetPath("img/decor/teacha-founder-year-study-china-icon.png")}
             alt=""
             aria-hidden="true"
             loading="lazy"
@@ -111,7 +112,7 @@ const teacherText = siteText.sections.teachers;
         <div class="stampCard stampCard--confucius">
           <img
             class="stampCard__icon"
-            src={`${base}img/decor/teacha-founder-confucius-course-icon.png`}
+            src={resolveAssetPath("img/decor/teacha-founder-confucius-course-icon.png")}
             alt=""
             aria-hidden="true"
             loading="lazy"
@@ -127,7 +128,7 @@ const teacherText = siteText.sections.teachers;
         <div class="stampCard stampCard--management">
           <img
             class="stampCard__icon"
-            src={`${base}img/decor/teacha-founder-language-center-management-icon.png`}
+            src={resolveAssetPath("img/decor/teacha-founder-language-center-management-icon.png")}
             alt=""
             aria-hidden="true"
             loading="lazy"

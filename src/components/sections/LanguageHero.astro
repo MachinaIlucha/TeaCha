@@ -6,6 +6,7 @@
  */
 
 import { siteText } from "../../data/siteText";
+import { resolveAssetPath } from "../../data/assetMap";
 
 type TitlePart =
   | {
@@ -17,7 +18,6 @@ type TitlePart =
     };
 
 const {
-  base,
   titleParts = [],
   subtitle = "",
   ctaText = siteText.sections.languageHero.defaultCtaText,
@@ -30,7 +30,6 @@ const {
   imgWidth = 1659,
   imgHeight = 2488,
 } = Astro.props as {
-  base: string;
   titleParts?: ReadonlyArray<TitlePart>;
   subtitle?: string;
   ctaText?: string;
@@ -44,7 +43,7 @@ const {
   imgHeight?: number;
 };
 
-const resolvedImg = imgSrc ?? `${base}img/hero/chinese/chinese-language-hero.webp`;
+const resolvedImg = imgSrc ?? resolveAssetPath("img/hero/chinese/chinese-language-hero.webp");
 const sectionClass = ["hero", "hero--lang", className].filter(Boolean).join(" ");
 ---
 
@@ -71,9 +70,9 @@ const sectionClass = ["hero", "hero--lang", className].filter(Boolean).join(" ")
       </p>
 
       <div class="hero__cta hero__cta--pill" data-reveal-item="3">
-        <button class="hero__pill" type="button" data-open-modal>
+        <a class="hero__pill" href="#start-lead">
           {ctaText}
-        </button>
+        </a>
       </div>
     </div>
 

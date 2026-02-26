@@ -5,6 +5,7 @@
  * © 2026. All rights reserved.
  */
 import { siteText } from "../../../data/siteText";
+import { resolveAssetPath } from "../../../data/assetMap";
 
 const base = import.meta.env.BASE_URL;
 const { className = "" } = Astro.props;
@@ -54,7 +55,7 @@ const trialButtonHtml = forms.trialButton.replace(" ", "<br />");
       <div class="heroPhoto">
         <img
           class="heroPhoto__img"
-          src={`${base}img/hero/home/home-hero-teacha-team.webp`}
+          src={resolveAssetPath("img/hero/home/home-hero-teacha-team.webp")}
           alt={heroText.teamAlt}
           loading="eager"
           fetchpriority="high"

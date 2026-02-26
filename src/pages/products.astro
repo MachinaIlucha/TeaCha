@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { siteText } from "../data/siteText";
+import { resolveAssetPath } from "../data/assetMap";
 
 const base = import.meta.env.BASE_URL;
 const pageText = siteText.pages.products;
@@ -32,7 +33,7 @@ const pageText = siteText.pages.products;
             <div class="productCard__mediaTrack">
               <img
                 class="productCard__img"
-                src={`${base}img/products/teacha-first-tshirt-front.webp`}
+                src={resolveAssetPath("img/products/teacha-first-tshirt-front.webp")}
                 alt={pageText.items[0].alt1}
                 loading="lazy"
                 decoding="async"
@@ -41,7 +42,7 @@ const pageText = siteText.pages.products;
               />
               <img
                 class="productCard__img"
-                src={`${base}img/products/teacha-first-tshirt-back.webp`}
+                src={resolveAssetPath("img/products/teacha-first-tshirt-back.webp")}
                 alt={pageText.items[0].alt2}
                 loading="lazy"
                 decoding="async"
@@ -63,7 +64,7 @@ const pageText = siteText.pages.products;
             <div class="productCard__mediaTrack">
               <img
                 class="productCard__img"
-                src={`${base}img/products/teacha-second-tshirt-front.webp`}
+                src={resolveAssetPath("img/products/teacha-second-tshirt-front.webp")}
                 alt={pageText.items[1].alt1}
                 loading="lazy"
                 decoding="async"
@@ -72,7 +73,7 @@ const pageText = siteText.pages.products;
               />
               <img
                 class="productCard__img"
-                src={`${base}img/products/teacha-second-tshirt-back.webp`}
+                src={resolveAssetPath("img/products/teacha-second-tshirt-back.webp")}
                 alt={pageText.items[1].alt2}
                 loading="lazy"
                 decoding="async"
@@ -94,7 +95,7 @@ const pageText = siteText.pages.products;
             <div class="productCard__mediaTrack">
               <img
                 class="productCard__img"
-                src={`${base}img/products/teacha-stickers-pack.webp`}
+                src={resolveAssetPath("img/products/teacha-stickers-pack.webp")}
                 alt={pageText.items[2].alt1}
                 loading="lazy"
                 decoding="async"
@@ -103,7 +104,7 @@ const pageText = siteText.pages.products;
               />
               <img
                 class="productCard__img productCard__img--stickersAlt"
-                src={`${base}img/products/teacha-stickers-pack-alt.webp`}
+                src={resolveAssetPath("img/products/teacha-stickers-pack-alt.webp")}
                 alt={pageText.items[2].alt2}
                 loading="lazy"
                 decoding="async"

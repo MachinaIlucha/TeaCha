@@ -10,13 +10,14 @@ const {
   ariaLabel,
   className = "",
   size = "md",
+  ...rest
 } = Astro.props as {
   href: string;
   network: Network;
   ariaLabel?: string;
   className?: string;
   size?: Size;
-};
+} & Record<string, unknown>;
 
 const iconLabel =
   ariaLabel ??
@@ -27,7 +28,7 @@ const classes = ["socialSweep", `socialSweep--${network}`, sizeClass, className]
   .join(" ");
 ---
 
-<a class={classes} href={href} aria-label={iconLabel} target="_blank" rel="noopener">
+<a class={classes} href={href} aria-label={iconLabel} target="_blank" rel="noopener" {...rest}>
   <span class="socialSweep__icon" aria-hidden="true">
     {
       network === "instagram" ? (

@@ -4,14 +4,17 @@
  * © 2026. All rights reserved.
  */
 import { siteText } from "../../../data/siteText";
+import { resolveAssetPath } from "../../../data/assetMap";
 
-const { base, className = "" } = Astro.props;
+const { className = "" } = Astro.props;
 const sectionClass = ["cClients", className].filter(Boolean).join(" ");
 const text = siteText.sections.corporateClients;
+const mobileLoopCopies = [0, 1, 2];
 
 const clients = text.clients.map((client) => ({
   ...client,
-  src: `${base}${client.logo}`,
+  src: resolveAssetPath(client.logo),
+  useNativeTone: client.logo.toLowerCase().includes("seediun_logo.png"),
 }));
 ---
 
@@ -26,24 +29,32 @@ const clients = text.clients.map((client) => ({
     </header>
 
     <div
-      class="cClients__compact"
+      class="cClients__mobileRail"
       data-reveal-item="2"
       aria-label={text.companiesAria}
     >
-      <span class="cClients__compactLabel">{text.compactLabel}</span>
-      <div class="cClients__compactTrack">
+      <div class="cClients__mobileTrack" data-loop-track data-loop-copies="3">
         {
-          clients.map((client) => (
-            <a
-              class="cClients__compactItem"
-              href={client.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${client.name}: ${text.visitLabel}`}
-            >
-              {client.name}
-            </a>
-          ))
+          mobileLoopCopies.flatMap((copyIndex) =>
+            clients.map((client) => (
+              <a
+                class="cClients__mobileCard"
+                href={client.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${client.name}: ${text.visitLabel}`}
+                aria-hidden={copyIndex === 1 ? undefined : "true"}
+                tabindex={copyIndex === 1 ? undefined : "-1"}
+              >
+              <img
+                class={`cClients__mobileLogo${client.useNativeTone ? " cClients__mobileLogo--native" : ""}`}
+                src={client.src}
+                alt={client.alt}
+                loading="lazy"
+              />
+              </a>
+            ))
+          )
         }
       </div>
     </div>
@@ -76,3 +87,88 @@ const clients = text.clients.map((client) => ({
     </div>
   </div>
 </section>
+
+<script is:inline>
+  (() => {
+    const initCircularClientScroll = () => {
+      const tracks = document.querySelectorAll(".cClients__mobileTrack[data-loop-track]");
+      tracks.forEach((track) => {
+        if (!(track instanceof HTMLElement) || track.dataset.loopReady === "true") {
+          return;
+        }
+
+        const copies = Number(track.dataset.loopCopies || "3");
+        if (!Number.isFinite(copies) || copies < 2) {
+          return;
+        }
+
+        let segmentWidth = 0;
+        let isRepositioning = false;
+
+        const getStartPosition = () => {
+          const cards = track.querySelectorAll(".cClients__mobileCard");
+          const firstCard = cards[0];
+
+          if (!(firstCard instanceof HTMLElement)) {
+            return segmentWidth;
+          }
+
+          const centerInset = Math.max(0, (track.clientWidth - firstCard.offsetWidth) / 2);
+          return segmentWidth - centerInset;
+        };
+
+        const recalc = (forceStart = false) => {
+          const totalWidth = track.scrollWidth;
+          segmentWidth = totalWidth / copies;
+
+          if (!Number.isFinite(segmentWidth) || segmentWidth <= 0) {
+            return;
+          }
+
+          const startPosition = getStartPosition();
+          if (forceStart) {
+            track.scrollLeft = startPosition;
+            return;
+          }
+
+          if (track.scrollLeft < segmentWidth * 0.5 || track.scrollLeft > segmentWidth * 1.5) {
+            track.scrollLeft = startPosition;
+          }
+        };
+
+        const onScroll = () => {
+          if (!segmentWidth || isRepositioning) {
+            return;
+          }
+
+          const minEdge = segmentWidth * 0.25;
+          const maxEdge = segmentWidth * 1.75;
+
+          if (track.scrollLeft <= minEdge) {
+            isRepositioning = true;
+            track.scrollLeft += segmentWidth;
+            isRepositioning = false;
+            return;
+          }
+
+          if (track.scrollLeft >= maxEdge) {
+            isRepositioning = true;
+            track.scrollLeft -= segmentWidth;
+            isRepositioning = false;
+          }
+        };
+
+        recalc(true);
+        requestAnimationFrame(() => recalc(true));
+        track.addEventListener("scroll", onScroll, { passive: true });
+
+        const resizeObserver = new ResizeObserver(() => recalc());
+        resizeObserver.observe(track);
+        track.dataset.loopReady = "true";
+      });
+    };
+
+    initCircularClientScroll();
+    document.addEventListener("astro:page-load", initCircularClientScroll);
+  })();
+</script>

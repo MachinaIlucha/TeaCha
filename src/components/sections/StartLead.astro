@@ -6,8 +6,9 @@
 
 import PrivacyConsent from "../forms/PrivacyConsent.astro";
 import { siteText } from "../../data/siteText";
+import { resolveAssetPath } from "../../data/assetMap";
 
-const { base = "/", className = "" } = Astro.props;
+const { className = "" } = Astro.props;
 const startLeadText = siteText.sections.startLead;
 const forms = siteText.shared.forms;
 ---
@@ -16,7 +17,7 @@ const forms = siteText.shared.forms;
   class={`startLead ${className}`}
   id="start-lead"
   data-reveal="scroll"
-  style={`--startlead-bg: url(${base}img/start-lead/language-bookshelf-background.webp);`}
+  style={`--startlead-bg: url(${resolveAssetPath("img/start-lead/language-bookshelf-background.webp")});`}
 >
   <div class="container">
     <div class="startLead__grid">
@@ -71,7 +72,7 @@ const forms = siteText.shared.forms;
         </form>
         <img
           class="startLead__note"
-          src={`${base}img/start-lead/messenger-sticker.png`}
+          src={resolveAssetPath("img/start-lead/messenger-sticker.png")}
           alt={startLeadText.stickerAlt}
           loading="lazy"
         />

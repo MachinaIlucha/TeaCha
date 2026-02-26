@@ -43,6 +43,117 @@
   display: none;
 }
 
+.cClients__mobileRail {
+  margin-top: 14px;
+  margin-inline: calc(var(--gutter) * -1);
+  padding: 0;
+  border-radius: 0;
+  border: 1px solid rgba(26, 34, 56, 0);
+  background: transparent;
+  box-shadow: none;
+}
+
+.cClients__mobileTrack {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 12px 0;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+}
+
+.cClients__mobileTrack::-webkit-scrollbar {
+  display: none;
+}
+
+.cClients__mobileCard {
+  position: relative;
+  overflow: hidden;
+  flex: 0 0 clamp(142px, 52vw, 210px);
+  height: 78px;
+  border-radius: 14px;
+  border: 1px solid rgba(130, 154, 226, 0.18);
+  background: linear-gradient(180deg, #1c1e22 0%, #15171a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 0 0 1px rgba(42, 78, 177, 0.16),
+    0 10px 24px rgba(0, 0, 0, 0.3);
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.cClients__mobileCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    120% 95% at 50% 0%,
+    rgba(255, 255, 255, 0.14),
+    rgba(255, 255, 255, 0) 62%
+  );
+  pointer-events: none;
+}
+
+.cClients__mobileCard:nth-child(4n + 1) {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 0 0 1px rgba(50, 112, 255, 0.22),
+    0 0 24px rgba(50, 112, 255, 0.25);
+}
+
+.cClients__mobileCard:nth-child(4n + 2) {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 0 0 1px rgba(255, 166, 0, 0.22),
+    0 0 24px rgba(255, 166, 0, 0.2);
+}
+
+.cClients__mobileCard:nth-child(4n + 3) {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 0 0 1px rgba(67, 103, 255, 0.22),
+    0 0 24px rgba(67, 103, 255, 0.22);
+}
+
+.cClients__mobileCard:nth-child(4n + 4) {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 0 0 1px rgba(219, 31, 50, 0.22),
+    0 0 24px rgba(219, 31, 50, 0.2);
+}
+
+.cClients__mobileCard:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--red) 35%, white 65%);
+  outline-offset: 2px;
+}
+
+.cClients__mobileLogo {
+  width: min(140px, 80%);
+  height: 46px;
+  object-fit: contain;
+  filter: brightness(0) invert(1) saturate(0.9) contrast(1.02);
+  opacity: 0.95;
+  transition:
+    transform 0.18s ease,
+    filter 0.18s ease,
+    opacity 0.18s ease;
+}
+
+.cClients__mobileLogo--native {
+  filter: none;
+  opacity: 1;
+}
+
 .cClients__compactItem {
   display: inline-flex;
   align-items: center;
@@ -128,6 +239,15 @@
     background: #fff;
   }
 
+  .cClients__mobileCard:hover {
+    transform: translateY(-2px);
+  }
+
+  .cClients__mobileCard:hover .cClients__mobileLogo {
+    transform: scale(1.02);
+    opacity: 1;
+  }
+
   .cClients__card:hover {
     transform: translateY(-2px);
     background: #eceff2;
@@ -147,7 +267,9 @@
 @media (prefers-reduced-motion: reduce) {
   .cClients__card,
   .cClients__logo,
-  .cClients__compactItem {
+  .cClients__compactItem,
+  .cClients__mobileCard,
+  .cClients__mobileLogo {
     transition: none !important;
   }
 }
@@ -158,6 +280,10 @@
   }
 
   .cClients__compact {
+    display: none;
+  }
+
+  .cClients__mobileRail {
     display: none;
   }
 

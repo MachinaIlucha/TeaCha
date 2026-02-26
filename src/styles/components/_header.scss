@@ -383,4 +383,69 @@ body.menu-open .topbar {
 
     width: auto;
   }
+
+  .topbar .nav__links .pill {
+    --pill-sweep-ease: cubic-bezier(0.31, -0.105, 0.43, 1.59);
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    z-index: 0;
+    transition:
+      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      color 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .topbar .nav__links .pill::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    left: -32%;
+    width: 164%;
+    height: calc(100% + 2px);
+    z-index: -1;
+    background: var(--text);
+    transform: translateX(-112%) skewX(-24deg);
+    transition: transform 1.05s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .topbar .nav__links .pill:hover,
+  .topbar .nav__links .pill:active,
+  .topbar .nav__links .pill:focus-visible {
+    color: #fff;
+    border-color: var(--text);
+    filter: none;
+  }
+
+  .topbar .nav__links .pill:hover::before,
+  .topbar .nav__links .pill:active::before,
+  .topbar .nav__links .pill:focus-visible::before {
+    transform: translateX(-2%) skewX(-24deg);
+  }
+
+  .topbar .nav__links .pill.is-active,
+  .topbar .nav__links .pill[aria-current="page"] {
+    color: #fff;
+    border-color: var(--text);
+    filter: none;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  .topbar .nav__links .pill.is-active::before,
+  .topbar .nav__links .pill[aria-current="page"]::before {
+    transform: translateX(-2%) skewX(-24deg);
+  }
+
+  .topbar .nav__links:has(.pill:hover) .pill.is-active:not(:hover),
+  .topbar .nav__links:has(.pill:hover) .pill[aria-current="page"]:not(:hover) {
+    color: var(--text);
+    border-color: rgba(43, 46, 68, 0.65);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .topbar .nav__links:has(.pill:hover) .pill.is-active:not(:hover)::before,
+  .topbar .nav__links:has(.pill:hover) .pill[aria-current="page"]:not(:hover)::before {
+    transform: translateX(-112%) skewX(-24deg);
+  }
 }

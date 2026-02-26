@@ -21,7 +21,10 @@
   background: #fff;
   border: 2px solid rgba(43, 46, 68, 0.65);
   color: var(--text);
-  transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease,
+    filter 0.12s ease;
 }
 
 .pill:hover {
@@ -364,16 +367,14 @@
   top: 55%;
   height: 3em;
   background: color-mix(in srgb, #7A1E1E 82%, transparent);
-  -webkit-mask: url("/img/decor/chinese-brush-stroke.png") center / 100% 100% no-repeat;
-  mask: url("/img/decor/chinese-brush-stroke.png") center / 100% 100% no-repeat;
-  border-radius: 0;
+  border-radius: 999px;
+  opacity: 0.92;
   transform: translateY(-50%) rotate(-1.5deg);
   z-index: -1;
 }
 
 .marker--round::after {
-  -webkit-mask: url("/img/decor/chinese-brush-stroke-round.png") center / 100% 100% no-repeat;
-  mask: url("/img/decor/chinese-brush-stroke-round.png") center / 100% 100% no-repeat;
+  border-radius: 50%;
 }
 
 /* Reviews-only: circular brush centered behind "ВІД" */
@@ -382,12 +383,6 @@
   height: 3em;
   left: -28%;
   right: auto;
-}
-
-@supports not ((-webkit-mask: url("")) or (mask: url(""))) {
-  .marker::after {
-    background: url("/img/decor/chinese-brush-stroke.png") center / 100% 100% no-repeat;
-  }
 }
 
 .handNote {

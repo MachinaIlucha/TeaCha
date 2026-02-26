@@ -79,6 +79,21 @@
   --social-color: #111827;
 }
 
+.socialSweep--tiktok::before {
+  background: #111827;
+  width: 170%;
+  height: 170%;
+  left: -155%;
+  top: 115%;
+  border-radius: inherit;
+}
+
+.socialSweep--tiktok:hover::before,
+.socialSweep--tiktok:focus-visible::before {
+  left: -35%;
+  top: -35%;
+}
+
 .socialSweep--sm {
   --social-size: 38px;
   --social-icon-size: 30px;

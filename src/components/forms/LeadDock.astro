@@ -5,8 +5,8 @@
  */
 
 import { siteText } from "../../data/siteText";
+import { resolveAssetPath } from "../../data/assetMap";
 
-const base = import.meta.env.BASE_URL;
 const { hidden = false } = Astro.props;
 const forms = siteText.shared.forms;
 ---
@@ -29,7 +29,7 @@ const forms = siteText.shared.forms;
       <div class="leadDock__intro">
         <img
           class="leadDock__icon"
-          src={`${base}img/forms/icon-handwrite-black.png`}
+          src={resolveAssetPath("img/forms/icon-handwrite-black.png")}
           alt=""
           loading="lazy"
           aria-hidden="true"
@@ -71,7 +71,7 @@ const forms = siteText.shared.forms;
         <span class="leadDock__btnText">{forms.trialButton}</span>
         <span class="leadDock__btnIcon" aria-hidden="true">
           <img
-            src={`${base}img/forms/chinese-scroll.png`}
+            src={resolveAssetPath("img/forms/chinese-scroll.png")}
             alt=""
             loading="lazy"
             decoding="async"
@@ -83,7 +83,7 @@ const forms = siteText.shared.forms;
         <span class="leadDock__btnText">{forms.trialButton}</span>
         <span class="leadDock__btnIcon" aria-hidden="true">
           <img
-            src={`${base}img/forms/chinese-scroll.png`}
+            src={resolveAssetPath("img/forms/chinese-scroll.png")}
             alt=""
             loading="lazy"
             decoding="async"

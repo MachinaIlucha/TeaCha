@@ -6,8 +6,8 @@
  */
 
 import { siteText } from "../../data/siteText";
+import { resolveAssetPath } from "../../data/assetMap";
 
-const base = import.meta.env.BASE_URL;
 const reviewText = siteText.sections.reviews;
 
 const {
@@ -24,6 +24,16 @@ const {
 
 const accentClass = accent === "top" ? "sectionTitle--accentTop" : "";
 
+const normalizeBadge = (badge: string): string => {
+  const lower = badge.toLowerCase();
+  if (lower.includes("english")) return "english";
+  if (lower.includes("chinese")) return "chinese";
+
+  return badge
+    .split(/[\u2022•·|-]/)[0]
+    .trim();
+};
+
 type Review = {
   name: string;
   badge: string;
@@ -36,7 +46,8 @@ type Review = {
 
 const reviews: Review[] = reviewText.list.map((item) => ({
   ...item,
-  img: `${base}${item.img}`,
+  badge: normalizeBadge(item.badge),
+  img: resolveAssetPath(item.img),
 }));
 
 const reviewsSchema = {

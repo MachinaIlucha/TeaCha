@@ -51,15 +51,18 @@
   grid-template-columns: 1fr;
   gap: 14px 28px;
   align-items: center;
-  justify-items: center;
-  text-align: center;
+  justify-items: start;
+  text-align: left;
+  width: 100%;
+  max-width: 980px;
+  margin-inline: auto;
 }
 
 .footer__contactsRow {
   display: grid;
   gap: 6px;
-  justify-items: center;
-  justify-self: center;
+  justify-items: start;
+  justify-self: start;
 }
 
 .footer__infoLabel {
@@ -74,14 +77,14 @@
   display: flex;
   gap: 12px;
   align-items: center;
-  justify-content: center;
-  justify-self: center;
+  justify-content: flex-start;
+  justify-self: start;
 }
 
 .footer__rightCol {
   display: grid;
   gap: 10px;
-  justify-items: center;
+  justify-items: start;
 }
 
 .footer__main {
@@ -226,8 +229,9 @@
 .footer__linksRow {
   display: grid;
   gap: 8px;
-  justify-items: center;
-  justify-self: center;
+  justify-items: start;
+  justify-self: start;
+  text-align: left;
 }
 
 .footer__link {
@@ -303,8 +307,8 @@
   }
 
   .footer__rightCol {
-    justify-self: end;
-    justify-items: end;
+    justify-self: start;
+    justify-items: start;
   }
 
   .footer__social {

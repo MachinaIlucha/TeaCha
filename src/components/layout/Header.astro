@@ -7,15 +7,32 @@
 
 import SocialLink from "../ui/SocialLink.astro";
 import { siteText } from "../../data/siteText";
+import { resolveAssetPath } from "../../data/assetMap";
 
 const base = import.meta.env.BASE_URL;
 const contact = siteText.shared.contact;
+
+const normalizePath = (value: string) => {
+  const normalized = value.replace(/\/+$/, "");
+  return normalized === "" ? "/" : normalized;
+};
+
+const currentPath = normalizePath(Astro.url.pathname);
+const navLinks = siteText.navigation.links.map((link) => {
+  const href = `${base}${link.href}`;
+  const linkPath = normalizePath(new URL(href, Astro.url).pathname);
+  return {
+    ...link,
+    href,
+    isActive: currentPath === linkPath,
+  };
+});
 ---
 
 <header class="topbar" id="top">
   <div class="container topbar__row">
     <a class="brand" href={base} aria-label={siteText.shared.homeAriaLabel}>
-      <img class="brand__logo" src={`${base}img/layout/logo.png`} alt={siteText.shared.brandName} />
+      <img class="brand__logo" src={resolveAssetPath("img/layout/logo.png")} alt={siteText.shared.brandName} />
       <span class="brand__word">
         <span class="tea">Tea</span><span class="cha">Cha</span>
       </span>
@@ -48,8 +65,14 @@ const contact = siteText.shared.contact;
 
         <div class="nav__links">
           {
-            siteText.navigation.links.map((link) => (
-              <a class="pill" href={`${base}${link.href}`}>{link.label}</a>
+            navLinks.map((link) => (
+              <a
+                class={`pill ${link.isActive ? "is-active" : ""}`}
+                href={link.href}
+                aria-current={link.isActive ? "page" : undefined}
+              >
+                {link.label}
+              </a>
             ))
           }
         </div>

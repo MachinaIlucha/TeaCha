@@ -2,6 +2,8 @@
 import "../styles/main.scss";
 import { ClientRouter } from "astro:transitions";
 import { siteText } from "../data/siteText";
+import { resolveAssetPath } from "../data/assetMap";
+import mainScriptUrl from "../scripts/main.js?url";
 
 import Header from "../components/layout/Header.astro";
 import Footer from "../components/layout/Footer.astro";
@@ -50,6 +52,10 @@ const siteName = siteText.seo.siteName;
 const defaultTitle = siteText.seo.defaultTitle;
 const defaultDescription = siteText.seo.defaultDescription;
 const defaultOgImage = siteText.seo.defaultOgImage;
+const logoImage = resolveAssetPath("img/layout/logo.png");
+const heroBackgroundImage = resolveAssetPath("img/hero/home/home-hero-background.webp");
+const processDividerImage = resolveAssetPath("img/process/teacha-learning-process-divider.webp");
+const reviewQuoteMarksImage = resolveAssetPath("img/reviews/quote-marks.png");
 const contact = siteText.shared.contact;
 
 const toAbsoluteUrl = (value: string) => {
@@ -66,7 +72,9 @@ const metaTitle = pageTitleRaw
   : defaultTitle;
 const metaDescription = description?.trim() || defaultDescription;
 const canonicalUrl = toAbsoluteUrl(canonical ?? pathname);
-const ogImageUrl = toAbsoluteUrl(ogImage ?? defaultOgImage);
+const resolvedDefaultOgImage = resolveAssetPath(defaultOgImage);
+const resolvedOgImage = ogImage ? resolveAssetPath(ogImage) : resolvedDefaultOgImage;
+const ogImageUrl = toAbsoluteUrl(resolvedOgImage);
 const robotsContent = noindex
   ? "noindex, nofollow"
   : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1";
@@ -104,7 +112,7 @@ const organizationSchema: JsonLd = {
   name: siteName,
   url: siteUrl,
   image: ogImageUrl,
-  logo: toAbsoluteUrl("/img/layout/logo.png"),
+  logo: toAbsoluteUrl(logoImage),
   email: contact.email,
   telephone: contact.phones[0].raw,
   contactPoint: [
@@ -214,9 +222,9 @@ const jsonLdItems = [organizationSchema, websiteSchema, webpageSchema, breadcrum
     <meta name="robots" content={robotsContent} />
     <link rel="canonical" href={canonicalUrl} />
     <meta name="theme-color" content="#f6efe3" />
-    <link rel="icon" type="image/png" href={`${base}img/layout/logo.png`} />
-    <link rel="shortcut icon" href={`${base}img/layout/logo.png`} />
-    <link rel="apple-touch-icon" href={`${base}img/layout/logo.png`} />
+    <link rel="icon" type="image/png" href={logoImage} />
+    <link rel="shortcut icon" href={logoImage} />
+    <link rel="apple-touch-icon" href={logoImage} />
 
     {
       alternateLinks.map((link) => (
@@ -244,6 +252,13 @@ const jsonLdItems = [organizationSchema, websiteSchema, webpageSchema, breadcrum
       ))
     }
     <script type="application/json" id="teacha-client-text" set:html={clientTextJson}></script>
+    <style is:inline>{`
+      :root {
+        --asset-hero-home-bg: url("${heroBackgroundImage}");
+        --asset-process-divider: url("${processDividerImage}");
+        --asset-reviews-quote: url("${reviewQuoteMarksImage}");
+      }
+    `}</style>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -268,13 +283,21 @@ const jsonLdItems = [organizationSchema, websiteSchema, webpageSchema, breadcrum
       }
     </nav>
 
-    <StartLead base={base} />
+    <StartLead />
     <Footer />
 
     <ModalConsult />
     <ToastHost />
     <LeadDock />
+    <button
+      class="backToTop"
+      type="button"
+      aria-label="Повернутися вгору"
+      data-back-to-top
+    >
+      ↑
+    </button>
 
-    <script type="module" src={`${import.meta.env.BASE_URL}scripts/main.js`}></script>
+    <script type="module" src={mainScriptUrl}></script>
   </body>
 </html>

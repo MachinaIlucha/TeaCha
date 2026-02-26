@@ -13,7 +13,7 @@
   width: min(100%, 980px);
   height: min(68vh, 520px);
   min-height: 360px;
-  transition: all 500ms;
+  transition: grid-template-columns 500ms ease;
 }
 
 .page-about .aboutCard {
@@ -23,36 +23,38 @@
   background-image: var(--img);
   background-position: center;
   background-size: cover;
-  transition: all 500ms;
+  transition: filter 500ms ease, transform 500ms ease, opacity 500ms ease;
   box-shadow: 0 10px 24px rgba(16, 24, 40, 0.14);
 }
 
-.page-about .aboutGallery__grid:hover .aboutCard {
-  filter: grayscale(100%) opacity(24%);
-}
+@media (hover: hover) and (pointer: fine) {
+  .page-about .aboutGallery__grid:hover .aboutCard {
+    filter: grayscale(100%) opacity(24%);
+  }
 
-.page-about .aboutGallery__grid .aboutCard:hover {
-  filter: grayscale(0%) opacity(100%);
-}
+  .page-about .aboutGallery__grid .aboutCard:hover {
+    filter: grayscale(0%) opacity(100%);
+  }
 
-.page-about .aboutGallery__grid:has(.aboutCard--1:hover) {
-  grid-template-columns: 3fr 1fr 1fr 1fr 1fr;
-}
+  .page-about .aboutGallery__grid:has(.aboutCard--1:hover) {
+    grid-template-columns: 3fr 1fr 1fr 1fr 1fr;
+  }
 
-.page-about .aboutGallery__grid:has(.aboutCard--2:hover) {
-  grid-template-columns: 1fr 3fr 1fr 1fr 1fr;
-}
+  .page-about .aboutGallery__grid:has(.aboutCard--2:hover) {
+    grid-template-columns: 1fr 3fr 1fr 1fr 1fr;
+  }
 
-.page-about .aboutGallery__grid:has(.aboutCard--3:hover) {
-  grid-template-columns: 1fr 1fr 3fr 1fr 1fr;
-}
+  .page-about .aboutGallery__grid:has(.aboutCard--3:hover) {
+    grid-template-columns: 1fr 1fr 3fr 1fr 1fr;
+  }
 
-.page-about .aboutGallery__grid:has(.aboutCard--4:hover) {
-  grid-template-columns: 1fr 1fr 1fr 3fr 1fr;
-}
+  .page-about .aboutGallery__grid:has(.aboutCard--4:hover) {
+    grid-template-columns: 1fr 1fr 1fr 3fr 1fr;
+  }
 
-.page-about .aboutGallery__grid:has(.aboutCard--5:hover) {
-  grid-template-columns: 1fr 1fr 1fr 1fr 3fr;
+  .page-about .aboutGallery__grid:has(.aboutCard--5:hover) {
+    grid-template-columns: 1fr 1fr 1fr 1fr 3fr;
+  }
 }
 
 .page-about .aboutCard:nth-child(odd) {

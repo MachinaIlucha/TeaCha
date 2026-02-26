@@ -118,24 +118,8 @@
   gap: 0.6rem;
 }
 
-.page-about .aboutContacts__social a {
-  text-decoration: none;
-  padding: 0.55rem 0.95rem;
-  border-radius: var(--radius-pill);
-  border: 1px solid rgba(43, 46, 68, 0.18);
-  background: rgba(255, 255, 255, 0.9);
-  color: var(--color-text);
-  font-size: 0.95rem;
-  font-weight: 700;
-  line-height: 1;
-  transition:
-    transform var(--dur-2) var(--ease),
-    border-color var(--dur-2) var(--ease),
-    background-color var(--dur-2) var(--ease);
-}
-
 .page-about .aboutContacts__link:focus-visible,
-.page-about .aboutContacts__social a:focus-visible {
+.page-about .aboutContacts__social .socialSweep:focus-visible {
   outline: none;
   box-shadow: var(--focus-ring);
 }
@@ -144,12 +128,6 @@
   .page-about .aboutContacts__link:hover {
     color: var(--color-accent);
     border-bottom-color: rgba(219, 31, 50, 0.55);
-  }
-
-  .page-about .aboutContacts__social a:hover {
-    transform: translateY(-1px);
-    border-color: rgba(219, 31, 50, 0.45);
-    background: #fff;
   }
 }
 
@@ -162,7 +140,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .page-about .aboutContacts__link,
-  .page-about .aboutContacts__social a {
+  .page-about .aboutContacts__social .socialSweep {
     transition: none !important;
   }
 }

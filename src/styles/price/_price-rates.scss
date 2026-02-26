@@ -41,6 +41,12 @@
   }
 }
 
+@media (max-width: 48rem) {
+  .priceRates__hint {
+    display: none;
+  }
+}
+
 @media (min-width: 64rem) {
   .priceRates__hint {
     margin-top: 12px;

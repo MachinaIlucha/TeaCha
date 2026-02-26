@@ -16,6 +16,7 @@ import PriceRates from "../components/pages/price/PriceRates.astro";
 import Reviews from "../components/sections/Reviews.astro";
 import Faq from "../components/sections/Faq.astro";
 import { siteText } from "../data/siteText";
+import { resolveAssetPath } from "../data/assetMap";
 
 const base = import.meta.env.BASE_URL;
 const pageText = siteText.pages.chinese;
@@ -29,9 +30,8 @@ const pageText = siteText.pages.chinese;
   bodyClass="page-chinese"
 >
   <LanguageHero
-    base={base}
     className="sectionShell section--a"
-    imgSrc={`${base}img/hero/chinese/chinese-language-hero.webp`}
+    imgSrc={resolveAssetPath("img/hero/chinese/chinese-language-hero.webp")}
     imgAlt={pageText.hero.imgAlt}
     imgLoading="eager"
     imgFetchpriority="high"

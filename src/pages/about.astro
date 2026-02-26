@@ -1,11 +1,19 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import SocialLink from "../components/ui/SocialLink.astro";
 import { siteText } from "../data/siteText";
+import { resolveAssetPath } from "../data/assetMap";
 
 const base = import.meta.env.BASE_URL;
 const site = Astro.site ?? new URL("https://teacha.pages.dev");
 const toAbsolute = (path: string) => new URL(path, site).toString();
 const aboutText = siteText.pages.about;
+const foundersFacts = siteText.sections.teachers;
+const formatFoundersFact = (text: string, index: number) => {
+  if (index === 0) return text.replace("магістра ", "магістра<br/>");
+  if (index === 3) return text.replace(" при ", " при<br/>");
+  return text;
+};
 const contact = siteText.shared.contact;
 
 const aboutContactPageSchema = {
@@ -77,18 +85,18 @@ const aboutContactPageSchema = {
 
       <div class="aboutTeam__cards">
         <article class="aboutTeamCard">
-          <img src={`${base}img/about/teacha-about-daryna-shvets.jpg`} alt={aboutText.founders[0].alt} />
+          <img src={resolveAssetPath("img/about/teacha-about-daryna-shvets.jpg")} alt={aboutText.founders[0].alt} />
           <div class="aboutTeamCard__content">
             <h3>{aboutText.founders[0].name}</h3>
           </div>
         </article>
 
         <article class="aboutTeamCard aboutTeamCard--center">
-          <img src={`${base}img/about/teacha-about-team-center.jpg`} alt={aboutText.teamCenterAlt} />
+          <img src={resolveAssetPath("img/about/teacha-about-team-center.jpg")} alt={aboutText.teamCenterAlt} />
         </article>
 
         <article class="aboutTeamCard">
-          <img src={`${base}img/about/teacha-about-dariia-pozniakovska.jpg`} alt={aboutText.founders[1].alt} />
+          <img src={resolveAssetPath("img/about/teacha-about-dariia-pozniakovska.jpg")} alt={aboutText.founders[1].alt} />
           <div class="aboutTeamCard__content">
             <h3>{aboutText.founders[1].name}</h3>
           </div>
@@ -97,13 +105,27 @@ const aboutContactPageSchema = {
     </div>
   </section>
 
+  <section class="aboutTeamFacts" aria-label={foundersFacts.educationAria} data-reveal="scroll">
+    <div class="aboutTeamFacts__inner">
+      <div class="aboutTeamFacts__grid">
+        {
+          foundersFacts.cards.map((card, index) => (
+            <article class="aboutTeamFactCard" data-reveal-item={String(index + 1)}>
+              <p set:html={formatFoundersFact(card.text, index)}></p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
   <section class="aboutGallery" aria-label={aboutText.teamGalleryAria}>
     <div class="aboutGallery__grid">
-      <div class="aboutCard aboutCard--1" style={`--img: url(${base}img/about/teacha-about-team-01.jpg);`}></div>
-      <div class="aboutCard aboutCard--2" style={`--img: url(${base}img/about/teacha-about-team-02.jpg);`}></div>
-      <div class="aboutCard aboutCard--3" style={`--img: url(${base}img/about/teacha-about-team-03.jpg);`}></div>
-      <div class="aboutCard aboutCard--4" style={`--img: url(${base}img/about/teacha-about-team-04.jpg);`}></div>
-      <div class="aboutCard aboutCard--5" style={`--img: url(${base}img/founders/teacha-founders-daryna-dariia.webp);`}></div>
+      <div class="aboutCard aboutCard--1" style={`--img: url(${resolveAssetPath("img/about/teacha-about-team-01.jpg")});`}></div>
+      <div class="aboutCard aboutCard--2" style={`--img: url(${resolveAssetPath("img/about/teacha-about-team-02.jpg")});`}></div>
+      <div class="aboutCard aboutCard--3" style={`--img: url(${resolveAssetPath("img/about/teacha-about-team-03.jpg")});`}></div>
+      <div class="aboutCard aboutCard--4" style={`--img: url(${resolveAssetPath("img/about/teacha-about-team-04.jpg")});`}></div>
+      <div class="aboutCard aboutCard--5" style={`--img: url(${resolveAssetPath("img/founders/teacha-founders-daryna-dariia.webp")});`}></div>
     </div>
   </section>
 
@@ -169,14 +191,24 @@ const aboutContactPageSchema = {
       </div>
 
       <div class="aboutContacts__social" data-reveal-item="8" aria-label={contact.socialsAria}>
-        <a href={contact.instagramUrl} target="_blank" rel="noopener noreferrer" itemprop="sameAs">{siteText.shared.social.instagramLabel}</a>
-        <a href={contact.tiktokUrl} target="_blank" rel="noopener noreferrer" itemprop="sameAs">{siteText.shared.social.tiktokLabel}</a>
+        <SocialLink
+          href={contact.instagramUrl}
+          network="instagram"
+          ariaLabel={siteText.shared.social.instagramLabel}
+          itemprop="sameAs"
+        />
+        <SocialLink
+          href={contact.tiktokUrl}
+          network="tiktok"
+          ariaLabel={siteText.shared.social.tiktokLabel}
+          itemprop="sameAs"
+        />
       </div>
     </div>
 
     <meta itemprop="name" content={siteText.shared.brandName} />
     <meta itemprop="url" content={toAbsolute("/about/")} />
-    <meta itemprop="image" content={toAbsolute("/img/layout/logo.png")} />
+    <meta itemprop="image" content={toAbsolute(resolveAssetPath("img/layout/logo.png"))} />
     <div class="visuallyHidden" itemprop="geo" itemscope itemtype="https://schema.org/GeoCoordinates">
       <meta itemprop="latitude" content="50.47026" />
       <meta itemprop="longitude" content="30.357656" />

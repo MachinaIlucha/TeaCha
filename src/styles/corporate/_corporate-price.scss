@@ -22,6 +22,12 @@
   }
 }
 
+@media (max-width: 48rem) {
+  .corpPrice__hint {
+    display: none;
+  }
+}
+
 .corpPrice__titleBracket {
   display: none;
 }

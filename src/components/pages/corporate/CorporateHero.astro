@@ -6,15 +6,15 @@
 
 import LanguageHero from "../../sections/LanguageHero.astro";
 import { siteText } from "../../../data/siteText";
+import { resolveAssetPath } from "../../../data/assetMap";
 
-const { base, className = "" } = Astro.props;
+const { className = "" } = Astro.props;
 const heroText = siteText.sections.corporateHero;
 ---
 
 <LanguageHero
-  base={base}
   className={className}
-  imgSrc={`${base}img/hero/corporate/corporate-hero-team.webp`}
+  imgSrc={resolveAssetPath("img/hero/corporate/corporate-hero-team.webp")}
   imgAlt={heroText.imageAlt}
   imgLoading="eager"
   imgFetchpriority="high"

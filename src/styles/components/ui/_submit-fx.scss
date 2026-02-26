@@ -1,0 +1,123 @@
+/*!
+ * TeaCha website
+ * Lead form submit success animation
+ * © 2026. All rights reserved.
+ */
+
+.leadSubmitFx {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.leadSubmitFx__label {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  transition: transform 420ms var(--ease);
+}
+
+.leadSubmitFx .leadDock__btnText {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  transition: transform 420ms var(--ease);
+}
+
+.leadSubmitFx__check {
+  position: absolute;
+  top: 0;
+  right: -74px;
+  z-index: 1;
+  width: 74px;
+  height: 100%;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  background: rgba(255, 255, 255, 0.18);
+  transition:
+    right 460ms var(--ease),
+    opacity 460ms var(--ease);
+}
+
+.leadSubmitFx__check svg {
+  width: 24px;
+  height: 24px;
+}
+
+.leadSubmitFx__icon {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  transform: translate(-50%, -50%);
+}
+
+.leadSubmitFx__icon path {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 34;
+  stroke-dashoffset: 34;
+  transition: stroke-dashoffset 320ms ease 220ms;
+}
+
+.leadSubmitFx__icon--err {
+  opacity: 0;
+}
+
+.leadSubmitFx.is-loading .leadSubmitFx__label {
+  opacity: 0.98;
+}
+
+.leadSubmitFx.is-success .leadSubmitFx__label {
+  transform: translateX(-18px);
+}
+
+.leadSubmitFx.is-success .leadDock__btnText {
+  transform: translateX(-18px);
+}
+
+.leadSubmitFx.is-success .leadSubmitFx__check {
+  right: 0;
+  opacity: 1;
+}
+
+.leadSubmitFx.is-success .leadSubmitFx__icon--ok path {
+  stroke-dashoffset: 0;
+}
+
+.leadSubmitFx.is-error .leadSubmitFx__check {
+  right: 0;
+  opacity: 1;
+  background: rgba(219, 31, 50, 0.55);
+}
+
+.leadSubmitFx.is-error .leadSubmitFx__label {
+  transform: translateX(-18px);
+}
+
+.leadSubmitFx.is-error .leadDock__btnText {
+  transform: translateX(-18px);
+}
+
+.leadSubmitFx.is-error .leadSubmitFx__icon--ok {
+  opacity: 0;
+}
+
+.leadSubmitFx.is-error .leadSubmitFx__icon--err {
+  opacity: 1;
+}
+
+.leadSubmitFx.is-error .leadSubmitFx__icon--err path {
+  stroke-dashoffset: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .leadSubmitFx__label,
+  .leadSubmitFx__check,
+  .leadSubmitFx__icon path {
+    transition: none !important;
+  }
+}

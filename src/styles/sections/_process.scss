@@ -11,6 +11,7 @@
 
   /* local vars from tokens */
   --p-line: rgba(43, 46, 68, 0.9);
+  --p-line-grad: linear-gradient(180deg, #8f96a3 0%, #7f8795 100%);
   --p-node-bg: var(--color-soft);
   --p-node-border: rgba(43, 46, 68, 0.08);
   --p-node-ring: var(--bg);
@@ -36,7 +37,7 @@
   border-radius: 0;
   pointer-events: none;
 
-  background: url("/img/process/teacha-learning-process-divider.webp") center / cover no-repeat;
+  background: var(--asset-process-divider) center / cover no-repeat;
   filter: blur(4px);
   transform: none;
   opacity: 0.98;
@@ -80,7 +81,7 @@
   top: 10px;
   bottom: 10px;
   width: 2px;
-  background: var(--p-line);
+  background: var(--p-line-grad);
   z-index: 0;
 
   transform-origin: center top;
@@ -100,9 +101,9 @@
   min-width: 0;
 }
 
-.process__node {
-  grid-column: 1;
-  width: var(--node);
+  .process__node {
+    grid-column: 1;
+    width: var(--node);
   height: var(--node);
   border-radius: var(--radius-pill);
 
@@ -124,12 +125,14 @@
     transform 900ms var(--ease);
 }
 
-.process__num {
-  font-size: 22px;
-  font-weight: 600;
-  line-height: 1;
-  color: var(--p-num);
-}
+  .process__num {
+    display: inline-grid;
+    place-items: center;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--p-num);
+  }
 
 .process__content {
   grid-column: 2;
@@ -376,6 +379,13 @@
 /* -------------------- */
 
 @media (min-width: 64rem) {
+  .process__desktop {
+    font-size: clamp(17px, 1.4vw, 22px);
+    line-height: 1.28;
+    letter-spacing: -0.01em;
+    text-wrap: pretty;
+  }
+
   .process .sectionTitle {
     margin-bottom: clamp(44px, 4.2vw, 72px);
   }
@@ -384,6 +394,10 @@
     --node: 76px;
     --topH: clamp(70px, 6vw, 100px);
     --bottomH: clamp(120px, 10vw, 160px);
+    --p-dot: clamp(38px, 3.8vw, 58px);
+    --p-track-w: 4px;
+    --p-track: #8f96a3;
+    --p-gap-fix: calc(var(--p-track-w) + 2px);
 
     padding-left: 0;
     overflow: visible;
@@ -395,28 +409,9 @@
     position: relative;
   }
 
-  /* линия строго от центра 1 до центра 5 */
+  /* desktop: line is drawn by per-step connectors (like in reference) */
   .process__timeline::before {
-    left: calc(var(--node) / 2);
-    right: calc(var(--node) / 2);
-    top: calc(var(--topH) + (var(--node) / 2));
-
-    height: 2px;
-    width: auto;
-    bottom: auto;
-
-    transform-origin: left center;
-    transform: scaleX(0);
-    opacity: 0;
-
-    transition:
-      transform 900ms var(--ease),
-      opacity 520ms var(--ease);
-  }
-
-  .process.is-visible .process__timeline::before {
-    transform: scaleX(1);
-    opacity: 1;
+    display: none;
   }
 
   .process__item {
@@ -425,6 +420,59 @@
     grid-template-columns: 1fr;
     min-width: 0;
     position: relative;
+  }
+
+  .process__item::before,
+  .process__item::after {
+    content: "";
+    position: absolute;
+    top: calc(var(--topH) + (var(--node) / 2) - (var(--p-track-w) / 2));
+    height: var(--p-track-w);
+    background: var(--p-line-grad);
+    z-index: 1;
+    opacity: 0;
+    transition:
+      transform 900ms var(--ease),
+      opacity 520ms var(--ease);
+  }
+
+  /* Left connector: from item left edge to node edge */
+  .process__item::before {
+    left: 0;
+    width: calc(50% - (var(--p-dot) / 2) - var(--p-gap-fix));
+    transform-origin: right center;
+    transform: scaleX(0);
+  }
+
+  /* Right connector: from node edge to item right edge */
+  .process__item::after {
+    right: 0;
+    width: calc(50% - (var(--p-dot) / 2) - var(--p-gap-fix));
+    transform-origin: left center;
+    transform: scaleX(0);
+  }
+
+  .process__item:nth-child(1)::before {
+    display: none;
+  }
+
+  .process__item:nth-child(5)::after {
+    display: none;
+  }
+
+  /* Edge nodes are aligned to container edges, so connectors are longer there */
+  .process__item:nth-child(1)::after {
+    width: calc(100% - var(--p-dot) - var(--p-gap-fix));
+  }
+
+  .process__item:nth-child(5)::before {
+    width: calc(100% - var(--p-dot) - var(--p-gap-fix));
+  }
+
+  .process.is-visible .process__item::before,
+  .process.is-visible .process__item::after {
+    opacity: 1;
+    transform: scaleX(1);
   }
 
   .process__node,
@@ -437,7 +485,29 @@
     align-self: center;
     justify-self: center;
     z-index: 2;
-    box-shadow: 0 0 0 10px var(--p-node-ring);
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .process__node::before {
+    content: "";
+    width: var(--p-dot);
+    height: var(--p-dot);
+    border-radius: 50%;
+    border: var(--p-track-w) solid var(--p-track);
+    background: transparent;
+  }
+
+  .process__num {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: var(--p-dot);
+    height: var(--p-dot);
+    transform: translate(-50%, -50%);
+    font-size: clamp(14px, 1.4vw, 28px);
+    color: var(--text);
   }
 
   /* 1 и 5 — по краям */
@@ -453,21 +523,21 @@
     align-self: end;
     justify-self: center;
 
-    max-inline-size: 56ch;
+    max-inline-size: clamp(17rem, 20vw, 23rem);
     text-align: center;
   }
 
   /* 1/3/5 сверху */
   .process__item:nth-child(odd) .process__content {
     grid-row: 1;
-    margin-bottom: 18px;
+    margin-bottom: clamp(18px, 2vw, 26px);
   }
 
   /* 2/4 снизу */
   .process__item:nth-child(even) .process__content {
     grid-row: 3;
     align-self: start;
-    margin-top: 18px;
+    margin-top: clamp(18px, 2vw, 26px);
     text-align: center;
   }
 
@@ -475,13 +545,27 @@
   .process__item:nth-child(1) .process__content {
     justify-self: start;
     text-align: left;
-    max-inline-size: 48ch;
+    max-inline-size: clamp(16rem, 18vw, 20rem);
+    margin-left: clamp(6px, 1vw, 14px);
+  }
+
+  .process__item:nth-child(2) .process__content {
+    max-inline-size: clamp(20rem, 24vw, 28rem);
+  }
+
+  .process__item:nth-child(3) .process__content {
+    max-inline-size: clamp(17rem, 20vw, 23rem);
+  }
+
+  .process__item:nth-child(4) .process__content {
+    max-inline-size: clamp(14rem, 17vw, 19rem);
   }
 
   .process__item:nth-child(5) .process__content {
     justify-self: end;
     text-align: right;
-    max-inline-size: 48ch;
+    max-inline-size: clamp(16rem, 18vw, 20rem);
+    margin-right: clamp(6px, 1vw, 14px);
   }
 
   @media (min-width: 80rem) {
