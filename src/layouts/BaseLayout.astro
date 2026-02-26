@@ -9,7 +9,9 @@ import "../styles/main.scss";
 import { ClientRouter } from "astro:transitions";
 import { siteText } from "../data/siteText";
 import { resolveAssetPath } from "../data/assetMap";
-import mainScriptUrl from "../scripts/main.js?url";
+import faviconAsset from "../assets/img/layout/teacha-language-school-favicon.png";
+import favicon32Asset from "../assets/img/layout/teacha-language-school-favicon-32.png";
+import favicon16Asset from "../assets/img/layout/teacha-language-school-favicon-16.png";
 
 import Header from "../components/layout/Header.astro";
 import Footer from "../components/layout/Footer.astro";
@@ -59,6 +61,9 @@ const defaultTitle = siteText.seo.defaultTitle;
 const defaultDescription = siteText.seo.defaultDescription;
 const defaultOgImage = siteText.seo.defaultOgImage;
 const logoImage = resolveAssetPath("img/layout/logo.png");
+const faviconImage = typeof faviconAsset === "string" ? faviconAsset : faviconAsset.src;
+const favicon32 = typeof favicon32Asset === "string" ? favicon32Asset : favicon32Asset.src;
+const favicon16 = typeof favicon16Asset === "string" ? favicon16Asset : favicon16Asset.src;
 const heroBackgroundImage = resolveAssetPath("img/hero/home/home-hero-background.webp");
 const processDividerImage = resolveAssetPath("img/process/teacha-learning-process-divider.webp");
 const reviewQuoteMarksImage = resolveAssetPath("img/reviews/quote-marks.png");
@@ -206,8 +211,11 @@ const jsonLdItems = [organizationSchema, websiteSchema, webpageSchema, breadcrum
 ---
 
 <!doctype html>
-<html lang="uk" class="js">
+<html lang="uk">
   <head>
+    <script is:inline>
+      document.documentElement.classList.add("js");
+    </script>
     <ClientRouter />
     <noscript>
       <style>
@@ -227,9 +235,10 @@ const jsonLdItems = [organizationSchema, websiteSchema, webpageSchema, breadcrum
     <meta name="robots" content={robotsContent} />
     <link rel="canonical" href={canonicalUrl} />
     <meta name="theme-color" content="#f6efe3" />
-    <link rel="icon" type="image/png" href={logoImage} />
-    <link rel="shortcut icon" href={logoImage} />
-    <link rel="apple-touch-icon" href={logoImage} />
+    <link rel="icon" type="image/png" sizes="32x32" href={favicon32} />
+    <link rel="icon" type="image/png" sizes="16x16" href={favicon16} />
+    <link rel="shortcut icon" href={favicon32} />
+    <link rel="apple-touch-icon" href={faviconImage} />
 
     {
       alternateLinks.map((link) => (
@@ -296,6 +305,8 @@ const jsonLdItems = [organizationSchema, websiteSchema, webpageSchema, breadcrum
       ↑
     </button>
 
-    <script type="module" src={mainScriptUrl}></script>
+    <script>
+      import "../scripts/main.js";
+    </script>
   </body>
 </html>
