@@ -1,16 +1,16 @@
 # TeaCha Website
 
-Сайт школы языков TeaCha на `Astro` с деплоем на `Cloudflare Pages`.
+TeaCha language school website built with `Astro` and deployed on `Cloudflare Pages`.
 
-Прод URL: `https://teacha.pages.dev`
+Production URL: `https://teacha.pages.dev`
 
-## Стек
+## Tech Stack
 
 - `Astro 5`
 - `Sass`
 - `Cloudflare Pages Functions` (API endpoint `/api/lead`)
 
-## Команды
+## Commands
 
 ```bash
 npm install
@@ -19,55 +19,55 @@ npm run build
 npm run preview
 ```
 
-## Структура проекта
+## Project Structure
 
 ```text
 .
 ├─ functions/              # Cloudflare Pages Functions
-│  └─ api/lead.js          # отправка заявок в Telegram
-├─ public/                 # статические файлы, которые должны идти 1:1 в root
+│  └─ api/lead.js          # sends lead messages to Telegram
+├─ public/                 # static files copied 1:1 to site root
 ├─ src/
-│  ├─ assets/              # изображения и прочие ассеты проекта
-│  ├─ components/          # Astro-компоненты
-│  ├─ data/                # текстовый контент и маппинг ассетов
-│  ├─ layouts/             # layout'ы страниц
-│  ├─ pages/               # роуты
-│  ├─ scripts/             # клиентский JS
-│  └─ styles/              # SCSS-архитектура
+│  ├─ assets/              # project images and media assets
+│  ├─ components/          # Astro components
+│  ├─ data/                # text content and asset mapping
+│  ├─ layouts/             # page layouts
+│  ├─ pages/               # routes
+│  ├─ scripts/             # client-side JavaScript
+│  └─ styles/              # SCSS architecture
 ├─ astro.config.mjs
 └─ package.json
 ```
 
-## Лиды в Telegram
+## Telegram Leads
 
-Форма отправляется на `/api/lead`, который работает через Cloudflare Function:
+Lead forms submit to `/api/lead`, handled by a Cloudflare Function:
 
-- файл: `functions/api/lead.js`
-- метод: `POST`
+- file: `functions/api/lead.js`
+- method: `POST`
 - body (`application/json`):
-  - `name` (string, обязательно)
-  - `contact` (string, обязательно)
-  - `source` (string, опционально)
+  - `name` (string, required)
+  - `contact` (string, required)
+  - `source` (string, optional)
 
-Для работы на Cloudflare Pages задай переменные окружения:
+Set these environment variables in Cloudflare Pages:
 
 - `TG_BOT_TOKEN`
 - `TG_CHAT_ID`
 
-Без них endpoint вернет `500 SERVER_CONFIG`.
+Without them, the endpoint returns `500 SERVER_CONFIG`.
 
-## Деплой на Cloudflare Pages
+## Cloudflare Pages Deployment
 
-Рекомендуемые настройки проекта в Cloudflare:
+Recommended Cloudflare project settings:
 
 - Framework preset: `Astro`
 - Build command: `npm run build`
 - Build output directory: `dist`
-- Root directory: `/` (корень репозитория)
+- Root directory: `/` (repository root)
 - Functions directory: `functions`
 
-## Важное по ассетам
+## Asset Notes
 
-- Основные изображения лежат в `src/assets` и подключаются из компонентов.
-- `public/` оставляй только для файлов, которые должны быть доступны напрямую по URL (например `robots.txt`, `favicon`, внешние верификационные файлы).
-- Для путей к изображениям используй единый подход через маппинг в `src/data/assetMap.ts`, чтобы избежать проблем на проде.
+- Keep main images in `src/assets` and import them from components.
+- Use `public/` only for files that must be directly available by URL (for example `robots.txt`, `favicon`, verification files).
+- Use the centralized path mapping in `src/data/assetMap.ts` to avoid production path issues.
