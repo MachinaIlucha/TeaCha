@@ -2,7 +2,7 @@
 
 TeaCha language school website built with `Astro` and deployed on `Cloudflare Pages`.
 
-Production URL: `https://teacha.pages.dev`
+Production URL: `https://teacha.com.ua`
 
 ## Tech Stack
 

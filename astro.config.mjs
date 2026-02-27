@@ -1,6 +1,6 @@
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
-  site: "https://teacha.pages.dev",
+  site: "https://teacha.com.ua",
   base: "/",
 });

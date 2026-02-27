@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 
-const fallbackSite = new URL("https://teacha.pages.dev");
+const fallbackSite = new URL("https://teacha.com.ua");
 
 export const GET: APIRoute = ({ site }) => {
   const root = site ?? fallbackSite;
