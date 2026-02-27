@@ -4,6 +4,8 @@ export function initMenu() {
   const burger = qs("[data-burger]")
   const panel = qs("[data-nav-panel]")
   if (!burger || !panel) return
+  if (burger.dataset.menuInit === "1") return
+  burger.dataset.menuInit = "1"
 
   let scrollLockActive = false
   let lockedScrollY = 0
