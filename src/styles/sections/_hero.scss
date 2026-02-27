@@ -59,6 +59,15 @@
     display: none;
   }
 
+  &#school::before {
+    transform: scaleX(-1) scale(1.03);
+  }
+
+  &#school::after {
+    display: block;
+    background: rgba(255, 255, 255, 0.14);
+  }
+
   &__left {
     position: relative; /* ✅ ЯКОРЬ для desktop badge */
     padding-bottom: 25px;
