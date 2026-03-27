@@ -9,6 +9,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import PriceRates from "../components/pages/price/PriceRates.astro";
 import CorporatePriceTable from "../components/pages/corporate/CorporatePriceTable.astro";
 import Faq from "../components/sections/Faq.astro";
+import TestBanner from "../components/sections/TestBanner.astro";
 import { siteText } from "../data/siteText";
 
 const base = import.meta.env.BASE_URL;
@@ -35,6 +36,7 @@ const pageText = siteText.pages.prices;
   </section>
 
   <PriceRates base={base} className="sectionShell section--a" />
+  <TestBanner className="section--a" />
   <CorporatePriceTable className="sectionShell section--b" sectionId="corporate-prices" />
   <Faq className="sectionShell section--b" />
 </BaseLayout>

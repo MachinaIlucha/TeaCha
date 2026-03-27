@@ -9,13 +9,69 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { siteText } from "../../data/siteText";
 
 const base = import.meta.env.BASE_URL;
+const site = Astro.site ?? new URL("https://teacha.com.ua");
+const testPageUrl = new URL("/english/test/", site).toString();
+
 const levels = [
-  { code: "A1", name: "Beginner" },
-  { code: "A2", name: "Elementary" },
-  { code: "B1", name: "Intermediate" },
-  { code: "B2", name: "Upper-Int" },
-  { code: "C1", name: "Advanced" },
+  { code: "A1", name: "Beginner",           nameUk: "Початківець",     desc: "Розумієш та вживаєш прості вирази. Можеш представитись і спілкуватись на базові теми." },
+  { code: "A2", name: "Elementary",         nameUk: "Елементарний",    desc: "Спілкуєшся у простих ситуаціях, описуєш своє оточення та найближчі потреби." },
+  { code: "B1", name: "Intermediate",       nameUk: "Середній",        desc: "Справляєшся з більшістю ситуацій у подорожах і на роботі, описуєш події та плани." },
+  { code: "B2", name: "Upper-Intermediate", nameUk: "Вище середнього", desc: "Спілкуєшся вільно й спонтанно, розумієш складні тексти, аргументуєш свою позицію." },
+  { code: "C1", name: "Advanced",           nameUk: "Просунутий",      desc: "Гнучко й ефективно використовуєш мову в академічних, соціальних та професійних контекстах." },
 ];
+
+const quizSchema = {
+  "@context": "https://schema.org",
+  "@type": "Quiz",
+  "name": "Тест на рівень англійської мови від A1 до C1",
+  "description": "Безкоштовний онлайн-тест для визначення рівня англійської мови за шкалою CEFR — від Beginner (A1) до Advanced (C1). 20 питань, 3–5 хвилин. Результат одразу.",
+  "url": testPageUrl,
+  "inLanguage": "uk-UA",
+  "isAccessibleForFree": true,
+  "timeRequired": "PT5M",
+  "educationalLevel": "A1, A2, B1, B2, C1",
+  "about": { "@type": "Thing", "name": "Рівень знань англійської мови CEFR" },
+  "provider": { "@type": "EducationalOrganization", "name": "TeaCha", "url": site.toString() },
+};
+
+const testFaqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Як безкоштовно визначити рівень англійської мови онлайн?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Пройдіть безкоштовний тест TeaCha з 20 питань на граматику, лексику та читання. За 3–5 хвилин ви отримаєте результат за шкалою CEFR від A1 до C1 та персональні рекомендації щодо курсів. Реєстрація не потрібна.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Що таке рівні англійської A1, A2, B1, B2, C1?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Це рівні шкали CEFR (Common European Framework of Reference): A1 — початківець, A2 — елементарний, B1 — середній, B2 — вище середнього, C1 — просунутий. Вони показують, наскільки вільно ви спілкуєтесь англійською у повсякденних, академічних та професійних ситуаціях.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Скільки часу займає тест на рівень англійської?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Тест складається з 20 питань і займає приблизно 3–5 хвилин. Часового обмеження немає — відповідайте у власному темпі. Результат з'являється одразу після останнього питання.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Чи потрібна реєстрація для тесту на рівень англійської?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ні, реєстрація не потрібна. Тест TeaCha повністю безкоштовний і доступний миттєво без жодних обмежень.",
+      },
+    },
+  ],
+};
 ---
 
 <BaseLayout
@@ -26,6 +82,7 @@ const levels = [
     { name: "Тест на рівень", href: "/english/test" },
   ]}
   bodyClass="page-english page-level-test"
+  jsonLd={[quizSchema, testFaqSchema]}
 >
   <section class="levelTest sectionShell section--a" id="level-test">
     <div class="container">
@@ -190,6 +247,41 @@ const levels = [
         </div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- ═══════ Static CEFR info — SEO text + schema support ═══════ -->
+  <section class="sectionShell section--b levelTestInfo" aria-label="Про рівні англійської мови CEFR">
+    <div class="container">
+      <div class="levelTestInfo__inner" data-reveal="scroll">
+        <div class="sectionTitle sectionTitle--center sectionTitle--accentBottom" data-reveal-item="1">
+          <h2 class="sectionTitle__line sectionTitle__line--a">ЩО ТАКЕ РІВНІ</h2>
+          <div class="sectionTitle__line sectionTitle__line--b">АНГЛІЙСЬКОЇ І CEFR?</div>
+        </div>
+
+        <p class="levelTestInfo__lead" data-reveal-item="2">
+          CEFR (Common European Framework of Reference) — загальноєвропейська шкала оцінки знань
+          іноземних мов. Вона використовується університетами, роботодавцями та мовними школами
+          по всьому світу і включає шість рівнів: від A1 до C2.
+        </p>
+
+        <div class="levelTestInfo__grid" data-reveal-item="3">
+          {levels.map(({ code, nameUk, desc }) => (
+            <div class="levelTestInfo__item">
+              <span class="levelTestInfo__code">{code}</span>
+              <div>
+                <strong class="levelTestInfo__name">{nameUk}</strong>
+                <p class="levelTestInfo__desc">{desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <p class="levelTestInfo__cta" data-reveal-item="4">
+          Визнач свій рівень прямо зараз — пройди безкоштовний тест вище та отримай
+          персональні рекомендації від TeaCha щодо найкращого курсу для тебе.
+        </p>
+      </div>
     </div>
   </section>
 </BaseLayout>
