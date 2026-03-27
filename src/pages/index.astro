@@ -13,6 +13,7 @@ import Teachers from "../components/sections/Teachers.astro";
 import Process from "../components/sections/Process.astro";
 import PriceRates from "../components/pages/price/PriceRates.astro";
 import Faq from "../components/sections/Faq.astro";
+import TestBanner from "../components/sections/TestBanner.astro";
 import { siteText } from "../data/siteText";
 
 const base = import.meta.env.BASE_URL;
@@ -27,6 +28,7 @@ const base = import.meta.env.BASE_URL;
 
   <Teachers className="sectionShell section--b" />
   <Facts className="sectionShell section--a" />
+  <TestBanner className="section--a" />
   <section class="processDivider" aria-hidden="true">
     <div class="processDivider__band"></div>
   </section>

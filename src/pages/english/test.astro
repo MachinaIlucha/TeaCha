@@ -1,0 +1,195 @@
+---
+/**
+ * TeaCha website
+ * Design & development: Ілля Пінчук Вадимович
+ * © 2026. All rights reserved.
+ */
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { siteText } from "../../data/siteText";
+
+const base = import.meta.env.BASE_URL;
+const levels = [
+  { code: "A1", name: "Beginner" },
+  { code: "A2", name: "Elementary" },
+  { code: "B1", name: "Intermediate" },
+  { code: "B2", name: "Upper-Int" },
+  { code: "C1", name: "Advanced" },
+];
+---
+
+<BaseLayout
+  title="Тест на рівень англійської — визнач свій рівень безкоштовно | TeaCha"
+  description="Безкоштовний тест на визначення рівня англійської мови від A1 до C1. 20 питань, 3–5 хвилин. Дізнайся свій рівень та отримай рекомендації від TeaCha."
+  breadcrumbs={[
+    { name: "Курси англійської", href: "/english/" },
+    { name: "Тест на рівень", href: "/english/test" },
+  ]}
+  bodyClass="page-english page-level-test"
+>
+  <section class="levelTest sectionShell section--a" id="level-test">
+    <div class="container">
+
+      <!-- ═══════ Welcome Screen ═══════ -->
+      <div class="levelTest__screen levelTest__screen--welcome is-active" data-test-screen="welcome">
+
+        <!-- decorative floating shapes -->
+        <div class="levelTest__deco" aria-hidden="true">
+          <span class="levelTest__decoShape levelTest__decoShape--1">A</span>
+          <span class="levelTest__decoShape levelTest__decoShape--2">B</span>
+          <span class="levelTest__decoShape levelTest__decoShape--3">?</span>
+          <span class="levelTest__decoShape levelTest__decoShape--4">C</span>
+        </div>
+
+        <div class="levelTest__welcomeInner">
+          <div class="levelTest__welcomeContent">
+
+            <div class="levelTest__badge" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              <span>Безкоштовний тест</span>
+            </div>
+
+            <div class="sectionTitle sectionTitle--center sectionTitle--accentBottom">
+              <h1 class="sectionTitle__line sectionTitle__line--a">ВИЗНАЧ СВІЙ РІВЕНЬ</h1>
+              <div class="sectionTitle__line sectionTitle__line--b">АНГЛІЙСЬКОЇ</div>
+            </div>
+
+            <p class="levelTest__welcomeSubtitle">
+              Пройди швидкий тест і дізнайся свій приблизний рівень
+              за шкалою CEFR&nbsp;— від&nbsp;A1&nbsp;до&nbsp;C1
+            </p>
+
+            <!-- level scale visual -->
+            <div class="levelTest__scale">
+              {levels.map((lvl) => (
+                <div class="levelTest__scaleItem">
+                  <span class="levelTest__scaleCode">{lvl.code}</span>
+                  <span class="levelTest__scaleName">{lvl.name}</span>
+                </div>
+              ))}
+            </div>
+
+            <div class="levelTest__welcomeMeta">
+              <div class="levelTest__metaItem">
+                <span class="levelTest__metaIcon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                  </svg>
+                </span>
+                <span>3–5 хвилин</span>
+              </div>
+              <div class="levelTest__metaItem">
+                <span class="levelTest__metaIcon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+                  </svg>
+                </span>
+                <span>20 питань</span>
+              </div>
+              <div class="levelTest__metaItem">
+                <span class="levelTest__metaIcon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/>
+                  </svg>
+                </span>
+                <span>Результат одразу</span>
+              </div>
+            </div>
+
+            <button class="btn btn--primary btn--lg levelTest__startBtn" type="button" data-test-start>
+              Розпочати тест
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 8px;"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+
+            <p class="levelTest__welcomeNote">
+              Тест є орієнтовним інструментом оцінки рівня. Для точного визначення
+              рекомендуємо пройти <a href={`${base}english`}>пробний урок</a> з викладачем.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════ Question Screen ═══════ -->
+      <div class="levelTest__screen levelTest__screen--question" data-test-screen="question" hidden>
+
+        <div class="levelTest__questionHeader">
+          <div class="levelTest__progress">
+            <div class="levelTest__progressBar">
+              <div class="levelTest__progressFill" data-test-progress></div>
+            </div>
+          </div>
+          <div class="levelTest__questionMeta">
+            <span class="levelTest__counter" data-test-counter>1 / 20</span>
+            <span class="levelTest__levelBand" data-test-level-band>A1</span>
+            <span class="levelTest__typeBadge" data-test-type>Grammar</span>
+          </div>
+        </div>
+
+        <div class="levelTest__questionWrap">
+          <div class="levelTest__questionNumber" data-test-q-number aria-hidden="true">01</div>
+          <h2 class="levelTest__question" data-test-question></h2>
+          <div class="levelTest__options" data-test-options role="group" aria-label="Варіанти відповідей"></div>
+        </div>
+
+        <!-- step dots -->
+        <div class="levelTest__dots" data-test-dots aria-hidden="true"></div>
+      </div>
+
+      <!-- ═══════ Result Screen ═══════ -->
+      <div class="levelTest__screen levelTest__screen--result" data-test-screen="result" hidden>
+        <div class="levelTest__resultInner">
+
+          <div class="levelTest__resultCard">
+            <div class="levelTest__resultHero">
+              <div class="levelTest__levelRing">
+                <div class="levelTest__levelCircle" data-test-result-level>B1</div>
+              </div>
+              <h2 class="levelTest__resultTitle" data-test-result-title>B1 — Intermediate</h2>
+              <p class="levelTest__resultSubtitle" data-test-result-subtitle>Середній</p>
+            </div>
+
+            <p class="levelTest__resultDesc" data-test-result-desc></p>
+
+            <div class="levelTest__resultScoreRow">
+              <div class="levelTest__resultScoreItem">
+                <span class="levelTest__resultScoreValue" data-test-result-score>0</span>
+                <span class="levelTest__resultScoreLabel">правильних</span>
+              </div>
+              <div class="levelTest__resultScoreDivider"></div>
+              <div class="levelTest__resultScoreItem">
+                <span class="levelTest__resultScoreValue">20</span>
+                <span class="levelTest__resultScoreLabel">всього</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="levelTest__breakdownSection">
+            <h3 class="levelTest__breakdownTitle">Результати за рівнями</h3>
+            <div class="levelTest__breakdown" data-test-breakdown></div>
+          </div>
+
+          <div class="levelTest__resultCta">
+            <h3 class="levelTest__ctaTitle">Що далі?</h3>
+            <p class="levelTest__ctaText">
+              Обери програму, яка підходить саме для твого рівня, або запишись на безкоштовний
+              пробний урок — викладач допоможе скласти персональний план навчання.
+            </p>
+
+            <div class="levelTest__recommendations" data-test-recommendations></div>
+
+            <div class="levelTest__ctaButtons">
+              <button class="btn btn--primary" type="button" data-open-modal>
+                Записатись на пробний урок
+              </button>
+              <button class="btn btn--secondary" type="button" data-test-restart>
+                Пройти тест ще раз
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>

@@ -14,6 +14,7 @@ const pages = [
   { path: "/english/anhliyska-hramatyka/", priority: "0.8", changefreq: "weekly" },
   { path: "/english/anhliyska-dlya-pereizdu/", priority: "0.8", changefreq: "weekly" },
   { path: "/english/spiking-klub/", priority: "0.8", changefreq: "weekly" },
+  { path: "/english/test/", priority: "0.7", changefreq: "monthly" },
   { path: "/chinese/", priority: "0.9", changefreq: "weekly" },
   { path: "/chinese/dlya-pochatkivciv/", priority: "0.8", changefreq: "weekly" },
   { path: "/chinese/hsk/", priority: "0.8", changefreq: "weekly" },

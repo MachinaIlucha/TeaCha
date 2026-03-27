@@ -1,0 +1,41 @@
+---
+/**
+ * TeaCha website
+ * Design & development: Ілля Пінчук Вадимович
+ * © 2026. All rights reserved.
+ *
+ * Promotional banner linking to the English level test.
+ */
+
+interface Props {
+  className?: string;
+}
+
+const { className = "" } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+
+<section class={`sectionShell ${className}`} data-reveal="scroll">
+  <div class="container" style="padding-top: var(--space-7); padding-bottom: var(--space-7);">
+    <a class="testBanner" href={`${base}english/test`} data-reveal-item="1">
+      <div class="testBanner__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+        </svg>
+      </div>
+
+      <div class="testBanner__content">
+        <p class="testBanner__title">Яка в тебе англійська?</p>
+        <p class="testBanner__text">
+          Пройди безкоштовний тест на визначення рівня — 20 питань, 3–5 хвилин, результат від A1 до C1
+        </p>
+      </div>
+
+      <div class="testBanner__arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M13 6l6 6-6 6"/>
+        </svg>
+      </div>
+    </a>
+  </div>
+</section>

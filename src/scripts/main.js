@@ -25,6 +25,7 @@ import { initStartLead } from "./lead/startLead.js";
 import { initFooterLead } from "./lead/footerLead.js";
 import { initLeadDock } from "./features/leadDock.js";
 import { initBackToTop } from "./features/backToTop.js";
+import { initLevelTest } from "./features/levelTest.js";
 
 const boot = () => {
   // features (safe to call on every page – they self-check DOM)
@@ -39,6 +40,7 @@ const boot = () => {
   initBackToTop();
   initFactsReveal();
   initProcessReveal();
+  initLevelTest();
 
   // modal
   const modalEl = document.getElementById("consultModal");
