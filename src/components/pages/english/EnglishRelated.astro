@@ -1,0 +1,59 @@
+---
+/**
+ * TeaCha website
+ * Design & development: Ілля Пінчук Вадимович
+ * © 2026. All rights reserved.
+ */
+
+import { siteText } from "../../../data/siteText";
+
+type RelatedLink = { title: string; href: string };
+
+const { className = "", currentHref = "", links = [] } = Astro.props as {
+  className?: string;
+  currentHref?: string;
+  links?: RelatedLink[];
+};
+
+const base = import.meta.env.BASE_URL;
+const text = siteText.sections.englishRelated;
+
+const programLinks = siteText.sections.englishPrograms.items
+  .filter((item) => item.href !== currentHref)
+  .slice(0, 5)
+  .map((item) => ({ title: item.title, href: item.href }));
+
+const allLinks = links.length ? links : programLinks;
+const sectionClass = ["cnRelated", className].filter(Boolean).join(" ");
+---
+
+<section class={sectionClass} data-reveal="scroll">
+  <div class="container">
+    <h2 class="cnRelated__title" data-reveal-item="1">{text.title}</h2>
+
+    <div class="cnRelated__grid" data-reveal-item="2">
+      {
+        allLinks.map((item) => (
+          <a class="cnRelated__link" href={`${base}${item.href}`}>
+            {item.title}
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true">
+              <path
+                d="M5 12h14M13 6l6 6-6 6"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </a>
+        ))
+      }
+    </div>
+
+    <div class="cnRelated__hub" data-reveal-item="3">
+      <a class="cnRelated__hubLink" href={`${base}${text.allCoursesHref}`}>
+        {text.allCoursesLabel}
+      </a>
+    </div>
+  </div>
+</section>

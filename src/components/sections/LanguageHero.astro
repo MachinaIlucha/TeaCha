@@ -17,10 +17,16 @@ type TitlePart =
       br: true;
     };
 
+type BreadcrumbItem = {
+  name: string;
+  href: string;
+};
+
 const {
   titleParts = [],
   subtitle = "",
   ctaText = siteText.sections.languageHero.defaultCtaText,
+  breadcrumbs = [],
   className = "",
   imgSrc,
   imgAlt = siteText.sections.languageHero.defaultImageAlt,
@@ -33,6 +39,7 @@ const {
   titleParts?: ReadonlyArray<TitlePart>;
   subtitle?: string;
   ctaText?: string;
+  breadcrumbs?: BreadcrumbItem[];
   className?: string;
   imgSrc?: string;
   imgAlt?: string;
@@ -43,51 +50,99 @@ const {
   imgHeight?: number;
 };
 
+const base = import.meta.env.BASE_URL;
 const resolvedImg = imgSrc ?? resolveAssetPath("img/hero/chinese/chinese-language-hero.webp");
 const sectionClass = ["hero", "hero--lang", className].filter(Boolean).join(" ");
+const normalizedBreadcrumbs = breadcrumbs.filter((item) => item?.name && item?.href);
+const breadcrumbTrail = normalizedBreadcrumbs.length
+  ? [
+      { name: siteText.seo.homeBreadcrumb, href: "/" },
+      ...normalizedBreadcrumbs.filter((item) => item.href !== "/" && item.href !== ""),
+    ]
+  : [];
+
+const resolveBreadcrumbHref = (href: string) => {
+  if (/^https?:\/\//i.test(href)) {
+    return href;
+  }
+
+  if (href === "/") {
+    return base;
+  }
+
+  return `${base}${href.replace(/^\/+/, "")}`;
+};
 ---
 
 <section class={sectionClass} data-reveal="load">
-  <div class="container hero__grid">
-    <div class="hero__left">
-      <h1 class="hero__title" data-reveal-item="1">
-        <div class="hero__titleLine">
-          {
-            titleParts.map((part) => {
-              if ("br" in part) return <br />;
-              return part.accent ? (
-                <span class="hero__accent">{part.text}</span>
-              ) : (
-                part.text
+  <div class="container">
+    {
+      breadcrumbTrail.length > 1 && (
+        <nav class="hero__breadcrumbs" aria-label="Breadcrumb" data-reveal-item="1">
+          <ol class="hero__breadcrumbsList">
+            {breadcrumbTrail.map((item, index) => {
+              const isLast = index === breadcrumbTrail.length - 1;
+
+              return (
+                <li class="hero__breadcrumbsItem">
+                  {isLast ? (
+                    <span class="hero__breadcrumbsCurrent" aria-current="page">
+                      {item.name}
+                    </span>
+                  ) : (
+                    <a class="hero__breadcrumbsLink" href={resolveBreadcrumbHref(item.href)}>
+                      {item.name}
+                    </a>
+                  )}
+                </li>
               );
-            })
-          }
+            })}
+          </ol>
+        </nav>
+      )
+    }
+
+    <div class="hero__grid">
+      <div class="hero__left">
+        <h1 class="hero__title" data-reveal-item={breadcrumbTrail.length > 1 ? "2" : "1"}>
+          <div class="hero__titleLine">
+            {
+              titleParts.map((part) => {
+                if ("br" in part) return <br />;
+                return part.accent ? (
+                  <span class="hero__accent">{part.text}</span>
+                ) : (
+                  part.text
+                );
+              })
+            }
+          </div>
+        </h1>
+
+        <p class="hero__subtitle hero__subtitle--big" data-reveal-item={breadcrumbTrail.length > 1 ? "3" : "2"}>
+          {subtitle}
+        </p>
+
+        <div class="hero__cta hero__cta--pill" data-reveal-item={breadcrumbTrail.length > 1 ? "4" : "3"}>
+          <a class="hero__pill" href="#start-lead">
+            {ctaText}
+          </a>
         </div>
-      </h1>
-
-      <p class="hero__subtitle hero__subtitle--big" data-reveal-item="2">
-        {subtitle}
-      </p>
-
-      <div class="hero__cta hero__cta--pill" data-reveal-item="3">
-        <a class="hero__pill" href="#start-lead">
-          {ctaText}
-        </a>
       </div>
-    </div>
 
-    <div class="hero__right" data-reveal-item="4">
-      <div class="heroPhoto">
-        <img
-          class="heroPhoto__img"
-          src={resolvedImg}
-          alt={imgAlt}
-          loading={imgLoading}
-          decoding={imgDecoding}
-          fetchpriority={imgFetchpriority}
-          width={imgWidth}
-          height={imgHeight}
-        />
+      <div class="hero__right" data-reveal-item={breadcrumbTrail.length > 1 ? "5" : "4"}>
+        <div class="heroPhoto">
+          <img
+            class="heroPhoto__img"
+            src={resolvedImg}
+            alt={imgAlt}
+            loading={imgLoading}
+            decoding={imgDecoding}
+            fetchpriority={imgFetchpriority}
+            width={imgWidth}
+            height={imgHeight}
+          />
+        </div>
       </div>
     </div>
   </div>

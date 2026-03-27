@@ -1,0 +1,63 @@
+---
+/**
+ * TeaCha website
+ * Design & development: Ілля Пінчук Вадимович
+ * © 2026. All rights reserved.
+ */
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+import LanguageHero from "../../components/sections/LanguageHero.astro";
+import ChineseCourseContent from "../../components/pages/chinese/ChineseCourseContent.astro";
+import ChineseWhy from "../../components/pages/chinese/ChineseWhy.astro";
+import ChineseFormat from "../../components/pages/chinese/ChineseFormat.astro";
+import ChineseRelated from "../../components/pages/chinese/ChineseRelated.astro";
+
+import Process from "../../components/sections/Process.astro";
+import PriceRates from "../../components/pages/price/PriceRates.astro";
+import Faq from "../../components/sections/Faq.astro";
+import { siteText } from "../../data/siteText";
+import { resolveAssetPath } from "../../data/assetMap";
+
+const base = import.meta.env.BASE_URL;
+const pageText = siteText.pages.chineseBusiness;
+const course = siteText.sections.chineseCourse.business;
+const faqItems = siteText.sections.chineseFaq.business;
+const breadcrumbs = [
+  { name: siteText.pages.chinese.breadcrumb, href: "/chinese/" },
+  { name: pageText.breadcrumb, href: "/chinese/dilova/" },
+];
+---
+
+<BaseLayout
+  title={pageText.title}
+  description={pageText.description}
+  ogImage="/img/hero/chinese/chinese-language-hero.jpg"
+  breadcrumbs={breadcrumbs}
+  bodyClass="page-chinese"
+>
+  <LanguageHero
+    className="sectionShell section--a"
+    breadcrumbs={breadcrumbs}
+    imgSrc={resolveAssetPath("img/hero/chinese/chinese-language-hero.webp")}
+    imgAlt={pageText.hero.imgAlt}
+    imgLoading="eager"
+    imgFetchpriority="high"
+    titleParts={pageText.hero.titleParts}
+    subtitle={pageText.hero.subtitle}
+  />
+
+  <ChineseCourseContent
+    className="sectionShell section--b"
+    about={course.about}
+    audience={course.audience}
+  />
+
+  <ChineseWhy className="sectionShell section--a" />
+  <Process className="sectionShell section--b" />
+  <ChineseFormat className="sectionShell section--a" />
+
+  <PriceRates base={base} className="sectionShell section--b" />
+  <Faq className="sectionShell section--a" items={faqItems} />
+  <ChineseRelated className="sectionShell section--b" currentHref="chinese/dilova" />
+</BaseLayout>

@@ -7,12 +7,21 @@
 
 import { siteText } from "../../data/siteText";
 
-const { className = "" } = Astro.props;
+type FaqItem = { q: string; a: string };
+
+const { className = "", items: customItems } = Astro.props as {
+  className?: string;
+  items?: readonly FaqItem[];
+};
 
 const path = Astro.url?.pathname ?? "/";
 const isCorporate = path.startsWith("/corporate");
 
-const items = isCorporate ? siteText.sections.faq.items.corporate : siteText.sections.faq.items.home;
+const items: readonly FaqItem[] = customItems
+  ? customItems
+  : isCorporate
+    ? siteText.sections.faq.items.corporate
+    : siteText.sections.faq.items.home;
 
 // ✅ всегда cards
 const sectionClass = `faq faq--cards ${className}`.trim();

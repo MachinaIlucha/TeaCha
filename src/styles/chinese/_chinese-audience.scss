@@ -1,0 +1,129 @@
+/*!
+ * TeaCha website
+ * Design & development: Ілля Пінчук Вадимович
+ * © 2026. All rights reserved.
+ */
+
+.cnAudience {
+  padding: 52px 0 56px;
+}
+
+.cnAudience__lead {
+  margin-top: 16px;
+  text-align: center;
+  max-width: 680px;
+  margin-inline: auto;
+  color: color-mix(in srgb, var(--text) 60%, transparent);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.cnAudience__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin-top: 32px;
+}
+
+@media (min-width: 30rem) {
+  .cnAudience__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 64rem) {
+  .cnAudience__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+}
+
+.cnAudience__card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  border-radius: var(--radius-xl);
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--text) 92%, black 8%) 0%,
+    color-mix(in srgb, var(--text) 100%, black 0%) 100%
+  );
+  border: 1px solid color-mix(in srgb, var(--white) 12%, transparent);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 color-mix(in srgb, var(--white) 14%, transparent);
+
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.cnAudience__card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    110% 70% at 20% 0%,
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(255, 255, 255, 0) 55%
+  );
+  pointer-events: none;
+}
+
+@media (hover: hover) {
+  .cnAudience__card:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 28px 72px rgba(0, 0, 0, 0.24),
+      inset 0 1px 0 color-mix(in srgb, var(--white) 18%, transparent);
+  }
+}
+
+.cnAudience__icon {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+}
+
+.cnAudience__icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.cnAudience__title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.3;
+  margin: 0;
+}
+
+.cnAudience__text {
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--white) 70%, transparent);
+  margin: 0;
+  flex: 1;
+}
+
+.cnAudience__arrow {
+  color: var(--red);
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+  transition: transform 0.2s ease;
+}
+
+@media (hover: hover) {
+  .cnAudience__card:hover .cnAudience__arrow {
+    transform: translateX(4px);
+  }
+}

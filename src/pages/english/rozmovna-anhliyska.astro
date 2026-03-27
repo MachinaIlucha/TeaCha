@@ -1,0 +1,63 @@
+---
+/**
+ * TeaCha website
+ * Design & development: Ілля Пінчук Вадимович
+ * © 2026. All rights reserved.
+ */
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+import LanguageHero from "../../components/sections/LanguageHero.astro";
+import EnglishCourseContent from "../../components/pages/english/EnglishCourseContent.astro";
+import EnglishWhy from "../../components/pages/english/EnglishWhy.astro";
+import EnglishFormat from "../../components/pages/english/EnglishFormat.astro";
+import EnglishRelated from "../../components/pages/english/EnglishRelated.astro";
+
+import Process from "../../components/sections/Process.astro";
+import PriceRates from "../../components/pages/price/PriceRates.astro";
+import Faq from "../../components/sections/Faq.astro";
+import { siteText } from "../../data/siteText";
+import { resolveAssetPath } from "../../data/assetMap";
+
+const base = import.meta.env.BASE_URL;
+const pageText = siteText.pages.englishConversational;
+const course = siteText.sections.englishCourse.conversational;
+const faqItems = siteText.sections.englishFaq.conversational;
+const breadcrumbs = [
+  { name: siteText.pages.english.breadcrumb, href: "/english/" },
+  { name: pageText.breadcrumb, href: "/english/rozmovna-anhliyska/" },
+];
+---
+
+<BaseLayout
+  title={pageText.title}
+  description={pageText.description}
+  ogImage="/img/hero/english/english-language-hero.jpg"
+  breadcrumbs={breadcrumbs}
+  bodyClass="page-english"
+>
+  <LanguageHero
+    className="sectionShell section--a"
+    breadcrumbs={breadcrumbs}
+    imgSrc={resolveAssetPath("img/hero/english/english-language-hero.webp")}
+    imgAlt={pageText.hero.imgAlt}
+    imgLoading="eager"
+    imgFetchpriority="high"
+    titleParts={pageText.hero.titleParts}
+    subtitle={pageText.hero.subtitle}
+  />
+
+  <EnglishCourseContent
+    className="sectionShell section--b"
+    about={course.about}
+    audience={course.audience}
+  />
+
+  <EnglishWhy className="sectionShell section--a" />
+  <Process className="sectionShell section--b" />
+  <EnglishFormat base={base} className="sectionShell section--a" />
+
+  <PriceRates base={base} className="sectionShell section--b" />
+  <Faq className="sectionShell section--a" items={faqItems} />
+  <EnglishRelated className="sectionShell section--b" currentHref="english/rozmovna-anhliyska" />
+</BaseLayout>

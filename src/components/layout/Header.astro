@@ -24,7 +24,7 @@ const navLinks = siteText.navigation.links.map((link) => {
   return {
     ...link,
     href,
-    isActive: currentPath === linkPath,
+    isActive: currentPath === linkPath || currentPath.startsWith(linkPath + "/"),
   };
 });
 ---

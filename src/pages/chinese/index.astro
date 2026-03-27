@@ -1,0 +1,54 @@
+---
+/**
+ * TeaCha website
+ * Design & development: Ілля Пінчук Вадимович
+ * © 2026. All rights reserved.
+ */
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+import LanguageHero from "../../components/sections/LanguageHero.astro";
+import ChinesePrograms from "../../components/pages/chinese/ChinesePrograms.astro";
+import ChineseAudience from "../../components/pages/chinese/ChineseAudience.astro";
+import ChineseWhy from "../../components/pages/chinese/ChineseWhy.astro";
+import ChineseFormat from "../../components/pages/chinese/ChineseFormat.astro";
+
+import Process from "../../components/sections/Process.astro";
+import PriceRates from "../../components/pages/price/PriceRates.astro";
+import Reviews from "../../components/sections/Reviews.astro";
+import Faq from "../../components/sections/Faq.astro";
+import { siteText } from "../../data/siteText";
+import { resolveAssetPath } from "../../data/assetMap";
+
+const base = import.meta.env.BASE_URL;
+const pageText = siteText.pages.chinese;
+const faqItems = siteText.sections.chineseFaq.chinese;
+---
+
+<BaseLayout
+  title={pageText.title}
+  description={pageText.description}
+  ogImage="/img/hero/chinese/chinese-language-hero.jpg"
+  breadcrumbs={[{ name: pageText.breadcrumb, href: "/chinese/" }]}
+  bodyClass="page-chinese"
+>
+  <LanguageHero
+    className="sectionShell section--a"
+    imgSrc={resolveAssetPath("img/hero/chinese/chinese-language-hero.webp")}
+    imgAlt={pageText.hero.imgAlt}
+    imgLoading="eager"
+    imgFetchpriority="high"
+    titleParts={pageText.hero.titleParts}
+    subtitle={pageText.hero.subtitle}
+  />
+
+  <ChinesePrograms className="sectionShell section--b" />
+  <ChineseAudience className="sectionShell section--a" />
+  <ChineseWhy className="sectionShell section--b" />
+  <Process className="sectionShell section--b" />
+  <ChineseFormat className="sectionShell section--a" />
+
+  <PriceRates base={base} className="sectionShell section--b" />
+  <Reviews className="sectionShell section--b section--ink" />
+  <Faq className="sectionShell section--b" items={faqItems} />
+</BaseLayout>

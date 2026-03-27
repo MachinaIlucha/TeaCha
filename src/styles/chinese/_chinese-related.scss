@@ -1,0 +1,79 @@
+/*!
+ * TeaCha website
+ * Design & development: Ілля Пінчук Вадимович
+ * © 2026. All rights reserved.
+ */
+
+.cnRelated {
+  &__title {
+    font-size: clamp(28px, 3vw, 42px);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 0.98;
+    text-align: center;
+    margin: 0 0 28px;
+  }
+
+  &__grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 22px;
+    border-radius: var(--radius-pill);
+    border: 1.5px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition:
+      border-color var(--dur-2) var(--ease),
+      background var(--dur-2) var(--ease),
+      color var(--dur-2) var(--ease);
+
+    &:hover,
+    &:focus-visible {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--focus-ring);
+    }
+
+    svg {
+      flex-shrink: 0;
+    }
+  }
+
+  &__hub {
+    text-align: center;
+    margin-top: 24px;
+  }
+
+  &__hubLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--color-accent);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    transition: opacity var(--dur-2) var(--ease);
+
+    &:hover,
+    &:focus-visible {
+      opacity: 0.78;
+    }
+  }
+}

@@ -1,0 +1,80 @@
+---
+/**
+ * TeaCha website
+ * Design & development: Ілля Пінчук Вадимович
+ * © 2026. All rights reserved.
+ */
+
+import { siteText } from "../../../data/siteText";
+import beginnersIcon from "../../../assets/img/chinese/programs/teacha-chinese-course-beginners-icon.png";
+import hskIcon from "../../../assets/img/chinese/programs/teacha-hsk-preparation-course-icon.png";
+import kidsIcon from "../../../assets/img/chinese/programs/teacha-chinese-course-kids-teens-icon.png";
+import businessIcon from "../../../assets/img/chinese/programs/teacha-business-chinese-course-icon.png";
+import conversationIcon from "../../../assets/img/chinese/programs/teacha-conversational-chinese-course-icon.png";
+
+const { className = "" } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const sectionClass = ["cnAudience", className].filter(Boolean).join(" ");
+const text = siteText.sections.chineseAudience;
+
+const icons = {
+  beginners: beginnersIcon,
+  hsk: hskIcon,
+  kids: kidsIcon,
+  business: businessIcon,
+  conversation: conversationIcon,
+} as const;
+---
+
+<section class={sectionClass} data-reveal="scroll">
+  <div class="container">
+    <header
+      class="sectionTitle sectionTitle--center sectionTitle--accentBottom"
+      data-reveal="scroll"
+    >
+      <h2 class="sectionTitle__line sectionTitle__line--a" data-reveal-item="1">
+        {text.titleTop}
+      </h2>
+      <div class="sectionTitle__line sectionTitle__line--b" data-reveal-item="2">
+        {text.titleBottom}
+      </div>
+    </header>
+
+    {text.lead && (
+      <p class="cnAudience__lead" data-reveal-item="3">{text.lead}</p>
+    )}
+
+    <div class="cnAudience__grid" data-reveal-item="4">
+      {text.items.map((item) => {
+        const icon = icons[item.icon as keyof typeof icons];
+        return (
+          <a class="cnAudience__card" href={`${base}${item.href}`}>
+            <div class="cnAudience__icon" aria-hidden="true">
+              <img
+                src={icon.src}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                width={icon.width}
+                height={icon.height}
+              />
+            </div>
+            <h3 class="cnAudience__title">{item.title}</h3>
+            <p class="cnAudience__text">{item.text}</p>
+            <span class="cnAudience__arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
+                <path
+                  d="M5 12h14M13 6l6 6-6 6"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,226 @@
+/*!
+ * TeaCha website
+ * Design & development: Ілля Пінчук Вадимович
+ * © 2026. All rights reserved.
+ */
+
+.cnPrograms {
+  &__intro {
+    max-width: 46rem;
+    margin: 0 auto;
+    text-align: center;
+    text-wrap: balance;
+    font-size: clamp(16px, 1.55vw, 20px);
+    line-height: 1.65;
+    color: color-mix(in srgb, var(--color-text) 76%, white 24%);
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 30px;
+  }
+
+  &__card {
+    display: block;
+    min-height: 100%;
+    color: #f7f7fb;
+    text-decoration: none;
+    border-radius: 28px;
+    overflow: hidden;
+    position: relative;
+    background:
+      radial-gradient(120% 100% at 10% 0%, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0) 48%),
+      linear-gradient(145deg, rgba(43, 46, 68, 0.98) 0%, rgba(35, 38, 58, 0.96) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow:
+      0 24px 54px rgba(15, 18, 30, 0.16),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    transition:
+      transform var(--dur-2) var(--ease),
+      box-shadow var(--dur-2) var(--ease),
+      border-color var(--dur-2) var(--ease);
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(
+          0deg,
+          rgba(255, 255, 255, 0.025) 0,
+          rgba(255, 255, 255, 0.025) 1px,
+          transparent 1px,
+          transparent 7px
+        ),
+        radial-gradient(circle at 85% 78%, rgba(219, 31, 50, 0.16) 0, rgba(219, 31, 50, 0) 24%);
+      opacity: 0.72;
+      pointer-events: none;
+    }
+
+    &:hover,
+    &:focus-visible {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.14);
+      box-shadow:
+        0 30px 68px rgba(15, 18, 30, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow:
+        var(--focus-ring),
+        0 30px 68px rgba(15, 18, 30, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    }
+  }
+
+  &__cardInner {
+    min-height: 100%;
+    padding: 22px 20px 20px;
+    display: grid;
+    gap: 22px;
+    position: relative;
+    z-index: 1;
+  }
+
+  &__head {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+
+  &__icon {
+    width: 64px;
+    height: 64px;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  &__iconImage {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.18));
+  }
+
+  &__copy {
+    display: grid;
+    gap: 10px;
+    align-content: start;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: clamp(24px, 2.1vw, 34px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    font-weight: 900;
+    color: #fff;
+    text-wrap: balance;
+  }
+
+  &__text {
+    margin: 0;
+    max-width: 32ch;
+    font-size: 14px;
+    line-height: 1.55;
+    color: rgba(247, 247, 251, 0.78);
+  }
+
+  &__footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 6px 8px 6px 22px;
+    border-radius: var(--radius-pill);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    transition:
+      background-position 0.4s ease-in-out,
+      transform var(--dur-2) var(--ease),
+      box-shadow var(--dur-2) var(--ease),
+      filter var(--dur-2) var(--ease);
+  }
+
+  &__ctaArrow {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 255, 255, 0.14);
+    flex-shrink: 0;
+  }
+
+  &__card:hover &__cta,
+  &__card:focus-visible &__cta {
+    background-position: 100% 50%;
+    transform: translateX(2px);
+    box-shadow: var(--cta-shadow-hover);
+    filter: saturate(1.07) brightness(1.03);
+  }
+}
+
+@media (min-width: 40rem) {
+  .cnPrograms {
+    &__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 34px;
+    }
+
+    &__card {
+      min-height: 182px;
+
+      &:last-child:nth-child(odd) {
+        grid-column: 1 / -1;
+      }
+    }
+
+    &__cardInner {
+      padding: 24px 22px 22px;
+    }
+  }
+}
+
+@media (min-width: 64rem) {
+  .cnPrograms {
+    &__intro {
+      max-width: 44rem;
+    }
+
+    &__card {
+      min-height: 196px;
+    }
+
+    &__cardInner {
+      padding: 24px 22px 20px;
+    }
+
+    &__head {
+      gap: 18px;
+    }
+
+    &__icon {
+      width: 70px;
+      height: 70px;
+    }
+
+    &__text {
+      font-size: 15px;
+    }
+  }
+}
