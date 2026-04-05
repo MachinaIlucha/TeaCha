@@ -8,8 +8,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 import LanguageHero from "../../components/sections/LanguageHero.astro";
-import ChinesePrograms from "../../components/pages/chinese/ChinesePrograms.astro";
-import ChineseAudience from "../../components/pages/chinese/ChineseAudience.astro";
+import ChineseOverview from "../../components/pages/chinese/ChineseOverview.astro";
 import ChineseWhy from "../../components/pages/chinese/ChineseWhy.astro";
 import ChineseFormat from "../../components/pages/chinese/ChineseFormat.astro";
 
@@ -42,8 +41,7 @@ const faqItems = siteText.sections.chineseFaq.chinese;
     subtitle={pageText.hero.subtitle}
   />
 
-  <ChinesePrograms className="sectionShell section--b" />
-  <ChineseAudience className="sectionShell section--a" />
+  <ChineseOverview className="sectionShell section--b" />
   <ChineseWhy className="sectionShell section--b" />
   <Process className="sectionShell section--b" />
   <ChineseFormat className="sectionShell section--a" />

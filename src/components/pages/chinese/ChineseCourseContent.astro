@@ -6,152 +6,34 @@
  */
 
 import { siteText } from "../../../data/siteText";
-import beginnersIcon from "../../../assets/img/chinese/programs/teacha-chinese-course-beginners-icon.png";
-import hskIcon from "../../../assets/img/chinese/programs/teacha-hsk-preparation-course-icon.png";
-import kidsIcon from "../../../assets/img/chinese/programs/teacha-chinese-course-kids-teens-icon.png";
-import businessIcon from "../../../assets/img/chinese/programs/teacha-business-chinese-course-icon.png";
-import conversationIcon from "../../../assets/img/chinese/programs/teacha-conversational-chinese-course-icon.png";
 import trialCtaLikeIcon from "../../../assets/img/forms/teacha-trial-lesson-cta-like-icon.png";
-
-type CourseIconKey =
-  | "beginners"
-  | "hsk"
-  | "kids"
-  | "business"
-  | "conversation";
 
 type CourseHighlight = {
   value: string;
   label: string;
 };
 
-type CourseFeatureGroup = {
-  title: string;
-  items: CourseFeatureItem[];
-};
-
-type LegacyCourseFeatureGroup = {
-  label: string;
-  items: CourseFeatureItem[];
-};
-
-type CourseFeatureItem =
-  | string
-  | {
-      summary: string;
-      title?: string;
-      text?: string;
-      details?: string[];
-    };
-
 type CourseAbout = {
   title?: string;
   titleTop?: string;
   titleBottom?: string;
   lead: string;
+  summary?: string;
   highlights?: CourseHighlight[];
-  features?: CourseFeatureItem[];
-  featureGroups?: CourseFeatureGroup[];
-  featuresKids?: LegacyCourseFeatureGroup;
-  featuresTeens?: LegacyCourseFeatureGroup;
 };
 
-type AudienceCard = {
-  title: string;
-  text: string;
-  icon: CourseIconKey;
-};
-
-type CourseAudience = {
-  title: string;
-  items?: string[];
-  cards?: AudienceCard[];
-};
-
-const { className = "", about, audience } = Astro.props as {
+const { className = "", about } = Astro.props as {
   className?: string;
   about: CourseAbout;
-  audience: CourseAudience;
 };
 
 const base = import.meta.env.BASE_URL;
 const sectionClass = ["cnCourse", className].filter(Boolean).join(" ");
 const overviewText = siteText.sections.courseOverview;
 
-const courseIcons = {
-  beginners: beginnersIcon,
-  hsk: hskIcon,
-  kids: kidsIcon,
-  business: businessIcon,
-  conversation: conversationIcon,
-} as const;
-
-const fallbackAudienceIcons = [
-  "beginners",
-  "business",
-  "conversation",
-  "hsk",
-] as const;
-
 const headingMain = about.titleTop ?? about.title?.split(" ")[0] ?? "ПРО";
 const headingAccent =
   about.titleBottom ?? about.title?.split(" ").slice(1).join(" ") ?? "КУРС";
-
-const featureGroups =
-  (about.features?.length ?? 0) > 0
-    ? []
-    : (about.featureGroups ??
-      (about.featuresKids && about.featuresTeens
-        ? [
-            { title: about.featuresKids.label ?? "Для дітей", items: about.featuresKids.items },
-            { title: about.featuresTeens.label ?? "Для підлітків", items: about.featuresTeens.items },
-          ]
-        : []));
-
-const audienceCards =
-  audience.cards ??
-  (audience.items ?? []).map((item, index) => ({
-    title: item,
-    text: "",
-    icon: fallbackAudienceIcons[index % fallbackAudienceIcons.length],
-  }));
-
-const splitFeatureText = (value: string) => {
-  const colonIndex = value.indexOf(":");
-
-  if (colonIndex === -1) {
-    return { title: "", text: value };
-  }
-
-  return {
-    title: value.slice(0, colonIndex + 1),
-    text: value.slice(colonIndex + 1).trim(),
-  };
-};
-
-const normalizeFeature = (item: CourseFeatureItem) => {
-  const summary = typeof item === "string" ? item : item.summary;
-  const directTitle = typeof item === "string" ? "" : item.title?.trim() ?? "";
-  const directText = typeof item === "string" ? "" : item.text?.trim() ?? "";
-  const details =
-    typeof item === "string"
-      ? []
-      : item.details?.filter((detail) => detail.trim().length > 0) ?? [];
-  const fallbackSplit = splitFeatureText(summary);
-
-  return {
-    summary,
-    title: directTitle || fallbackSplit.title,
-    text: directText || fallbackSplit.text || summary,
-    details:
-      details.length > 0
-        ? details
-        : [
-            `Фокус цього блоку: ${summary}.`,
-            "Опрацьовуємо тему на заняттях, у вправах і практиці з викладачем.",
-          ],
-  };
-};
 ---
 
 <section class={sectionClass} data-reveal="scroll">
@@ -179,84 +61,9 @@ const normalizeFeature = (item: CourseFeatureItem) => {
         )
       }
 
-      <div class="cnCourse__programTop">
-        <h3 class="cnCourse__sectionTitle">{overviewText.programTitle}</h3>
-      </div>
-
-      {
-        featureGroups.length > 0 ? (
-          <div class="cnCourse__groupGrid">
-            {featureGroups.map((group) => (
-              <article class="cnCourse__groupCard">
-                <h4 class="cnCourse__groupTitle">{group.title}</h4>
-                <ul class="cnCourse__programList cnCourse__programList--group">
-                  {group.items.map((item) => {
-                    const featureItem = normalizeFeature(item);
-
-                    return (
-                      <li>
-                        <details class="cnCourse__programItem cnCourse__programItem--accordion">
-                          <summary class="cnCourse__programSummary">
-                            <span class="cnCourse__programDot" aria-hidden="true"></span>
-                            <div class="cnCourse__programText">
-                              {featureItem.title && <strong>{featureItem.title}</strong>}
-                              {featureItem.text && <span>{featureItem.text}</span>}
-                            </div>
-
-                            <span class="cnCourse__programToggle" aria-hidden="true"></span>
-                          </summary>
-
-                          <div class="cnCourse__programPanel">
-                            <div class="cnCourse__programPanelInner">
-                              <ul class="cnCourse__programDetails">
-                                {featureItem.details.map((detail) => (
-                                  <li class="cnCourse__programDetail">{detail}</li>
-                                ))}
-                              </ul>
-                            </div>
-                          </div>
-                        </details>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </article>
-            ))}
-          </div>
-        ) : (
-          <ul class="cnCourse__programList">
-            {(about.features ?? []).map((item) => {
-              const featureItem = normalizeFeature(item);
-
-              return (
-                <li>
-                  <details class="cnCourse__programItem cnCourse__programItem--accordion">
-                    <summary class="cnCourse__programSummary">
-                      <span class="cnCourse__programDot" aria-hidden="true"></span>
-                      <div class="cnCourse__programText">
-                        {featureItem.title && <strong>{featureItem.title}</strong>}
-                        {featureItem.text && <span>{featureItem.text}</span>}
-                      </div>
-
-                      <span class="cnCourse__programToggle" aria-hidden="true"></span>
-                    </summary>
-
-                    <div class="cnCourse__programPanel">
-                      <div class="cnCourse__programPanelInner">
-                        <ul class="cnCourse__programDetails">
-                          {featureItem.details.map((detail) => (
-                            <li class="cnCourse__programDetail">{detail}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  </details>
-                </li>
-              );
-            })}
-          </ul>
-        )
-      }
+      {about.summary && (
+        <p class="cnCourse__summary" data-reveal-item="4">{about.summary}</p>
+      )}
 
       <div class="cnCourse__actions">
         <button class="cnCourse__trial heroPill" type="button" data-open-modal>
@@ -299,158 +106,6 @@ const normalizeFeature = (item: CourseFeatureItem) => {
           </span>
         </a>
       </div>
-
-      <div class="cnCourse__audience">
-        <h3 class="cnCourse__sectionTitle cnCourse__sectionTitle--audience">
-          {audience.title}
-        </h3>
-
-        <div class="cnCourse__audienceGrid">
-          {
-            audienceCards.map((card) => {
-              const icon = courseIcons[card.icon];
-
-              return (
-                <article class="cnCourse__audienceCard">
-                  <div class="cnCourse__audienceHead">
-                    <img
-                      class="cnCourse__audienceIcon"
-                      src={icon.src}
-                      alt=""
-                      aria-hidden="true"
-                      loading="lazy"
-                      decoding="async"
-                      width={icon.width}
-                      height={icon.height}
-                    />
-
-                    <div class="cnCourse__audienceCopy">
-                      <h4 class="cnCourse__audienceCardTitle">{card.title}</h4>
-                      {card.text && <p class="cnCourse__audienceCardText">{card.text}</p>}
-                    </div>
-                  </div>
-                </article>
-              );
-            })
-          }
-        </div>
-      </div>
     </div>
   </div>
 </section>
-
-<script>
-  const initChineseCourseAccordions = () => {
-    const accordionItems = document.querySelectorAll(".cnCourse__programItem--accordion");
-
-    accordionItems.forEach((item) => {
-      if (!(item instanceof HTMLDetailsElement) || item.dataset.enhanced === "true") {
-        return;
-      }
-
-      const summary = item.querySelector(".cnCourse__programSummary");
-      const panel = item.querySelector(".cnCourse__programPanel");
-
-      if (!(summary instanceof HTMLElement) || !(panel instanceof HTMLElement)) {
-        return;
-      }
-
-      item.dataset.enhanced = "true";
-
-      let animation;
-
-      const cleanup = (shouldStayOpen) => {
-        if (animation) {
-          animation.cancel();
-          animation = null;
-        }
-
-        item.open = shouldStayOpen;
-        panel.style.height = "";
-        panel.style.opacity = "";
-        panel.style.overflow = "";
-      };
-
-      const openPanel = () => {
-        if (animation) {
-          animation.cancel();
-        }
-
-        item.open = true;
-        panel.style.overflow = "hidden";
-        panel.style.height = "0px";
-        panel.style.opacity = "0";
-
-        requestAnimationFrame(() => {
-          const endHeight = `${panel.scrollHeight}px`;
-
-          animation = panel.animate(
-            [
-              { height: "0px", opacity: 0 },
-              { height: endHeight, opacity: 1 },
-            ],
-            {
-              duration: 280,
-              easing: "cubic-bezier(0.22, 1, 0.36, 1)",
-            },
-          );
-
-          panel.style.height = endHeight;
-          panel.style.opacity = "1";
-
-          animation.onfinish = () => cleanup(true);
-          animation.oncancel = () => {
-            animation = null;
-          };
-        });
-      };
-
-      const closePanel = () => {
-        if (animation) {
-          animation.cancel();
-        }
-
-        const startHeight = `${panel.offsetHeight}px`;
-
-        panel.style.overflow = "hidden";
-        panel.style.height = startHeight;
-        panel.style.opacity = "1";
-
-        requestAnimationFrame(() => {
-          animation = panel.animate(
-            [
-              { height: startHeight, opacity: 1 },
-              { height: "0px", opacity: 0 },
-            ],
-            {
-              duration: 240,
-              easing: "cubic-bezier(0.4, 0, 0.2, 1)",
-            },
-          );
-
-          panel.style.height = "0px";
-          panel.style.opacity = "0";
-
-          animation.onfinish = () => cleanup(false);
-          animation.oncancel = () => {
-            animation = null;
-          };
-        });
-      };
-
-      summary.addEventListener("click", (event) => {
-        event.preventDefault();
-
-        if (item.open) {
-          closePanel();
-          return;
-        }
-
-        openPanel();
-      });
-    });
-  };
-
-  document.addEventListener("DOMContentLoaded", initChineseCourseAccordions, { once: true });
-  document.addEventListener("astro:page-load", initChineseCourseAccordions);
-</script>

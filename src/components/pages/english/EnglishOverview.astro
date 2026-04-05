@@ -1,0 +1,35 @@
+---
+/**
+ * TeaCha website
+ * Design & development: Ілля Пінчук Вадимович
+ * © 2026. All rights reserved.
+ */
+
+import { siteText } from "../../../data/siteText";
+
+const { className = "" } = Astro.props;
+const sectionClass = ["langOverview", "langOverview--english", className].filter(Boolean).join(" ");
+const text = siteText.sections.englishOverview;
+---
+
+<section class={sectionClass} data-reveal="scroll">
+  <div class="container">
+    <header
+      class="sectionTitle sectionTitle--center sectionTitle--accentBottom"
+      data-reveal="scroll"
+    >
+      <h2 class="sectionTitle__line sectionTitle__line--a" data-reveal-item="1">
+        {text.titleTop}
+      </h2>
+      <div class="sectionTitle__line sectionTitle__line--b" data-reveal-item="2">
+        {text.titleBottom}
+      </div>
+    </header>
+
+    <div class="langOverview__body" data-reveal-item="3">
+      {text.paragraphs.map((p) => (
+        <p class="langOverview__text" set:html={p} />
+      ))}
+    </div>
+  </div>
+</section>

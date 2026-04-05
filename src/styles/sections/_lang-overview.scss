@@ -1,0 +1,54 @@
+/*!
+ * TeaCha website
+ * Design & development: Ілля Пінчук Вадимович
+ * © 2026. All rights reserved.
+ */
+
+.langOverview {
+  &__body {
+    max-width: 48rem;
+    margin: 8px auto 0;
+    text-align: center;
+  }
+
+  &--english &__body {
+    max-width: 68rem;
+  }
+
+  &--english &__text {
+    text-wrap: pretty;
+  }
+
+  &--chinese &__body {
+    max-width: 72rem;
+  }
+
+  &--chinese &__text {
+    text-wrap: pretty;
+  }
+
+  &__text {
+    font-size: clamp(16px, 1.5vw, 19px);
+    line-height: 1.72;
+    color: color-mix(in srgb, var(--color-text) 76%, white 24%);
+    text-wrap: balance;
+
+    & + & {
+      margin-top: 14px;
+    }
+
+    a {
+      color: var(--color-accent);
+      text-decoration: none;
+      font-weight: 600;
+      border-bottom: 1.5px solid color-mix(in srgb, var(--color-accent) 32%, transparent);
+      transition:
+        border-color var(--dur-1) var(--ease),
+        color var(--dur-1) var(--ease);
+
+      &:hover {
+        border-color: var(--color-accent);
+      }
+    }
+  }
+}

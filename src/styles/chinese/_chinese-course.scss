@@ -6,7 +6,7 @@
 
 .cnCourse {
   &__intro {
-    max-width: 52rem;
+    max-width: 72rem;
     margin-inline: auto;
     text-align: center;
   }
@@ -35,12 +35,12 @@
   }
 
   &__lead {
-    max-width: 48rem;
+    max-width: 66rem;
     margin: 24px auto 0;
     font-size: clamp(16px, 1.5vw, 20px);
     line-height: 1.7;
     color: color-mix(in srgb, var(--color-text) 78%, white 22%);
-    text-wrap: balance;
+    text-wrap: pretty;
   }
 
   &__surface {
@@ -336,6 +336,16 @@
     box-shadow:
       0 10px 24px rgba(17, 24, 39, 0.06),
       inset 0 1px 0 rgba(255, 255, 255, 0.94);
+  }
+
+  &__summary {
+    max-width: 66rem;
+    margin: 28px auto 0;
+    text-align: center;
+    font-size: clamp(16px, 1.5vw, 19px);
+    line-height: 1.72;
+    color: color-mix(in srgb, var(--color-text) 76%, white 24%);
+    text-wrap: pretty;
   }
 
   &__actions {

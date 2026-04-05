@@ -8,8 +8,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 import LanguageHero from "../../components/sections/LanguageHero.astro";
-import EnglishPrograms from "../../components/pages/english/EnglishPrograms.astro";
-import EnglishAudience from "../../components/pages/english/EnglishAudience.astro";
+import EnglishOverview from "../../components/pages/english/EnglishOverview.astro";
 import EnglishWhy from "../../components/pages/english/EnglishWhy.astro";
 import EnglishFormat from "../../components/pages/english/EnglishFormat.astro";
 import TestBanner from "../../components/sections/TestBanner.astro";
@@ -43,8 +42,7 @@ const faqItems = siteText.sections.englishFaq.english;
     subtitle={pageText.hero.subtitle}
   />
 
-  <EnglishPrograms className="sectionShell section--b" />
-  <EnglishAudience className="sectionShell section--a" />
+  <EnglishOverview className="sectionShell section--b" />
   <TestBanner className="section--a" />
   <EnglishWhy className="sectionShell section--b" />
   <Process className="sectionShell section--b" />
