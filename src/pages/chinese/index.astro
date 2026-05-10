@@ -18,10 +18,12 @@ import Reviews from "../../components/sections/Reviews.astro";
 import Faq from "../../components/sections/Faq.astro";
 import { siteText } from "../../data/siteText";
 import { resolveAssetPath } from "../../data/assetMap";
+import { buildFaqSchema } from "../../data/seoSchemas";
 
 const base = import.meta.env.BASE_URL;
 const pageText = siteText.pages.chinese;
 const faqItems = siteText.sections.chineseFaq.chinese;
+const jsonLd = [buildFaqSchema(faqItems)];
 ---
 
 <BaseLayout
@@ -30,6 +32,7 @@ const faqItems = siteText.sections.chineseFaq.chinese;
   ogImage="/img/hero/chinese/chinese-language-hero.jpg"
   breadcrumbs={[{ name: pageText.breadcrumb, href: "/chinese/" }]}
   bodyClass="page-chinese"
+  jsonLd={jsonLd}
 >
   <LanguageHero
     className="sectionShell section--a"

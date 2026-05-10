@@ -18,6 +18,7 @@ import PriceRates from "../../components/pages/price/PriceRates.astro";
 import Faq from "../../components/sections/Faq.astro";
 import { siteText } from "../../data/siteText";
 import { resolveAssetPath } from "../../data/assetMap";
+import { buildCourseSchema, buildFaqSchema } from "../../data/seoSchemas";
 
 const base = import.meta.env.BASE_URL;
 const pageText = siteText.pages.chineseTeen;
@@ -27,6 +28,7 @@ const breadcrumbs = [
   { name: siteText.pages.chinese.breadcrumb, href: "/chinese/" },
   { name: pageText.breadcrumb, href: "/chinese/dlya-pidlitkiv/" },
 ];
+const jsonLd = [buildCourseSchema({ name: pageText.title.split(" |")[0], description: pageText.description, path: breadcrumbs[1].href }), buildFaqSchema(faqItems)];
 ---
 
 <BaseLayout
@@ -35,6 +37,7 @@ const breadcrumbs = [
   ogImage="/img/hero/chinese/chinese-language-hero.jpg"
   breadcrumbs={breadcrumbs}
   bodyClass="page-chinese"
+  jsonLd={jsonLd}
 >
   <LanguageHero
     className="sectionShell section--a"

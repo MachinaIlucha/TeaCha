@@ -15,14 +15,18 @@ import PriceRates from "../components/pages/price/PriceRates.astro";
 import Faq from "../components/sections/Faq.astro";
 import TestBanner from "../components/sections/TestBanner.astro";
 import { siteText } from "../data/siteText";
+import { buildFaqSchema } from "../data/seoSchemas";
 
 const base = import.meta.env.BASE_URL;
+const faqItems = siteText.sections.faq.items.home;
+const jsonLd = [buildFaqSchema(faqItems)];
 ---
 
 <BaseLayout
   title={siteText.pages.index.title}
   description={siteText.pages.index.description}
   ogImage="/img/hero/home/home-hero-background.jpg"
+  jsonLd={jsonLd}
 >
   <HomeHero className="sectionShell section--a" />
 

@@ -16,25 +16,31 @@ import Faq from "../components/sections/Faq.astro";
 
 import CorporatePriceTable from "../components/pages/corporate/CorporatePriceTable.astro";
 import { siteText } from "../data/siteText";
+import { buildFaqSchema } from "../data/seoSchemas";
 
 const pageText = siteText.pages.corporate;
+const faqItems = siteText.sections.faq.items.corporate;
+const jsonLd = [buildFaqSchema(faqItems)];
 ---
 
-<BaseLayout title={pageText.title}>
-  <main class="page-corporate">
-    <CorporateHero className="sectionShell section--a" />
-    <CorporateBenefits className="sectionShell section--b" />
-    <Process
-      className="sectionShell section--a"
-      steps={pageText.processSteps}
-      footnote={pageText.processFootnote}
-    />
-    <slot />
+<BaseLayout
+  title={pageText.title}
+  description={pageText.description}
+  breadcrumbs={[{ name: pageText.breadcrumb, href: "/corporate/" }]}
+  bodyClass="page-corporate"
+  jsonLd={jsonLd}
+>
+  <CorporateHero className="sectionShell section--a" />
+  <CorporateBenefits className="sectionShell section--b" />
+  <Process
+    className="sectionShell section--a"
+    steps={pageText.processSteps}
+    footnote={pageText.processFootnote}
+  />
 
-    <CorporateClients className="sectionShell section--b" />
+  <CorporateClients className="sectionShell section--b" />
 
-    <CorporatePriceTable className="sectionShell section--a" />
+  <CorporatePriceTable className="sectionShell section--a" />
 
-    <Faq className="sectionShell section--a" />
-  </main>
+  <Faq className="sectionShell section--a" />
 </BaseLayout>

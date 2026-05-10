@@ -11,9 +11,29 @@ import CorporatePriceTable from "../components/pages/corporate/CorporatePriceTab
 import Faq from "../components/sections/Faq.astro";
 import TestBanner from "../components/sections/TestBanner.astro";
 import { siteText } from "../data/siteText";
+import { buildFaqSchema, buildOfferSchema } from "../data/seoSchemas";
 
 const base = import.meta.env.BASE_URL;
 const pageText = siteText.pages.prices;
+const faqItems = siteText.sections.faq.items.home;
+const jsonLd = [
+  buildOfferSchema([
+    { name: "Індивідуальне навчання — 1 урок", price: 700, lessons: 1 },
+    { name: "Індивідуальне навчання — 8 уроків", price: 5160, lessons: 8 },
+    { name: "Індивідуальне навчання — 12 уроків", price: 7560, lessons: 12 },
+    { name: "Індивідуальне навчання — 24 уроки", price: 14400, lessons: 24 },
+    { name: "Парне навчання — 1 урок", price: 500, lessons: 1 },
+    { name: "Парне навчання — 8 уроків", price: 3560, lessons: 8 },
+    { name: "Парне навчання — 12 уроків", price: 5160, lessons: 12 },
+    { name: "Парне навчання — 24 уроки", price: 9600, lessons: 24 },
+    { name: "Групове навчання — 1 урок", price: 400, lessons: 1 },
+    { name: "Групове навчання — 8 уроків", price: 2840, lessons: 8 },
+    { name: "Групове навчання — 12 уроків", price: 3960, lessons: 12 },
+    { name: "Групове навчання — 24 уроки", price: 7440, lessons: 24 },
+    { name: "Пробне заняття", price: 200, lessons: 1 },
+  ]),
+  buildFaqSchema(faqItems),
+];
 ---
 
 <BaseLayout
@@ -22,6 +42,7 @@ const pageText = siteText.pages.prices;
   ogImage="/img/hero/home/home-hero-background.jpg"
   breadcrumbs={[{ name: pageText.breadcrumb, href: "/prices/" }]}
   bodyClass="page-price"
+  jsonLd={jsonLd}
 >
   <section class="sectionShell section--a landingLinks visuallyHidden" data-reveal="scroll">
     <div class="container">
