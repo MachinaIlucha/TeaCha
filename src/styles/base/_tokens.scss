@@ -26,9 +26,19 @@
   --section-b2-muted: rgba(247, 247, 251, 0.7);
   --section-b2-soft: rgba(255, 255, 255, 0.08);
 
-  /* Shadows */
-  --shadow-1: 0 10px 30px rgba(0, 0, 0, 0.08);
-  --shadow-2: 0 18px 55px rgba(0, 0, 0, 0.14);
+  /* Shadows — tinted with the brand navy (#2B2E44) for warmer, premium depth */
+  --shadow-1: 0 8px 24px rgba(43, 46, 68, 0.09);
+  --shadow-2: 0 18px 50px rgba(43, 46, 68, 0.15);
+
+  /* Hairlines & elevation (light surfaces) — navy-tinted for a cohesive,
+     premium depth language. Use these instead of raw rgba(0,0,0,…). */
+  --hairline: rgba(43, 46, 68, 0.10);
+  --hairline-strong: rgba(43, 46, 68, 0.16);
+  --elev-1: 0 4px 12px rgba(43, 46, 68, 0.08);
+  --elev-2: 0 10px 26px rgba(43, 46, 68, 0.12);
+  /* Sticky bars: a crisp hairline seam + a soft, low-spread lift */
+  --shadow-sticky: 0 1px 0 rgba(43, 46, 68, 0.06), 0 10px 28px rgba(43, 46, 68, 0.07);
+  --shadow-dock: 0 -1px 0 rgba(43, 46, 68, 0.06), 0 -14px 34px rgba(43, 46, 68, 0.10);
 
   /* Radii */
   --radius-sm: 12px;
@@ -54,8 +64,9 @@
 
   /* Typography */
   --font-sans:
-    ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial,
-    "Noto Sans", "Helvetica Neue", sans-serif;
+    "Montserrat", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+    Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+  --font-display: var(--font-sans);
 
   --text-xs: 12px;
   --text-sm: 14px;
@@ -72,6 +83,10 @@
 
   /* Motion */
   --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  /* Punchy ease-out for entrances (responsive, starts fast) */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  /* Strong ease-in-out for on-screen movement / morphs */
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --dur-1: 120ms;
   --dur-2: 200ms;
 
@@ -94,8 +109,8 @@
   --btn-h: 56px;
   --btn-px: 28px;
   --btn-radius: var(--radius-pill);
-  --btn-shadow: 0 14px 30px rgba(0, 0, 0, 0.1);
-  --btn-shadow-hover: 0 18px 38px rgba(0, 0, 0, 0.14);
+  --btn-shadow: 0 12px 28px rgba(43, 46, 68, 0.12);
+  --btn-shadow-hover: 0 18px 38px rgba(43, 46, 68, 0.17);
   --btn-font: 800;
   --btn-size: 16px;
 

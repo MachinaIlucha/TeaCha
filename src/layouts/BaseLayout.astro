@@ -234,7 +234,7 @@ const jsonLdItems = [organizationSchema, websiteSchema, webpageSchema, breadcrum
     <meta name="description" content={metaDescription} />
     <meta name="robots" content={robotsContent} />
     <link rel="canonical" href={canonicalUrl} />
-    <meta name="theme-color" content="#f6efe3" />
+    <meta name="theme-color" content="#f6f7fb" />
     <link rel="icon" type="image/png" sizes="32x32" href={favicon32} />
     <link rel="icon" type="image/png" sizes="16x16" href={favicon16} />
     <link rel="shortcut icon" href={favicon32} />
@@ -270,7 +270,12 @@ const jsonLdItems = [organizationSchema, websiteSchema, webpageSchema, breadcrum
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap"
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
   </head>

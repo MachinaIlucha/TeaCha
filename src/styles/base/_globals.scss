@@ -39,6 +39,19 @@ body {
   margin: 0;
 }
 
+/* Typography polish: balanced headlines, no orphans in body copy */
+h1,
+h2,
+h3,
+.h2,
+.sectionTitle__line {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
 ::selection {
   background: rgba(219, 31, 50, 0.18);
 }

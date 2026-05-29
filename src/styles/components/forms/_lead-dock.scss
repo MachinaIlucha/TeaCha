@@ -21,7 +21,7 @@
   --leadDock-line-focus: rgba(36, 36, 36, 0.95);
 
   /* effects */
-  --leadDock-shadow: 0 -14px 34px rgba(0, 0, 0, 0.12);
+  --leadDock-shadow: var(--shadow-dock);
   --leadDock-btn-shadow: var(--cta-shadow);
   --leadDock-btn-shadow-hover: var(--cta-shadow-hover);
 
@@ -307,7 +307,7 @@ body {
   &__field:focus-within::after {
     height: 2px;
     background: var(--leadDock-line-focus);
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 6px 14px rgba(43, 46, 68, 0.20);
   }
 
   /* ===== invalid styles =====
@@ -318,7 +318,7 @@ body {
     &__field:has(input.leadDock__input:invalid)::after {
       height: 2px;
       background: rgba(36, 36, 36, 0.8);
-      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.14);
+      box-shadow: 0 6px 14px rgba(43, 46, 68, 0.16);
     }
   }
 
@@ -326,6 +326,6 @@ body {
   &__field.is-invalid::after {
     height: 2px;
     background: rgba(36, 36, 36, 0.8);
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.14);
+    box-shadow: 0 6px 14px rgba(43, 46, 68, 0.16);
   }
 }

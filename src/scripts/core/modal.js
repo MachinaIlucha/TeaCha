@@ -8,14 +8,27 @@ export const initModal = ({
   const modal = document.getElementById(modalId);
   if (!modal) return null;
 
+  const closingClass = "is-closing";
+  const EXIT_MS = 220; // keep in sync with modal exit animation duration
+  let exitTimer = null;
+
   const close = () => {
+    if (!modal.classList.contains(openClass)) return;
     modal.classList.remove(openClass);
+    modal.classList.add(closingClass); // play the exit animation
     modal.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
     document.body.classList.remove(bodyOpenClass);
+
+    window.clearTimeout(exitTimer);
+    exitTimer = window.setTimeout(() => {
+      modal.classList.remove(closingClass);
+    }, EXIT_MS);
   };
 
   const open = () => {
+    window.clearTimeout(exitTimer);
+    modal.classList.remove(closingClass); // cancel any in-flight exit
     modal.classList.add(openClass);
     modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";

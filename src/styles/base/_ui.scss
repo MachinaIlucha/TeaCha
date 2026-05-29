@@ -29,13 +29,13 @@
 
 .pill:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.10);
+  box-shadow: 0 6px 16px rgba(43, 46, 68, 0.12);
   filter: brightness(0.98);
 }
 
 .pill:active {
   transform: translateY(0);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 3px 8px rgba(43, 46, 68, 0.10);
   filter: brightness(0.98);
 }
 

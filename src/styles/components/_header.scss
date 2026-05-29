@@ -13,8 +13,8 @@
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 
-  border-bottom: 0;
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid var(--hairline);
+  box-shadow: var(--shadow-sticky);
 
   color: var(--text);
 }
@@ -429,7 +429,7 @@ body.menu-open .topbar {
     color: #fff;
     border-color: var(--text);
     filter: none;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 16px rgba(43, 46, 68, 0.18);
   }
 
   .topbar .nav__links .pill.is-active::before,
@@ -441,7 +441,7 @@ body.menu-open .topbar {
   .topbar .nav__links:has(.pill:hover) .pill[aria-current="page"]:not(:hover) {
     color: var(--text);
     border-color: rgba(43, 46, 68, 0.65);
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 3px 8px rgba(43, 46, 68, 0.10);
   }
 
   .topbar .nav__links:has(.pill:hover) .pill.is-active:not(:hover)::before,

@@ -75,7 +75,7 @@
   border-radius: 18px;
   background: color-mix(in srgb, var(--white) 80%, transparent);
   border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
-  box-shadow: 0 16px 28px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 16px 28px rgba(43, 46, 68, 0.07);
   transition: transform 0.14s ease, box-shadow 0.14s ease, border-color 0.14s ease;
 }
 
@@ -96,7 +96,7 @@
 @media (hover: hover) and (pointer: fine) {
   .landingLinks__card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 20px 32px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 20px 32px rgba(43, 46, 68, 0.12);
     border-color: color-mix(in srgb, var(--red) 35%, transparent);
   }
 }

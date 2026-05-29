@@ -15,7 +15,8 @@
   display: none;
 }
 
-.modal.is-open {
+.modal.is-open,
+.modal.is-closing {
   display: block;
 }
 
@@ -24,6 +25,15 @@
   inset: 0;
   background: rgba(43, 46, 68, 0.45);
   backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* Overlay fades — appearing/disappearing without transition feels broken */
+.modal.is-open .modal__overlay {
+  animation: overlayIn 260ms var(--ease-out) both;
+}
+.modal.is-closing .modal__overlay {
+  animation: overlayOut 200ms var(--ease) both;
 }
 
 .modal__content {
@@ -34,19 +44,50 @@
   border-radius: 28px;
   padding: 32px;
   z-index: 1;
+  box-shadow: var(--shadow-2);
+  /* Modal is not anchored to a trigger → scales from its own centre */
+  transform-origin: center;
+}
 
-  animation: modalIn 0.35s ease;
+/* Enter: punchy ease-out; never from scale(0) */
+.modal.is-open .modal__content {
+  animation: modalIn 260ms var(--ease-out) both;
+}
+/* Exit: shorter than enter, so leaving feels snappy */
+.modal.is-closing .modal__content {
+  animation: modalOut 200ms var(--ease) both;
 }
 
 @keyframes modalIn {
   from {
     opacity: 0;
-    transform: translateY(20px) scale(0.96);
+    transform: translateY(16px) scale(0.96);
   }
   to {
     opacity: 1;
-    transform: none;
+    transform: translateY(0) scale(1);
   }
+}
+
+@keyframes modalOut {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+}
+
+@keyframes overlayIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes overlayOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
 }
 
 .modal__close {
@@ -55,10 +96,49 @@
   right: 18px;
   width: 36px;
   height: 36px;
+  display: grid;
+  place-items: center;
   border-radius: 50%;
-  border: 2px solid rgba(43, 46, 68, 0.25);
+  border: 2px solid rgba(43, 46, 68, 0.18);
   background: transparent;
+  color: rgba(43, 46, 68, 0.7);
+  font-size: 15px;
+  line-height: 1;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+
+  transition:
+    background-color var(--dur-1) var(--ease),
+    border-color var(--dur-1) var(--ease),
+    color var(--dur-1) var(--ease),
+    transform var(--dur-1) var(--ease);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .modal__close:hover {
+    background: rgba(43, 46, 68, 0.06);
+    border-color: rgba(43, 46, 68, 0.3);
+    color: var(--color-text);
+  }
+}
+
+.modal__close:active {
+  transform: scale(0.94);
+}
+
+.modal__close:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* opacity-only, no movement — keep enter/exit directions correct */
+  .modal.is-open .modal__content {
+    animation-name: overlayIn;
+  }
+  .modal.is-closing .modal__content {
+    animation-name: overlayOut;
+  }
 }
 
 .modal__title {
@@ -86,6 +166,15 @@
   border: 2px solid rgba(219, 31, 50, 0.35);
   padding: 0 18px;
   font-size: 15px;
+  transition:
+    border-color var(--dur-2) var(--ease),
+    box-shadow var(--dur-2) var(--ease);
+}
+
+.modal__form input:focus {
+  outline: none;
+  border-color: rgba(219, 31, 50, 0.7);
+  box-shadow: var(--focus-ring);
 }
 
 .modal__submit {
@@ -101,17 +190,24 @@
   letter-spacing: 0.3px;
   cursor: pointer;
 
-  transition: transform 0.15s ease, box-shadow 0.15s ease,
-    background-color 0.15s ease;
+  transition: transform var(--dur-1) var(--ease), box-shadow var(--dur-2) var(--ease),
+    background-color var(--dur-2) var(--ease);
 }
 
-.modal__submit:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 10px 26px rgba(219, 31, 50, 0.45);
-  background-color: rgba(200, 25, 42, 1); // чуть темнее на hover
+@media (hover: hover) and (pointer: fine) {
+  .modal__submit:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 26px rgba(219, 31, 50, 0.45);
+    background-color: rgba(200, 25, 42, 1); // чуть темнее на hover
+  }
 }
 
 .modal__submit:active {
-  transform: translateY(0);
+  transform: scale(0.97);
   box-shadow: 0 6px 14px rgba(219, 31, 50, 0.35);
+}
+
+.modal__submit:focus-visible {
+  outline: none;
+  box-shadow: 0 10px 26px rgba(219, 31, 50, 0.45), var(--focus-ring);
 }
