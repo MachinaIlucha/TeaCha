@@ -58,7 +58,7 @@ export const siteText = {
     defaultTitle: "Школа англійської та китайської в Києві — онлайн та офлайн | TeaCha",
     defaultDescription:
       "TeaCha — школа англійської та китайської в Києві: онлайн й офлайн, індивідуально та мінігрупи, корпоративне навчання. Запишіться на пробний урок.",
-    defaultOgImage: "/img/hero/home/home-hero-background.jpg",
+    defaultOgImage: "/img/layout/teacha-og-default.png",
     homeBreadcrumb: "Головна",
     links: [
       { href: "english", label: "Курси англійської TeaCha" },

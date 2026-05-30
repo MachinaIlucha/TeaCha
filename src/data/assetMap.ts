@@ -30,6 +30,7 @@ import assetHeroHomeHomeHeroBackgroundJpg from "../assets/img/hero/home/home-her
 import assetHeroHomeHomeHeroBackgroundWebp from "../assets/img/hero/home/home-hero-background.webp";
 import assetHeroHomeHomeHeroTeachaTeamWebp from "../assets/img/hero/home/home-hero-teacha-team.webp";
 import assetLayoutLogoPng from "../assets/img/layout/logo.png";
+import assetLayoutTeachaOgDefaultPng from "../assets/img/layout/teacha-og-default.png";
 import assetProcessTeachaLearningProcessDividerWebp from "../assets/img/process/teacha-learning-process-divider.webp";
 import assetProductsTeachaFirstTshirtBackWebp from "../assets/img/products/teacha-first-tshirt-back.webp";
 import assetProductsTeachaFirstTshirtFrontJpg from "../assets/img/products/teacha-first-tshirt-front.jpg";
@@ -78,6 +79,7 @@ const ASSET_URLS: Record<string, AssetValue> = {
   "img/hero/home/home-hero-background.webp": assetHeroHomeHomeHeroBackgroundWebp,
   "img/hero/home/home-hero-teacha-team.webp": assetHeroHomeHomeHeroTeachaTeamWebp,
   "img/layout/logo.png": assetLayoutLogoPng,
+  "img/layout/teacha-og-default.png": assetLayoutTeachaOgDefaultPng,
   "img/process/teacha-learning-process-divider.webp": assetProcessTeachaLearningProcessDividerWebp,
   "img/products/teacha-first-tshirt-back.webp": assetProductsTeachaFirstTshirtBackWebp,
   "img/products/teacha-first-tshirt-front.jpg": assetProductsTeachaFirstTshirtFrontJpg,
