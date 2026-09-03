@@ -77,13 +77,6 @@ export function initReviews() {
   frontImg.decoding = "async";
   backImg.decoding = "async";
 
-  // warm cache
-  reviews.forEach((r) => {
-    if (!r?.img) return;
-    const im = new Image();
-    im.src = r.img;
-  });
-
   let i = 0;
   let locked = false;
   let fallbackT = 0;
@@ -266,7 +259,6 @@ export function initReviews() {
   const next0 = reviews[(i + 1) % reviews.length];
   setImage(backImg, next0);
   fillTextLayer(backLayer, next0);
-  predecode(next0?.img);
 
   // ---- AUTOPLAY (stable) ----
   const reduceMotion = prefersReducedMotion();
@@ -367,7 +359,10 @@ export function initReviews() {
 
       inView = visible;
 
-      if (inView) startAutoplay();
+      if (inView) {
+        predecode(reviews[(i + 1) % reviews.length]?.img);
+        startAutoplay();
+      }
       else stopAutoplay();
     },
     { threshold: 0.2 },

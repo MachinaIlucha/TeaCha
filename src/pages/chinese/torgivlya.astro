@@ -12,6 +12,7 @@ import ChineseCourseContent from "../../components/pages/chinese/ChineseCourseCo
 import ChineseWhy from "../../components/pages/chinese/ChineseWhy.astro";
 import ChineseFormat from "../../components/pages/chinese/ChineseFormat.astro";
 import ChineseRelated from "../../components/pages/chinese/ChineseRelated.astro";
+import ChineseResources from "../../components/pages/chinese/ChineseResources.astro";
 
 import Process from "../../components/sections/Process.astro";
 import PriceRates from "../../components/pages/price/PriceRates.astro";
@@ -52,6 +53,7 @@ const jsonLd = [buildCourseSchema({ name: pageText.title.split(" |")[0], descrip
   <ChineseCourseContent
     className="sectionShell section--b"
     about={course.about}
+    audience={course.audience}
   />
 
   <ChineseWhy className="sectionShell section--a" />
@@ -59,6 +61,7 @@ const jsonLd = [buildCourseSchema({ name: pageText.title.split(" |")[0], descrip
   <ChineseFormat className="sectionShell section--a" />
 
   <PriceRates base={base} className="sectionShell section--b" />
+  <ChineseResources className="sectionShell section--a" currentHref="chinese/torgivlya/" />
   <Faq className="sectionShell section--a" items={faqItems} />
-  <ChineseRelated className="sectionShell section--b" currentHref="chinese/torgivlya" />
+  <ChineseRelated className="sectionShell section--b" currentHref="chinese/torgivlya/" />
 </BaseLayout>

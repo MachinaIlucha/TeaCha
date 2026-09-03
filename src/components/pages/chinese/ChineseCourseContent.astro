@@ -7,6 +7,11 @@
 
 import { siteText } from "../../../data/siteText";
 import trialCtaLikeIcon from "../../../assets/img/forms/teacha-trial-lesson-cta-like-icon.png";
+import beginnersIcon from "../../../assets/img/chinese/programs/teacha-chinese-course-beginners-icon.png";
+import businessIcon from "../../../assets/img/chinese/programs/teacha-business-chinese-course-icon.png";
+import conversationIcon from "../../../assets/img/chinese/programs/teacha-conversational-chinese-course-icon.png";
+import hskIcon from "../../../assets/img/chinese/programs/teacha-hsk-preparation-course-icon.png";
+import kidsIcon from "../../../assets/img/chinese/programs/teacha-chinese-course-kids-teens-icon.png";
 
 type CourseHighlight = {
   value: string;
@@ -20,11 +25,28 @@ type CourseAbout = {
   lead: string;
   summary?: string;
   highlights?: CourseHighlight[];
+  features?: Array<{
+    title: string;
+    text?: string;
+    summary?: string;
+    details?: string[];
+  }>;
 };
 
-const { className = "", about } = Astro.props as {
+type CourseAudience = {
+  title: string;
+  items?: string[];
+  cards?: Array<{
+    title: string;
+    text: string;
+    icon: "beginners" | "business" | "conversation" | "hsk" | "kids";
+  }>;
+};
+
+const { className = "", about, audience } = Astro.props as {
   className?: string;
   about: CourseAbout;
+  audience?: CourseAudience;
 };
 
 const base = import.meta.env.BASE_URL;
@@ -34,6 +56,14 @@ const overviewText = siteText.sections.courseOverview;
 const headingMain = about.titleTop ?? about.title?.split(" ")[0] ?? "ПРО";
 const headingAccent =
   about.titleBottom ?? about.title?.split(" ").slice(1).join(" ") ?? "КУРС";
+
+const audienceIcons = {
+  beginners: beginnersIcon,
+  business: businessIcon,
+  conversation: conversationIcon,
+  hsk: hskIcon,
+  kids: kidsIcon,
+};
 ---
 
 <section class={sectionClass} data-reveal="scroll">
@@ -57,6 +87,82 @@ const headingAccent =
                 <p class="cnCourse__highlightLabel">{item.label}</p>
               </article>
             ))}
+          </div>
+        )
+      }
+
+      {
+        about.features && about.features.length > 0 && (
+          <div class="cnCourse__program">
+            <div class="cnCourse__programTop">
+              <h3 class="cnCourse__sectionTitle">{overviewText.programTitle}</h3>
+            </div>
+
+            <div class="cnCourse__programList">
+              {about.features.map((feature, index) => (
+                <details class="cnCourse__programItem cnCourse__programItem--accordion" open={index === 0}>
+                  <summary class="cnCourse__programSummary">
+                    <span class="cnCourse__programDot" aria-hidden="true"></span>
+                    <span class="cnCourse__programText">
+                      <strong>{feature.title}</strong>
+                      {feature.text && <span>{feature.text}</span>}
+                    </span>
+                    <span class="cnCourse__programToggle" aria-hidden="true"></span>
+                  </summary>
+                  {feature.details && feature.details.length > 0 && (
+                    <div class="cnCourse__programPanel">
+                      <div class="cnCourse__programPanelInner">
+                        <ul class="cnCourse__programDetails">
+                          {feature.details.map((detail) => (
+                            <li class="cnCourse__programDetail">{detail}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  )}
+                </details>
+              ))}
+            </div>
+          </div>
+        )
+      }
+
+      {
+        audience && ((audience.cards?.length ?? 0) > 0 || (audience.items?.length ?? 0) > 0) && (
+          <div class="cnCourse__audience">
+            <h3 class="cnCourse__sectionTitle cnCourse__sectionTitle--audience">{audience.title}</h3>
+            <div class="cnCourse__audienceGrid">
+              {(audience.cards?.length
+                ? audience.cards
+                : audience.items?.map((item) => ({
+                    title: item,
+                    text: "",
+                    icon: "beginners" as const,
+                  }))
+              )?.map((card) => {
+                const icon = audienceIcons[card.icon];
+                return (
+                  <article class="cnCourse__audienceCard">
+                    <div class="cnCourse__audienceHead">
+                      <img
+                        class="cnCourse__audienceIcon"
+                        src={icon.src}
+                        width={icon.width}
+                        height={icon.height}
+                        alt=""
+                        aria-hidden="true"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      <div class="cnCourse__audienceCopy">
+                        <h4 class="cnCourse__audienceCardTitle">{card.title}</h4>
+                        {card.text && <p class="cnCourse__audienceCardText">{card.text}</p>}
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
           </div>
         )
       }

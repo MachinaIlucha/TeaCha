@@ -55,50 +55,30 @@ export const siteText = {
   },
   seo: {
     siteName: "TeaCha",
-    defaultTitle: "Школа англійської та китайської в Києві — онлайн та офлайн | TeaCha",
+    defaultTitle: "Школа китайської та англійської в Києві й онлайн | TeaCha",
     defaultDescription:
-      "TeaCha — школа англійської та китайської в Києві: онлайн й офлайн, індивідуально та мінігрупи, корпоративне навчання. Запишіться на пробний урок.",
+      "TeaCha — школа китайської та англійської мов у Києві й онлайн: заняття з нуля, підготовка до HSK, індивідуально та в мінігрупах. Запишіться на пробний урок.",
     defaultOgImage: "/img/layout/teacha-og-default.png",
     homeBreadcrumb: "Головна",
-    links: [
-      { href: "english", label: "Курси англійської TeaCha" },
-      { href: "english/biznes-anhliyska", label: "Бізнес-англійська TeaCha" },
-      { href: "english/korporatyvna-anhliyska", label: "Корпоративна англійська TeaCha" },
-      { href: "english/anhliyska-dlya-it", label: "Англійська для IT TeaCha" },
-      { href: "english/anhliyska-dlya-dyzayneriv", label: "Англійська для дизайнерів TeaCha" },
-      { href: "english/pidhotovka-do-nmt", label: "Підготовка до НМТ з англійської TeaCha" },
-      { href: "english/rozmovna-anhliyska", label: "Розмовна англійська TeaCha" },
-      { href: "english/anhliyska-hramatyka", label: "Англійська граматика TeaCha" },
-      { href: "english/anhliyska-dlya-pereizdu", label: "Англійська для переїзду TeaCha" },
-      { href: "english/spiking-klub", label: "Спікінг-клуб з англійської TeaCha" },
-      { href: "chinese", label: "Курси китайської TeaCha" },
-      { href: "chinese/dlya-pochatkivciv", label: "Китайська для початківців TeaCha" },
-      { href: "chinese/hsk", label: "Підготовка до HSK TeaCha" },
-      { href: "chinese/dlya-ditey", label: "Китайська для дітей TeaCha" },
-      { href: "chinese/dilova", label: "Ділова китайська TeaCha" },
-      { href: "chinese/rozmovna", label: "Розмовна китайська TeaCha" },
-      { href: "corporate", label: "Корпоративне навчання TeaCha" },
-      { href: "prices", label: "Ціни на навчання TeaCha" },
-      { href: "products", label: "Продукція TeaCha" },
-    ],
   },
   navigation: {
     ariaLabel: "Навігація",
     burgerAriaLabel: "Відкрити меню",
     links: [
-      { href: "english", label: "Англійська" },
-      { href: "chinese", label: "Китайська" },
-      { href: "corporate", label: "Корпоративне навчання" },
-      { href: "prices", label: "Ціни" },
-      { href: "products", label: "Продукція" },
-      { href: "about", label: "Про нас" },
+      { href: "chinese/", label: "Китайська" },
+      { href: "blog/", label: "Блог" },
+      { href: "english/", label: "Англійська" },
+      { href: "corporate/", label: "Корпоративне навчання" },
+      { href: "prices/", label: "Ціни" },
+      { href: "products/", label: "Продукція" },
+      { href: "about/", label: "Про нас" },
     ],
   },
   pages: {
     index: {
-      title: "Школа англійської та китайської в Києві — онлайн та офлайн | TeaCha",
+      title: "Школа китайської та англійської в Києві й онлайн | TeaCha",
       description:
-        "TeaCha — курси англійської та китайської в Києві: індивідуально, мінігрупи й корпоративно. Онлайн та офлайн. Пробний урок за записом.",
+        "TeaCha — курси китайської та англійської мов у Києві й онлайн: китайська з нуля, HSK, заняття для дітей і дорослих. Пробний урок за записом.",
     },
     english: {
       title: "Курси англійської в Києві — онлайн та офлайн | TeaCha",
@@ -137,7 +117,7 @@ export const siteText = {
       },
     },
     englishCorporate: {
-      title: "Корпоративна англійська онлайн — для командного спілкування | TeaCha",
+      title: "Корпоративна англійська онлайн для команд | TeaCha",
       description:
         "Корпоративна англійська в TeaCha: ділова переписка, онлайн-зустрічі, презентації. Програма для команд і компаній. Онлайн та офлайн у Києві.",
       breadcrumb: "Корпоративна англійська",
@@ -152,7 +132,7 @@ export const siteText = {
       },
     },
     englishIT: {
-      title: "Англійська для IT-спеціалістів онлайн — технічна англійська | TeaCha",
+      title: "Англійська для IT онлайн — курс для спеціалістів | TeaCha",
       description:
         "Курс англійської для IT в TeaCha: технічні презентації, мітинги, документація. Для розробників, QA, PM. Онлайн та офлайн у Києві.",
       breadcrumb: "Англійська для IT",
@@ -168,7 +148,7 @@ export const siteText = {
       },
     },
     englishDesign: {
-      title: "Англійська для дизайнерів онлайн — курс для креативних фахівців | TeaCha",
+      title: "Англійська для дизайнерів онлайн | TeaCha",
       description:
         "Курс англійської для дизайнерів в TeaCha: презентація концепцій, спілкування з клієнтами, дизайнерська лексика. Онлайн та офлайн у Києві.",
       breadcrumb: "Англійська для дизайнерів",
@@ -200,7 +180,7 @@ export const siteText = {
       },
     },
     englishConversational: {
-      title: "Розмовна англійська онлайн — курс для подолання мовного бар'єру | TeaCha",
+      title: "Розмовна англійська онлайн — курс | TeaCha",
       description:
         "Курс розмовної англійської в TeaCha: говоріння, дискусії, рольові ігри, подолання мовного бар'єру. Онлайн та офлайн у Києві.",
       breadcrumb: "Розмовна англійська",
@@ -215,7 +195,7 @@ export const siteText = {
       },
     },
     englishGrammar: {
-      title: "Англійська граматика онлайн — курс для систематичного вивчення | TeaCha",
+      title: "Курс англійської граматики онлайн | TeaCha",
       description:
         "Курс англійської граматики в TeaCha: часи, умовні речення, модальні дієслова, пасивний стан. Онлайн та офлайн у Києві.",
       breadcrumb: "Англійська граматика",
@@ -230,7 +210,7 @@ export const siteText = {
       },
     },
     englishAbroad: {
-      title: "Англійська для переїзду за кордон онлайн — практичний курс | TeaCha",
+      title: "Англійська для переїзду онлайн | TeaCha",
       description:
         "Курс англійської для переїзду в TeaCha: пошук житла, медицина, банки, транспорт. Практична підготовка до життя за кордоном. Онлайн та офлайн.",
       breadcrumb: "Англійська для переїзду",
@@ -246,7 +226,7 @@ export const siteText = {
       },
     },
     englishSpeakingClub: {
-      title: "Спікінг-клуб з англійської мови онлайн — розмовна практика | TeaCha",
+      title: "Спікінг-клуб англійської онлайн | TeaCha",
       description:
         "Спікінг-клуб з англійської в TeaCha: дискусії, дебати, живе спілкування в парах і групах. Подолайте мовний бар'єр онлайн та офлайн у Києві.",
       breadcrumb: "Спікінг-клуб",
@@ -261,28 +241,25 @@ export const siteText = {
       },
     },
     chinese: {
-      title: "Курси китайської мови онлайн і в Києві — для дітей, підлітків і дорослих | TeaCha",
+      title: "Курси китайської мови в Києві та онлайн | TeaCha",
       description:
         "Курси китайської мови в TeaCha: з нуля, HSK, ділова та розмовна китайська, для дітей і підлітків. Онлайн і офлайн у Києві. Індивідуально та мінігрупи.",
       breadcrumb: "Курси китайської",
       hero: {
         imgAlt: "Курси китайської мови в TeaCha — онлайн і офлайн у Києві",
         titleParts: [
-          { text: "КИТАЙСЬКА", accent: true },
-          { text: ", ЯКА" },
+          { text: "КУРСИ", accent: true },
+          { text: " КИТАЙСЬКОЇ" },
           { br: true },
-          { text: "ВІДКРИЄ" },
-          { br: true },
-          { text: "НОВІ" },
-          { br: true },
-          { text: "МОЖЛИВОСТІ" },
+          { text: "МОВИ ОНЛАЙН" },
+          { text: " ТА В КИЄВІ", accent: true },
         ],
         subtitle: "Онлайн та офлайн у Києві • Від нуля до HSK • Діти, підлітки, дорослі",
       },
       lead: "Пропонуємо курси китайської мови онлайн для тих, хто хоче вивчати китайську з нуля, підвищити рівень, підготуватися до HSK або розвинути розмовні навички для навчання, роботи, бізнесу чи переїзду. Наші програми поєднують системне опрацювання говоріння, аудіювання, читання та письма, роботу з сучасними матеріалами й практику живої мови. Навчання підходить для дорослих, дітей, школярів і підлітків.",
     },
     chineseBeginners: {
-      title: "Курси китайської мови для початківців — з нуля онлайн і в Києві | TeaCha",
+      title: "Китайська з нуля — курси онлайн і в Києві | TeaCha",
       description:
         "Китайська мова з нуля в TeaCha: ієрогліфи, тони, піньїнь, розмовна практика. Онлайн та офлайн у Києві. Індивідуально або мінігрупи. Пробний урок.",
       breadcrumb: "Для початківців",
@@ -298,7 +275,7 @@ export const siteText = {
       },
     },
     chineseHsk: {
-      title: "Підготовка до HSK онлайн — курси підготовки до іспиту HSK | TeaCha",
+      title: "Підготовка до HSK онлайн і в Києві | TeaCha",
       description:
         "Підготовка до іспиту HSK у TeaCha: тренувальні тести, лексика, граматика, аудіювання за форматом HSK. Онлайн та офлайн у Києві. Пробний урок.",
       breadcrumb: "Підготовка до HSK",
@@ -394,7 +371,7 @@ export const siteText = {
     chinesePhonetics: {
       title: "Фонетичний курс китайської мови — тони та піньїнь онлайн | TeaCha",
       description:
-        "Фонетика китайської у TeaCha: тони, піньїнь, правильна вимова з нуля. Онлайн та офлайн у Києві. Пробний урок.",
+        "Фонетика китайської у TeaCha: чотири тони, піньїнь і правильна вимова з нуля. Практичний курс онлайн та офлайн у Києві. Пробний урок.",
       breadcrumb: "Фонетика і тони",
       hero: {
         imgAlt: "Фонетичний курс китайської мови в TeaCha",
@@ -440,7 +417,7 @@ export const siteText = {
       },
     },
     corporate: {
-      title: "Корпоративна англійська для компаній у Києві — онлайн/офлайн | TeaCha",
+      title: "Корпоративна англійська для компаній | TeaCha",
       description:
         "Корпоративне навчання англійської мови в TeaCha: програми для команд і компаній, ділова англійська, звітність про прогрес. Онлайн та офлайн у Києві.",
       breadcrumb: "Корпоративне навчання",
@@ -455,9 +432,9 @@ export const siteText = {
         "* Кожна корпоративна група отримує план курсу, його опис, перелік лексичних та граматичних тем",
     },
     prices: {
-      title: "Ціни на курси англійської та китайської в Києві | TeaCha",
+      title: "Ціни на курси китайської та англійської в Києві | TeaCha",
       description:
-        "Актуальні ціни TeaCha на індивідуальне, парне, групове та корпоративне навчання англійської і китайської мов у Києві та онлайн. Запишіться на консультацію.",
+        "Актуальні ціни TeaCha на індивідуальне, парне й групове навчання китайської та англійської мов у Києві й онлайн. Запишіться на консультацію.",
       breadcrumb: "Ціни",
       headingTop: "Ціни навчання",
       headingBottom: "в TeaCha",
@@ -495,14 +472,14 @@ export const siteText = {
       ],
     },
     about: {
-      title: "Про TeaCha — школа англійської та китайської в Києві | Контакти",
+      title: "Про TeaCha — школа китайської та англійської в Києві | Контакти",
       description:
-        "Контакти TeaCha в Києві: телефони, email, адреса, карта проїзду та графік роботи. Англійська та китайська онлайн і офлайн.",
+        "Про школу китайської та англійської TeaCha у Києві: засновниці, досвід команди, телефони, email, адреса, карта та графік роботи.",
       breadcrumb: "Про нас",
-      hiddenH1: "Про TeaCha — школа англійської та китайської (Київ/онлайн)",
+      hiddenH1: "Про TeaCha — школа китайської та англійської мов у Києві й онлайн",
       teamHeading: "Засновниці<br/>мовного центру",
       teamLead:
-        "Ми об’єднуємо досвід, підтримку та сучасний підхід, щоб навчання було живим та результативним.",
+        "Дарина Швець і Дарія Позняковська розвивають TeaCha як школу китайської та англійської мов. Команда створює системні програми від китайської з нуля до HSK і професійних напрямів, поєднуючи педагогічну освіту, практику живої мови та персональний супровід студентів.",
       teamWatermark: "OWNERS",
       teamGalleryAria: "Команда TeaCha",
       founders: [
@@ -535,9 +512,9 @@ export const siteText = {
       text: "Перевірте адресу або скористайтеся навігацією нижче, щоб продовжити навчання з TeaCha.",
       links: [
         { href: "", label: "На головну" },
-        { href: "english", label: "Англійська" },
-        { href: "chinese", label: "Китайська" },
-        { href: "prices", label: "Ціни" },
+        { href: "english/", label: "Англійська" },
+        { href: "chinese/", label: "Китайська" },
+        { href: "prices/", label: "Ціни" },
       ],
     },
   },
@@ -785,9 +762,9 @@ export const siteText = {
       ],
     },
     homeHero: {
-      hiddenH1: "TeaCha - школа англійської та китайської мов онлайн і офлайн у Києві",
-      titleLines: ["ДВІ КУЛЬТУРИ", "В ОДНОМУ", "ПРОСТОРІ"],
-      subtitle: "Ми - центр <br />найпопулярніших мов у світі",
+      hiddenH1: "TeaCha — школа китайської та англійської мов онлайн і офлайн у Києві",
+      titleLines: ["КИТАЙСЬКА", "ОНЛАЙН"],
+      subtitle: "Китайська з нуля, підготовка до HSK, курси для дітей і дорослих<br />та практична англійська для навчання й роботи",
       english: "Англійська",
       chinese: "Китайська",
       teamAlt: "Команда викладачів TeaCha",
@@ -841,63 +818,63 @@ export const siteText = {
         {
           title: "Бізнес-англійська",
           text: "Переговори, презентації та ділова переписка для роботи в міжнародному середовищі",
-          href: "english/biznes-anhliyska",
+          href: "english/biznes-anhliyska/",
           icon: "business",
           iconAlt: "Іконка для курсу бізнес-англійської TeaCha",
         },
         {
           title: "Корпоративна англійська",
           text: "Практична англійська для щоденного робочого спілкування та міжнародних проєктів",
-          href: "english/korporatyvna-anhliyska",
+          href: "english/korporatyvna-anhliyska/",
           icon: "business",
           iconAlt: "Іконка для курсу корпоративної англійської TeaCha",
         },
         {
           title: "Англійська для IT",
           text: "Технічна комунікація, мітинги та презентації для роботи в IT-команді",
-          href: "english/anhliyska-dlya-it",
+          href: "english/anhliyska-dlya-it/",
           icon: "beginners",
           iconAlt: "Іконка для курсу англійської для IT-спеціалістів TeaCha",
         },
         {
           title: "Англійська для дизайнерів",
           text: "Презентація ідей, робота з клієнтами та дизайнерська лексика англійською",
-          href: "english/anhliyska-dlya-dyzayneriv",
+          href: "english/anhliyska-dlya-dyzayneriv/",
           icon: "conversation",
           iconAlt: "Іконка для курсу англійської для дизайнерів TeaCha",
         },
         {
           title: "Підготовка до НМТ",
           text: "Граматика, лексика та пробні тести у форматі НМТ з англійської мови",
-          href: "english/pidhotovka-do-nmt",
+          href: "english/pidhotovka-do-nmt/",
           icon: "hsk",
           iconAlt: "Іконка для курсу підготовки до НМТ з англійської TeaCha",
         },
         {
           title: "Розмовна англійська",
           text: "Говоріння, дискусії та рольові ігри для подолання мовного бар'єру",
-          href: "english/rozmovna-anhliyska",
+          href: "english/rozmovna-anhliyska/",
           icon: "conversation",
           iconAlt: "Іконка для курсу розмовної англійської TeaCha",
         },
         {
           title: "Англійська граматика",
           text: "Систематичне вивчення та вдосконалення ключових граматичних тем",
-          href: "english/anhliyska-hramatyka",
+          href: "english/anhliyska-hramatyka/",
           icon: "beginners",
           iconAlt: "Іконка для курсу англійської граматики TeaCha",
         },
         {
           title: "Англійська для переїзду",
           text: "Практична мова для адаптації в англомовному середовищі та повсякденному житті",
-          href: "english/anhliyska-dlya-pereizdu",
+          href: "english/anhliyska-dlya-pereizdu/",
           icon: "conversation",
           iconAlt: "Іконка для курсу англійської для переїзду за кордон TeaCha",
         },
         {
           title: "Спікінг-клуб",
           text: "Живе спілкування в парах і групах для тих, хто хоче говорити більше",
-          href: "english/spiking-klub",
+          href: "english/spiking-klub/",
           icon: "conversation",
           iconAlt: "Іконка для спікінг-клубу з англійської TeaCha",
         },
@@ -1811,7 +1788,7 @@ export const siteText = {
     englishRelated: {
       title: "ІНШІ НАПРЯМИ",
       allCoursesLabel: "Усі курси англійської",
-      allCoursesHref: "english",
+      allCoursesHref: "english/",
     },
     englishAudience: {
       titleTop: "КОМУ",
@@ -1820,37 +1797,37 @@ export const siteText = {
         {
           title: "Для роботи і переговорів",
           text: "Переговори, презентації та ділова переписка для роботи в міжнародному середовищі",
-          href: "english/biznes-anhliyska",
+          href: "english/biznes-anhliyska/",
           icon: "business",
         },
         {
           title: "Для команд і компаній",
           text: "Практична англійська для щоденного робочого спілкування та міжнародних проєктів",
-          href: "english/korporatyvna-anhliyska",
+          href: "english/korporatyvna-anhliyska/",
           icon: "business",
         },
         {
           title: "Для IT-фахівців",
           text: "Технічна комунікація, мітинги та презентації для роботи в IT-команді",
-          href: "english/anhliyska-dlya-it",
+          href: "english/anhliyska-dlya-it/",
           icon: "beginners",
         },
         {
           title: "Для дизайнерів",
           text: "Презентація ідей, робота з клієнтами та дизайнерська лексика англійською",
-          href: "english/anhliyska-dlya-dyzayneriv",
+          href: "english/anhliyska-dlya-dyzayneriv/",
           icon: "conversation",
         },
         {
           title: "Для НМТ і навчання",
           text: "Граматика, лексика та пробні тести у форматі НМТ з англійської мови",
-          href: "english/pidhotovka-do-nmt",
+          href: "english/pidhotovka-do-nmt/",
           icon: "hsk",
         },
         {
           title: "Для спілкування і переїзду",
           text: "Практична мова для адаптації в англомовному середовищі та повсякденному житті",
-          href: "english/anhliyska-dlya-pereizdu",
+          href: "english/anhliyska-dlya-pereizdu/",
           icon: "conversation",
         },
       ],
@@ -2137,70 +2114,70 @@ export const siteText = {
         {
           title: "Загальний курс китайської",
           text: "Системний розвиток 4 навичок: говоріння, аудіювання, читання та письма з нуля",
-          href: "chinese/dlya-pochatkivciv",
+          href: "chinese/dlya-pochatkivciv/",
           icon: "beginners",
           iconAlt: "Іконка підручника для загального курсу китайської мови TeaCha",
         },
         {
           title: "Підготовка до HSK",
           text: "Лексика, граматика, аудіювання та тренувальні тести за форматом іспиту",
-          href: "chinese/hsk",
+          href: "chinese/hsk/",
           icon: "hsk",
           iconAlt: "Іконка сертифіката для курсу підготовки до HSK у TeaCha",
         },
         {
           title: "Для дітей (6–12 років)",
           text: "Ігри, пісні, рухливі вправи та перші ієрогліфи для школярів",
-          href: "chinese/dlya-ditey",
+          href: "chinese/dlya-ditey/",
           icon: "kids",
           iconAlt: "Іконка дітей для курсу китайської для дітей у TeaCha",
         },
         {
           title: "Для підлітків (13–17 років)",
           text: "Динамічний формат, сучасні теми та розмовна практика для підлітків",
-          href: "chinese/dlya-pidlitkiv",
+          href: "chinese/dlya-pidlitkiv/",
           icon: "kids",
           iconAlt: "Іконка для курсу китайської мови для підлітків у TeaCha",
         },
         {
           title: "Ділова китайська",
           text: "Переговори, презентації та ділове листування для роботи з Китаєм",
-          href: "chinese/dilova",
+          href: "chinese/dilova/",
           icon: "business",
           iconAlt: "Іконка портфеля для курсу ділової китайської мови в TeaCha",
         },
         {
           title: "Розмовна китайська",
           text: "Жива мова для подорожей, переїзду та повсякденного спілкування",
-          href: "chinese/rozmovna",
+          href: "chinese/rozmovna/",
           icon: "conversation",
           iconAlt: "Іконка діалогу для курсу розмовної китайської мови в TeaCha",
         },
         {
           title: "Ієрогліфи і письмо",
           text: "Радикали, порядок рисок і логіка побудови знаків — системний курс ієрогліфіки",
-          href: "chinese/ieroglify",
+          href: "chinese/ieroglify/",
           icon: "beginners",
           iconAlt: "Іконка ієрогліфа для курсу китайського письма в TeaCha",
         },
         {
           title: "Фонетика і тони",
           text: "Правильна вимова, чотири тони та система піньїнь з нуля",
-          href: "chinese/fonetyka",
+          href: "chinese/fonetyka/",
           icon: "hsk",
           iconAlt: "Іконка для фонетичного курсу китайської мови в TeaCha",
         },
         {
           title: "За дорамами",
           text: "Жива мова через китайські серіали — аудіювання, лексика та розмовна практика",
-          href: "chinese/doramy",
+          href: "chinese/doramy/",
           icon: "conversation",
           iconAlt: "Іконка серіалу для курсу китайської за дорамами в TeaCha",
         },
         {
           title: "Китайська для торгівлі",
           text: "Закупівлі, переговори та комерційна документація для торгового бізнесу",
-          href: "chinese/torgivlya",
+          href: "chinese/torgivlya/",
           icon: "business",
           iconAlt: "Іконка для курсу китайської мови для торгівлі в TeaCha",
         },
@@ -2210,7 +2187,7 @@ export const siteText = {
       programTitle: "Програма курсу",
       ctaLabel: "Записатися на пробний урок",
       pricesLabel: "Подивитись ціни",
-      pricesHref: "prices",
+      pricesHref: "prices/",
     },
     chineseCourse: {
       beginners: {
@@ -3874,37 +3851,37 @@ export const siteText = {
         {
           title: "Починаєте з нуля",
           text: "Систематичний курс із тонами, піньїньом, ієрогліфами та першими діалогами.",
-          href: "chinese/dlya-pochatkivciv",
+          href: "chinese/dlya-pochatkivciv/",
           icon: "beginners",
         },
         {
           title: "Готуєтесь до HSK",
           text: "Лексика, формат іспиту, тренувальні тести та пробний іспит наприкінці.",
-          href: "chinese/hsk",
+          href: "chinese/hsk/",
           icon: "hsk",
         },
         {
           title: "Для бізнесу і переговорів",
           text: "Переговори, ділове листування та торгова лексика для роботи з Китаєм.",
-          href: "chinese/dilova",
+          href: "chinese/dilova/",
           icon: "business",
         },
         {
           title: "Для батьків і дітей",
           text: "Ігровий і захопливий формат для школярів 6–12 років з пісеньками та іграми.",
-          href: "chinese/dlya-ditey",
+          href: "chinese/dlya-ditey/",
           icon: "kids",
         },
         {
           title: "Для підлітків",
           text: "Сучасні теми, динамічний формат і жива мова для підлітків 13–17 років.",
-          href: "chinese/dlya-pidlitkiv",
+          href: "chinese/dlya-pidlitkiv/",
           icon: "kids",
         },
         {
           title: "Для подорожей і переїзду",
           text: "Побутова лексика, діалоги та реальні ситуації для повсякденного спілкування.",
-          href: "chinese/rozmovna",
+          href: "chinese/rozmovna/",
           icon: "conversation",
         },
       ],
@@ -3912,7 +3889,7 @@ export const siteText = {
     chineseRelated: {
       title: "ІНШІ НАПРЯМИ",
       allCoursesLabel: "Усі курси китайської",
-      allCoursesHref: "chinese",
+      allCoursesHref: "chinese/",
     },
     chineseFaq: {
       chinese: [
@@ -4252,6 +4229,7 @@ export const siteText = {
       subtitle: "Персоналізована програма під ваш бізнес. Онлайн або офлайн у Києві.",
     },
     corporateBenefits: {
+      heading: "Переваги корпоративного навчання",
       items: [
         {
           title: "ОРІЄНТАЦІЯ НА ПОТРЕБИ ВАШОЇ КОМПАНІЇ",

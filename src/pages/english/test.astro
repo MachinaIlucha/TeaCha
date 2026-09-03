@@ -75,11 +75,11 @@ const testFaqSchema = {
 ---
 
 <BaseLayout
-  title="Тест на рівень англійської — визнач свій рівень безкоштовно | TeaCha"
+  title="Тест на рівень англійської онлайн | TeaCha"
   description="Безкоштовний тест на визначення рівня англійської мови від A1 до C1. 20 питань, 3–5 хвилин. Дізнайся свій рівень та отримай рекомендації від TeaCha."
   breadcrumbs={[
     { name: "Курси англійської", href: "/english/" },
-    { name: "Тест на рівень", href: "/english/test" },
+    { name: "Тест на рівень", href: "/english/test/" },
   ]}
   bodyClass="page-english page-level-test"
   jsonLd={[quizSchema, testFaqSchema]}
@@ -160,7 +160,7 @@ const testFaqSchema = {
 
             <p class="levelTest__welcomeNote">
               Тест є орієнтовним інструментом оцінки рівня. Для точного визначення
-              рекомендуємо пройти <a href={`${base}english`}>пробний урок</a> з викладачем.
+              рекомендуємо пройти <a href={`${base}english/`}>пробний урок</a> з викладачем.
             </p>
           </div>
         </div>

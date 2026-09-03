@@ -35,6 +35,9 @@ const {
   canonical,
   ogImage,
   ogImageAlt,
+  ogType = "website",
+  publishedTime,
+  modifiedTime,
   noindex = false,
   hreflangs = [],
   breadcrumbs = [],
@@ -47,6 +50,9 @@ const {
   canonical?: string;
   ogImage?: string;
   ogImageAlt?: string;
+  ogType?: "website" | "article";
+  publishedTime?: string;
+  modifiedTime?: string;
   noindex?: boolean;
   hreflangs?: Array<{ lang: string; href: string }>;
   breadcrumbs?: BreadcrumbItem[];
@@ -54,7 +60,6 @@ const {
 };
 
 const bodyClassName = [bodyClass, isHome ? "page--home" : ""].filter(Boolean).join(" ");
-const base = import.meta.env.BASE_URL;
 const site = Astro.site ?? new URL("https://teacha.com.ua");
 const siteName = siteText.seo.siteName;
 const defaultTitle = siteText.seo.defaultTitle;
@@ -64,9 +69,9 @@ const logoImage = resolveAssetPath("img/layout/logo.png");
 const faviconImage = typeof faviconAsset === "string" ? faviconAsset : faviconAsset.src;
 const favicon32 = typeof favicon32Asset === "string" ? favicon32Asset : favicon32Asset.src;
 const favicon16 = typeof favicon16Asset === "string" ? favicon16Asset : favicon16Asset.src;
-const heroBackgroundImage = resolveAssetPath("img/hero/home/home-hero-background.webp");
-const processDividerImage = resolveAssetPath("img/process/teacha-learning-process-divider.webp");
-const reviewQuoteMarksImage = resolveAssetPath("img/reviews/quote-marks.png");
+const heroBackgroundImage = resolveAssetPath("img/hero/home/home-hero-background-optimized.webp");
+const processDividerImage = resolveAssetPath("img/process/teacha-learning-process-divider-optimized.webp");
+const reviewQuoteMarksImage = resolveAssetPath("img/reviews/quote-marks-optimized.webp");
 const assetVarStyle = `--asset-hero-home-bg:url(${heroBackgroundImage});--asset-process-divider:url(${processDividerImage});--asset-reviews-quote:url(${reviewQuoteMarksImage});`;
 const contact = siteText.shared.contact;
 
@@ -88,16 +93,10 @@ const resolvedDefaultOgImage = resolveAssetPath(defaultOgImage);
 const resolvedOgImage = ogImage ? resolveAssetPath(ogImage) : resolvedDefaultOgImage;
 const ogImageUrl = toAbsoluteUrl(resolvedOgImage);
 const robotsContent = noindex
-  ? "noindex, nofollow"
+  ? "noindex, follow"
   : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1";
 
-const alternateLinks = (hreflangs.length
-  ? hreflangs
-  : [
-      { lang: "uk", href: canonicalUrl },
-      { lang: "x-default", href: canonicalUrl },
-    ]
-).map((item) => ({
+const alternateLinks = hreflangs.map((item) => ({
   hreflang: item.lang,
   href: toAbsoluteUrl(item.href),
 }));
@@ -109,11 +108,6 @@ const breadcrumbTrail = normalizedBreadcrumbs.length
       ...normalizedBreadcrumbs.filter((item) => item.href !== "/" && item.href !== ""),
     ]
   : [];
-
-const seoLinks = siteText.seo.links.map((item) => ({
-  href: `${base}${item.href}`,
-  label: item.label,
-}));
 
 const siteUrl = site.toString();
 const clientTextJson = JSON.stringify(siteText.client).replace(/</g, "\\u003c");
@@ -168,6 +162,8 @@ const organizationSchema: JsonLd = {
     longitude: 30.357656,
   },
   hasMap: contact.mapUrl,
+  priceRange: "₴₴",
+  areaServed: [contact.city, contact.country],
 };
 
 const websiteSchema: JsonLd = {
@@ -206,7 +202,7 @@ const breadcrumbSchema: JsonLd | null = breadcrumbTrail.length
   : null;
 
 const customJsonLd = (Array.isArray(jsonLd) ? jsonLd : [jsonLd]).filter(Boolean);
-const jsonLdItems = [organizationSchema, websiteSchema, webpageSchema, breadcrumbSchema, ...customJsonLd]
+const jsonLdItems = [isHome ? organizationSchema : null, isHome ? websiteSchema : null, webpageSchema, breadcrumbSchema, ...customJsonLd]
   .filter(Boolean);
 ---
 
@@ -239,6 +235,7 @@ const jsonLdItems = [organizationSchema, websiteSchema, webpageSchema, breadcrum
     <link rel="icon" type="image/png" sizes="16x16" href={favicon16} />
     <link rel="shortcut icon" href={favicon32} />
     <link rel="apple-touch-icon" href={faviconImage} />
+    {isHome && <link rel="preload" as="image" href={heroBackgroundImage} fetchpriority="high" />}
 
     {
       alternateLinks.map((link) => (
@@ -246,7 +243,7 @@ const jsonLdItems = [organizationSchema, websiteSchema, webpageSchema, breadcrum
       ))
     }
 
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:locale" content="uk_UA" />
     <meta property="og:site_name" content={siteName} />
     <meta property="og:title" content={metaTitle} />
@@ -258,6 +255,8 @@ const jsonLdItems = [organizationSchema, websiteSchema, webpageSchema, breadcrum
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={ogImageAlt ?? metaTitle} />
+    {ogType === "article" && publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    {ogType === "article" && modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={metaTitle} />
@@ -290,14 +289,6 @@ const jsonLdItems = [organizationSchema, websiteSchema, webpageSchema, breadcrum
     <main>
       <slot />
     </main>
-
-    <nav class="visuallyHidden" aria-hidden="true" data-seo-links>
-      {
-        seoLinks.map((item) => (
-          <a href={item.href} tabindex="-1">{item.label}</a>
-        ))
-      }
-    </nav>
 
     <StartLead />
     <Footer />

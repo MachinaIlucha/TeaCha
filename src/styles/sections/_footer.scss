@@ -226,6 +226,17 @@
   overflow-wrap: anywhere;
 }
 
+.footer__contactLink {
+  text-decoration: none;
+  transition: color var(--dur-2) var(--ease);
+}
+
+.footer__contactLink:hover {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
 .footer__linksRow {
   display: grid;
   gap: 8px;
@@ -235,6 +246,9 @@
 }
 
 .footer__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
   color: rgba(255, 255, 255, 0.8);
   font-weight: 700;
   font-size: 11px;

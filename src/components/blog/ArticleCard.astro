@@ -1,0 +1,49 @@
+---
+/**
+ * TeaCha website
+ * Design & development: Ілля Пінчук Вадимович
+ * © 2026. All rights reserved.
+ */
+
+import type { BlogArticle } from "../../data/blog";
+
+const {
+  article,
+  featured = false,
+  compact = false,
+  headingLevel = "h2",
+} = Astro.props as {
+  article: BlogArticle;
+  featured?: boolean;
+  compact?: boolean;
+  headingLevel?: "h2" | "h3";
+};
+const Heading = headingLevel;
+
+const formattedDate = new Intl.DateTimeFormat("uk-UA", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+}).format(new Date(`${article.publishedAt}T12:00:00Z`));
+---
+
+<article class:list={["blogCard", featured && "blogCard--featured", compact && "blogCard--compact"]}>
+  <a class="blogCard__link" href={`/blog/${article.slug}/`}>
+    <div class="blogCard__top">
+      <span class="blogCard__category">{article.category}</span>
+      <span class="blogCard__marker" lang="zh-Hans" aria-hidden="true">{article.marker}</span>
+    </div>
+
+    <div class="blogCard__body">
+      <Heading class="blogCard__title">{article.title}</Heading>
+      <p class="blogCard__excerpt">{article.excerpt}</p>
+    </div>
+
+    <div class="blogCard__meta">
+      <span>{formattedDate}</span>
+      <span aria-hidden="true">·</span>
+      <span>{article.readTime} хв читання</span>
+      <span class="blogCard__arrow" aria-hidden="true">↗</span>
+    </div>
+  </a>
+</article>

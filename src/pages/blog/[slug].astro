@@ -1,0 +1,296 @@
+---
+/**
+ * TeaCha website
+ * Design & development: Ілля Пінчук Вадимович
+ * © 2026. All rights reserved.
+ */
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ArticleCard from "../../components/blog/ArticleCard.astro";
+import { blogArticles, type BlogArticle } from "../../data/blog";
+import { chineseVocabulary, chineseVocabularyCount } from "../../data/chineseVocabulary";
+import { buildFaqSchema } from "../../data/seoSchemas";
+import logoImage from "../../assets/img/layout/logo.png";
+
+export function getStaticPaths() {
+  return blogArticles.map((article) => ({
+    params: { slug: article.slug },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props as { article: BlogArticle };
+const site = Astro.site ?? new URL("https://teacha.com.ua");
+const canonicalPath = `/blog/${article.slug}/`;
+const articleUrl = new URL(canonicalPath.replace(/^\/+/, ""), site).toString();
+const articleImagePath = `/img/blog/${article.slug}.png`;
+const articleImage = new URL(articleImagePath.replace(/^\/+/, ""), site).toString();
+const articleImageAlt = `${article.shortTitle} — стаття TeaCha про китайську мову`;
+const formattedDate = new Intl.DateTimeFormat("uk-UA", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+}).format(new Date(`${article.publishedAt}T12:00:00Z`));
+const breadcrumbs = [
+  { name: "Блог", href: "/blog/" },
+  { name: article.shortTitle, href: canonicalPath },
+];
+const articleIndex = blogArticles.findIndex((item) => item.slug === article.slug);
+const related = [1, 2, 3]
+  .map((offset) => blogArticles[(articleIndex + offset) % blogArticles.length])
+  .filter((item) => item.slug !== article.slug);
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: article.title,
+  description: article.description,
+  datePublished: article.publishedAt,
+  dateModified: article.updatedAt,
+  inLanguage: "uk-UA",
+  image: articleImage,
+  thumbnailUrl: articleImage,
+  articleSection: article.category,
+  mainEntityOfPage: articleUrl,
+  author: {
+    "@type": "Organization",
+    name: "TeaCha",
+    url: new URL("about/", site).toString(),
+  },
+  publisher: {
+    "@type": "EducationalOrganization",
+    name: "TeaCha",
+    url: site.toString(),
+    logo: {
+      "@type": "ImageObject",
+      url: new URL(logoImage.src, site).toString(),
+      width: logoImage.width,
+      height: logoImage.height,
+    },
+  },
+};
+const faqSchema = buildFaqSchema(article.faqs.map((item) => ({ q: item.question, a: item.answer })));
+---
+
+<BaseLayout
+  title={article.seoTitle}
+  description={article.description}
+  canonical={canonicalPath}
+  breadcrumbs={breadcrumbs}
+  bodyClass="page-article"
+  ogType="article"
+  ogImage={articleImagePath}
+  ogImageAlt={articleImageAlt}
+  publishedTime={`${article.publishedAt}T09:00:00+03:00`}
+  modifiedTime={`${article.updatedAt}T09:00:00+03:00`}
+  jsonLd={[articleSchema, faqSchema]}
+>
+  <article class="article">
+    <header class="articleHero" data-reveal="load">
+      <div class="container articleHero__inner">
+        <nav class="blogCrumbs" aria-label="Навігаційний ланцюжок" data-reveal-item="1">
+          <a href="/">Головна</a>
+          <span aria-hidden="true">/</span>
+          <a href="/blog/">Блог</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">{article.shortTitle}</span>
+        </nav>
+
+        <div class="articleHero__layout">
+          <div class="articleHero__copy">
+            <div class="articleHero__meta" data-reveal-item="2">
+              <span class="blogTag">{article.category}</span>
+              <time datetime={article.publishedAt}>{formattedDate}</time>
+              <span aria-hidden="true">·</span>
+              <span>{article.readTime} хв читання</span>
+            </div>
+            <h1 data-reveal-item="3">{article.title}</h1>
+            <p class="articleHero__lead" data-reveal-item="4">{article.lead}</p>
+            <p class="articleHero__author" data-reveal-item="5">
+              Матеріал підготувала <a href="/about/">команда TeaCha</a>
+            </p>
+          </div>
+
+          <div class="articleHero__mark" aria-hidden="true" data-reveal-item="4">
+            <span lang="zh-Hans">{article.marker}</span>
+            <small>{article.category}</small>
+          </div>
+        </div>
+
+        <figure class="articleHero__cover" data-reveal-item="5">
+          <img
+            src={articleImagePath}
+            alt={articleImageAlt}
+            width="1200"
+            height="630"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </figure>
+      </div>
+    </header>
+
+    <div class="articleLayout container">
+      <aside class="articleToc" aria-label="Зміст статті">
+        <p class="articleToc__label">У цій статті</p>
+        <ol>
+          {article.sections.map((section) => <li><a href={`#${section.id}`}>{section.title}</a></li>)}
+          <li><a href="#faq">Поширені запитання</a></li>
+        </ol>
+      </aside>
+
+      <div class="articleMain">
+        <section class="articleSummary" aria-labelledby="article-summary-title">
+          <p class="articleSummary__label">Коротко</p>
+          <h2 id="article-summary-title" class="visuallyHidden">Головні висновки</h2>
+          <ul>
+            {article.takeaways.map((item) => <li>{item}</li>)}
+          </ul>
+        </section>
+
+        <div class="articleContent">
+          {
+            article.sections.map((section, sectionIndex) => (
+              <section id={section.id} class="articleSection" aria-labelledby={`${section.id}-title`}>
+                <div class="articleSection__number" aria-hidden="true">
+                  {String(sectionIndex + 1).padStart(2, "0")}
+                </div>
+                <h2 id={`${section.id}-title`}>{section.title}</h2>
+
+                {section.paragraphs?.map((paragraph) => <p>{paragraph}</p>)}
+
+                {section.bullets && (
+                  <ul class="articleBullets">
+                    {section.bullets.map((item) => <li>{item}</li>)}
+                  </ul>
+                )}
+
+                {section.steps && (
+                  <ol class="articleSteps">
+                    {section.steps.map((step, index) => (
+                      <li>
+                        <span>{String(index + 1).padStart(2, "0")}</span>
+                        <div>
+                          <h3>{step.title}</h3>
+                          <p>{step.text}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                )}
+
+                {section.table && (
+                  <div class="articleTableWrap">
+                    <table>
+                      {section.table.caption && <caption>{section.table.caption}</caption>}
+                      <thead>
+                        <tr>{section.table.headers.map((header) => <th scope="col">{header}</th>)}</tr>
+                      </thead>
+                      <tbody>
+                        {section.table.rows.map((row) => (
+                          <tr>{row.map((cell, index) => index === 0 ? <th scope="row">{cell}</th> : <td>{cell}</td>)}</tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+
+                {section.note && (
+                  <aside class="articleNote">
+                    <span aria-hidden="true">茶</span>
+                    <div>
+                      <h3>{section.note.title}</h3>
+                      <p>{section.note.text}</p>
+                    </div>
+                  </aside>
+                )}
+
+                {article.vocabulary && section.id === "word-list" && (
+                  <div class="vocabularyGroups" aria-label={`Список ${chineseVocabularyCount} китайських слів`}>
+                    {chineseVocabulary.map((group, groupIndex) => (
+                      <section class="vocabularyGroup" aria-labelledby={`vocabulary-${groupIndex}`}>
+                        <div class="vocabularyGroup__head">
+                          <span>{String(groupIndex + 1).padStart(2, "0")}</span>
+                          <div>
+                            <h3 id={`vocabulary-${groupIndex}`}>{group.title}</h3>
+                            <p>{group.description}</p>
+                          </div>
+                        </div>
+                        <div class="articleTableWrap articleTableWrap--vocabulary">
+                          <table>
+                            <thead><tr><th scope="col">汉字</th><th scope="col">Pinyin</th><th scope="col">Українською</th></tr></thead>
+                            <tbody>
+                              {group.words.map((word) => (
+                                <tr>
+                                  <th scope="row" lang="zh-Hans">{word.hanzi}</th>
+                                  <td lang="zh-Latn-pinyin">{word.pinyin}</td>
+                                  <td>{word.meaning}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </section>
+                    ))}
+                  </div>
+                )}
+              </section>
+            ))
+          }
+        </div>
+
+        {article.sources && article.sources.length > 0 && (
+          <section class="articleSources" aria-labelledby="sources-title">
+            <h2 id="sources-title">Джерела й перевірка фактів</h2>
+            <ol>
+              {article.sources.map((source) => (
+                <li>
+                  <a href={source.url} target="_blank" rel="noopener noreferrer">{source.label}</a>
+                  <p>{source.note}</p>
+                </li>
+              ))}
+            </ol>
+          </section>
+        )}
+
+        <section class="articleFaq" id="faq" aria-labelledby="faq-title">
+          <p class="blogEyebrow">Короткі відповіді</p>
+          <h2 id="faq-title">Поширені запитання</h2>
+          <div class="articleFaq__list">
+            {article.faqs.map((item) => (
+              <details>
+                <summary>{item.question}<span aria-hidden="true">+</span></summary>
+                <p>{item.answer}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        <aside class="articleCta">
+          <div>
+            <p>{article.course.eyebrow}</p>
+            <h2>{article.course.title}</h2>
+            <span>{article.course.text}</span>
+          </div>
+          <a class="btn btn--primary" href={article.course.href}>{article.course.label}<span aria-hidden="true">↗</span></a>
+        </aside>
+      </div>
+    </div>
+  </article>
+
+  <section class="articleRelated sectionShell section--b" aria-labelledby="related-title">
+    <div class="container">
+      <div class="articleRelated__head">
+        <div>
+          <p class="blogEyebrow">Читайте далі</p>
+          <h2 id="related-title">Ще про китайську</h2>
+        </div>
+        <a href="/blog/">Усі статті <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="blogGrid blogGrid--related">
+        {related.map((item) => <ArticleCard article={item} compact headingLevel="h3" />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

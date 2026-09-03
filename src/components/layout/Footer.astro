@@ -8,7 +8,8 @@
 import PrivacyConsent from "../forms/PrivacyConsent.astro";
 import SocialLink from "../ui/SocialLink.astro";
 import { siteText } from "../../data/siteText";
-import { resolveAssetPath } from "../../data/assetMap";
+import logoImage from "../../assets/img/layout/logo.png";
+import formIcon from "../../assets/img/forms/icon-handwrite-black.png";
 
 const base = import.meta.env.BASE_URL;
 const contact = siteText.shared.contact;
@@ -20,7 +21,15 @@ const footerText = siteText.shared.footer;
 <footer class="footer" id="contacts">
   <div class="container footer__hero">
     <div class="footer__brandLine">
-      <img class="footer__logo" src={resolveAssetPath("img/layout/logo.png")} alt={siteText.shared.brandName} />
+      <img
+        class="footer__logo"
+        src={logoImage.src}
+        width={logoImage.width}
+        height={logoImage.height}
+        alt={siteText.shared.brandName}
+        loading="lazy"
+        decoding="async"
+      />
       <div class="footer__name">Tea<span class="brand__cha">Cha</span></div>
     </div>
   </div>
@@ -32,17 +41,42 @@ const footerText = siteText.shared.footer;
         <span class="footer__infoLabel">{footerText.contactsLabel}</span>
         {
           contact.phones.map((phone) => (
-            <span class="footer__text">{phone.label}</span>
+            <a class="footer__text footer__contactLink" href={`tel:${phone.raw}`}>{phone.label}</a>
           ))
         }
-        <span class="footer__text">{contact.email}</span>
+        <a class="footer__text footer__contactLink" href={`mailto:${contact.email}`}>{contact.email}</a>
+        <a class="footer__text footer__contactLink" href={contact.mapUrl} target="_blank" rel="noopener">
+          {contact.street}, {contact.city}
+        </a>
+        <span class="footer__text">{contact.openingHoursLabel}</span>
       </div>
 
       <div class="footer__rightCol">
         <div class="footer__linksRow">
           <a
             class="footer__link"
-            href={`${base}english/test`}
+            href={`${base}chinese/`}
+          >
+            КУРСИ КИТАЙСЬКОЇ
+          </a>
+
+          <a
+            class="footer__link"
+            href={`${base}chinese/hsk/`}
+          >
+            ПІДГОТОВКА ДО HSK
+          </a>
+
+          <a
+            class="footer__link"
+            href={`${base}blog/`}
+          >
+            БЛОГ ПРО КИТАЙСЬКУ
+          </a>
+
+          <a
+            class="footer__link"
+            href={`${base}english/test/`}
           >
             ТЕСТ НА РІВЕНЬ
           </a>
@@ -90,10 +124,13 @@ const footerText = siteText.shared.footer;
         <span class="footerForm__title">{forms.trialLeadTitle}</span>
         <img
           class="footerForm__icon"
-          src={resolveAssetPath("img/forms/icon-handwrite-black.png")}
+          src={formIcon.src}
+          width={formIcon.width}
+          height={formIcon.height}
           alt=""
           aria-hidden="true"
           loading="lazy"
+          decoding="async"
         />
       </div>
 

@@ -70,6 +70,15 @@ const aboutContactPageSchema = {
       },
     ],
     sameAs: [contact.instagramUrl, contact.tiktokUrl],
+    founder: aboutText.founders.map((founder) => ({
+      "@type": "Person",
+      name: founder.name,
+      jobTitle: "Співзасновниця мовної школи TeaCha",
+      worksFor: {
+        "@type": "EducationalOrganization",
+        name: siteText.shared.brandName,
+      },
+    })),
   },
 };
 ---
@@ -82,28 +91,26 @@ const aboutContactPageSchema = {
   jsonLd={[aboutContactPageSchema]}
   bodyClass="page-about"
 >
-  <h1 class="visuallyHidden">{aboutText.hiddenH1}</h1>
-
   <section class="aboutTeam" aria-labelledby="about-team-title" data-reveal="load">
     <div class="aboutTeam__inner" data-reveal-item="1">
-      <h2 id="about-team-title" set:html={aboutText.teamHeading}></h2>
+      <h1 id="about-team-title" aria-label={aboutText.hiddenH1} set:html={aboutText.teamHeading}></h1>
       <p class="aboutTeam__lead">{aboutText.teamLead}</p>
       <span class="aboutTeam__watermark" aria-hidden="true">{aboutText.teamWatermark}</span>
 
       <div class="aboutTeam__cards">
         <article class="aboutTeamCard">
-          <img src={resolveAssetPath("img/about/teacha-about-daryna-shvets.jpg")} alt={aboutText.founders[0].alt} />
+          <img src={resolveAssetPath("img/about/teacha-about-daryna-shvets.webp")} alt={aboutText.founders[0].alt} width="1200" height="1800" decoding="async" />
           <div class="aboutTeamCard__content">
             <h3>{aboutText.founders[0].name}</h3>
           </div>
         </article>
 
         <article class="aboutTeamCard aboutTeamCard--center">
-          <img src={resolveAssetPath("img/about/teacha-about-team-center.jpg")} alt={aboutText.teamCenterAlt} />
+          <img src={resolveAssetPath("img/about/teacha-about-team-center.webp")} alt={aboutText.teamCenterAlt} width="1200" height="1800" decoding="async" />
         </article>
 
         <article class="aboutTeamCard">
-          <img src={resolveAssetPath("img/about/teacha-about-dariia-pozniakovska.jpg")} alt={aboutText.founders[1].alt} />
+          <img src={resolveAssetPath("img/about/teacha-about-dariia-pozniakovska.webp")} alt={aboutText.founders[1].alt} width="1200" height="1800" decoding="async" />
           <div class="aboutTeamCard__content">
             <h3>{aboutText.founders[1].name}</h3>
           </div>
@@ -128,10 +135,10 @@ const aboutContactPageSchema = {
 
   <section class="aboutGallery" aria-label={aboutText.teamGalleryAria}>
     <div class="aboutGallery__grid">
-      <div class="aboutCard aboutCard--1" style={`--img: url(${resolveAssetPath("img/about/teacha-about-team-01.jpg")});`}></div>
-      <div class="aboutCard aboutCard--2" style={`--img: url(${resolveAssetPath("img/about/teacha-about-team-02.jpg")});`}></div>
-      <div class="aboutCard aboutCard--3" style={`--img: url(${resolveAssetPath("img/about/teacha-about-team-03.jpg")});`}></div>
-      <div class="aboutCard aboutCard--4" style={`--img: url(${resolveAssetPath("img/about/teacha-about-team-04.jpg")});`}></div>
+      <div class="aboutCard aboutCard--1" style={`--img: url(${resolveAssetPath("img/about/teacha-about-team-01.webp")});`}></div>
+      <div class="aboutCard aboutCard--2" style={`--img: url(${resolveAssetPath("img/about/teacha-about-team-02.webp")});`}></div>
+      <div class="aboutCard aboutCard--3" style={`--img: url(${resolveAssetPath("img/about/teacha-about-team-03.webp")});`}></div>
+      <div class="aboutCard aboutCard--4" style={`--img: url(${resolveAssetPath("img/about/teacha-about-team-04.webp")});`}></div>
       <div class="aboutCard aboutCard--5" style={`--img: url(${resolveAssetPath("img/founders/teacha-founders-daryna-dariia.webp")});`}></div>
     </div>
   </section>

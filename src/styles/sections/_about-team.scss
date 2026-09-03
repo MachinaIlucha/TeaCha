@@ -24,13 +24,13 @@
 
 .page-about .aboutTeam__inner span,
 .page-about .aboutTeam__inner p,
-.page-about .aboutTeam__inner h2,
+.page-about .aboutTeam__inner h1,
 .page-about .aboutTeam__inner h3 {
   letter-spacing: 0.035rem;
 }
 
 .page-about .aboutTeam__eyebrow,
-.page-about .aboutTeam h2,
+.page-about .aboutTeam h1,
 .page-about .aboutTeam__lead {
   position: relative;
   z-index: 2;
@@ -68,7 +68,7 @@
   color: #a3a3a3;
 }
 
-.page-about .aboutTeam h2 {
+.page-about .aboutTeam h1 {
   font-size: clamp(3.5rem, 3rem + 1.6vw, 5rem);
   margin: -0.625rem 0 0.84rem;
   line-height: 0.9;

@@ -18,7 +18,7 @@ const forms = siteText.shared.forms;
   class={`startLead ${className}`}
   id="start-lead"
   data-reveal="scroll"
-  style={`--startlead-bg: url(${resolveAssetPath("img/start-lead/language-bookshelf-background.webp")});`}
+  style={`--startlead-bg: url(${resolveAssetPath("img/start-lead/language-bookshelf-background-optimized.webp")});`}
 >
   <div class="container">
     <div class="startLead__grid">
@@ -73,9 +73,12 @@ const forms = siteText.shared.forms;
         </form>
         <img
           class="startLead__note"
-          src={resolveAssetPath("img/start-lead/messenger-sticker.png")}
+          src={resolveAssetPath("img/start-lead/messenger-sticker.webp")}
           alt={startLeadText.stickerAlt}
           loading="lazy"
+          decoding="async"
+          width="768"
+          height="512"
         />
       </div>
     </div>

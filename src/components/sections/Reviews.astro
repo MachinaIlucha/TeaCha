@@ -50,34 +50,8 @@ const reviews: Review[] = reviewText.list.map((item) => ({
   img: resolveAssetPath(item.img),
 }));
 
-const reviewsSchema = {
-  "@context": "https://schema.org",
-  "@type": "ItemList",
-  name: reviewText.schemaName,
-  itemListElement: reviews.map((review, index) => ({
-    "@type": "ListItem",
-    position: index + 1,
-    item: {
-      "@type": "Review",
-      inLanguage: "uk-UA",
-      author: {
-        "@type": "Person",
-        name: review.name,
-      },
-      reviewBody: review.quote,
-      itemReviewed: {
-        "@type": "EducationalOrganization",
-        name: "TeaCha",
-        url: "https://teacha.com.ua/",
-      },
-    },
-  })),
-};
-
 const first = reviews[0];
 ---
-
-<script type="application/ld+json" set:html={JSON.stringify(reviewsSchema)} />
 
 <section class={`r2 ${className}`} id="reviews" data-r2 data-reveal="scroll" tabindex="0">
   <div class="container" data-reveal-item="1">

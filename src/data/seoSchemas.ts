@@ -30,22 +30,14 @@ export function buildCourseSchema(opts: {
     url: `${SITE_URL}${opts.path}`,
     provider: PROVIDER,
     inLanguage: "uk-UA",
-    isAccessibleForFree: false,
-    offers: {
-      "@type": "Offer",
-      category: "Paid",
-      priceCurrency: "UAH",
-    },
     hasCourseInstance: [
       {
         "@type": "CourseInstance",
         courseMode: "Online",
-        courseWorkload: "PT1H",
       },
       {
         "@type": "CourseInstance",
         courseMode: "Onsite",
-        courseWorkload: "PT1H",
         location: LOCATION,
       },
     ],
@@ -62,6 +54,31 @@ export function buildFaqSchema(items: FaqItem[]) {
       acceptedAnswer: {
         "@type": "Answer",
         text: item.a.replace(/<br\s*\/?>/g, " ").replace(/<[^>]*>/g, ""),
+      },
+    })),
+  };
+}
+
+export function buildCourseListSchema(courses: Array<{
+  name: string;
+  description: string;
+  path: string;
+}>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Курси китайської мови TeaCha",
+    itemListElement: courses.map((course, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      url: `${SITE_URL}/${course.path.replace(/^\/+/, "")}`,
+      item: {
+        "@type": "Course",
+        name: course.name,
+        description: course.description,
+        url: `${SITE_URL}/${course.path.replace(/^\/+/, "")}`,
+        provider: PROVIDER,
+        inLanguage: "uk-UA",
       },
     })),
   };

@@ -6,7 +6,8 @@
  */
 
 import { siteText } from "../../../data/siteText";
-import { resolveAssetPath } from "../../../data/assetMap";
+import { Image } from "astro:assets";
+import homeTeamImage from "../../../assets/img/hero/home/home-hero-teacha-team.webp";
 
 const base = import.meta.env.BASE_URL;
 const { className = "" } = Astro.props;
@@ -18,23 +19,20 @@ const trialButtonHtml = forms.trialButton.replace(" ", "<br />");
 <section class={`hero ${className}`} id="school" data-reveal="load">
   <div class="container hero__grid">
     <div class="hero__left">
-      <h1 class="visuallyHidden">
-        {heroText.hiddenH1}
-      </h1>
-
-      <div class="hero__title" data-reveal-item="1" aria-hidden="true">
-        <div class="hero__titleLine">
+      <h1 class="hero__title" data-reveal-item="1" aria-label={heroText.hiddenH1}>
+        <span class="hero__titleLine">
           TEA<span class="brand__cha">CHA</span> -
-        </div>
-        {heroText.titleLines.map((line) => <div class="hero__titleLine">{line}</div>)}
-      </div>
+        </span>
+        {" "}
+        {heroText.titleLines.map((line) => <><span class="hero__titleLine">{line}</span>{" "}</>)}
+      </h1>
 
       <p class="hero__subtitle hero__subtitle--big" data-reveal-item="2" set:html={heroText.subtitle} />
 
       <!-- кнопки языков ДОЛЖНЫ появляться раньше badge -->
       <div class="hero__modes" data-reveal-item="3">
-        <a href={`${base}english`} class="heroLangBtn">{heroText.english}</a>
-        <a href={`${base}chinese`} class="heroLangBtn">{heroText.chinese}</a>
+        <a href={`${base}chinese/`} class="heroLangBtn">{heroText.chinese}</a>
+        <a href={`${base}english/`} class="heroLangBtn">{heroText.english}</a>
       </div>
 
       <!-- DESKTOP badge (анимация через обертку) -->
@@ -54,15 +52,17 @@ const trialButtonHtml = forms.trialButton.replace(" ", "<br />");
       </div>
 
       <div class="heroPhoto">
-        <img
+        <Image
           class="heroPhoto__img"
-          src={resolveAssetPath("img/hero/home/home-hero-teacha-team.webp")}
+          src={homeTeamImage}
+          widths={[480, 720, 853]}
+          sizes="(min-width: 64rem) 45vw, calc(100vw - 32px)"
+          format="webp"
+          quality={82}
           alt={heroText.teamAlt}
           loading="eager"
           fetchpriority="high"
           decoding="async"
-          width="853"
-          height="1280"
         />
       </div>
     </div>

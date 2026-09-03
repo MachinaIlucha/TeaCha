@@ -44,10 +44,10 @@ const pricePlans = text.plans;
 
         {
           pricePlans.map((plan) => (
-            <article class="corpPrice__mobileCard" role="listitem">
+            <div class="corpPrice__mobileCard" role="listitem">
               <h3 class="corpPrice__mobileLessons">{plan.lessons}</h3>
               <div class="corpPrice__mobilePrice">{plan.price}</div>
-            </article>
+            </div>
           ))
         }
       </div>

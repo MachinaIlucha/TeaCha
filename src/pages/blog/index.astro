@@ -1,0 +1,100 @@
+---
+/**
+ * TeaCha website
+ * Design & development: Ілля Пінчук Вадимович
+ * © 2026. All rights reserved.
+ */
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ArticleCard from "../../components/blog/ArticleCard.astro";
+import { blogArticles } from "../../data/blog";
+
+const title = "Блог про китайську мову: HSK, вимова й навчання";
+const description =
+  "Практичні статті TeaCha про китайську мову: HSK 3.0, pinyin, тони, ієрогліфи, навчання дітей і дорослих, роботу та вибір курсів.";
+const breadcrumbs = [{ name: "Блог", href: "/blog/" }];
+const site = Astro.site ?? new URL("https://teacha.com.ua");
+const toAbsolute = (path: string) => new URL(path.replace(/^\/+/, ""), site).toString();
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: title,
+  description,
+  url: toAbsolute("/blog/"),
+  inLanguage: "uk-UA",
+  mainEntity: {
+    "@type": "ItemList",
+    itemListElement: blogArticles.map((article, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      url: toAbsolute(`/blog/${article.slug}/`),
+      name: article.title,
+    })),
+  },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  breadcrumbs={breadcrumbs}
+  bodyClass="page-blog"
+  jsonLd={jsonLd}
+>
+  <section class="blogHero" data-reveal="load">
+    <div class="container blogHero__inner">
+      <nav class="blogCrumbs" aria-label="Навігаційний ланцюжок" data-reveal-item="1">
+        <a href="/">Головна</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">Блог</span>
+      </nav>
+
+      <div class="blogHero__grid">
+        <div class="blogHero__copy">
+          <p class="blogEyebrow" data-reveal-item="2">База знань TeaCha</p>
+          <h1 class="blogHero__title" data-reveal-item="3">
+            Китайська
+            <span>без туману</span>
+          </h1>
+          <p class="blogHero__lead" data-reveal-item="4">
+            Розбираємо мову по суті: від першого тону до HSK і робочих переговорів.
+            З прикладами, чесними строками та планами, які можна взяти в навчання сьогодні.
+          </p>
+        </div>
+
+        <div class="blogHero__seal" aria-hidden="true" data-reveal-item="4">
+          <span lang="zh-Hans">学</span>
+          <small>вчитися</small>
+        </div>
+      </div>
+
+      <div class="blogHero__topics" aria-label="Теми блогу" data-reveal-item="5">
+        <span>HSK 3.0</span>
+        <span>Вимова</span>
+        <span>Початківцям</span>
+        <span>Дітям</span>
+        <span>Кар’єра</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="blogListing sectionShell section--b" aria-labelledby="blog-list-title">
+    <div class="container">
+      <div class="blogListing__head">
+        <div>
+          <p class="blogEyebrow">Читайте й застосовуйте</p>
+          <h2 id="blog-list-title">Усі матеріали</h2>
+        </div>
+        <p>{blogArticles.length} докладних гайдів про китайську мову</p>
+      </div>
+
+      <div class="blogGrid">
+        {
+          blogArticles.map((article, index) => (
+            <ArticleCard article={article} featured={index < 2} headingLevel="h3" />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

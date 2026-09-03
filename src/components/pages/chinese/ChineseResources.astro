@@ -1,0 +1,57 @@
+---
+/**
+ * TeaCha website
+ * Design & development: Ілля Пінчук Вадимович
+ * © 2026. All rights reserved.
+ */
+
+import ArticleCard from "../../blog/ArticleCard.astro";
+import { blogArticles } from "../../../data/blog";
+
+const { className = "", currentHref } = Astro.props as {
+  className?: string;
+  currentHref: string;
+};
+
+const articleSlugs: Record<string, string[]> = {
+  "chinese/dlya-pochatkivciv/": [
+    "z-choho-pochaty-kytaysku",
+    "skilky-chasu-vyvchaty-kytaysku",
+    "200-bazovyh-kytayskyh-sliv",
+  ],
+  "chinese/hsk/": ["nova-systema-hsk-3-0", "z-choho-pochaty-kytaysku"],
+  "chinese/dlya-ditey/": ["navishcho-dytyni-kytayska", "chy-skladno-vchyty-kytaysku"],
+  "chinese/dlya-pidlitkiv/": ["navishcho-dytyni-kytayska", "skilky-chasu-vyvchaty-kytaysku"],
+  "chinese/dilova/": ["kytayska-dlya-roboty-v-ukrayini", "yak-obraty-kursy-kytayskoyi"],
+  "chinese/rozmovna/": ["200-bazovyh-kytayskyh-sliv", "skilky-chasu-vyvchaty-kytaysku"],
+  "chinese/ieroglify/": ["chy-skladno-vchyty-kytaysku", "200-bazovyh-kytayskyh-sliv"],
+  "chinese/fonetyka/": ["pinyin-za-vyhidni", "chy-skladno-vchyty-kytaysku"],
+  "chinese/doramy/": ["200-bazovyh-kytayskyh-sliv", "chy-skladno-vchyty-kytaysku"],
+  "chinese/torgivlya/": ["kytayska-dlya-roboty-v-ukrayini", "yak-obraty-kursy-kytayskoyi"],
+};
+
+const selectedSlugs = articleSlugs[currentHref] ?? [];
+const articles = selectedSlugs
+  .map((slug) => blogArticles.find((article) => article.slug === slug))
+  .filter((article): article is (typeof blogArticles)[number] => Boolean(article));
+const sectionClass = ["articleRelated", className].filter(Boolean).join(" ");
+---
+
+{
+  articles.length > 0 && (
+    <section class={sectionClass} aria-labelledby="chinese-resources-title">
+      <div class="container">
+        <div class="articleRelated__head">
+          <div>
+            <p class="blogEyebrow">База знань TeaCha</p>
+            <h2 id="chinese-resources-title">Корисні матеріали про китайську</h2>
+          </div>
+          <a href="/blog/">Усі статті <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="blogGrid blogGrid--related">
+          {articles.map((article) => <ArticleCard article={article} compact headingLevel="h3" />)}
+        </div>
+      </div>
+    </section>
+  )
+}

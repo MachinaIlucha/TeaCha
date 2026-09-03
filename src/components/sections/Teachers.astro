@@ -6,7 +6,9 @@
  */
 
 import { siteText } from "../../data/siteText";
+import { Image } from "astro:assets";
 import { resolveAssetPath } from "../../data/assetMap";
+import foundersImage from "../../assets/img/founders/teacha-founders-daryna-dariia.webp";
 
 const { className = "" } = Astro.props;
 const teacherText = siteText.sections.teachers;
@@ -22,14 +24,16 @@ const teacherText = siteText.sections.teachers;
     <!-- CENTER: photo + 2 captions -->
     <div class="foundersSketch__center" data-reveal="load">
       <div class="foundersSketch__hero" data-reveal-item="2">
-        <img
+        <Image
           class="foundersSketch__photo"
-          src={resolveAssetPath("img/founders/teacha-founders-daryna-dariia.webp")}
+          src={foundersImage}
+          widths={[480, 720, 848]}
+          sizes="(min-width: 64rem) 42rem, calc(100vw - 32px)"
+          format="webp"
+          quality={82}
           alt={teacherText.photoAlt}
           loading="lazy"
           decoding="async"
-          width="848"
-          height="1264"
         />
 
         <div class="foundersSketch__names" aria-label={teacherText.namesAria}>

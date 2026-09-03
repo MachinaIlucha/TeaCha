@@ -5,13 +5,18 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "seo:images": "node scripts/generate-blog-covers.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.16.8"
+    "astro": "7.1.6"
   },
   "devDependencies": {
-    "sass": "^1.97.2"
+    "sass": "^1.97.2",
+    "sharp": "^0.35.4"
+  },
+  "overrides": {
+    "unifont": "0.7.4"
   }
 }
