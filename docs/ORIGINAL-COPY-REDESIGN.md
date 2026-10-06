@@ -1,6 +1,6 @@
 # Existing redesign with original main content
 
-Branch: `design/original-copy`.
+Prepared in branch `design/original-copy` for publication from `main`, authorized by the owner on 6 October 2026.
 
 The visual source is the existing local redesign in `TeaCha`, previously uploaded to the Cloudflare `redesign` preview. Its four `school*.css` files, photography, intro, motion system and interactive components are retained. Text comes from working `main`, commit `cdc0dbff8c54e5e767bc360ddf3b38e16fd1554f`.
 
@@ -21,6 +21,6 @@ python -X utf8 scripts/check-lead-submission.py
 
 The comparison script expects the original build in the adjacent `TeaCha-main-preview/dist` directory and compares content, paragraphs, metadata, structured data, robots and sitemap. It also verifies the four design styles against the adjacent original `TeaCha` workspace. The browser script expects the built preview at `http://127.0.0.1:4325/`, uses Playwright with installed Chrome, and intercepts lead submissions; it does not send real applications.
 
-Local preview is served from this branch's `dist` directory on port 4325. No Cloudflare deployment has been made for this branch.
+Local preview is served from this branch's `dist` directory on port 4325. Production uses the Cloudflare Pages project `teacha`, branch `main`, and domain `https://teacha.com.ua`. Publish with `npx --yes wrangler pages deploy dist --project-name teacha --branch main --commit-dirty=false` after building. Existing production Telegram secrets must remain configured. Both browser check scripts accept `--url https://teacha.com.ua` and intercept submissions instead of sending real applications.
 
 Lead submissions are bound once per form, including validation, and concurrent submissions on the same form are ignored until the current request finishes. The original layout initialized its modal form on both `DOMContentLoaded` and `astro:page-load`, causing two requests from one click. `check-lead-submission.py` covers repeated initialization, rapid submissions, invalid input, retries after a failed request and a later legitimate application. The same fix is available independently of the redesign in branch `fix/lead-duplicates`.

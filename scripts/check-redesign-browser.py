@@ -1,8 +1,12 @@
+import argparse
 import json
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 
 root = Path(__file__).resolve().parents[1]
+parser = argparse.ArgumentParser()
+parser.add_argument('--url', default='http://127.0.0.1:4325')
+base_url = parser.parse_args().url.rstrip('/')
 out = root / 'artifacts/browser'
 out.mkdir(parents=True, exist_ok=True)
 report = {'pages': [], 'errors': [], 'checks': []}
@@ -13,14 +17,14 @@ with sync_playwright() as p:
     for width in [1440, 390]:
         page.set_viewport_size({'width': width, 'height': 1000 if width == 1440 else 844})
         for route in ['/', '/chinese/', '/chinese/hsk/', '/about/', '/corporate/', '/prices/', '/blog/', '/english/test/']:
-            response = page.goto('http://127.0.0.1:4325' + route, wait_until='networkidle')
+            response = page.goto(base_url + route, wait_until='networkidle')
             page.evaluate('document.fonts.ready')
             page.screenshot(path=str(out / f'{route.strip("/").replace("/", "-") or "home"}-{width}.png'), full_page=True)
             overflow = page.evaluate('document.documentElement.scrollWidth > innerWidth + 1')
             broken = page.locator('img').evaluate_all('(images) => images.filter(img => img.complete && img.naturalWidth === 0).map(img => img.src)')
             report['pages'].append({'route': route, 'width': width, 'status': response.status, 'overflow': overflow, 'broken_images': broken})
     page.set_viewport_size({'width': 1440, 'height': 1000})
-    page.goto('http://127.0.0.1:4325/', wait_until='networkidle')
+    page.goto(base_url + '/', wait_until='networkidle')
     page.locator('[data-pack="24"]').click()
     assert page.locator('[data-tuition="individual"]').inner_text() == '600'
     assert page.locator('[data-tuition="pair"]').inner_text() == '400'
@@ -47,17 +51,17 @@ with sync_playwright() as p:
     page.locator('#consultForm input[type="checkbox"]').check()
     page.locator('#consultForm button[type="submit"]').click()
     page.wait_for_timeout(1300)
-    assert requests and requests[0]['source'] == 'modal'
+    assert len(requests) == 1 and requests[0]['source'] == 'modal'
     assert not page.locator('#consultModal').is_visible()
     report['checks'].append('Lead submission keeps original payload; request intercepted locally')
     page.set_viewport_size({'width': 390, 'height': 844})
     page.locator('[data-menu-toggle]').click()
-    assert page.locator('#school-nav').is_visible()
+    page.locator('#school-nav').wait_for(state='visible')
     assert page.locator('#school-nav a[href="/products/"]').is_visible()
     page.keyboard.press('Escape')
     assert page.locator('[data-menu-toggle]').get_attribute('aria-expanded') == 'false'
     report['checks'].append('Mobile navigation includes every original link')
-    page.goto('http://127.0.0.1:4325/blog/', wait_until='networkidle')
+    page.goto(base_url + '/blog/', wait_until='networkidle')
     page.locator('[data-blog-search]').fill('HSK')
     assert page.locator('[data-article-title]:visible').count() > 0
     page.locator('[data-blog-search]').fill('zzzz-no-matches')
