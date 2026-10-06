@@ -33,23 +33,85 @@ const { full = false } = Astro.props;
       <div class="tc-partner-logos">
         {siteText.sections.corporateClients.clients.map((c, i) => (
           <a
+            class="tc-partner-card"
             href={c.href}
             target="_blank"
             rel="noopener noreferrer"
             style={`--delay:${i * 90}ms`}
             data-rise
           >
-            <img
-              src={asset(c.logo)}
-              alt={c.alt}
-              width="180"
-              height="65"
-              loading="lazy"
-            />
-            <strong>{c.name}</strong><p>({c.details})</p><span>{siteText.sections.corporateClients.visitLabel}</span>
+            <div class="tc-partner-card__logo">
+              <img
+                src={asset(c.logo)}
+                alt={c.alt}
+                width="180"
+                height="65"
+                loading="lazy"
+              />
+            </div>
+            <strong class="tc-partner-card__name">{c.name}</strong>
+            <p class="tc-partner-card__description">({c.details})</p>
+            <span class="tc-partner-card__visit">{siteText.sections.corporateClients.visitLabel}</span>
           </a>
         ))}
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  .tc-partner-logos {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .tc-partner-logos > .tc-partner-card {
+    min-width: 0;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 12px;
+    text-align: center;
+  }
+
+  .tc-partner-card__logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 72px;
+    flex-shrink: 0;
+  }
+
+  .tc-partner-card__logo img {
+    width: 170px;
+    height: 65px;
+    max-width: 100%;
+    max-height: 65px;
+    object-fit: contain;
+  }
+
+  .tc-partner-card__name {
+    font-size: 14px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+
+  .tc-partner-card__description {
+    font-size: 12px;
+    line-height: 1.65;
+    color: var(--tc-muted);
+    overflow-wrap: anywhere;
+  }
+
+  .tc-partner-card__visit {
+    margin-top: auto;
+    padding-top: 6px;
+    font-size: 11px;
+    color: var(--tc-red);
+  }
+
+  @media (max-width: 700px) {
+    .tc-partner-logos {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>
