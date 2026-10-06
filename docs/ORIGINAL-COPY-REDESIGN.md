@@ -4,9 +4,11 @@ Branch: `design/original-copy`.
 
 The visual source is the existing local redesign in `TeaCha`, previously uploaded to the Cloudflare `redesign` preview. Its four `school*.css` files, photography, intro, motion system and interactive components are retained. Text comes from working `main`, commit `cdc0dbff8c54e5e767bc360ddf3b38e16fd1554f`.
 
-The original `siteText.ts`, `blog.ts`, `chineseVocabulary.ts` and `seoSchemas.ts` data are preserved. Previously abbreviated course content and omitted sections now appear using the redesign's existing typography and layouts. Blog article cards use their complete original titles, descriptions and dates.
+The original content data is preserved except for the owner's explicit school relocation. Previously abbreviated course content and omitted sections now appear using the redesign's existing typography and layouts. Blog article cards use their complete original titles, descriptions and dates.
 
 `src/data/preservedSeo.json` captures the original title, meta tags, canonical and icon links, and JSON-LD for each of the 39 routes. `OriginalSeo.astro` emits this content consistently, including the original FAQ, course and breadcrumb schemas. Edit this snapshot deliberately when a future content or SEO change is authorized. `robots.txt` and `sitemap.xml` remain the original main implementations.
+
+The location is now вулиця Михайла Бойчука, 2/34, Київ, на базі приватної школи «Newton Kids», with охорона, укриття та відеоспостереження. Contacts, footer, offline format descriptions, FAQ answers, course and organization addresses, and map links use the new location. Maps query the supplied street address; obsolete coordinates were removed. `approvedContentChanges.json` records only these authorized differences so comparisons still protect all other original content and SEO.
 
 Validation:
 

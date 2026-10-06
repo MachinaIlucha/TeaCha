@@ -1,3 +1,5 @@
+import { siteText } from "./siteText";
+
 type FaqItem = { q: string; a: string };
 
 const SITE_URL = "https://teacha.com.ua";
@@ -11,8 +13,8 @@ const LOCATION = {
   name: "TeaCha",
   address: {
     "@type": "PostalAddress" as const,
-    streetAddress: "проспект Академіка Палладіна, 44а",
-    addressLocality: "Київ",
+    streetAddress: siteText.shared.contact.street,
+    addressLocality: siteText.shared.contact.city,
     addressCountry: "UA",
   },
 };

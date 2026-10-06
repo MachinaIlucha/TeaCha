@@ -58,6 +58,7 @@ const crumbs = [{ name: siteText.pages.about.breadcrumb, href: "/about/" }];
         <div data-rise>
           <h3>{siteText.pages.about.locationCardTitle}</h3>
           <p>{c.street}, {c.city}, {c.country}</p>
+          <p>{c.locationDescription}</p>
           <a
             class="tc-text-link"
             href={c.mapUrl}

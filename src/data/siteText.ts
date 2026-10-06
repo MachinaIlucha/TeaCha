@@ -12,17 +12,18 @@ export const siteText = {
         { raw: "+380673626364", label: "+38 (067) 362-63-64" },
       ],
       email: "teachaschoolkyiv@gmail.com",
-      street: "проспект Академіка Палладіна, 44а",
+      street: "вулиця Михайла Бойчука, 2/34",
+      locationDescription: "На базі приватної школи «Newton Kids». Є охорона, укриття та відеоспостереження.",
       city: "Київ",
       country: "Україна",
-      mapUrl: "https://maps.google.com/?q=50.47026,30.357656",
-      mapEmbedUrl: "https://www.google.com/maps?q=50.47026,30.357656&z=16&output=embed",
+      mapUrl: "https://maps.google.com/?q=%D0%B2%D1%83%D0%BB%D0%B8%D1%86%D1%8F%20%D0%9C%D0%B8%D1%85%D0%B0%D0%B9%D0%BB%D0%B0%20%D0%91%D0%BE%D0%B9%D1%87%D1%83%D0%BA%D0%B0%2C%202%2F34%2C%20%D0%9A%D0%B8%D1%97%D0%B2%2C%20%D0%A3%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D0%B0",
+      mapEmbedUrl: "https://www.google.com/maps?q=%D0%B2%D1%83%D0%BB%D0%B8%D1%86%D1%8F%20%D0%9C%D0%B8%D1%85%D0%B0%D0%B9%D0%BB%D0%B0%20%D0%91%D0%BE%D0%B9%D1%87%D1%83%D0%BA%D0%B0%2C%202%2F34%2C%20%D0%9A%D0%B8%D1%97%D0%B2%2C%20%D0%A3%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D0%B0&z=16&output=embed",
       instagramUrl: "https://www.instagram.com/teacha_english_chinese?igsh=MW15MzJpdmVqemRidg==",
       tiktokUrl: "https://www.tiktok.com/@school.teacha?_r=1&_t=ZM-92xtLcPpblU",
       openingHoursMeta: "Mo-Su 09:00-21:00",
       openingHoursLabel: "Щодня: 09:00 - 21:00",
       openingHoursNote: "Онлайн та офлайн заняття за попереднім записом.",
-      mapTitle: "Карта TeaCha в Києві",
+      mapTitle: "TeaCha — вулиця Михайла Бойчука, 2/34, Київ",
       socialsAria: "Соцмережі TeaCha",
     },
     docs: {
@@ -579,7 +580,7 @@ export const siteText = {
           },
           {
             q: "Де проходять заняття?",
-            a: `Офлайн заняття проходять за адресою: проспект Академіка Палладіна 44а.<br />
+            a: `Офлайн заняття проходять за адресою: вулиця Михайла Бойчука, 2/34. На базі приватної школи «Newton Kids». Є охорона, укриття та відеоспостереження.<br />
 Онлайн заняття проходять на платформах Zoom, Google Meet або Microsoft Teams.`,
           },
           { q: "Як відбувається оплата?", a: "Оплата відбувається на рахунок ФОП." },
@@ -602,7 +603,7 @@ export const siteText = {
           { q: "Скільки людей в групі?", a: "Працюємо у міні-групах 3-6 людей" },
           {
             q: "Де проходять заняття?",
-            a: `Офлайн заняття проходять за адресою проспект академіка Палладіна 44а<br />
+            a: `Офлайн заняття проходять за адресою вулиця Михайла Бойчука, 2/34. На базі приватної школи «Newton Kids». Є охорона, укриття та відеоспостереження.<br />
 Онлайн заняття проходять на платформах Zoom, Google Meet або Microsoft teams`,
           },
           { q: "Як відбувається оплата?", a: "Оплата відбувається на рахунок ФОП" },
@@ -1840,7 +1841,7 @@ export const siteText = {
         },
         {
           q: "Як проходять заняття?",
-          a: `Офлайн заняття проходять за адресою: проспект Академіка Палладіна 44а.<br />Онлайн заняття проходять на платформах Zoom, Google Meet або Microsoft Teams. Доступ до Miro з усіма матеріалами.`,
+          a: `Офлайн заняття проходять за адресою: вулиця Михайла Бойчука, 2/34. На базі приватної школи «Newton Kids». Є охорона, укриття та відеоспостереження.<br />Онлайн заняття проходять на платформах Zoom, Google Meet або Microsoft Teams. Доступ до Miro з усіма матеріалами.`,
         },
         {
           q: "Яка тривалість уроку?",
@@ -3907,7 +3908,7 @@ export const siteText = {
         },
         {
           q: "Як проходять заняття?",
-          a: `Офлайн заняття проходять за адресою: проспект Академіка Палладіна 44а.<br />Онлайн заняття проходять на платформах Zoom, Google Meet або Microsoft Teams. Доступ до Miro з усіма матеріалами.`,
+          a: `Офлайн заняття проходять за адресою: вулиця Михайла Бойчука, 2/34. На базі приватної школи «Newton Kids». Є охорона, укриття та відеоспостереження.<br />Онлайн заняття проходять на платформах Zoom, Google Meet або Microsoft Teams. Доступ до Miro з усіма матеріалами.`,
         },
         {
           q: "Яка тривалість уроку?",
@@ -4195,7 +4196,7 @@ export const siteText = {
       formatsTitle: "Формати",
       formatsValue: "Індивідуальні, парні, групові (3-5 ос.)",
       offlineTitle: "Офлайн",
-      offlineValue: "м.Київ, метро Академмістечко",
+      offlineValue: "м.Київ, вулиця Михайла Бойчука, 2/34",
       onlineTitle: "Онлайн",
       onlineValue: "Zoom / Google Meet / Microsoft Teams",
       materialsTitle: "Матеріали",
@@ -4211,7 +4212,7 @@ export const siteText = {
       formatsTitle: "Формати",
       formatsValue: "Індивідуальні, парні, групові (3-5 ос.)",
       offlineTitle: "Офлайн",
-      offlineValue: "м.Київ, метро Академмістечко",
+      offlineValue: "м.Київ, вулиця Михайла Бойчука, 2/34",
       onlineTitle: "Онлайн",
       onlineValue: "Zoom / Google Meet / Microsoft Teams",
       materialsTitle: "Матеріали",

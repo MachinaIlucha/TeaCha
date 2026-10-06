@@ -166,11 +166,6 @@ const organizationSchema: JsonLd = {
     addressLocality: contact.city,
     streetAddress: contact.street,
   },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: 50.47026,
-    longitude: 30.357656,
-  },
   hasMap: contact.mapUrl,
   priceRange: "₴₴",
   areaServed: [contact.city, contact.country],

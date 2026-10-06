@@ -14,7 +14,7 @@ const d = siteText.shared.docs;
         <a href="/chinese/">КУРСИ КИТАЙСЬКОЇ</a><a href="/chinese/hsk/">ПІДГОТОВКА ДО HSK</a><a href="/blog/">БЛОГ ПРО КИТАЙСЬКУ</a><a href="/english/test/">ТЕСТ НА РІВЕНЬ</a>
       </div>
       <div><h3>{siteText.shared.forms.trialLeadTitle}</h3>{siteText.navigation.links.map(item => <a href={`/${item.href}`}>{item.label}</a>)}</div>
-      <div><h3>{f.contactsLabel}</h3>{c.phones.map(phone => <a href={`tel:${phone.raw}`}>{phone.label}</a>)}<a href={`mailto:${c.email}`}>{c.email}</a><a href={c.mapUrl} target="_blank" rel="noopener">{c.street}, {c.city}</a><span>{c.openingHoursLabel}</span></div>
+      <div><h3>{f.contactsLabel}</h3>{c.phones.map(phone => <a href={`tel:${phone.raw}`}>{phone.label}</a>)}<a href={`mailto:${c.email}`}>{c.email}</a><a href={c.mapUrl} target="_blank" rel="noopener">{c.street}, {c.city}</a><p>{c.locationDescription}</p><span>{c.openingHoursLabel}</span></div>
     </div>
     <div class="tc-footer__bottom"><span>{f.copyright}</span><a href={`/${d.privacyFile}`} target="_blank" rel="noopener">{d.privacyLabel}</a><a href={`/${d.offerFile}`} target="_blank" rel="noopener">{d.offerLabel}</a><span>{f.designPrefix} — <a href={f.authorUrl} target="_blank" rel="noopener">{f.authorName}</a></span><button data-back-to-top aria-label="На початок">↑</button></div>
   </div>

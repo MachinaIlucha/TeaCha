@@ -311,14 +311,9 @@
           "@type": "PostalAddress",
           "addressCountry": "UA",
           "addressLocality": "Київ",
-          "streetAddress": "проспект Академіка Палладіна, 44а"
+          "streetAddress": "вулиця Михайла Бойчука, 2/34"
         },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": 50.47026,
-          "longitude": 30.357656
-        },
-        "hasMap": "https://maps.google.com/?q=50.47026,30.357656",
+        "hasMap": "https://maps.google.com/?q=%D0%B2%D1%83%D0%BB%D0%B8%D1%86%D1%8F%20%D0%9C%D0%B8%D1%85%D0%B0%D0%B9%D0%BB%D0%B0%20%D0%91%D0%BE%D0%B9%D1%87%D1%83%D0%BA%D0%B0%2C%202%2F34%2C%20%D0%9A%D0%B8%D1%97%D0%B2%2C%20%D0%A3%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D0%B0",
         "priceRange": "₴₴",
         "areaServed": [
           "Київ",
@@ -386,7 +381,7 @@
             "name": "Де проходять заняття?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Офлайн заняття проходять за адресою: проспект Академіка Палладіна 44а. \nОнлайн заняття проходять на платформах Zoom, Google Meet або Microsoft Teams."
+              "text": "Офлайн заняття проходять за адресою: вулиця Михайла Бойчука, 2/34. На базі приватної школи «Newton Kids». Є охорона, укриття та відеоспостереження. \nОнлайн заняття проходять на платформах Zoom, Google Meet або Microsoft Teams."
             }
           },
           {
@@ -456,7 +451,7 @@
             "name": "Де проходять заняття?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Офлайн заняття проходять за адресою: проспект Академіка Палладіна 44а. Онлайн заняття проходять на платформах Zoom, Google Meet або Microsoft Teams."
+              "text": "Офлайн заняття проходять за адресою: вулиця Михайла Бойчука, 2/34. На базі приватної школи «Newton Kids». Є охорона, укриття та відеоспостереження. Онлайн заняття проходять на платформах Zoom, Google Meet або Microsoft Teams."
             }
           },
           {
@@ -704,7 +699,7 @@
           "url": "https://teacha.com.ua/about/",
           "telephone": "+380634602120",
           "email": "teachaschoolkyiv@gmail.com",
-          "hasMap": "https://maps.google.com/?q=50.47026,30.357656",
+          "hasMap": "https://maps.google.com/?q=%D0%B2%D1%83%D0%BB%D0%B8%D1%86%D1%8F%20%D0%9C%D0%B8%D1%85%D0%B0%D0%B9%D0%BB%D0%B0%20%D0%91%D0%BE%D0%B9%D1%87%D1%83%D0%BA%D0%B0%2C%202%2F34%2C%20%D0%9A%D0%B8%D1%97%D0%B2%2C%20%D0%A3%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D0%B0",
           "contactPoint": [
             {
               "@type": "ContactPoint",
@@ -727,14 +722,9 @@
           ],
           "address": {
             "@type": "PostalAddress",
-            "streetAddress": "проспект Академіка Палладіна, 44а",
+            "streetAddress": "вулиця Михайла Бойчука, 2/34",
             "addressLocality": "Київ",
             "addressCountry": "UA"
-          },
-          "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 50.47026,
-            "longitude": 30.357656
           },
           "openingHoursSpecification": [
             {
@@ -4607,7 +4597,7 @@
             "name": "Як проходять заняття?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Офлайн заняття проходять за адресою: проспект Академіка Палладіна 44а. Онлайн заняття проходять на платформах Zoom, Google Meet або Microsoft Teams. Доступ до Miro з усіма матеріалами."
+              "text": "Офлайн заняття проходять за адресою: вулиця Михайла Бойчука, 2/34. На базі приватної школи «Newton Kids». Є охорона, укриття та відеоспостереження. Онлайн заняття проходять на платформах Zoom, Google Meet або Microsoft Teams. Доступ до Miro з усіма матеріалами."
             }
           },
           {
@@ -4677,7 +4667,7 @@
             "name": "Як проходять заняття?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Офлайн заняття проходять за адресою: проспект Академіка Палладіна 44а. Онлайн заняття проходять на платформах Zoom, Google Meet або Microsoft Teams. Доступ до Miro з усіма матеріалами."
+              "text": "Офлайн заняття проходять за адресою: вулиця Михайла Бойчука, 2/34. На базі приватної школи «Newton Kids». Є охорона, укриття та відеоспостереження. Онлайн заняття проходять на платформах Zoom, Google Meet або Microsoft Teams. Доступ до Miro з усіма матеріалами."
             }
           },
           {
@@ -4970,7 +4960,7 @@
               "name": "TeaCha",
               "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "проспект Академіка Палладіна, 44а",
+                "streetAddress": "вулиця Михайла Бойчука, 2/34",
                 "addressLocality": "Київ",
                 "addressCountry": "UA"
               }
@@ -5342,7 +5332,7 @@
               "name": "TeaCha",
               "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "проспект Академіка Палладіна, 44а",
+                "streetAddress": "вулиця Михайла Бойчука, 2/34",
                 "addressLocality": "Київ",
                 "addressCountry": "UA"
               }
@@ -5714,7 +5704,7 @@
               "name": "TeaCha",
               "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "проспект Академіка Палладіна, 44а",
+                "streetAddress": "вулиця Михайла Бойчука, 2/34",
                 "addressLocality": "Київ",
                 "addressCountry": "UA"
               }
@@ -6086,7 +6076,7 @@
               "name": "TeaCha",
               "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "проспект Академіка Палладіна, 44а",
+                "streetAddress": "вулиця Михайла Бойчука, 2/34",
                 "addressLocality": "Київ",
                 "addressCountry": "UA"
               }
@@ -6462,7 +6452,7 @@
               "name": "TeaCha",
               "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "проспект Академіка Палладіна, 44а",
+                "streetAddress": "вулиця Михайла Бойчука, 2/34",
                 "addressLocality": "Київ",
                 "addressCountry": "UA"
               }
@@ -6834,7 +6824,7 @@
               "name": "TeaCha",
               "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "проспект Академіка Палладіна, 44а",
+                "streetAddress": "вулиця Михайла Бойчука, 2/34",
                 "addressLocality": "Київ",
                 "addressCountry": "UA"
               }
@@ -7206,7 +7196,7 @@
               "name": "TeaCha",
               "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "проспект Академіка Палладіна, 44а",
+                "streetAddress": "вулиця Михайла Бойчука, 2/34",
                 "addressLocality": "Київ",
                 "addressCountry": "UA"
               }
@@ -7578,7 +7568,7 @@
               "name": "TeaCha",
               "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "проспект Академіка Палладіна, 44а",
+                "streetAddress": "вулиця Михайла Бойчука, 2/34",
                 "addressLocality": "Київ",
                 "addressCountry": "UA"
               }
@@ -7950,7 +7940,7 @@
               "name": "TeaCha",
               "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "проспект Академіка Палладіна, 44а",
+                "streetAddress": "вулиця Михайла Бойчука, 2/34",
                 "addressLocality": "Київ",
                 "addressCountry": "UA"
               }
@@ -8322,7 +8312,7 @@
               "name": "TeaCha",
               "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "проспект Академіка Палладіна, 44а",
+                "streetAddress": "вулиця Михайла Бойчука, 2/34",
                 "addressLocality": "Київ",
                 "addressCountry": "UA"
               }
@@ -8696,7 +8686,7 @@
             "name": "Де проходять заняття?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Офлайн заняття проходять за адресою проспект академіка Палладіна 44а \nОнлайн заняття проходять на платформах Zoom, Google Meet або Microsoft teams"
+              "text": "Офлайн заняття проходять за адресою вулиця Михайла Бойчука, 2/34. На базі приватної школи «Newton Kids». Є охорона, укриття та відеоспостереження. \nОнлайн заняття проходять на платформах Zoom, Google Meet або Microsoft teams"
             }
           },
           {
@@ -8750,7 +8740,7 @@
             "name": "Де проходять заняття?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Офлайн заняття проходять за адресою проспект академіка Палладіна 44а Онлайн заняття проходять на платформах Zoom, Google Meet або Microsoft teams"
+              "text": "Офлайн заняття проходять за адресою вулиця Михайла Бойчука, 2/34. На базі приватної школи «Newton Kids». Є охорона, укриття та відеоспостереження. Онлайн заняття проходять на платформах Zoom, Google Meet або Microsoft teams"
             }
           },
           {
@@ -8997,7 +8987,7 @@
             "name": "Як проходять заняття?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Офлайн заняття проходять за адресою: проспект Академіка Палладіна 44а. Онлайн заняття проходять на платформах Zoom, Google Meet або Microsoft Teams. Доступ до Miro з усіма матеріалами."
+              "text": "Офлайн заняття проходять за адресою: вулиця Михайла Бойчука, 2/34. На базі приватної школи «Newton Kids». Є охорона, укриття та відеоспостереження. Онлайн заняття проходять на платформах Zoom, Google Meet або Microsoft Teams. Доступ до Miro з усіма матеріалами."
             }
           },
           {
@@ -9051,7 +9041,7 @@
             "name": "Як проходять заняття?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Офлайн заняття проходять за адресою: проспект Академіка Палладіна 44а. Онлайн заняття проходять на платформах Zoom, Google Meet або Microsoft Teams. Доступ до Miro з усіма матеріалами."
+              "text": "Офлайн заняття проходять за адресою: вулиця Михайла Бойчука, 2/34. На базі приватної школи «Newton Kids». Є охорона, укриття та відеоспостереження. Онлайн заняття проходять на платформах Zoom, Google Meet або Microsoft Teams. Доступ до Miro з усіма матеріалами."
             }
           },
           {
@@ -9328,7 +9318,7 @@
               "name": "TeaCha",
               "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "проспект Академіка Палладіна, 44а",
+                "streetAddress": "вулиця Михайла Бойчука, 2/34",
                 "addressLocality": "Київ",
                 "addressCountry": "UA"
               }
@@ -9680,7 +9670,7 @@
               "name": "TeaCha",
               "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "проспект Академіка Палладіна, 44а",
+                "streetAddress": "вулиця Михайла Бойчука, 2/34",
                 "addressLocality": "Київ",
                 "addressCountry": "UA"
               }
@@ -10032,7 +10022,7 @@
               "name": "TeaCha",
               "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "проспект Академіка Палладіна, 44а",
+                "streetAddress": "вулиця Михайла Бойчука, 2/34",
                 "addressLocality": "Київ",
                 "addressCountry": "UA"
               }
@@ -10384,7 +10374,7 @@
               "name": "TeaCha",
               "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "проспект Академіка Палладіна, 44а",
+                "streetAddress": "вулиця Михайла Бойчука, 2/34",
                 "addressLocality": "Київ",
                 "addressCountry": "UA"
               }
@@ -10736,7 +10726,7 @@
               "name": "TeaCha",
               "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "проспект Академіка Палладіна, 44а",
+                "streetAddress": "вулиця Михайла Бойчука, 2/34",
                 "addressLocality": "Київ",
                 "addressCountry": "UA"
               }
@@ -11088,7 +11078,7 @@
               "name": "TeaCha",
               "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "проспект Академіка Палладіна, 44а",
+                "streetAddress": "вулиця Михайла Бойчука, 2/34",
                 "addressLocality": "Київ",
                 "addressCountry": "UA"
               }
@@ -11440,7 +11430,7 @@
               "name": "TeaCha",
               "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "проспект Академіка Палладіна, 44а",
+                "streetAddress": "вулиця Михайла Бойчука, 2/34",
                 "addressLocality": "Київ",
                 "addressCountry": "UA"
               }
@@ -11792,7 +11782,7 @@
               "name": "TeaCha",
               "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "проспект Академіка Палладіна, 44а",
+                "streetAddress": "вулиця Михайла Бойчука, 2/34",
                 "addressLocality": "Київ",
                 "addressCountry": "UA"
               }
@@ -12144,7 +12134,7 @@
               "name": "TeaCha",
               "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "проспект Академіка Палладіна, 44а",
+                "streetAddress": "вулиця Михайла Бойчука, 2/34",
                 "addressLocality": "Київ",
                 "addressCountry": "UA"
               }
@@ -12967,7 +12957,7 @@
             "name": "Де проходять заняття?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Офлайн заняття проходять за адресою: проспект Академіка Палладіна 44а. \nОнлайн заняття проходять на платформах Zoom, Google Meet або Microsoft Teams."
+              "text": "Офлайн заняття проходять за адресою: вулиця Михайла Бойчука, 2/34. На базі приватної школи «Newton Kids». Є охорона, укриття та відеоспостереження. \nОнлайн заняття проходять на платформах Zoom, Google Meet або Microsoft Teams."
             }
           },
           {
@@ -13037,7 +13027,7 @@
             "name": "Де проходять заняття?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Офлайн заняття проходять за адресою: проспект Академіка Палладіна 44а. Онлайн заняття проходять на платформах Zoom, Google Meet або Microsoft Teams."
+              "text": "Офлайн заняття проходять за адресою: вулиця Михайла Бойчука, 2/34. На базі приватної школи «Newton Kids». Є охорона, укриття та відеоспостереження. Онлайн заняття проходять на платформах Zoom, Google Meet або Microsoft Teams."
             }
           },
           {
