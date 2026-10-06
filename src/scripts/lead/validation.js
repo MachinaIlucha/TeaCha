@@ -132,6 +132,8 @@ export const attachLeadValidation = (form) => {
   const consentInput = form.elements.consent;
 
   if (!nameInput || !contactInput) return;
+  if (form.dataset.leadValidationBound === "1") return;
+  form.dataset.leadValidationBound = "1";
 
   attachUaNativeMessages({ nameInput, contactInput, consentInput });
 

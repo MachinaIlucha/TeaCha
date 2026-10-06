@@ -14,8 +14,11 @@ Validation:
 npm run build
 python -X utf8 scripts/verify-original-copy.py
 python -X utf8 scripts/check-redesign-browser.py
+python -X utf8 scripts/check-lead-submission.py
 ```
 
 The comparison script expects the original build in the adjacent `TeaCha-main-preview/dist` directory and compares content, paragraphs, metadata, structured data, robots and sitemap. It also verifies the four design styles against the adjacent original `TeaCha` workspace. The browser script expects the built preview at `http://127.0.0.1:4325/`, uses Playwright with installed Chrome, and intercepts lead submissions; it does not send real applications.
 
 Local preview is served from this branch's `dist` directory on port 4325. No Cloudflare deployment has been made for this branch.
+
+Lead submissions are bound once per form, including validation, and concurrent submissions on the same form are ignored until the current request finishes. The original layout initialized its modal form on both `DOMContentLoaded` and `astro:page-load`, causing two requests from one click. `check-lead-submission.py` covers repeated initialization, rapid submissions, invalid input, retries after a failed request and a later legitimate application. The same fix is available independently of the redesign in branch `fix/lead-duplicates`.

@@ -41,7 +41,10 @@ const setupSubmitFx = (btn) => {
 
 export const bindLeadForm = (selector, opts = {}) => {
   const form = document.querySelector(selector);
-  if (!form) return;
+  if (!form || form.dataset.leadSubmitBound === "1") return;
+  form.dataset.leadSubmitBound = "1";
+
+  let submitting = false;
 
   const submitBtn = form.querySelector('button[type="submit"]');
   const hasSubmitFx = setupSubmitFx(submitBtn);
@@ -51,6 +54,7 @@ export const bindLeadForm = (selector, opts = {}) => {
     // Respect that result even when it clears its temporary native message.
     if (e.defaultPrevented) return;
     e.preventDefault();
+    if (submitting) return;
 
     // Let native validity + customValidity messages handle required fields
     if (!form.checkValidity()) {
@@ -60,6 +64,8 @@ export const bindLeadForm = (selector, opts = {}) => {
 
     const name = form.elements.name?.value?.trim() || "";
     const contact = form.elements.contact?.value?.trim() || "";
+
+    submitting = true;
 
     const btn = form.querySelector('button[type="submit"]');
     const labelEl = getLabelEl(btn);
@@ -108,6 +114,7 @@ export const bindLeadForm = (selector, opts = {}) => {
         btn.classList.remove("is-error");
       }
     } finally {
+      submitting = false;
       if (btn) {
         btn.disabled = false;
         btn.classList.remove("is-loading", "is-success");
