@@ -1,0 +1,28 @@
+---
+import { resolveAssetPath } from "../../data/assetMap";
+const { light = false, compact = false } = Astro.props;
+---
+
+<span
+  class:list={[
+    "tc-brand",
+    light && "tc-brand--light",
+    compact && "tc-brand--compact",
+  ]}
+>
+  <svg
+    class="tc-brand__mark"
+    viewBox="185 400 805 490"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <image
+      href={resolveAssetPath("img/layout/logo.png")}
+      width="1200"
+      height="1200"
+    />
+  </svg>
+  <span class="tc-brand__name">
+    Tea<span>Cha</span>
+  </span>
+</span>

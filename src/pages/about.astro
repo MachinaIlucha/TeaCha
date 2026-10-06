@@ -1,233 +1,85 @@
 ---
-/**
- * TeaCha website
- * Design & development: Ілля Пінчук Вадимович
- * © 2026. All rights reserved.
- */
-
 import BaseLayout from "../layouts/BaseLayout.astro";
-import SocialLink from "../components/ui/SocialLink.astro";
-import TestBanner from "../components/sections/TestBanner.astro";
+import AboutStory from "../components/school/AboutStory.astro";
+import TestStrip from "../components/school/TestStrip.astro";
+import Approach from "../components/school/Approach.astro";
+import Reviews from "../components/school/Reviews.astro";
 import { siteText } from "../data/siteText";
-import { resolveAssetPath } from "../data/assetMap";
-
-const base = import.meta.env.BASE_URL;
-const site = Astro.site ?? new URL("https://teacha.com.ua");
-const toAbsolute = (path: string) => new URL(path, site).toString();
-const aboutText = siteText.pages.about;
-const foundersFacts = siteText.sections.teachers;
-const formatFoundersFact = (text: string, index: number) => {
-  if (index === 0) return text.replace("магістра ", "магістра<br/>");
-  if (index === 3) return text.replace(" при ", " при<br/>");
-  return text;
-};
-const contact = siteText.shared.contact;
-
-const aboutContactPageSchema = {
-  "@context": "https://schema.org",
-  "@type": "ContactPage",
-  name: aboutText.schemaPageName,
-  url: toAbsolute("/about/"),
-  mainEntity: {
-    "@type": ["EducationalOrganization", "LocalBusiness"],
-    name: siteText.shared.brandName,
-    url: toAbsolute("/about/"),
-    telephone: contact.phones[0].raw,
-    email: contact.email,
-    hasMap: contact.mapUrl,
-    contactPoint: contact.phones.map((phone) => ({
-      "@type": "ContactPoint",
-      contactType: "customer support",
-      telephone: phone.raw,
-      areaServed: "UA",
-      availableLanguage: ["uk"],
-    })),
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: contact.street,
-      addressLocality: contact.city,
-      addressCountry: "UA",
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: 50.47026,
-      longitude: 30.357656,
-    },
-    openingHoursSpecification: [
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday",
-        ],
-        opens: "09:00",
-        closes: "21:00",
-      },
-    ],
-    sameAs: [contact.instagramUrl, contact.tiktokUrl],
-    founder: aboutText.founders.map((founder) => ({
-      "@type": "Person",
-      name: founder.name,
-      jobTitle: "Співзасновниця мовної школи TeaCha",
-      worksFor: {
-        "@type": "EducationalOrganization",
-        name: siteText.shared.brandName,
-      },
-    })),
-  },
-};
+import { resolveAssetPath as asset } from "../data/assetMap";
+const c = siteText.shared.contact;
+const crumbs = [{ name: siteText.pages.about.breadcrumb, href: "/about/" }];
 ---
 
 <BaseLayout
-  title={aboutText.title}
-  description={aboutText.description}
-  canonical="/about/"
-  breadcrumbs={[{ name: aboutText.breadcrumb, href: "/about/" }]}
-  jsonLd={[aboutContactPageSchema]}
-  bodyClass="page-about"
+  title={siteText.pages.about.title}
+  description={siteText.pages.about.description}
+  breadcrumbs={crumbs}
 >
-  <section class="aboutTeam" aria-labelledby="about-team-title" data-reveal="load">
-    <div class="aboutTeam__inner" data-reveal-item="1">
-      <h1 id="about-team-title" aria-label={aboutText.hiddenH1} set:html={aboutText.teamHeading}></h1>
-      <p class="aboutTeam__lead">{aboutText.teamLead}</p>
-      <span class="aboutTeam__watermark" aria-hidden="true">{aboutText.teamWatermark}</span>
-
-      <div class="aboutTeam__cards">
-        <article class="aboutTeamCard">
-          <img src={resolveAssetPath("img/about/teacha-about-daryna-shvets.webp")} alt={aboutText.founders[0].alt} width="1200" height="1800" decoding="async" />
-          <div class="aboutTeamCard__content">
-            <h3>{aboutText.founders[0].name}</h3>
-          </div>
-        </article>
-
-        <article class="aboutTeamCard aboutTeamCard--center">
-          <img src={resolveAssetPath("img/about/teacha-about-team-center.webp")} alt={aboutText.teamCenterAlt} width="1200" height="1800" decoding="async" />
-        </article>
-
-        <article class="aboutTeamCard">
-          <img src={resolveAssetPath("img/about/teacha-about-dariia-pozniakovska.webp")} alt={aboutText.founders[1].alt} width="1200" height="1800" decoding="async" />
-          <div class="aboutTeamCard__content">
-            <h3>{aboutText.founders[1].name}</h3>
-          </div>
-        </article>
+  <AboutStory />
+  <section class="tc-section tc-program">
+    <div class="tc-wrap">
+      <div class="tc-prose-grid">
+        <div data-rise>
+          <p class="tc-kicker">{siteText.sections.teachers.educationAria}</p>
+          <h2>{siteText.sections.teachers.heading}</h2>
+        </div>
+        <div class="tc-prose" data-rise>
+          <p>{siteText.pages.about.teamLead}</p>
+          <p>{siteText.sections.facts.items[1].text}</p>
+        </div>
+      </div>
+      <div class="tc-program-grid" style="margin-top:50px">
+        {siteText.sections.teachers.cards.map((card, i) => (
+          <article data-rise>
+            <p class="tc-kicker">0{i + 1}</p>
+            <h3>{card.text}</h3>
+          </article>
+        ))}
       </div>
     </div>
   </section>
-
-  <section class="aboutTeamFacts" aria-label={foundersFacts.educationAria} data-reveal="scroll">
-    <div class="aboutTeamFacts__inner">
-      <div class="aboutTeamFacts__grid">
-        {
-          foundersFacts.cards.map((card, index) => (
-            <article class="aboutTeamFactCard" data-reveal-item={String(index + 1)}>
-              <p set:html={formatFoundersFact(card.text, index)}></p>
-            </article>
-          ))
-        }
+  <Approach />
+  <TestStrip />
+  <Reviews />
+  <section class="tc-section" id="contacts">
+    <div class="tc-wrap">
+      <div data-rise>
+        <p class="tc-kicker">{siteText.shared.footer.contactsLabel}</p>
+        <h2>{siteText.pages.about.contactsHeadingTop}<br /><em>{siteText.pages.about.contactsHeadingBottom}</em></h2><p class="tc-large-copy">{siteText.pages.about.contactsLead}</p>
       </div>
-    </div>
-  </section>
-
-  <section class="aboutGallery" aria-label={aboutText.teamGalleryAria}>
-    <div class="aboutGallery__grid">
-      <div class="aboutCard aboutCard--1" style={`--img: url(${resolveAssetPath("img/about/teacha-about-team-01.webp")});`}></div>
-      <div class="aboutCard aboutCard--2" style={`--img: url(${resolveAssetPath("img/about/teacha-about-team-02.webp")});`}></div>
-      <div class="aboutCard aboutCard--3" style={`--img: url(${resolveAssetPath("img/about/teacha-about-team-03.webp")});`}></div>
-      <div class="aboutCard aboutCard--4" style={`--img: url(${resolveAssetPath("img/about/teacha-about-team-04.webp")});`}></div>
-      <div class="aboutCard aboutCard--5" style={`--img: url(${resolveAssetPath("img/founders/teacha-founders-daryna-dariia.webp")});`}></div>
-    </div>
-  </section>
-
-  <TestBanner className="section--a" />
-
-  <section
-    class="aboutContacts"
-    id="contacts"
-    aria-labelledby="about-contacts-title"
-    data-reveal="scroll"
-    itemscope
-    itemtype="https://schema.org/LocalBusiness"
-  >
-    <div class="aboutContacts__inner">
-      <header class="aboutContacts__head sectionTitle sectionTitle--center sectionTitle--accentBottom">
-        <h2 id="about-contacts-title" class="sectionTitle__line sectionTitle__line--a" data-reveal-item="1">
-          {aboutText.contactsHeadingTop}
-        </h2>
-        <div class="sectionTitle__line sectionTitle__line--b" data-reveal-item="2">{aboutText.contactsHeadingBottom}</div>
-        <p class="aboutContacts__lead" itemprop="description" data-reveal-item="3">
-          {aboutText.contactsLead}
-        </p>
-      </header>
-
-      <div class="aboutContacts__grid">
-        <article class="aboutContacts__card" data-reveal-item="4">
-          <h3>{aboutText.contactCardTitle}</h3>
-          <div class="aboutContacts__phones">
-            {
-              contact.phones.map((phone) => (
-                <a class="aboutContacts__link" href={`tel:${phone.raw}`} itemprop="telephone">{phone.label}</a>
-              ))
-            }
-          </div>
-          <a class="aboutContacts__link" href={`mailto:${contact.email}`} itemprop="email">{contact.email}</a>
-        </article>
-
-        <article class="aboutContacts__card" data-reveal-item="5">
-          <h3>{aboutText.locationCardTitle}</h3>
-          <p class="aboutContacts__address" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-            <span itemprop="streetAddress">{contact.street}</span>, <span itemprop="addressLocality">{contact.city}</span>,{" "}
-            <span itemprop="addressCountry">{contact.country}</span>
-          </p>
-          <a class="aboutContacts__link aboutContacts__link--map" href={contact.mapUrl} target="_blank" rel="noopener noreferrer" itemprop="hasMap">
-            {aboutText.openMap}
+      <div class="tc-contact-grid">
+        <div data-rise>
+          <h3>{siteText.pages.about.contactCardTitle}</h3>
+          {c.phones.map((p) => (
+            <a href={`tel:${p.raw}`}>{p.label}</a>
+          ))}
+          <a href={`mailto:${c.email}`}>{c.email}</a>
+        </div>
+        <div data-rise>
+          <h3>{siteText.pages.about.locationCardTitle}</h3>
+          <p>{c.street}, {c.city}, {c.country}</p>
+          <a
+            class="tc-text-link"
+            href={c.mapUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {siteText.pages.about.openMap}
           </a>
-        </article>
-
-        <article class="aboutContacts__card" data-reveal-item="6">
-          <h3>{aboutText.hoursCardTitle}</h3>
-          <p class="aboutContacts__time">{contact.openingHoursLabel}</p>
-          <p class="aboutContacts__note">{contact.openingHoursNote}</p>
-          <meta itemprop="openingHours" content={contact.openingHoursMeta} />
-        </article>
+        </div>
+        <div data-rise>
+          <h3>{siteText.pages.about.hoursCardTitle}</h3>
+          <p>{c.openingHoursLabel}</p>
+          <p>{c.openingHoursNote}</p>
+        </div>
       </div>
-
-      <div class="aboutContacts__map" data-reveal-item="7">
-        <iframe
-          title={contact.mapTitle}
-          src={contact.mapEmbedUrl}
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          allowfullscreen
-        ></iframe>
-      </div>
-
-      <div class="aboutContacts__social" data-reveal-item="8" aria-label={contact.socialsAria}>
-        <SocialLink
-          href={contact.instagramUrl}
-          network="instagram"
-          ariaLabel={siteText.shared.social.instagramLabel}
-          itemprop="sameAs"
-        />
-        <SocialLink
-          href={contact.tiktokUrl}
-          network="tiktok"
-          ariaLabel={siteText.shared.social.tiktokLabel}
-          itemprop="sameAs"
-        />
-      </div>
-    </div>
-
-    <meta itemprop="name" content={siteText.shared.brandName} />
-    <meta itemprop="url" content={toAbsolute("/about/")} />
-    <meta itemprop="image" content={toAbsolute(resolveAssetPath("img/layout/logo.png"))} />
-    <div class="visuallyHidden" itemprop="geo" itemscope itemtype="https://schema.org/GeoCoordinates">
-      <meta itemprop="latitude" content="50.47026" />
-      <meta itemprop="longitude" content="30.357656" />
+      <iframe
+        class="tc-contact-map"
+        src={c.mapEmbedUrl}
+        title={c.mapTitle}
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
     </div>
   </section>
 </BaseLayout>

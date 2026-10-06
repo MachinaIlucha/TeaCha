@@ -1,38 +1,8 @@
 ---
-/**
- * TeaCha website
- * Design & development: Ілля Пінчук Вадимович
- * © 2026. All rights reserved.
- */
-
-import BaseLayout from "../layouts/BaseLayout.astro";
-import { siteText } from "../data/siteText";
-
-const base = import.meta.env.BASE_URL;
-const pageText = siteText.pages.notFound;
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteText } from '../data/siteText';
+const page = siteText.pages.notFound;
 ---
-
-<BaseLayout
-  title={pageText.title}
-  description={pageText.description}
-  canonical="/404/"
-  bodyClass="page-404"
-  noindex={true}
->
-  <section class="notFound sectionShell section--b" data-reveal="load">
-    <div class="container notFound__wrap">
-      <p class="notFound__code" data-reveal-item="1">{pageText.code}</p>
-      <h1 class="notFound__title" data-reveal-item="2">{pageText.heading}</h1>
-      <p class="notFound__text" data-reveal-item="3">
-        {pageText.text}
-      </p>
-
-      <div class="notFound__actions" data-reveal-item="4">
-        <a class="pill notFound__btn notFound__btn--solid" href={`${base}${pageText.links[0].href}`}>{pageText.links[0].label}</a>
-        <a class="pill notFound__btn" href={`${base}${pageText.links[1].href}`}>{pageText.links[1].label}</a>
-        <a class="pill notFound__btn" href={`${base}${pageText.links[2].href}`}>{pageText.links[2].label}</a>
-        <a class="pill notFound__btn" href={`${base}${pageText.links[3].href}`}>{pageText.links[3].label}</a>
-      </div>
-    </div>
-  </section>
+<BaseLayout title={page.title} description={page.description} noindex>
+  <section class="tc-section"><div class="tc-wrap"><p class="tc-kicker">{page.code}</p><h1 class="tc-page-title">{page.heading}</h1><p style="margin:25px 0 35px">{page.text}</p><div class="tc-actions">{page.links.map((link, i) => <a class={i ? 'tc-text-link' : 'tc-button'} href={`/${link.href}`}>{link.label}</a>)}</div></div></section>
 </BaseLayout>

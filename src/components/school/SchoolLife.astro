@@ -1,0 +1,140 @@
+---
+import { siteText } from "../../data/siteText";
+import Brand from "./Brand.astro";
+---
+
+<section class="tc-section tc-school-life" id="school-life">
+  <div class="tc-wrap tc-school-life__grid">
+    <div data-rise>
+      <p class="tc-kicker">{siteText.sections.facts.heading}</p>
+      <h2>{siteText.sections.chineseFormat.titleTop}<br /><em>{siteText.sections.chineseFormat.titleBottom}</em></h2>
+      <p class="tc-large-copy">{siteText.sections.facts.items[1].text}</p>
+      <div
+        class="tc-service-options"
+        data-glide
+        aria-label="Зручності навчання"
+      >
+        <button class="is-active" data-service="student" aria-pressed="true">
+          <span>01</span>
+          <div>
+            <strong>Матеріали</strong>
+            <small>Доступ до Miro, Canva або Figma з усіма матеріалами з уроків</small>
+          </div>
+        </button>
+        <button data-service="parent" aria-pressed="false">
+          <span>02</span>
+          <div>
+            <strong>Індивідуальна програма навчання</strong>
+            <small>Індивідуальний навчальний план для кожного</small>
+          </div>
+        </button>
+        <button data-service="telegram" aria-pressed="false">
+          <span>03</span>
+          <div>
+            <strong>Формати</strong>
+            <small>Індивідуальні, парні, групові (3-5 ос.)</small>
+          </div>
+        </button>
+      </div>
+    </div>
+    <div class="tc-service-stage" data-rise>
+      <span class="tc-service-stage__note">
+        Онлайн та
+        <br />
+        <em>офлайн у м.Київ</em>
+      </span>
+      <div class="tc-service-demo" data-service-panel="student">
+        <div class="tc-demo-top">
+          <Brand compact />
+          <span class="tc-demo-avatar">М</span>
+        </div>
+        <p class="tc-kicker">Матеріали</p>
+        <h3>
+          TeaCha <span aria-hidden="true">✳</span>
+        </h3>
+        <p>Індивідуальна програма навчання + онлайн-словник</p>
+        <div class="tc-demo-lesson">
+          <span>Тривалість заняття</span>
+          <strong>60/90 хв</strong>
+          <div>
+            <span>Zoom / Google Meet / Microsoft Teams</span>
+            <span>Онлайн</span>
+          </div>
+        </div>
+        <div class="tc-demo-progress">
+          <span>Додатково</span>
+          <div aria-hidden="true">
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+          </div>
+          <small>Індивідуальна програма навчання + онлайн-словник</small>
+        </div>
+        <span class="tc-demo-label">TeaCha</span>
+      </div>
+      <div class="tc-service-demo" data-service-panel="parent" hidden>
+        <div class="tc-demo-top">
+          <Brand compact />
+          <span class="tc-demo-avatar">В</span>
+        </div>
+        <p class="tc-kicker">Додатково</p>
+        <h3>Індивідуальний навчальний план для кожного</h3>
+        <p>Чітка структура уроків і дедлайни навчання</p>
+        <div class="tc-demo-lesson">
+          <span>Матеріали</span>
+          <strong>Доступ до Miro, Canva або Figma з усіма матеріалами з уроків</strong>
+          <div>
+            <span>Наступне заняття</span>
+            <span>П’ятниця · 16:00</span>
+          </div>
+        </div>
+        <div class="tc-demo-progress">
+          <strong>Онлайн та офлайн у Києві</strong>
+          <p>Індивідуальне, парне, групове та
+корпоративне навчання</p>
+        </div>
+        <span class="tc-demo-label">TeaCha</span>
+      </div>
+      <div
+        class="tc-service-demo tc-telegram"
+        data-service-panel="telegram"
+        hidden
+      >
+        <div class="tc-telegram__head">
+          <span class="tc-demo-avatar">T</span>
+          <div>
+            <strong>TeaCha</strong>
+            <small>КОНТАКТИ</small>
+          </div>
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path d="m3 10 18-7-4 18-6-5-3 3 1-6 8-7-10 6z" />
+          </svg>
+        </div>
+        <span class="tc-telegram__date">Сьогодні</span>
+        <div class="tc-message">
+          <strong>ХОЧУ ПРОБНИЙ УРОК</strong>
+          <p>За 60 хвилин визначимо Ваш рівень і обговоримо цілі навчання</p>
+          <span>09:00 ✓✓</span>
+        </div>
+        <div class="tc-message">
+          <strong>Запишись на пробний урок</strong>
+          <p>ТЕЛЕФОН АБО НІК TELEGRAM</p>
+          <span class="tc-message__action">ЗАЛИШИТИ ЗАЯВКУ</span>
+          <span>09:01 ✓✓</span>
+        </div>
+        <span class="tc-demo-label">TeaCha</span>
+      </div>
+    </div>
+  </div>
+</section>

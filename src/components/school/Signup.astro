@@ -1,0 +1,67 @@
+---
+import { siteText } from "../../data/siteText";
+import PrivacyConsent from "../forms/PrivacyConsent.astro";
+import Socials from "./Socials.astro";
+import { resolveAssetPath as asset } from "../../data/assetMap";
+const corporate = /corporate|korporatyvna/.test(Astro.url.pathname);
+---
+
+<section class="tc-signup tc-section" id="start-lead">
+  <img
+    class="tc-signup__backdrop"
+    src={asset("img/start-lead/language-bookshelf-background-optimized.webp")}
+    alt=""
+    loading="lazy"
+    width="1600"
+    height="900"
+  />
+  <div class="tc-wrap tc-signup__grid">
+    <div data-rise>
+      <p class="tc-kicker">{siteText.shared.forms.trialLeadTitle}</p>
+      <h2>
+        {siteText.sections.startLead.titleTop}<br /><em>{siteText.sections.startLead.titleBottom}</em>
+      </h2>
+      <p>
+        {siteText.sections.modal.subtitle}
+      </p>
+      <div class="tc-signup__social">
+        <span>{siteText.shared.footer.contactsLabel}</span>
+        <Socials />
+      </div>
+    </div>
+    <form
+      id="start-lead-form"
+      class="tc-form"
+      method="post"
+      action="/api/lead"
+      data-rise
+    >
+      <label>
+        {siteText.shared.forms.nameLabel}
+        <input
+          name="name"
+          autocomplete="name"
+          placeholder={siteText.shared.forms.namePlaceholder}
+          required
+          minlength="2"
+        />
+      </label>
+      <label>
+        {siteText.shared.forms.contactLabel}
+        <input
+          name="contact"
+          autocomplete="tel"
+          placeholder={siteText.shared.forms.contactPlaceholder}
+          required
+        />
+      </label>
+      <PrivacyConsent />
+      <button class="tc-button" type="submit">
+        {siteText.sections.startLead.submit}
+      </button>
+      <p class="tc-form__note">
+        {corporate ? siteText.sections.corporatePrice.notes[0] : siteText.sections.priceRates.groups[3].title}
+      </p>
+    </form>
+  </div>
+</section>

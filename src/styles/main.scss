@@ -1,15 +1,7 @@
-/*!
- * TeaCha website
- * Design & development: Ілля Пінчук Вадимович
- * © 2026. All rights reserved.
- */
-
-@use "./english";
-@use "./chinese";
-@use "./corporate";
-@use "./base";
-@use "./components";
-@use "./sections";
-@use "./price";
-@use "./blog";
-@use "./section-spacing";
+/* Shared foundations plus retained article and quiz layouts. */
+@use './base';
+@use './components/toast';
+@use './components/ui/submit-fx';
+@use './components/forms/consent';
+@use './sections/level-test';
+@use './blog';

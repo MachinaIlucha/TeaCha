@@ -1,0 +1,47 @@
+---
+import { siteText } from "../../data/siteText";
+import PrivacyConsent from "../forms/PrivacyConsent.astro";
+import Brand from "./Brand.astro";
+const corporate = /corporate|korporatyvna/.test(Astro.url.pathname);
+---
+
+<dialog class="tc-modal" id="consultModal" aria-labelledby="consult-title">
+  <button class="tc-modal__close" data-close-modal aria-label="Закрити форму">
+    ×
+  </button>
+  <Brand />
+  <p class="tc-kicker">{siteText.shared.forms.trialLeadTitle}</p>
+  <h2 id="consult-title">
+    {siteText.sections.modal.title}
+  </h2>
+  <p>{siteText.sections.modal.subtitle}</p>
+  <form id="consultForm" class="tc-form" method="post" action="/api/lead">
+    <label>
+      {siteText.shared.forms.nameLabel}
+      <input
+        name="name"
+        autocomplete="name"
+        placeholder={siteText.shared.forms.namePlaceholder}
+        required
+        minlength="2"
+      />
+    </label>
+    <label>
+      {siteText.shared.forms.contactLabel}
+      <input
+        name="contact"
+        autocomplete="tel"
+        placeholder={siteText.shared.forms.contactPlaceholder}
+        required
+      />
+    </label>
+    <PrivacyConsent />
+    <button class="tc-button" type="submit">
+      {siteText.shared.forms.submitButton}
+    </button>
+    <p class="tc-form__note">
+      {corporate ? siteText.sections.corporatePrice.notes[0] : siteText.sections.priceRates.groups[3].title}
+    </p>
+  </form>
+  <div class="toasts" aria-live="polite" aria-atomic="true"></div>
+</dialog>

@@ -27,3 +27,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Local preview logs, comparison reports and screenshots
+artifacts/

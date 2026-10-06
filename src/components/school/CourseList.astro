@@ -1,0 +1,22 @@
+---
+import { siteText } from "../../data/siteText";
+import Arrow from "./Arrow.astro";
+const { language = "english", related = false } = Astro.props;
+const text = language === "english" ? siteText.sections.englishPrograms : siteText.sections.chinesePrograms;
+const relatedText = language === "english" ? siteText.sections.englishRelated : siteText.sections.chineseRelated;
+const items = text.items.filter((item) => Astro.url.pathname !== `/${item.href}`);
+---
+<section class="tc-section">
+  <div class="tc-wrap">
+    <div class="tc-section-head" data-rise>
+      <div><h2>{related ? relatedText.title : text.titleTop}{!related && <><br /><em>{text.titleBottom}</em></>}</h2></div>
+      <p class="tc-section-intro">{text.subtitle}</p>
+    </div>
+    <div class="tc-course-list">
+      {items.map((item, i) => <a class="tc-course-row" href={`/${item.href}`} data-rise>
+        <span>{String(i + 1).padStart(2, "0")}</span><h3>{item.title}</h3><p>{item.text}</p><Arrow />
+      </a>)}
+    </div>
+    {related && <a class="tc-text-link" href={`/${relatedText.allCoursesHref}`}>{relatedText.allCoursesLabel}</a>}
+  </div>
+</section>

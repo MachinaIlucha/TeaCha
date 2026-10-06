@@ -1,0 +1,90 @@
+---
+import { tuition, packs } from "../../data/school";
+import { siteText } from "../../data/siteText";
+const text = siteText.sections.priceRates;
+const lessonLabel = (n: number) => n === 1 ? text.singleLessonLabel : text[`lessons${n}Label`];
+---
+
+<section class="tc-section tc-pricing" id="prices">
+  <div class="tc-wrap">
+    <div class="tc-section-head" data-rise>
+      <div>
+        <p class="tc-kicker">{text.hint}</p>
+        <h2>{text.titleTop}<br /><em>{text.titleBottom}</em></h2>
+      </div>
+      <p class="tc-section-intro">{siteText.pages.prices.lead}</p>
+    </div>
+    <div class="tc-pack-selector" data-rise>
+      <span>{text.titleTop}</span>
+      <div
+        class="tc-segmented"
+        data-glide="horizontal"
+        aria-label="Кількість занять"
+      >
+        {packs.map((n) => (
+          <button
+            data-pack={n}
+            aria-pressed={n === 8}
+            class:list={[n === 8 && "is-active"]}
+          >
+            {lessonLabel(n)}
+          </button>
+        ))}
+      </div>
+    </div>
+    <div class="tc-price-grid">
+      {Object.entries(tuition).map(([key, value], i) => (
+        <article
+          class:list={["tc-price", i === 0 && "tc-price--featured"]}
+          data-rise
+          style={`--delay:${i * 70}ms`}
+        >
+          <div class="tc-price__top">
+            <span>{value.sizes}</span>
+            <svg
+              class="tc-format-icon"
+              viewBox="0 0 36 28"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              aria-hidden="true"
+            >
+              {Array.from({ length: i + 1 }, (_, j) => (
+                <g transform={`translate(${18 - (i * 10) / 2 + j * 10},0)`}>
+                  <circle cx="0" cy="7" r="4" />
+                  <path d="M-6 24v-4a6 6 0 0 1 12 0v4" />
+                </g>
+              ))}
+            </svg>
+          </div>
+          <h3>{value.label}</h3>
+          <p>{value.note}</p>
+          <div class="tc-price__amount">
+            <strong data-tuition={key}>{value.prices[1]}</strong>
+            <span>грн / 1 урок</span>
+          </div>
+          <p class="tc-price__total" data-tuition-total={key}>{lessonLabel(8)}</p>
+          <button
+            class:list={["tc-button", i !== 0 && "tc-button--outline"]}
+            data-open-modal
+          >
+            {text.cta}
+          </button>
+        </article>
+      ))}
+    </div>
+    <div class="tc-trial-note" data-rise>
+      <span class="tc-spark" aria-hidden="true">
+        ✳
+      </span>
+      <div>
+        <strong>{text.groups[3].title}</strong>
+        <p>{text.trialCardLabel} · {text.trialLessonLabel} · 200 грн</p>
+      </div>
+      <button class="tc-text-link" data-open-modal>
+        {text.cta}
+      </button>
+    </div>
+    <noscript><p class="tc-nojs-note">{text.hint}</p></noscript>
+  </div>
+</section>

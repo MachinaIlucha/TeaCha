@@ -1,0 +1,19 @@
+---
+import { siteText } from "../../data/siteText";
+const { steps = siteText.sections.process.steps, footnote = "" } = Astro.props;
+---
+<section class="tc-section tc-approach" id="approach">
+  <div class="tc-wrap tc-approach__grid">
+    <div class="tc-approach__title" data-rise>
+      <h2>{siteText.sections.process.titleTop}<br /><em>{siteText.sections.process.titleBottom}</em></h2>
+      {footnote && <p>{footnote}</p>}
+      <button class="tc-button" data-open-modal>{siteText.shared.forms.trialButton}</button>
+    </div>
+    <div class="tc-steps" data-learning-path>
+      {steps.map((step: any, i: number) => <article class="tc-step" data-rise style={`--delay:${i * 70}ms`}>
+        <span class="tc-step__number">{i + 1}</span>
+        <div><p set:html={step.text ?? [step.title, step.description].filter(Boolean).join("<br />")} /></div>
+      </article>)}
+    </div>
+  </div>
+</section>

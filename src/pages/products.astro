@@ -1,127 +1,61 @@
 ---
-/**
- * TeaCha website
- * Design & development: Ілля Пінчук Вадимович
- * © 2026. All rights reserved.
- */
-
 import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/school/PageHero.astro";
 import { siteText } from "../data/siteText";
-import { resolveAssetPath } from "../data/assetMap";
-
-const base = import.meta.env.BASE_URL;
-const pageText = siteText.pages.products;
+import { resolveAssetPath as asset } from "../data/assetMap";
+const photos = [
+  ["teacha-first-tshirt-front.webp", "teacha-first-tshirt-back.webp"],
+  ["teacha-second-tshirt-front.webp", "teacha-second-tshirt-back.webp"],
+  ["teacha-stickers-pack.webp", "teacha-stickers-pack-alt.webp"],
+];
 ---
 
 <BaseLayout
-  title={pageText.title}
-  description={pageText.description}
-  breadcrumbs={[{ name: pageText.breadcrumb, href: "/products/" }]}
-  bodyClass="page--products"
+  title={siteText.pages.products.title}
+  description={siteText.pages.products.description}
   noindex
 >
-  <section class="productsPage sectionShell section--b section--ink">
-    <div class="container">
-      <header class="productsPage__head" data-reveal="scroll">
-        <h1 class="sectionTitle sectionTitle--inline sectionTitle--center">
-          <span class="sectionTitle__line sectionTitle__line--a" data-reveal-item="1">{pageText.headingTop}</span>
-          <span class="sectionTitle__line sectionTitle__line--b" data-reveal-item="2">{pageText.headingBottom}</span>
-        </h1>
-      </header>
-
-      <div class="productsGrid">
-        <article class="productCard" data-reveal="scroll">
-          <div
-            class="productCard__media productCard__media--scroll"
-            data-reveal-item="1"
-            aria-label={pageText.items[0].galleryAria}
-          >
-            <div class="productCard__mediaTrack">
-              <img
-                class="productCard__img"
-                src={resolveAssetPath("img/products/teacha-first-tshirt-front.webp")}
-                alt={pageText.items[0].alt1}
-                loading="lazy"
-                decoding="async"
-                width="1181"
-                height="1181"
-              />
-              <img
-                class="productCard__img"
-                src={resolveAssetPath("img/products/teacha-first-tshirt-back.webp")}
-                alt={pageText.items[0].alt2}
-                loading="lazy"
-                decoding="async"
-                width="1181"
-                height="1181"
-              />
+  <PageHero
+    title={siteText.pages.products.headingTop}
+    accent={siteText.pages.products.headingBottom}
+    crumbs={[{ name: siteText.pages.products.breadcrumb, href: "/products/" }]}
+    cta={false}
+  />
+  <section class="tc-section">
+    <div class="tc-wrap">
+      <div class="tc-merch-grid">
+        {siteText.pages.products.items.map((item, i) => (
+          <article class="tc-merch" data-rise>
+            <div
+              class="tc-merch__photos"
+              aria-label={item.galleryAria}
+              tabindex="0"
+            >
+              {photos[i].map((photo, j) => (
+                <img
+                  src={asset(`img/products/${photo}`)}
+                  alt={j ? item.alt2 : item.alt1}
+                  loading="lazy"
+                  width="600"
+                  height="700"
+                />
+              ))}
             </div>
-          </div>
-          <h3 class="productCard__name" data-reveal-item="2">{pageText.items[0].name}</h3>
-          <p class="productCard__price" data-reveal-item="3">{pageText.items[0].price}</p>
-        </article>
-
-        <article class="productCard" data-reveal="scroll">
-          <div
-            class="productCard__media productCard__media--scroll"
-            data-reveal-item="1"
-            aria-label={pageText.items[1].galleryAria}
-          >
-            <div class="productCard__mediaTrack">
-              <img
-                class="productCard__img"
-                src={resolveAssetPath("img/products/teacha-second-tshirt-front.webp")}
-                alt={pageText.items[1].alt1}
-                loading="lazy"
-                decoding="async"
-                width="1181"
-                height="1181"
-              />
-              <img
-                class="productCard__img"
-                src={resolveAssetPath("img/products/teacha-second-tshirt-back.webp")}
-                alt={pageText.items[1].alt2}
-                loading="lazy"
-                decoding="async"
-                width="1181"
-                height="1181"
-              />
+            <span class="tc-kicker">Гортайте фото ↔</span>
+            <h2>{item.name}</h2>
+            <div>
+              <span>{item.price}</span>
+              <a
+                class="tc-text-link"
+                href={siteText.shared.contact.instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {siteText.shared.forms.trialButton}
+              </a>
             </div>
-          </div>
-          <h3 class="productCard__name" data-reveal-item="2">{pageText.items[1].name}</h3>
-          <p class="productCard__price" data-reveal-item="3">{pageText.items[1].price}</p>
-        </article>
-
-        <article class="productCard productCard--wide" data-reveal="scroll">
-          <div
-            class="productCard__media productCard__media--scroll"
-            data-reveal-item="1"
-            aria-label={pageText.items[2].galleryAria}
-          >
-            <div class="productCard__mediaTrack">
-              <img
-                class="productCard__img"
-                src={resolveAssetPath("img/products/teacha-stickers-pack.webp")}
-                alt={pageText.items[2].alt1}
-                loading="lazy"
-                decoding="async"
-                width="913"
-                height="1280"
-              />
-              <img
-                class="productCard__img productCard__img--stickersAlt"
-                src={resolveAssetPath("img/products/teacha-stickers-pack-alt.webp")}
-                alt={pageText.items[2].alt2}
-                loading="lazy"
-                decoding="async"
-                width="1659"
-                height="2488"
-              />
-            </div>
-          </div>
-          <h3 class="productCard__name" data-reveal-item="2">{pageText.items[2].name}</h3>
-          <p class="productCard__price" data-reveal-item="3">{pageText.items[2].price}</p>
-        </article>
+          </article>
+        ))}
       </div>
     </div>
   </section>

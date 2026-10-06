@@ -13,61 +13,91 @@ const site = Astro.site ?? new URL("https://teacha.com.ua");
 const testPageUrl = new URL("/english/test/", site).toString();
 
 const levels = [
-  { code: "A1", name: "Beginner",           nameUk: "Початківець",     desc: "Розумієш та вживаєш прості вирази. Можеш представитись і спілкуватись на базові теми." },
-  { code: "A2", name: "Elementary",         nameUk: "Елементарний",    desc: "Спілкуєшся у простих ситуаціях, описуєш своє оточення та найближчі потреби." },
-  { code: "B1", name: "Intermediate",       nameUk: "Середній",        desc: "Справляєшся з більшістю ситуацій у подорожах і на роботі, описуєш події та плани." },
-  { code: "B2", name: "Upper-Intermediate", nameUk: "Вище середнього", desc: "Спілкуєшся вільно й спонтанно, розумієш складні тексти, аргументуєш свою позицію." },
-  { code: "C1", name: "Advanced",           nameUk: "Просунутий",      desc: "Гнучко й ефективно використовуєш мову в академічних, соціальних та професійних контекстах." },
+  {
+    code: "A1",
+    name: "Beginner",
+    nameUk: "Початківець",
+    desc: "Розумієш та вживаєш прості вирази. Можеш представитись і спілкуватись на базові теми.",
+  },
+  {
+    code: "A2",
+    name: "Elementary",
+    nameUk: "Елементарний",
+    desc: "Спілкуєшся у простих ситуаціях, описуєш своє оточення та найближчі потреби.",
+  },
+  {
+    code: "B1",
+    name: "Intermediate",
+    nameUk: "Середній",
+    desc: "Справляєшся з більшістю ситуацій у подорожах і на роботі, описуєш події та плани.",
+  },
+  {
+    code: "B2",
+    name: "Upper-Intermediate",
+    nameUk: "Вище середнього",
+    desc: "Спілкуєшся вільно й спонтанно, розумієш складні тексти, аргументуєш свою позицію.",
+  },
+  {
+    code: "C1",
+    name: "Advanced",
+    nameUk: "Просунутий",
+    desc: "Гнучко й ефективно використовуєш мову в академічних, соціальних та професійних контекстах.",
+  },
 ];
 
 const quizSchema = {
   "@context": "https://schema.org",
   "@type": "Quiz",
-  "name": "Тест на рівень англійської мови від A1 до C1",
-  "description": "Безкоштовний онлайн-тест для визначення рівня англійської мови за шкалою CEFR — від Beginner (A1) до Advanced (C1). 20 питань, 3–5 хвилин. Результат одразу.",
-  "url": testPageUrl,
-  "inLanguage": "uk-UA",
-  "isAccessibleForFree": true,
-  "timeRequired": "PT5M",
-  "educationalLevel": "A1, A2, B1, B2, C1",
-  "about": { "@type": "Thing", "name": "Рівень знань англійської мови CEFR" },
-  "provider": { "@type": "EducationalOrganization", "name": "TeaCha", "url": site.toString() },
+  name: "Тест на рівень англійської мови від A1 до C1",
+  description:
+    "Безкоштовний онлайн-тест для визначення рівня англійської мови за шкалою CEFR — від Beginner (A1) до Advanced (C1). 20 питань, 3–5 хвилин. Результат одразу.",
+  url: testPageUrl,
+  inLanguage: "uk-UA",
+  isAccessibleForFree: true,
+  timeRequired: "PT5M",
+  educationalLevel: "A1, A2, B1, B2, C1",
+  about: { "@type": "Thing", name: "Рівень знань англійської мови CEFR" },
+  provider: {
+    "@type": "EducationalOrganization",
+    name: "TeaCha",
+    url: site.toString(),
+  },
 };
 
 const testFaqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "mainEntity": [
+  mainEntity: [
     {
       "@type": "Question",
-      "name": "Як безкоштовно визначити рівень англійської мови онлайн?",
-      "acceptedAnswer": {
+      name: "Як безкоштовно визначити рівень англійської мови онлайн?",
+      acceptedAnswer: {
         "@type": "Answer",
-        "text": "Пройдіть безкоштовний тест TeaCha з 20 питань на граматику, лексику та читання. За 3–5 хвилин ви отримаєте результат за шкалою CEFR від A1 до C1 та персональні рекомендації щодо курсів. Реєстрація не потрібна.",
+        text: "Пройдіть безкоштовний тест TeaCha з 20 питань на граматику, лексику та читання. За 3–5 хвилин ви отримаєте результат за шкалою CEFR від A1 до C1 та персональні рекомендації щодо курсів. Реєстрація не потрібна.",
       },
     },
     {
       "@type": "Question",
-      "name": "Що таке рівні англійської A1, A2, B1, B2, C1?",
-      "acceptedAnswer": {
+      name: "Що таке рівні англійської A1, A2, B1, B2, C1?",
+      acceptedAnswer: {
         "@type": "Answer",
-        "text": "Це рівні шкали CEFR (Common European Framework of Reference): A1 — початківець, A2 — елементарний, B1 — середній, B2 — вище середнього, C1 — просунутий. Вони показують, наскільки вільно ви спілкуєтесь англійською у повсякденних, академічних та професійних ситуаціях.",
+        text: "Це рівні шкали CEFR (Common European Framework of Reference): A1 — початківець, A2 — елементарний, B1 — середній, B2 — вище середнього, C1 — просунутий. Вони показують, наскільки вільно ви спілкуєтесь англійською у повсякденних, академічних та професійних ситуаціях.",
       },
     },
     {
       "@type": "Question",
-      "name": "Скільки часу займає тест на рівень англійської?",
-      "acceptedAnswer": {
+      name: "Скільки часу займає тест на рівень англійської?",
+      acceptedAnswer: {
         "@type": "Answer",
-        "text": "Тест складається з 20 питань і займає приблизно 3–5 хвилин. Часового обмеження немає — відповідайте у власному темпі. Результат з'являється одразу після останнього питання.",
+        text: "Тест складається з 20 питань і займає приблизно 3–5 хвилин. Часового обмеження немає — відповідайте у власному темпі. Результат з'являється одразу після останнього питання.",
       },
     },
     {
       "@type": "Question",
-      "name": "Чи потрібна реєстрація для тесту на рівень англійської?",
-      "acceptedAnswer": {
+      name: "Чи потрібна реєстрація для тесту на рівень англійської?",
+      acceptedAnswer: {
         "@type": "Answer",
-        "text": "Ні, реєстрація не потрібна. Тест TeaCha повністю безкоштовний і доступний миттєво без жодних обмежень.",
+        text: "Ні, реєстрація не потрібна. Тест TeaCha повністю безкоштовний і доступний миттєво без жодних обмежень.",
       },
     },
   ],
@@ -86,10 +116,11 @@ const testFaqSchema = {
 >
   <section class="levelTest sectionShell section--a" id="level-test">
     <div class="container">
-
       <!-- ═══════ Welcome Screen ═══════ -->
-      <div class="levelTest__screen levelTest__screen--welcome is-active" data-test-screen="welcome">
-
+      <div
+        class="levelTest__screen levelTest__screen--welcome is-active"
+        data-test-screen="welcome"
+      >
         <!-- decorative floating shapes -->
         <div class="levelTest__deco" aria-hidden="true">
           <span class="levelTest__decoShape levelTest__decoShape--1">A</span>
@@ -100,20 +131,34 @@ const testFaqSchema = {
 
         <div class="levelTest__welcomeInner">
           <div class="levelTest__welcomeContent">
-
             <div class="levelTest__badge" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              <svg
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+              </svg>
               <span>Безкоштовний тест</span>
             </div>
 
             <div class="sectionTitle sectionTitle--center sectionTitle--accentBottom">
-              <h1 class="sectionTitle__line sectionTitle__line--a">ВИЗНАЧ СВІЙ РІВЕНЬ</h1>
-              <div class="sectionTitle__line sectionTitle__line--b">АНГЛІЙСЬКОЇ</div>
+              <h1 class="sectionTitle__line sectionTitle__line--a">
+                ВИЗНАЧ СВІЙ РІВЕНЬ
+              </h1>
+              <div class="sectionTitle__line sectionTitle__line--b">
+                АНГЛІЙСЬКОЇ
+              </div>
             </div>
 
             <p class="levelTest__welcomeSubtitle">
-              Пройди швидкий тест і дізнайся свій приблизний рівень
-              за шкалою CEFR&nbsp;— від&nbsp;A1&nbsp;до&nbsp;C1
+              Пройди швидкий тест і дізнайся свій приблизний рівень за шкалою
+              CEFR&nbsp;— від&nbsp;A1&nbsp;до&nbsp;C1
             </p>
 
             <!-- level scale visual -->
@@ -129,46 +174,98 @@ const testFaqSchema = {
             <div class="levelTest__welcomeMeta">
               <div class="levelTest__metaItem">
                 <span class="levelTest__metaIcon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
                   </svg>
                 </span>
                 <span>3–5 хвилин</span>
               </div>
               <div class="levelTest__metaItem">
                 <span class="levelTest__metaIcon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
                   </svg>
                 </span>
                 <span>20 питань</span>
               </div>
               <div class="levelTest__metaItem">
                 <span class="levelTest__metaIcon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/>
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
+                    <path d="m9 12 2 2 4-4" />
                   </svg>
                 </span>
                 <span>Результат одразу</span>
               </div>
             </div>
 
-            <button class="btn btn--primary btn--lg levelTest__startBtn" type="button" data-test-start>
+            <button
+              class="btn btn--primary btn--lg levelTest__startBtn"
+              type="button"
+              data-test-start
+            >
               Розпочати тест
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 8px;"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              <svg
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                style="margin-left: 8px;"
+              >
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
             </button>
 
             <p class="levelTest__welcomeNote">
-              Тест є орієнтовним інструментом оцінки рівня. Для точного визначення
-              рекомендуємо пройти <a href={`${base}english/`}>пробний урок</a> з викладачем.
+              Тест є орієнтовним інструментом оцінки рівня. Для точного
+              визначення рекомендуємо пройти{" "}
+              <a href={`${base}english/`}>пробний урок</a> з викладачем.
             </p>
           </div>
         </div>
       </div>
 
       <!-- ═══════ Question Screen ═══════ -->
-      <div class="levelTest__screen levelTest__screen--question" data-test-screen="question" hidden>
-
+      <div
+        class="levelTest__screen levelTest__screen--question"
+        data-test-screen="question"
+        hidden
+      >
         <div class="levelTest__questionHeader">
           <div class="levelTest__progress">
             <div class="levelTest__progressBar">
@@ -176,16 +273,33 @@ const testFaqSchema = {
             </div>
           </div>
           <div class="levelTest__questionMeta">
-            <span class="levelTest__counter" data-test-counter>1 / 20</span>
-            <span class="levelTest__levelBand" data-test-level-band>A1</span>
-            <span class="levelTest__typeBadge" data-test-type>Grammar</span>
+            <span class="levelTest__counter" data-test-counter>
+              1 / 20
+            </span>
+            <span class="levelTest__levelBand" data-test-level-band>
+              A1
+            </span>
+            <span class="levelTest__typeBadge" data-test-type>
+              Grammar
+            </span>
           </div>
         </div>
 
         <div class="levelTest__questionWrap">
-          <div class="levelTest__questionNumber" data-test-q-number aria-hidden="true">01</div>
+          <div
+            class="levelTest__questionNumber"
+            data-test-q-number
+            aria-hidden="true"
+          >
+            01
+          </div>
           <h2 class="levelTest__question" data-test-question></h2>
-          <div class="levelTest__options" data-test-options role="group" aria-label="Варіанти відповідей"></div>
+          <div
+            class="levelTest__options"
+            data-test-options
+            role="group"
+            aria-label="Варіанти відповідей"
+          ></div>
         </div>
 
         <!-- step dots -->
@@ -193,23 +307,37 @@ const testFaqSchema = {
       </div>
 
       <!-- ═══════ Result Screen ═══════ -->
-      <div class="levelTest__screen levelTest__screen--result" data-test-screen="result" hidden>
+      <div
+        class="levelTest__screen levelTest__screen--result"
+        data-test-screen="result"
+        hidden
+      >
         <div class="levelTest__resultInner">
-
           <div class="levelTest__resultCard">
             <div class="levelTest__resultHero">
               <div class="levelTest__levelRing">
-                <div class="levelTest__levelCircle" data-test-result-level>B1</div>
+                <div class="levelTest__levelCircle" data-test-result-level>
+                  B1
+                </div>
               </div>
-              <h2 class="levelTest__resultTitle" data-test-result-title>B1 — Intermediate</h2>
-              <p class="levelTest__resultSubtitle" data-test-result-subtitle>Середній</p>
+              <h2 class="levelTest__resultTitle" data-test-result-title>
+                B1 — Intermediate
+              </h2>
+              <p class="levelTest__resultSubtitle" data-test-result-subtitle>
+                Середній
+              </p>
             </div>
 
             <p class="levelTest__resultDesc" data-test-result-desc></p>
 
             <div class="levelTest__resultScoreRow">
               <div class="levelTest__resultScoreItem">
-                <span class="levelTest__resultScoreValue" data-test-result-score>0</span>
+                <span
+                  class="levelTest__resultScoreValue"
+                  data-test-result-score
+                >
+                  0
+                </span>
                 <span class="levelTest__resultScoreLabel">правильних</span>
               </div>
               <div class="levelTest__resultScoreDivider"></div>
@@ -232,37 +360,53 @@ const testFaqSchema = {
               пробний урок — викладач допоможе скласти персональний план навчання.
             </p>
 
-            <div class="levelTest__recommendations" data-test-recommendations></div>
+            <div
+              class="levelTest__recommendations"
+              data-test-recommendations
+            ></div>
 
             <div class="levelTest__ctaButtons">
               <button class="btn btn--primary" type="button" data-open-modal>
                 Записатись на пробний урок
               </button>
-              <button class="btn btn--secondary" type="button" data-test-restart>
+              <button
+                class="btn btn--secondary"
+                type="button"
+                data-test-restart
+              >
                 Пройти тест ще раз
               </button>
             </div>
           </div>
-
         </div>
       </div>
-
     </div>
   </section>
 
   <!-- ═══════ Static CEFR info — SEO text + schema support ═══════ -->
-  <section class="sectionShell section--b levelTestInfo" aria-label="Про рівні англійської мови CEFR">
+  <section
+    class="sectionShell section--b levelTestInfo"
+    aria-label="Про рівні англійської мови CEFR"
+  >
     <div class="container">
       <div class="levelTestInfo__inner" data-reveal="scroll">
-        <div class="sectionTitle sectionTitle--center sectionTitle--accentBottom" data-reveal-item="1">
-          <h2 class="sectionTitle__line sectionTitle__line--a">ЩО ТАКЕ РІВНІ</h2>
-          <div class="sectionTitle__line sectionTitle__line--b">АНГЛІЙСЬКОЇ І CEFR?</div>
+        <div
+          class="sectionTitle sectionTitle--center sectionTitle--accentBottom"
+          data-reveal-item="1"
+        >
+          <h2 class="sectionTitle__line sectionTitle__line--a">
+            ЩО ТАКЕ РІВНІ
+          </h2>
+          <div class="sectionTitle__line sectionTitle__line--b">
+            АНГЛІЙСЬКОЇ І CEFR?
+          </div>
         </div>
 
         <p class="levelTestInfo__lead" data-reveal-item="2">
-          CEFR (Common European Framework of Reference) — загальноєвропейська шкала оцінки знань
-          іноземних мов. Вона використовується університетами, роботодавцями та мовними школами
-          по всьому світу і включає шість рівнів: від A1 до C2.
+          CEFR (Common European Framework of Reference) — загальноєвропейська
+          шкала оцінки знань іноземних мов. Вона використовується
+          університетами, роботодавцями та мовними школами по всьому світу і
+          включає шість рівнів: від A1 до C2.
         </p>
 
         <div class="levelTestInfo__grid" data-reveal-item="3">
@@ -278,8 +422,9 @@ const testFaqSchema = {
         </div>
 
         <p class="levelTestInfo__cta" data-reveal-item="4">
-          Визнач свій рівень прямо зараз — пройди безкоштовний тест вище та отримай
-          персональні рекомендації від TeaCha щодо найкращого курсу для тебе.
+          Визнач свій рівень прямо зараз — пройди безкоштовний тест вище та
+          отримай персональні рекомендації від TeaCha щодо найкращого курсу для
+          тебе.
         </p>
       </div>
     </div>

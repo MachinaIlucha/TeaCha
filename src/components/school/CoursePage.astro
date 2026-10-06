@@ -1,0 +1,132 @@
+---
+import { siteText } from "../../data/siteText";
+import LanguageDetails from "./LanguageDetails.astro";
+import Resources from "./Resources.astro";
+import CorporatePricing from "./CorporatePricing.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "./PageHero.astro";
+import CourseList from "./CourseList.astro";
+import Approach from "./Approach.astro";
+import Pricing from "./Pricing.astro";
+import FAQ from "./FAQ.astro";
+import TestStrip from "./TestStrip.astro";
+import { englishCourses, chineseCourses } from "../../data/school";
+import { resolveAssetPath as asset } from "../../data/assetMap";
+import { buildCourseSchema, buildFaqSchema } from "../../data/seoSchemas";
+const { language, page, course, faq } = Astro.props;
+const english = language === "english";
+const catalog = english ? englishCourses : chineseCourses;
+const entry = catalog.find(
+  (c) => Astro.url.pathname === `/${language}/${c[2]}/`,
+);
+const title = page.breadcrumb;
+const crumbs = [
+  { name: siteText.pages[language].breadcrumb, href: `/${language}/` },
+  { name: title, href: Astro.url.pathname },
+];
+const about = course.about;
+---
+
+<BaseLayout
+  title={page.title}
+  description={page.description}
+  breadcrumbs={crumbs}
+  jsonLd={[
+    buildCourseSchema({
+      name: title,
+      description: page.description,
+      path: Astro.url.pathname,
+    }),
+    buildFaqSchema(faq),
+  ]}
+>
+  <PageHero
+    titleParts={page.hero.titleParts}
+    lead={page.hero.subtitle}
+    crumbs={crumbs}
+    image={asset(
+      english
+        ? "img/hero/english/english-language-hero.webp"
+        : "img/hero/chinese/chinese-language-hero.webp",
+    )}
+    alt={page.hero.imgAlt}
+    duo={true}
+    caption={english ? "make it happen." : "一步一步"}
+  />
+  <section class="tc-section">
+    <div class="tc-wrap">
+      <div class="tc-prose-grid">
+        <div data-rise>
+
+          <h2>{about.titleTop ?? about.title?.split(" ")[0] ?? "ПРО"}<br /><em>{about.titleBottom ?? about.title?.split(" ").slice(1).join(" ") ?? "КУРС"}</em></h2>
+        </div>
+        <div class="tc-prose" data-rise>
+          <p>{about.lead}</p>
+          {about.summary && <p>{about.summary}</p>}
+        </div>
+      </div>
+      {about.highlights?.length && (
+        <div class="tc-highlights">
+          {about.highlights.map((h: any) => (
+            <div data-rise>
+              <strong>{h.value}</strong>
+              <p>{h.label}</p>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+  {about.features?.length && (
+    <section class="tc-section tc-program">
+      <div class="tc-wrap">
+        <div class="tc-section-head" data-rise>
+          <div>
+
+            <h2>{siteText.sections.courseOverview.programTitle}</h2>
+          </div>
+        </div>
+        <div class="tc-program-grid">
+          {about.features.map((f: any, i: number) => (
+            <article data-rise>
+              <p class="tc-kicker">{String(i + 1).padStart(2, "0")}</p>
+              <h3>{f.title}</h3>
+              {f.text && <p>{f.text}</p>}
+              {f.details?.map((detail) => <p>{detail}</p>)}
+
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+  {course.audience?.cards?.length && (
+    <section class="tc-section">
+      <div class="tc-wrap">
+        <div class="tc-section-head" data-rise>
+          <div>
+
+            <h2>{course.audience.title}</h2>
+          </div>
+        </div>
+        <div class="tc-program-grid">
+          {course.audience.cards.map((card: any) => (
+            <article data-rise>
+              <h3>{card.title}</h3>
+              <p>{card.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+  {english && <TestStrip />}
+  <div class="tc-wrap tc-actions"><button class="tc-button" data-open-modal>{siteText.sections.courseOverview.ctaLabel}</button><a class="tc-text-link" href="/prices/">{siteText.sections.courseOverview.pricesLabel}</a></div>
+  <LanguageDetails language={language} />
+  <Approach />
+  <LanguageDetails language={language} kind="format" />
+  <Pricing />
+  {!english && <Resources currentHref={Astro.url.pathname.slice(1)} />}
+  <FAQ items={faq} />
+  <CourseList language={language} related />
+</BaseLayout>

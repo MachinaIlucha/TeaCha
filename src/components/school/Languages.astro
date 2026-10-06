@@ -1,0 +1,92 @@
+---
+import { siteText } from "../../data/siteText";
+const { compact = false } = Astro.props;
+---
+
+<section class="tc-section tc-languages" id="languages">
+  <div class="tc-wrap">
+    <div class="tc-section-head" data-rise>
+      <div>
+        <p class="tc-kicker">{siteText.sections.facts.heading}</p>
+        <h2>{siteText.sections.englishOverview.titleTop}<br /><em>{siteText.sections.englishOverview.titleBottom}</em></h2>
+      </div>
+      <p class="tc-section-intro" set:html={siteText.sections.homeHero.subtitle} />
+    </div>
+    <div class="tc-language-grid">
+      <a
+        class="tc-language tc-language--en"
+        href="/english/"
+        data-rise
+        data-tilt
+      >
+        <div class="tc-language__top">
+          <span class="tc-tag">English</span>
+          <span class="tc-language__discover">Курси</span>
+        </div>
+        <span class="tc-language__art" aria-hidden="true">
+          say<span>YES.</span>
+          <svg viewBox="0 0 200 28" fill="none">
+            <path
+              d="M4 18Q84-2 195 12M21 24Q102 11 167 20"
+              stroke="currentColor"
+              stroke-width="3"
+              stroke-linecap="round"
+            />
+          </svg>
+        </span>
+        <div class="tc-language__body">
+          <h3>{siteText.sections.homeHero.english}</h3>
+          <div class="tc-language__phrases" aria-hidden="true">
+            <span>My next chapter.</span>
+            <span>«Я можу» — це про вас.</span>
+          </div><p>{siteText.pages.english.hero.subtitle}</p>
+          <div class="tc-language__tags">
+            <span>Життя та подорожі</span>
+            <span>Кар’єра</span>
+            <span>НМТ</span>
+          </div>
+        </div>
+      </a>
+      <a
+        class="tc-language tc-language--cn"
+        href="/chinese/"
+        data-tilt
+        data-rise
+        style="--delay:100ms"
+      >
+        <div class="tc-language__top">
+          <span class="tc-tag">中文 / Chinese</span>
+          <span class="tc-language__discover">Курси</span>
+        </div>
+        <span class="tc-language__art" aria-hidden="true">
+          <span lang="zh">你好</span>
+          <small>nǐ hǎo, майбутнє!</small>
+        </span>
+        <div class="tc-language__body">
+          <h3>{siteText.sections.homeHero.chinese}</h3>
+          <div class="tc-language__phrases" aria-hidden="true">
+            <span lang="zh">新的开始</span>
+            <span>Ваш новий початок.</span>
+          </div>
+          <p>{siteText.pages.chinese.hero.subtitle}</p>
+          <div class="tc-language__tags">
+            <span>З нуля</span>
+            <span>HSK</span>
+            <span>Дітям і дорослим</span>
+          </div>
+        </div>
+      </a>
+    </div>
+    {!compact && (
+      <div class="tc-language-note" data-rise>
+        <span class="tc-spark" aria-hidden="true">
+          ✳
+        </span>
+        <p>{siteText.sections.modal.subtitle}</p>
+        <button class="tc-text-link" data-open-modal>
+          {siteText.shared.forms.trialButton}
+        </button>
+      </div>
+    )}
+  </div>
+</section>

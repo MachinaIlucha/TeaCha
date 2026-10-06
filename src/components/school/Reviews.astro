@@ -1,0 +1,124 @@
+---
+import { siteText } from "../../data/siteText";
+import { resolveAssetPath as asset } from "../../data/assetMap";
+import Arrow from "./Arrow.astro";
+const reviews = siteText.sections.reviews.list;
+const names: Record<string, string> = {
+  ОЛЕНА: "Олена",
+  ВʼЯЧЕСЛАВ: "Вʼячеслав",
+  НАТАЛІЯ: "Наталія",
+  АНЯ: "Аня",
+  ЮЛІЯ: "Юлія",
+};
+const highlights: Record<string, string> = {
+  ОЛЕНА: "Заняття цікаві і їх хочеться відвідувати, а не оце «треба».",
+  ВʼЯЧЕСЛАВ:
+    "Завдяки TEACHA я значно покращив англійську та став упевненішим у спілкуванні.",
+  НАТАЛІЯ: "Донька з великим задоволенням ходить на заняття з китайської мови.",
+  АНЯ: "Щиро дякую вам за всі заняття, які ми мали разом: ви багато чому мене навчили, допомогли з підготовкою",
+  ЮЛІЯ: "Завдяки вашому мовному центру я швидко та якісно підготувалась до співбесіди на роботу своєї мрії 😍",
+};
+---
+
+<section class="tc-section tc-reviews" id="reviews">
+  <div class="tc-wrap">
+    <div class="tc-section-head" data-rise>
+      <div>
+        <p class="tc-kicker">{siteText.sections.reviews.titleTop}</p>
+        <h2>
+          {siteText.sections.reviews.titleTop}<em>{siteText.sections.reviews.titleBottom}</em>
+        </h2>
+      </div>
+      <div class="tc-review-nav">
+        <button data-review-prev aria-label="Попередній відгук">
+          <Arrow />
+        </button>
+        <span data-review-count>01 / 05</span>
+        <button data-review-next aria-label="Наступний відгук">
+          <Arrow />
+        </button>
+      </div>
+    </div>
+    <div class="tc-review-stage" aria-live="polite" data-rise>
+      {reviews.map((r, i) => (
+        <article class="tc-review" data-review hidden={i > 0}>
+          <div class="tc-review__photo">
+            <img
+              src={asset(r.img)}
+              alt={`${names[r.name]} — відгук про TeaCha`}
+              width="480"
+              height="640"
+              loading="lazy"
+            />
+            <div class="tc-review__identity">
+              <strong>{r.name}</strong>
+              <span>
+                {r.badge}
+              </span>
+            </div>
+          </div>
+          <div class="tc-review__body">
+            <div class="tc-review__request">
+              <span class="tc-case-label">
+                <i>01</i> Запит:
+              </span>
+              <h3>{r.request}</h3>
+            </div>
+            <div class="tc-review__journey">
+              <div class="tc-review__point">
+                <span class="tc-case-label">
+                  <i>02</i> Точка А:
+                </span>
+                <strong>{r.pointA.level}</strong>
+                <time>{r.pointA.date} • {r.pointA.level}</time>
+                <p>{r.pointA.text}</p>
+              </div>
+              <div class="tc-review__point tc-review__point--result">
+                <span class="tc-case-label">
+                  <i>03</i> Точка Б:
+                </span>
+                <strong>{r.pointB.level}</strong>
+                <time>{r.pointB.date} • {r.pointB.level}</time>
+                <p>{r.pointB.text}</p>
+              </div>
+            </div>
+            <blockquote>{r.quote.split(/(?<=[.!?])\s/)[0]}</blockquote>
+            <details class="tc-review-full">
+              <summary>
+                Весь відгук <span aria-hidden="true">+</span>
+              </summary>
+              <p>{r.quote}</p>
+            </details>
+          </div>
+        </article>
+      ))}
+    </div>
+    <div class="tc-review-bottom" data-rise>
+      <div class="tc-review-people" aria-label="Обрати історію">
+        {reviews.map((r, i) => (
+          <button
+            data-review-select={i}
+            aria-label={`Історія: ${names[r.name]}`}
+            aria-pressed={i === 0}
+          >
+            <img
+              src={asset(r.img)}
+              alt=""
+              width="48"
+              height="48"
+              loading="lazy"
+            />
+          </button>
+        ))}
+      </div>
+      <div>
+        <p>
+          {siteText.sections.modal.subtitle}
+        </p>
+        <button class="tc-button" data-open-modal>
+          {siteText.shared.forms.trialButton}
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

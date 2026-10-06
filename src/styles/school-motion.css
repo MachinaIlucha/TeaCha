@@ -1,0 +1,513 @@
+/* CSS owns the motion. JS only coordinates arrival, selection and visible scroll scenes. */
+@property --tc-opening {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+.tc-intro,
+.tc-intro-ripple {
+  display: none;
+}
+html.tc-arriving {
+  overflow: hidden;
+}
+.tc-arriving .tc-intro,
+.tc-intro.is-opening {
+  display: grid;
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  place-items: center;
+  color: var(--tc-ink);
+  background:
+    radial-gradient(ellipse at 80% 20%, #e8eaf6 0, transparent 55%),
+    radial-gradient(ellipse at 15% 80%, #f4e6e9, transparent 50%), #f6f7fb;
+  mask: radial-gradient(
+    circle at 50% 50%,
+    transparent var(--tc-opening),
+    #000 calc(var(--tc-opening) + 1px)
+  );
+}
+.tc-intro__stage {
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+.tc-intro__stage > * {
+  grid-area: 1/1;
+}
+.tc-intro__tile {
+  display: grid;
+  place-items: center;
+  width: 190px;
+  height: 170px;
+  padding: 25px;
+  background: white;
+  border-radius: 42px;
+  box-shadow:
+    0 1px 0 #fff,
+    0 22px 70px -30px #2b2e4444;
+  animation: tc-seed-in 0.7s var(--tc-spring) backwards;
+}
+.tc-intro__mark {
+  width: 150px;
+  overflow: visible;
+}
+.tc-intro__mark path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: tc-ink-flow 1.5s cubic-bezier(0.45, 0, 0.15, 1) forwards;
+}
+.tc-ink-left {
+  animation-delay: 0.3s !important;
+}
+.tc-ink-t {
+  animation-delay: 0.5s !important;
+}
+.tc-ink-c {
+  animation-delay: 0.85s !important;
+}
+.tc-ink-right {
+  animation-delay: 0.65s !important;
+}
+.tc-intro__lockup {
+  opacity: 0;
+  transform: scale(0.85) translateY(8px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 330px;
+}
+.tc-intro__lockup .tc-brand {
+  gap: 17px;
+}
+.tc-intro__lockup .tc-brand__mark {
+  width: 100px;
+  height: 76px;
+}
+.tc-intro__lockup .tc-brand__name {
+  font-size: 66px;
+  letter-spacing: -3.5px;
+}
+.tc-intro__lockup > p {
+  font-size: 11px;
+  margin-top: 22px;
+  letter-spacing: 0.035em;
+}
+.tc-intro.is-word .tc-intro__tile {
+  opacity: 0;
+  transform: scale(0.72);
+  transition:
+    opacity 0.4s,
+    transform 0.55s cubic-bezier(0.55, 0, 0.45, 1);
+}
+.tc-intro.is-word .tc-intro__lockup {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.65s 0.1s,
+    transform 0.8s var(--tc-spring) 0.1s;
+}
+.tc-intro__corner {
+  position: absolute;
+  top: 50%;
+  width: 22px;
+  height: 96px;
+  border-block: 3px solid #2b2e441c;
+  animation: tc-bracket-in 1.2s var(--tc-ease) 0.7s backwards;
+}
+.tc-intro__corner--left {
+  left: calc(50% - 280px);
+  border-left: 3px solid #2b2e441c;
+  transform: translateY(-50%);
+}
+.tc-intro__corner--right {
+  right: calc(50% - 280px);
+  border-right: 3px solid #db1f3230;
+  border-block-color: #db1f3230;
+  transform: translateY(-50%);
+}
+.tc-intro__foot {
+  position: absolute;
+  bottom: 45px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: #686d81;
+  animation: tc-rise 0.8s 1s backwards;
+}
+.tc-intro__foot > span + span {
+  font-size: 9px;
+  color: #9398a8;
+  letter-spacing: 0.025em;
+}
+.tc-intro.is-opening {
+  pointer-events: none;
+  animation: tc-intro-pour 1.5s cubic-bezier(0.65, 0, 0.35, 1) 0.12s forwards;
+}
+.tc-intro.is-opening .tc-intro__stage {
+  opacity: 0;
+  transform: scale(0.9);
+  transition:
+    opacity 0.25s,
+    transform 0.35s;
+}
+.tc-intro.is-opening .tc-intro__corner,
+.tc-intro.is-opening .tc-intro__foot {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.tc-arriving .tc-intro-ripple {
+  display: block;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  width: 300vmax;
+  height: 300vmax;
+  z-index: 151;
+  border: 2px solid #db1f3230;
+  border-radius: 50%;
+  box-shadow:
+    0 0 40px #e4b5c05c,
+    inset 0 0 40px #e4b5c04d;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+}
+.tc-intro-ripple.is-opening {
+  animation: tc-intro-ripple 1.5s cubic-bezier(0.65, 0, 0.35, 1) 0.12s forwards;
+}
+.tc-pouring #main-content {
+  animation: tc-page-open 1.65s var(--tc-ease) backwards;
+}
+.tc-pouring .tc-hero-in,
+.tc-pouring .tc-line > span {
+  animation-play-state: running;
+}
+.tc-arriving .tc-hero__photo img,
+.tc-arriving .tc-sticker,
+.tc-arriving .tc-hero__orbit {
+  animation-play-state: paused;
+}
+.tc-pouring .tc-hero__photo img,
+.tc-pouring .tc-sticker,
+.tc-pouring .tc-hero__orbit {
+  animation-play-state: running;
+}
+.tc-hero-in {
+  animation-duration: 1.15s;
+  animation-delay: calc(var(--delay, 0ms) + 150ms);
+}
+.tc-hero__photo img {
+  animation: tc-photo-arrive 1.4s var(--tc-ease) 0.35s backwards;
+}
+.tc-hero__orbit {
+  animation: tc-orbit-arrive 1.6s var(--tc-ease) 0.1s backwards;
+}
+.tc-sticker--hello {
+  animation: tc-sticker-arrive 1.1s var(--tc-spring) 0.7s backwards;
+}
+.tc-sticker--nihao {
+  animation: tc-sticker-arrive 1s var(--tc-spring) 0.95s backwards;
+}
+.tc-sticker--hello path {
+  stroke-dasharray: 250;
+  stroke-dashoffset: 250;
+  animation: tc-line-draw 1.2s var(--tc-ease) 1.4s forwards;
+}
+.tc-arriving:not(.tc-pouring) .tc-sticker--hello path {
+  animation-play-state: paused;
+}
+.tc-motion [data-reveal="photo"] {
+  opacity: 0;
+  clip-path: inset(12% 0 12% 0 round 24px);
+  translate: 0 45px;
+  transition:
+    opacity 1s var(--tc-ease) var(--delay, 0ms),
+    clip-path 1.4s var(--tc-ease) var(--delay, 0ms),
+    translate 1.2s var(--tc-ease) var(--delay, 0ms);
+}
+.tc-motion [data-reveal="photo"].is-visible {
+  opacity: 1;
+  clip-path: inset(0 0 0 0 round 24px);
+  translate: 0 0;
+}
+.tc-motion [data-rise].tc-language.is-visible .tc-language__art {
+  animation: tc-language-type 1.2s var(--tc-spring) 0.1s backwards;
+}
+.tc-motion [data-rise].tc-language.is-visible .tc-language__phrases > span {
+  animation: tc-sticker-arrive 0.9s var(--tc-spring) 0.35s backwards;
+}
+.tc-motion
+  [data-rise].tc-language.is-visible
+  .tc-language__phrases
+  > span
+  + span {
+  animation-delay: 0.5s;
+}
+.tc-language .tc-language__art {
+  transition: translate 0.75s var(--tc-ease);
+}
+.tc-language .tc-language__phrases {
+  transition:
+    translate 0.75s var(--tc-ease),
+    rotate 0.75s var(--tc-spring);
+}
+.tc-language:hover .tc-language__art {
+  translate: -7px -6px;
+}
+.tc-language:hover .tc-language__phrases {
+  translate: 0 -16px;
+  rotate: -4deg;
+}
+.tc-language[data-tilt].is-visible {
+  transform: perspective(1200px) rotateX(var(--tilt-x, 0deg))
+    rotateY(var(--tilt-y, 0deg));
+  transition: transform 0.55s var(--tc-ease);
+}
+.tc-service-demo:not([hidden]) > :not(.tc-demo-label) {
+  animation: tc-panel-in 0.65s var(--tc-ease) backwards;
+}
+.tc-service-demo:not([hidden]) > :nth-child(2) {
+  animation-delay: 50ms;
+}
+.tc-service-demo:not([hidden]) > :nth-child(3) {
+  animation-delay: 100ms;
+}
+.tc-service-demo:not([hidden]) > :nth-child(4) {
+  animation-delay: 140ms;
+}
+.tc-service-demo:not([hidden]) > :nth-child(5) {
+  animation-delay: 180ms;
+}
+.tc-service-demo:not([hidden]) > :nth-child(6) {
+  animation-delay: 230ms;
+}
+.tc-service-demo:not([hidden]) .tc-demo-progress i {
+  animation: tc-bar 0.75s var(--tc-ease) 0.25s backwards;
+  transform-origin: left;
+}
+.tc-service-demo:not([hidden]) .tc-message {
+  animation: tc-chat-in 0.65s var(--tc-spring) 0.15s backwards;
+}
+.tc-service-demo:not([hidden]) .tc-message + .tc-message {
+  animation-delay: 0.38s;
+}
+.tc-review:not([hidden]) .tc-review__photo {
+  animation: tc-review-photo 0.8s var(--tc-ease) backwards;
+}
+.tc-review:not([hidden]) .tc-review__request,
+.tc-review:not([hidden]) .tc-review__point,
+.tc-review:not([hidden]) blockquote {
+  animation: tc-panel-in 0.65s var(--tc-ease) 0.1s backwards;
+}
+.tc-review:not([hidden]) .tc-review__point {
+  animation-delay: 0.16s;
+}
+.tc-review:not([hidden]) .tc-review__point--result {
+  animation-delay: 0.25s;
+}
+.tc-review:not([hidden]) blockquote {
+  animation-delay: 0.32s;
+}
+.tc-review:not([hidden]) .tc-review__journey::before {
+  animation: tc-bar 0.9s var(--tc-ease) 0.15s backwards;
+  transform-origin: left;
+}
+.tc-price.is-updating [data-tuition] {
+  animation: tc-price-change 0.5s var(--tc-ease);
+}
+.tc-rolling-price {
+  display: inline-block;
+}
+.tc-menu-button span {
+  transition:
+    rotate 0.3s,
+    translate 0.3s;
+}
+.tc-menu-button[aria-expanded="true"] span:first-child {
+  rotate: 45deg;
+  translate: 0 4px;
+}
+.tc-menu-button[aria-expanded="true"] span:last-child {
+  rotate: -45deg;
+  translate: 0 -4px;
+}
+@keyframes tc-ink-flow {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes tc-seed-in {
+  from {
+    opacity: 0;
+    transform: scale(0.4) rotate(-7deg);
+  }
+}
+@keyframes tc-bracket-in {
+  from {
+    opacity: 0;
+    translate: 0 16px;
+    scale: 0.7;
+  }
+}
+@keyframes tc-intro-pour {
+  to {
+    --tc-opening: 150vmax;
+  }
+}
+@keyframes tc-intro-ripple {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+@keyframes tc-page-open {
+  from {
+    transform: scale(0.982);
+    transform-origin: 50% 10%;
+  }
+}
+@keyframes tc-photo-arrive {
+  from {
+    opacity: 0;
+    translate: 0 70px;
+    scale: 0.96;
+  }
+}
+@keyframes tc-orbit-arrive {
+  from {
+    opacity: 0;
+    scale: 0.7;
+    rotate: 9deg;
+  }
+}
+@keyframes tc-sticker-arrive {
+  from {
+    opacity: 0;
+    translate: 0 35px;
+    scale: 0.75;
+    rotate: -14deg;
+  }
+}
+@keyframes tc-language-type {
+  from {
+    opacity: 0;
+    translate: 0 55px;
+    rotate: -8deg;
+    scale: 0.86;
+  }
+}
+@keyframes tc-line-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes tc-chat-in {
+  from {
+    opacity: 0;
+    translate: 0 22px;
+    scale: 0.93;
+  }
+}
+@keyframes tc-review-photo {
+  from {
+    opacity: 0;
+    transform: translateX(calc(var(--review-direction, 1) * 25px))
+      rotate(calc(var(--review-direction, 1) * 2deg)) scale(0.98);
+  }
+}
+@keyframes tc-price-change {
+  from {
+    opacity: 0.2;
+    translate: 0 13px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+@media (max-width: 650px) {
+  .tc-intro__tile {
+    width: 150px;
+    height: 140px;
+    border-radius: 32px;
+  }
+  .tc-intro__mark {
+    width: 120px;
+  }
+  .tc-intro__lockup .tc-brand__mark {
+    width: 67px;
+    height: 53px;
+  }
+  .tc-intro__lockup .tc-brand__name {
+    font-size: 48px;
+    letter-spacing: -2px;
+  }
+  .tc-intro__lockup .tc-brand {
+    gap: 12px;
+  }
+  .tc-intro__lockup > p {
+    font-size: 9px;
+  }
+  .tc-intro__corner--left {
+    left: 5%;
+  }
+  .tc-intro__corner--right {
+    right: 5%;
+  }
+  .tc-intro__corner {
+    height: 70px;
+    width: 14px;
+    opacity: 0.5;
+  }
+  .tc-intro__foot {
+    bottom: 35px;
+    font-size: 8px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .tc-intro,
+  .tc-intro-ripple {
+    display: none !important;
+  }
+  html.tc-arriving {
+    overflow: auto;
+  }
+  .tc-motion [data-rise],
+  .tc-motion [data-reveal="photo"] {
+    opacity: 1;
+    transform: none;
+    translate: none;
+    clip-path: none;
+  }
+  .tc-sticker--hello path {
+    stroke-dashoffset: 0;
+  }
+  .tc-language[data-tilt].is-visible {
+    transform: none;
+  }
+  .tc-steps::after {
+    transform: none;
+  }
+}

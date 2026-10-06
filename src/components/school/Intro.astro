@@ -1,0 +1,73 @@
+---
+import Brand from "./Brand.astro";
+import { resolveAssetPath } from "../../data/assetMap";
+---
+
+<div class="tc-intro" aria-hidden="true">
+  <span class="tc-intro__corner tc-intro__corner--left"></span>
+  <span class="tc-intro__corner tc-intro__corner--right"></span>
+  <div class="tc-intro__stage">
+    <div class="tc-intro__tile">
+      <svg viewBox="170 390 830 510" class="tc-intro__mark" focusable="false">
+        <defs>
+          <mask
+            id="teacha-ink"
+            maskUnits="userSpaceOnUse"
+            x="170"
+            y="390"
+            width="830"
+            height="510"
+          >
+            <path
+              class="tc-ink-left"
+              d="M285 435H211V735H286"
+              fill="none"
+              stroke="white"
+              stroke-width="42"
+              pathLength="1"
+            />
+            <path
+              class="tc-ink-t"
+              d="M342 490H591M467 490V706"
+              fill="none"
+              stroke="white"
+              stroke-width="64"
+              pathLength="1"
+            />
+            <path
+              class="tc-ink-c"
+              d="M792 725C764 599 563 621 561 745C554 882 766 889 791 764"
+              fill="none"
+              stroke="white"
+              stroke-width="76"
+              pathLength="1"
+            />
+            <path
+              class="tc-ink-right"
+              d="M881 429H961V742H880"
+              fill="none"
+              stroke="white"
+              stroke-width="42"
+              pathLength="1"
+            />
+          </mask>
+        </defs>
+        <image
+          href={resolveAssetPath("img/layout/logo.png")}
+          width="1200"
+          height="1200"
+          mask="url(#teacha-ink)"
+        />
+      </svg>
+    </div>
+    <div class="tc-intro__lockup">
+      <Brand />
+      <p>Тут починається ваша нова мова.</p>
+    </div>
+  </div>
+  <div class="tc-intro__foot">
+    <span>АНГЛІЙСЬКА · КИТАЙСЬКА · TEACHA</span>
+    <span>Натисніть, щоб перейти до знайомства</span>
+  </div>
+</div>
+<span class="tc-intro-ripple" aria-hidden="true"></span>

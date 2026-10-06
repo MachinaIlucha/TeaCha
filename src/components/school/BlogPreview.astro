@@ -1,0 +1,24 @@
+---
+import { blogArticles } from "../../data/blog";
+import ArticleCard from "../blog/ArticleCard.astro";
+const { hub = false } = Astro.props;
+---
+
+<section class="tc-section tc-blog-preview">
+  <div class="tc-wrap">
+    <div class="tc-section-head" data-rise>
+      <div>
+        <p class="tc-kicker">База знань TeaCha</p>
+        <h2>Корисне про китайську</h2>
+      </div>
+      <a class="tc-text-link" href="/blog/">
+        Усі статті →
+      </a>
+    </div>
+    <div class="tc-article-grid">
+      {(hub ? blogArticles.slice(0, 3) : [blogArticles[1], blogArticles[0], blogArticles[4]]).map((article) => (
+        <ArticleCard article={article} headingLevel="h3" />
+      ))}
+    </div>
+  </div>
+</section>

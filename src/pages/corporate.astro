@@ -1,46 +1,54 @@
 ---
-/**
- * TeaCha website
- * Design & development: Ілля Пінчук Вадимович
- * © 2026. All rights reserved.
- */
-
 import BaseLayout from "../layouts/BaseLayout.astro";
-
-import CorporateHero from "../components/pages/corporate/CorporateHero.astro";
-import CorporateBenefits from "../components/pages/corporate/CorporateBenefits.astro";
-import CorporateClients from "../components/pages/corporate/CorporateClients.astro";
-
-import Process from "../components/sections/Process.astro";
-import Faq from "../components/sections/Faq.astro";
-
-import CorporatePriceTable from "../components/pages/corporate/CorporatePriceTable.astro";
+import PageHero from "../components/school/PageHero.astro";
+import CorporatePricing from "../components/school/CorporatePricing.astro";
+import Approach from "../components/school/Approach.astro";
+import Partners from "../components/school/Partners.astro";
+import FAQ from "../components/school/FAQ.astro";
 import { siteText } from "../data/siteText";
-import { buildFaqSchema } from "../data/seoSchemas";
-
-const pageText = siteText.pages.corporate;
-const faqItems = siteText.sections.faq.items.corporate;
-const jsonLd = [buildFaqSchema(faqItems)];
+import { resolveAssetPath as asset } from "../data/assetMap";
+const crumbs = [{ name: siteText.pages.corporate.breadcrumb, href: "/corporate/" }];
+const benefits = siteText.sections.corporateBenefits.items;
+const hero = siteText.sections.corporateHero;
 ---
 
 <BaseLayout
-  title={pageText.title}
-  description={pageText.description}
-  breadcrumbs={[{ name: pageText.breadcrumb, href: "/corporate/" }]}
-  bodyClass="page-corporate"
-  jsonLd={jsonLd}
+  title={siteText.pages.corporate.title}
+  description={siteText.pages.corporate.description}
+  breadcrumbs={crumbs}
 >
-  <CorporateHero className="sectionShell section--a" />
-  <CorporateBenefits className="sectionShell section--b" />
-  <Process
-    className="sectionShell section--a"
-    steps={pageText.processSteps}
-    footnote={pageText.processFootnote}
+  <PageHero
+    titleParts={hero.titleParts}
+    lead={hero.subtitle}
+    alt={hero.imageAlt}
+    crumbs={crumbs}
+    image={asset("img/hero/corporate/corporate-hero-team.webp")}
+    caption="better together."
+
   />
+  <section class="tc-section">
+    <div class="tc-wrap">
+      <div class="tc-section-head" data-rise>
+        <div>
 
-  <CorporateClients className="sectionShell section--b" />
-
-  <CorporatePriceTable className="sectionShell section--a" />
-
-  <Faq className="sectionShell section--a" />
+          <h2>{siteText.sections.corporateBenefits.heading}</h2>
+        </div>
+        <button class="tc-button" data-open-modal>
+          {siteText.shared.forms.trialButton}
+        </button>
+      </div>
+      <div class="tc-program-grid">
+        {benefits.map(({title, text}) => (
+          <article data-rise>
+            <h3>{title}</h3>
+            <p>{text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+  <Partners full />
+  <Approach steps={siteText.pages.corporate.processSteps} footnote={siteText.pages.corporate.processFootnote} />
+  <CorporatePricing />
+  <FAQ items={siteText.sections.faq.items.corporate} />
 </BaseLayout>

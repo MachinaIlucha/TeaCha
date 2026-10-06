@@ -1,0 +1,113 @@
+---
+import { siteText } from "../../data/siteText";
+import { resolveAssetPath as asset } from "../../data/assetMap";
+import Socials from "./Socials.astro";
+const page = siteText.pages.about;
+const gallery = ["01", "02", "03", "04"].map((n, i) => [n, siteText.sections.teachers.cards[i].text]);
+---
+
+<section class="tc-about-opening">
+  <div class="tc-wrap">
+    <nav class="tc-crumbs" aria-label="Навігаційний ланцюжок">
+      <a href="/">Головна</a>
+      <span>/</span>
+      <span aria-current="page">Про нас</span>
+    </nav>
+    <div class="tc-about-heading" data-rise>
+      <p class="tc-kicker">{siteText.sections.teachers.heading}</p>
+      <h1 set:html={page.teamHeading} />
+      <p>{page.teamLead}</p>
+    </div>
+    <div class="tc-portrait-fan" data-portrait-fan>
+      <figure
+        class="tc-portrait-fan__side"
+        data-reveal="photo"
+        style="--delay:180ms"
+      >
+        <img
+          src={asset("img/about/teacha-about-daryna-shvets.webp")}
+          alt="Дарина Швець — співзасновниця TeaCha"
+          width="1200"
+          height="1800"
+          loading="eager"
+        />
+        <figcaption>
+          <strong>Дарина Швець</strong>
+          <span>{siteText.sections.homeHero.english} · {siteText.sections.homeHero.chinese}</span>
+        </figcaption>
+      </figure>
+      <figure class="tc-portrait-fan__center" data-reveal="photo">
+        <img
+          src={asset("img/about/teacha-about-team-center.webp")}
+          alt="Дарина та Дарія разом готують заняття"
+          width="1200"
+          height="1800"
+          loading="eager"
+        />
+        <figcaption>{page.teamWatermark}</figcaption>
+      </figure>
+      <figure
+        class="tc-portrait-fan__side"
+        data-reveal="photo"
+        style="--delay:300ms"
+      >
+        <img
+          src={asset("img/about/teacha-about-dariia-pozniakovska.webp")}
+          alt="Дарія Позняковська — співзасновниця TeaCha"
+          width="1200"
+          height="1800"
+          loading="eager"
+        />
+        <figcaption>
+          <strong>Дарія Позняковська</strong>
+          <span>{siteText.sections.homeHero.english} · {siteText.sections.homeHero.chinese}</span>
+        </figcaption>
+      </figure>
+    </div>
+    <div class="tc-about-intro" data-rise>
+      <p>{siteText.sections.facts.items[1].text}</p>
+      <button class="tc-button" data-open-modal>
+        {siteText.shared.forms.trialButton}
+      </button>
+    </div>
+  </div>
+</section>
+<section
+  class="tc-memory"
+  data-photo-story
+  aria-label="Життя та команда TeaCha"
+>
+  <div class="tc-memory__sticky">
+    <div class="tc-memory__intro">
+      <p class="tc-kicker">{siteText.sections.teachers.educationAria}</p>
+      <h2>{siteText.sections.teachers.heading}</h2>
+      <p>{page.teamLead}</p>
+    </div>
+    <div class="tc-memory__photos">
+      {gallery.map(([n, caption], i) => (
+        <figure
+          class={`tc-memory__photo tc-memory__photo--${n}`}
+          style={`--i:${i}`}
+        >
+          <img
+            src={asset(`img/about/teacha-about-team-${n}.webp`)}
+            alt={`Дарина та Дарія — фотосесія TeaCha, ${n}`}
+            width="1200"
+            height="1800"
+            loading="lazy"
+          />
+          <figcaption>{caption}</figcaption>
+        </figure>
+      ))}
+    </div>
+    <span class="tc-memory__hint">Гортайте — знайомство триває</span>
+  </div>
+</section>
+<section class="tc-about-social tc-section">
+  <div class="tc-wrap" data-rise>
+    <p class="tc-kicker">{siteText.shared.footer.contactsLabel}</p>
+    <h2>{siteText.shared.footer.contactsTitle}</h2>
+    <p>{siteText.shared.contact.openingHoursNote}</p>
+    <Socials />
+  </div>
+</section>

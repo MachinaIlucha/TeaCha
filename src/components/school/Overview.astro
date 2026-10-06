@@ -1,0 +1,11 @@
+---
+import { siteText } from '../../data/siteText';
+const { language = 'english' } = Astro.props;
+const text = language === 'english' ? siteText.sections.englishOverview : siteText.sections.chineseOverview;
+---
+<section class="tc-section">
+  <div class="tc-wrap tc-prose-grid">
+    <div data-rise><h2>{text.titleTop}<br /><em>{text.titleBottom}</em></h2></div>
+    <div class="tc-prose" data-rise>{text.paragraphs.map((paragraph) => <p set:html={paragraph} />)}</div>
+  </div>
+</section>

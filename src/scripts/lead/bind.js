@@ -47,6 +47,9 @@ export const bindLeadForm = (selector, opts = {}) => {
   const hasSubmitFx = setupSubmitFx(submitBtn);
 
   form.addEventListener("submit", async (e) => {
+    // A preceding validator can reject a non-empty contact or name.
+    // Respect that result even when it clears its temporary native message.
+    if (e.defaultPrevented) return;
     e.preventDefault();
 
     // Let native validity + customValidity messages handle required fields
@@ -60,7 +63,11 @@ export const bindLeadForm = (selector, opts = {}) => {
 
     const btn = form.querySelector('button[type="submit"]');
     const labelEl = getLabelEl(btn);
-    const prevText = btn?.dataset.defaultLabel || labelEl?.textContent || btn?.textContent || "";
+    const prevText =
+      btn?.dataset.defaultLabel ||
+      labelEl?.textContent ||
+      btn?.textContent ||
+      "";
 
     if (btn) {
       btn.disabled = true;

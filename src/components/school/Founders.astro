@@ -1,0 +1,33 @@
+---
+import { Image } from "astro:assets";
+import founders from "../../assets/img/founders/teacha-founders-daryna-dariia.webp";
+import { siteText } from "../../data/siteText";
+const text = siteText.sections.teachers;
+---
+<section class="tc-section tc-founders" id="team">
+  <div class="tc-wrap tc-founders__grid">
+    <div class="tc-founders__visual" data-rise>
+      <span class="tc-founders__circle" aria-hidden="true"></span>
+      <span class="tc-founders__type" aria-hidden="true">nice to<br /><em>teach you.</em></span>
+      <Image src={founders} widths={[480, 720, 840]} sizes="(min-width:900px) 42vw, 90vw" alt={text.photoAlt} loading="lazy" />
+      <div class="tc-founders__names" aria-label={text.namesAria}>
+        <strong>{text.firstName.first} {text.firstName.last}</strong>
+        <span>{text.secondName.first} {text.secondName.last}</span>
+      </div>
+    </div>
+    <div class="tc-founders__copy" data-rise>
+      <p class="tc-kicker">{text.bgWord}</p>
+      <h2>{text.heading}</h2>
+      <div class="tc-prose" aria-label={text.educationAria}>
+        {text.cards.map((card) => <p>{card.text}</p>)}
+      </div>
+      <div class="tc-founders__facts">
+        {siteText.sections.facts.items.map((fact: any) => <div>
+          {fact.value && <strong>{fact.value}</strong>}
+          <span>{fact.label ?? fact.text}</span>
+        </div>)}
+      </div>
+      <a class="tc-text-link" href="/about/">{siteText.pages.about.breadcrumb}</a>
+    </div>
+  </div>
+</section>

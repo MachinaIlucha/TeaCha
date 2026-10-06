@@ -1,7 +1,9 @@
 import { escapeHtml } from "./escape.js";
 import { getClientText } from "./site-text.js";
 
-const root = () => document.querySelector(".toasts");
+const root = () =>
+  document.querySelector("dialog[open] .toasts") ||
+  document.querySelector("body > .toasts");
 const clientText = getClientText();
 
 const prefersReducedMotion = () =>
@@ -104,7 +106,11 @@ const show = ({ type = "success", title, text, timeout = 3500 }) => {
       finalize();
     };
     const onEnd = (ev) => {
-      if (ev.target === el && (ev.propertyName === "transform" || ev.propertyName === "opacity")) end();
+      if (
+        ev.target === el &&
+        (ev.propertyName === "transform" || ev.propertyName === "opacity")
+      )
+        end();
     };
     el.addEventListener("transitionend", onEnd);
     window.setTimeout(end, EXIT_FALLBACK_MS);
@@ -162,7 +168,9 @@ const show = ({ type = "success", title, text, timeout = 3500 }) => {
     const velocity = Math.abs(dy) / elapsed;
     el.style.transition = ""; // hand motion back to CSS
 
-    const flung = dy < 0 && (Math.abs(dy) >= SWIPE_THRESHOLD || velocity > VELOCITY_THRESHOLD);
+    const flung =
+      dy < 0 &&
+      (Math.abs(dy) >= SWIPE_THRESHOLD || velocity > VELOCITY_THRESHOLD);
     if (flung) {
       el.style.transform = "translateY(-120%)"; // throw it off the top edge
       el.style.opacity = "0";

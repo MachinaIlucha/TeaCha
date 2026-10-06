@@ -1,0 +1,59 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "./PageHero.astro";
+import Overview from "./Overview.astro";
+import LanguageDetails from "./LanguageDetails.astro";
+import Resources from "./Resources.astro";
+import BlogPreview from "./BlogPreview.astro";
+import CourseList from "./CourseList.astro";
+import Approach from "./Approach.astro";
+import Reviews from "./Reviews.astro";
+import Pricing from "./Pricing.astro";
+import FAQ from "./FAQ.astro";
+import TestStrip from "./TestStrip.astro";
+import SchoolLife from "./SchoolLife.astro";
+import { siteText } from "../../data/siteText";
+import { resolveAssetPath as asset } from "../../data/assetMap";
+import { buildFaqSchema } from "../../data/seoSchemas";
+const { language = "english" } = Astro.props;
+const english = language === "english";
+const page = english ? siteText.pages.english : siteText.pages.chinese;
+const faq = english
+  ? siteText.sections.englishFaq.english
+  : siteText.sections.chineseFaq.chinese;
+const crumbs = [
+  { name: page.breadcrumb, href: `/${language}/` },
+];
+---
+
+<BaseLayout
+  title={page.title}
+  description={page.description}
+  breadcrumbs={crumbs}
+  jsonLd={[buildFaqSchema(faq)]}
+>
+  <PageHero
+    titleParts={page.hero.titleParts}
+    lead={page.hero.subtitle}
+    image={asset(
+      english
+        ? "img/hero/english/english-language-hero.webp"
+        : "img/hero/chinese/chinese-language-hero.webp",
+    )}
+    alt={page.hero.imgAlt}
+    duo={true}
+    caption={english ? "you can say it." : "一步一步 · крок за кроком"}
+    crumbs={crumbs}
+  />
+  <Overview language={language} />
+  <CourseList language={language} />
+  <LanguageDetails language={language} />
+  {english && <TestStrip />}
+  <Approach />
+  <LanguageDetails language={language} kind="format" />
+  <SchoolLife />
+  <Reviews />
+  <Pricing />
+  {!english && <BlogPreview hub />}
+  <FAQ items={faq} />
+</BaseLayout>

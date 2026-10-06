@@ -1,0 +1,55 @@
+---
+import { siteText } from "../../data/siteText";
+import Brand from "./Brand.astro";
+import Socials from "./Socials.astro";
+const path = Astro.url.pathname;
+const links = [
+  ["Англійська", "/english/"],
+  ["Китайська", "/chinese/"],
+  ["Для компаній", "/corporate/"],
+  ["Про нас", "/about/"],
+  ["Вартість", "/prices/"],
+  ["Блог", "/blog/"],
+];
+---
+
+<a class="tc-skip-link" href="#main-content">
+  Перейти до вмісту
+</a>
+<header class="tc-header">
+  <div class="tc-wrap tc-header__inner">
+    <a class="tc-brand-link" href="/" aria-label="TeaCha — головна">
+      <Brand />
+    </a>
+    <nav class="tc-nav" id="school-nav" aria-label="Головна навігація">
+      {siteText.navigation.links.map(({label, href: relativeHref}) => { const href = `/${relativeHref}`; return (
+        <a
+          href={href}
+          aria-current={path.startsWith(href) ? "page" : undefined}
+        >
+          {label}
+        </a>
+      ); })}
+      <a class="tc-nav__mobile-cta" href="#start-lead">
+        {siteText.shared.forms.trialButton}
+      </a>
+    </nav>
+    <div class="tc-header__actions">
+      <Socials compact />
+      <button class="tc-button tc-button--small tc-header__cta" data-open-modal>
+        {siteText.shared.forms.trialButton}
+      </button>
+    </div>
+    <button
+      class="tc-menu-button"
+      aria-label="Відкрити меню"
+      aria-controls="school-nav"
+      aria-expanded="false"
+      data-menu-toggle
+    >
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+  <span class="tc-reading-progress" aria-hidden="true"></span>
+</header>

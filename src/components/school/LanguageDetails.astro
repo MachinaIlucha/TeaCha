@@ -1,0 +1,14 @@
+---
+import { siteText } from '../../data/siteText';
+const { language = 'english', kind = 'why' } = Astro.props;
+const text = siteText.sections[`${language}${kind === 'why' ? 'Why' : 'Format'}`];
+const keys = ['duration', 'formats', 'offline', 'online', 'materials', 'extra'];
+---
+<section class="tc-section tc-program">
+  <div class="tc-wrap">
+    <div class="tc-section-head" data-rise><h2>{text.titleTop}<br /><em>{text.titleBottom}</em></h2></div>
+    <div class="tc-program-grid">
+      {kind === 'why' ? text.items.map((item) => <article data-rise><p>{item}</p></article>) : keys.map((key) => <article data-rise><h3>{text[`${key}Title`]}</h3><p>{text[`${key}Value`]}</p></article>)}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,82 @@
+---
+import { siteText } from "../../data/siteText";
+const {
+  title,
+  titleParts = null,
+  accent = "",
+  eyebrow = "",
+  lead = "",
+  image,
+  duo = false,
+  alt = "Команда школи TeaCha",
+  caption = "let’s begin.",
+  crumbs = [],
+  cta = true,
+  ctaLabel = siteText.sections.languageHero.defaultCtaText,
+} = Astro.props;
+---
+
+<section class="tc-page-hero">
+  <div class="tc-wrap">
+    <nav class="tc-crumbs" aria-label="Навігаційний ланцюжок">
+      <a href="/">Головна</a>
+      {crumbs.map((c: any, i: number) => (
+        <>
+          <span aria-hidden="true">/</span>
+          {i === crumbs.length - 1 ? (
+            <span aria-current="page">{c.name}</span>
+          ) : (
+            <a href={c.href}>{c.name}</a>
+          )}
+        </>
+      ))}
+    </nav>
+    <div class:list={[image && "tc-page-hero__grid"]}>
+      <div class="tc-page-hero__copy" data-rise>
+        {eyebrow && <p class="tc-kicker">{eyebrow}</p>}
+        <h1 class="tc-page-title">
+          {titleParts ? titleParts.map((part: any) => "br" in part ? <><br />{" "}</> : part.accent ? <em>{part.text}</em> : part.text) : title}
+          {!titleParts && accent && (
+            <>
+              <br />
+              <em>{accent}</em>
+            </>
+          )}
+        </h1>
+        {lead && <p set:html={lead} />}{" "}
+        {cta && (
+          <div class="tc-actions">
+            <button class="tc-button" data-open-modal>
+              {ctaLabel}
+            </button>
+            <a class="tc-text-link" href="#prices">
+              {siteText.pages.prices.breadcrumb} <span>↓</span>
+            </a>
+          </div>
+        )}
+      </div>
+      {image && (
+        <div
+          class:list={["tc-page-hero__art", duo && "tc-page-hero__art--duo"]}
+          data-reveal="photo"
+          style="--delay:150ms"
+        >
+          <img
+            src={image}
+            alt={alt}
+            width="600"
+            height="800"
+            loading="eager"
+            fetchpriority="high"
+          />
+          <span>{duo ? `${siteText.sections.teachers.firstName.first} ${siteText.sections.teachers.firstName.last} · ${siteText.sections.teachers.secondName.first} ${siteText.sections.teachers.secondName.last}` : caption}</span>
+          {duo && (
+            <p class="tc-page-hero__duo-note">
+              {siteText.sections.teachers.heading}
+            </p>
+          )}
+        </div>
+      )}
+    </div>
+  </div>
+</section>

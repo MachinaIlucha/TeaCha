@@ -1,0 +1,55 @@
+---
+import { siteText } from "../../data/siteText";
+import { resolveAssetPath as asset } from "../../data/assetMap";
+const { full = false } = Astro.props;
+---
+
+<section
+  class:list={["tc-section", "tc-partners", full && "tc-partners--full"]}
+  id="partners"
+>
+  <div class="tc-wrap">
+    <div class="tc-partners__head" data-rise>
+      <div>
+        <p class="tc-kicker">{siteText.pages.corporate.breadcrumb}</p>
+        <h2>{siteText.sections.corporateClients.titleTop}<br /><em>{siteText.sections.corporateClients.titleBottom}</em></h2>
+      </div>
+      <div>
+        <p>{siteText.sections.corporateHero.subtitle}</p>
+        {full ? (
+          <button class="tc-button" data-open-modal>
+            {siteText.sections.languageHero.defaultCtaText}
+          </button>
+        ) : (
+          <a class="tc-button" href="/corporate/">
+            {siteText.pages.corporate.breadcrumb}
+          </a>
+        )}
+        <span class="tc-partners__note">{siteText.sections.corporatePrice.notes[0]}</span>
+      </div>
+    </div>
+    <div class="tc-partners__trust" data-rise>
+      <span>{siteText.sections.corporateClients.compactLabel}</span>
+      <div class="tc-partner-logos">
+        {siteText.sections.corporateClients.clients.map((c, i) => (
+          <a
+            href={c.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={`--delay:${i * 90}ms`}
+            data-rise
+          >
+            <img
+              src={asset(c.logo)}
+              alt={c.alt}
+              width="180"
+              height="65"
+              loading="lazy"
+            />
+            <strong>{c.name}</strong><p>({c.details})</p><span>{siteText.sections.corporateClients.visitLabel}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

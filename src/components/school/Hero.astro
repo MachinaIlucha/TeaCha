@@ -1,0 +1,113 @@
+---
+import { siteText } from "../../data/siteText";
+import { Image } from "astro:assets";
+import team from "../../assets/img/hero/home/home-hero-teacha-team.webp";
+import { resolveAssetPath as asset } from "../../data/assetMap";
+---
+
+<section class="tc-hero" id="school">
+  <div class="tc-wrap tc-hero__grid">
+    <div class="tc-hero__copy">
+      <p class="tc-kicker tc-hero-in" style="--delay:0ms">
+        <span class="tc-dot"></span> {siteText.sections.homeHero.hiddenH1}
+      </p>
+      <h1 class="tc-hero__title" aria-label={siteText.sections.homeHero.hiddenH1}>
+        <span class="tc-line">
+          <span>TEA<span class="brand__cha">CHA</span> -</span>
+        </span>
+        <span class="tc-line">
+          <span>{siteText.sections.homeHero.titleLines[0]}</span>
+        </span>
+        <span class="tc-line tc-hero__accent">
+          <span>{siteText.sections.homeHero.titleLines[1]}</span>
+        </span>
+      </h1>
+      <p class="tc-hero__lead tc-hero-in" style="--delay:240ms" set:html={siteText.sections.homeHero.subtitle} />
+      <div class="tc-actions tc-hero-in" style="--delay:340ms">
+        <button class="tc-button" data-open-modal>
+          {siteText.shared.forms.trialButton}
+        </button>
+        <a class="tc-text-link" href="#team">
+          {siteText.sections.teachers.heading} <span>↓</span>
+        </a>
+      </div>
+      <div class="tc-social-proof tc-hero-in" style="--delay:440ms">
+        <div class="tc-avatar-stack">
+          {["yuliia", "olena", "viacheslav"].map((name) => (
+            <img
+              src={asset(`img/reviews/student-review-${name}.webp`)}
+              alt=""
+              width="40"
+              height="40"
+            />
+          ))}
+        </div>
+        <p>
+          <strong>{siteText.sections.facts.items[0].value}</strong>
+          <span>{siteText.sections.facts.items[0].label}</span>
+        </p>
+      </div>
+    </div>
+    <div class="tc-hero__visual tc-hero-in" style="--delay:180ms">
+      <div class="tc-hero__orbit" aria-hidden="true"></div>
+      <span class="tc-hero__letter" aria-hidden="true">
+        Aa<span lang="zh">茶</span>
+      </span>
+      <div class="tc-hero__photo">
+        <Image
+          src={team}
+          widths={[480, 720, 853]}
+          sizes="(min-width: 900px) 48vw, 90vw"
+          alt={siteText.sections.homeHero.teamAlt}
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+      <div class="tc-sticker tc-sticker--hello" aria-hidden="true">
+        hello,
+        <br />
+        <em>new world!</em>
+        <svg viewBox="0 0 130 16" fill="none">
+          <path
+            d="M3 8Q65-2 126 7M13 13Q73 4 113 12"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
+      </div>
+      <span class="tc-sticker tc-sticker--nihao" lang="zh" aria-hidden="true">
+        你好!
+      </span>
+      <div class="tc-hero__caption">
+        <span class="tc-dot"></span>
+        <span>
+          {siteText.sections.teachers.firstName.first} {siteText.sections.teachers.firstName.last}
+          <br />
+          <strong>{siteText.sections.teachers.secondName.first} {siteText.sections.teachers.secondName.last}</strong>
+        </span>
+        <svg
+          width="44"
+          height="38"
+          viewBox="0 0 44 38"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M3 35c27 0 38-12 29-30m0 0-9 10M32 5l10 6"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+          />
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="tc-wrap tc-hero__bottom">
+    <span>{siteText.sections.facts.items[2].text}</span>
+    <span>{`${siteText.shared.contact.street}, ${siteText.shared.contact.city}`}</span>
+    <a href="#languages" aria-label="Дізнатися про навчання">
+      {siteText.sections.homeHero.chinese} · {siteText.sections.homeHero.english} <span>↓</span>
+    </a>
+  </div>
+</section>

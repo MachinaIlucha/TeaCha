@@ -1,42 +1,34 @@
 ---
-/**
- * TeaCha website
- * Design & development: Ілля Пінчук Вадимович
- * © 2026. All rights reserved.
- */
-
 import BaseLayout from "../layouts/BaseLayout.astro";
-import HomeHero from "../components/pages/home/HomeHero.astro";
-import Reviews from "../components/sections/Reviews.astro";
-import Facts from "../components/sections/Facts.astro";
-import Teachers from "../components/sections/Teachers.astro";
-import Process from "../components/sections/Process.astro";
-import PriceRates from "../components/pages/price/PriceRates.astro";
-import Faq from "../components/sections/Faq.astro";
-import TestBanner from "../components/sections/TestBanner.astro";
+import Partners from "../components/school/Partners.astro";
+import TestStrip from "../components/school/TestStrip.astro";
+import Hero from "../components/school/Hero.astro";
+import Languages from "../components/school/Languages.astro";
+import Approach from "../components/school/Approach.astro";
+import Founders from "../components/school/Founders.astro";
+import SchoolLife from "../components/school/SchoolLife.astro";
+import Reviews from "../components/school/Reviews.astro";
+import Pricing from "../components/school/Pricing.astro";
+import FAQ from "../components/school/FAQ.astro";
+import BlogPreview from "../components/school/BlogPreview.astro";
 import { siteText } from "../data/siteText";
 import { buildFaqSchema } from "../data/seoSchemas";
-
-const base = import.meta.env.BASE_URL;
-const faqItems = siteText.sections.faq.items.home;
-const jsonLd = [buildFaqSchema(faqItems)];
 ---
 
 <BaseLayout
   title={siteText.pages.index.title}
   description={siteText.pages.index.description}
-  jsonLd={jsonLd}
+  jsonLd={[buildFaqSchema(siteText.sections.faq.items.home)]}
 >
-  <HomeHero className="sectionShell section--a" />
-
-  <Teachers className="sectionShell section--b" />
-  <Facts className="sectionShell section--a" />
-  <TestBanner className="section--a" />
-  <section class="processDivider" aria-hidden="true">
-    <div class="processDivider__band"></div>
-  </section>
-  <Process className="sectionShell section--b" />
-  <PriceRates base={base} className="sectionShell section--a" />
-  <Reviews className="sectionShell section--b section--ink" />
-  <Faq className="sectionShell section--a" />
+  <Hero />
+  <Languages />
+  <TestStrip />
+  <Approach />
+  <Founders />
+  <SchoolLife />
+  <Reviews />
+  <Pricing />
+  <Partners />
+  <BlogPreview />
+  <FAQ />
 </BaseLayout>

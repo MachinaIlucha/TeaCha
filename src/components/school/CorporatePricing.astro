@@ -1,0 +1,9 @@
+---
+import { siteText } from '../../data/siteText';
+const text = siteText.sections.corporatePrice;
+---
+<section class="tc-section" id="prices"><div class="tc-wrap">
+  <div class="tc-section-head" data-rise><div><p class="tc-kicker">{text.hint}</p><h2>{text.titleTop}<br /><em>[ {text.titleBottom} ]</em></h2></div><p class="tc-section-intro">{text.stubTop}<br />{text.stubBottom}</p></div>
+  <table class="tc-corporate-table"><caption>{text.tableAria}</caption><thead><tr><th>{text.mobileLabel}</th>{text.plans.map(plan => <th>{plan.lessons}</th>)}</tr></thead><tbody><tr><th set:html={text.rowLabel} />{text.plans.map(plan => <td><button class="tc-text-link" data-open-modal>{plan.price}</button></td>)}</tr></tbody></table>
+  <div class="tc-trial-note" data-rise><div>{text.notes.map(note => <p>{note}</p>)}</div><button class="tc-button" data-open-modal>{text.cta}</button></div>
+</div></section>

@@ -1,0 +1,32 @@
+---
+import { siteText } from "../../data/siteText";
+const { items = siteText.sections.faq.items.home } = Astro.props;
+---
+
+<section class="tc-section tc-faq" id="faq">
+  <div class="tc-wrap tc-faq__grid">
+    <div data-rise>
+      <p class="tc-kicker">{siteText.sections.faq.title}</p>
+      <h2>
+        {siteText.sections.faq.title}
+      </h2>
+      <p>
+        {siteText.sections.faq.subtitle}
+      </p>
+      <button class="tc-text-link" data-open-modal>
+        {siteText.shared.forms.trialButton} <span></span>
+      </button>
+    </div>
+    <div class="tc-faq__list" data-rise>
+      {items.map((item: any) => (
+        <details>
+          <summary>
+            {item.question ?? item.q ?? item.title}
+            <span aria-hidden="true">+</span>
+          </summary>
+          <div set:html={item.answer ?? item.a ?? item.text} />
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

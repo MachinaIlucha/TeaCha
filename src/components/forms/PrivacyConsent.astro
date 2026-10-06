@@ -15,7 +15,7 @@ const {
   className = "",
   inputClass = "consent__check",
   required = true,
-  invalidMessage = forms.consentInvalidMessage
+  invalidMessage = forms.consentInvalidMessage,
 } = Astro.props;
 ---
 
@@ -29,15 +29,22 @@ const {
     onchange="this.setCustomValidity('')"
   />
 
-  <span class="consent__box" aria-hidden="true"></span>
+  <span class="consent__box" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none">
+      <path
+        d="m5 12 4.5 4.5L19 7"
+        stroke="currentColor"
+        stroke-width="2.3"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        pathLength="1"
+      />
+    </svg>
+  </span>
 
   <span class="consent__text">
-    {forms.consentText}
-    <a
-      href={`${base}${docs.privacyFile}`}
-      target="_blank"
-      rel="noopener"
-    >
+    {forms.consentText}{" "}
+    <a href={`${base}${docs.privacyFile}`} target="_blank" rel="noopener">
       {forms.consentLinkText}
     </a>
   </span>
