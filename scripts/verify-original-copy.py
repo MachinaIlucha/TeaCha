@@ -66,10 +66,10 @@ for file in ['robots.txt', 'sitemap.xml']:
     if (baseline/file).read_bytes() != (root/'dist'/file).read_bytes():
         report['protected_errors'].append(file)
 for file in ['school.css','school-brand.css','school-motion.css','school-story.css']:
-    if (root/'src/styles'/file).read_bytes() != (original_design/'src/styles'/file).read_bytes():
+    if (root/'src/styles'/file).read_text(encoding='utf-8') != (original_design/'src/styles'/file).read_text(encoding='utf-8'):
         report['protected_errors'].append(file)
 for file in ['blog.ts','chineseVocabulary.ts']:
-    if (root/'src/data'/file).read_bytes() != (root.parent/'TeaCha-main-preview/src/data'/file).read_bytes():
+    if (root/'src/data'/file).read_text(encoding='utf-8') != (root.parent/'TeaCha-main-preview/src/data'/file).read_text(encoding='utf-8'):
         report['protected_errors'].append(file)
 # Only the owner's explicit location changes may differ in the original content data.
 paths = [str(root.parent/'TeaCha-main-preview/src/data/siteText.ts'), str(root/'src/data/siteText.ts')]
@@ -87,6 +87,7 @@ expected_data['shared']['contact'].update(approved['contactAdditions'])
 if expected_data != current_data:
     report['protected_errors'].append('siteText.ts: unexpected content changes')
 write_to = root/'artifacts/original-copy-verification.json'
+write_to.parent.mkdir(parents=True, exist_ok=True)
 write_to.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding='utf-8')
 print(json.dumps({'pages': len(report['pages']), 'seo_errors': report['seo_errors'], 'protected_errors': report['protected_errors'], 'pages_with_missing_text': len(report['missing_text']), 'missing_strings': sum(map(len,report['missing_text'].values()))}, ensure_ascii=False))
 for route, missing in report['missing_text'].items():
