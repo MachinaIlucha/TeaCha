@@ -1,0 +1,63 @@
+---
+import "../../styles/test-choice.css";
+
+const tests = [
+  {
+    href: "/english/test/",
+    language: "Англійська",
+    mark: "Aa",
+    markLang: "en",
+    title: "Яка в тебе англійська?",
+    text: "Пройди безкоштовний тест на визначення рівня — 20 питань, 3–5 хвилин, результат від A1 до C1",
+    steps: ["A1", "A2", "B1", "B2", "C1"],
+    stepsLang: "en",
+    label: "ТЕСТ НА РІВЕНЬ АНГЛІЙСЬКОЇ",
+  },
+  {
+    href: "/chinese/test/",
+    language: "Китайська",
+    mark: "文",
+    markLang: "zh-Hans",
+    title: "Яка в тебе китайська?",
+    text: "Пройди безкоштовний тест на визначення рівня — 20 запитань, 5–7 хвилин, результат від HSK 1 до HSK 6",
+    steps: ["一", "二", "三", "四", "五", "六"],
+    stepsLang: "zh-Hans",
+    label: "ТЕСТ НА РІВЕНЬ КИТАЙСЬКОЇ",
+  },
+];
+---
+
+<section class="tc-test-choice" aria-labelledby="test-choice-title">
+  <div class="tc-wrap">
+    <div class="tc-test-choice__head" data-rise>
+      <h2 id="test-choice-title">Перевір свій рівень</h2>
+      <p>Безкоштовно · без реєстрації · результат одразу</p>
+    </div>
+    <div class="tc-test-choice__grid">
+      {tests.map((test, index) => (
+        <div data-rise style={`--delay:${index * 120}ms`}>
+          <a class="tc-test-card" href={test.href}>
+            <span class="tc-test-card__top">
+              <span class="tc-test-card__mark" lang={test.markLang} aria-hidden="true">{test.mark}</span>
+              <span class="tc-test-card__language">{test.language}</span>
+            </span>
+            <h3>{test.title}</h3>
+            <p>{test.text}</p>
+            <ol class="tc-test-card__steps" lang={test.stepsLang} aria-hidden="true">
+              {test.steps.map((step, stepIndex) => (
+                <li style={`--i:${stepIndex}`}>
+                  <i></i>
+                  <span>{step}</span>
+                </li>
+              ))}
+            </ol>
+            <span class="tc-test-card__cta">
+              <span>{test.label}</span>
+              <span class="tc-test-card__arrow" aria-hidden="true">→</span>
+            </span>
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -224,6 +224,15 @@ def linked_and_in_sitemap(page):
         assert 'href="/chinese/test/"' in html, route
 
 
+@check
+def home_offers_both_tests(page):
+    html = page.request.get(base_url + '/').text()
+    start = html.index('<section class="tc-test-choice"')
+    section = html[start:html.index('</section>', start)]
+    assert 'href="/english/test/"' in section and 'href="/chinese/test/"' in section
+    assert 'Яка в тебе англійська?' in section and 'Яка в тебе китайська?' in section
+
+
 def main():
     passed = []
     failed = []
