@@ -1,0 +1,193 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import FAQ from "../../components/school/FAQ.astro";
+import { siteText } from "../../data/siteText";
+import { buildFaqSchema } from "../../data/seoSchemas";
+import {
+  hskQuestions,
+  LEVEL_GLYPHS,
+  SAMPLE_QUESTION_IDS,
+  HSK_LEVEL_CARDS,
+  HSK_TEST_FAQ,
+} from "../../data/chineseHskTest";
+import "../../styles/chinese-test.css";
+
+const crumbs = [
+  { name: siteText.pages.chinese.breadcrumb, href: "/chinese/" },
+  { name: "Тест на рівень", href: "/chinese/test/" },
+];
+const samples = SAMPLE_QUESTION_IDS.map((id) => hskQuestions.find((q) => q.id === id)!);
+const quizSchema = {
+  "@context": "https://schema.org",
+  "@type": "Quiz",
+  name: "Тест на рівень китайської мови HSK 1–6",
+  description:
+    "Безкоштовний онлайн-тест для орієнтовного визначення рівня китайської мови від HSK 1 до HSK 6. 20 запитань, 5–7 хвилин, результат одразу.",
+  url: "https://teacha.com.ua/chinese/test/",
+  inLanguage: "uk-UA",
+  isAccessibleForFree: true,
+  timeRequired: "PT7M",
+  learningResourceType: "Quiz",
+  educationalLevel: "HSK 1, HSK 2, HSK 3, HSK 4, HSK 5, HSK 6",
+  about: { "@type": "Thing", name: "Рівні володіння китайською мовою HSK" },
+  provider: { "@type": "EducationalOrganization", name: "TeaCha", url: "https://teacha.com.ua/" },
+};
+---
+
+<BaseLayout
+  title="Тест на рівень китайської мови онлайн: HSK 1–6 | TeaCha"
+  description="Безкоштовний онлайн-тест на рівень китайської мови від HSK 1 до HSK 6: 20 запитань, 5–7 хвилин, результат одразу й без реєстрації. Дізнайтеся свій рівень."
+  breadcrumbs={crumbs}
+  bodyClass="page-chinese-test"
+  seoSchemas={[quizSchema, buildFaqSchema(HSK_TEST_FAQ)]}
+>
+  <section class="hsk-test" id="hsk-test">
+    <div class="tc-wrap">
+      <nav class="tc-crumbs" aria-label="Навігаційний ланцюжок">
+        <a href="/">Головна</a>
+        <span aria-hidden="true">/</span>
+        <a href="/chinese/">{siteText.pages.chinese.breadcrumb}</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">Тест на рівень</span>
+      </nav>
+
+      <div class="hsk-screen hsk-intro" data-hsk-screen="intro">
+        <div class="hsk-intro__copy">
+          <p class="tc-kicker"><span class="tc-dot"></span>Безкоштовно · без реєстрації</p>
+          <h1 class="tc-page-title">Тест на рівень <em>китайської мови</em></h1>
+          <p class="hsk-intro__lead">Який у вас рівень китайської мови? 20 коротких запитань від простого до складного. Оберіть одну відповідь у кожному завданні. Якщо не знаєте — пропустіть.</p>
+          <dl class="hsk-facts">
+            <div><dt>запитань</dt><dd>20</dd></div>
+            <div><dt>орієнтовний час</dt><dd>5–7 хв</dd></div>
+            <div><dt>рівнів HSK</dt><dd>6</dd></div>
+          </dl>
+          <div class="hsk-intro__actions">
+            <button class="tc-button" type="button" data-hsk-start>Почати тест <span aria-hidden="true">→</span></button>
+          </div>
+          <noscript><p class="hsk-note">Щоб пройти тест, увімкніть JavaScript у браузері.</p></noscript>
+          <p class="hsk-note">Результат орієнтовний: короткий письмовий тест не замінює перевірку аудіювання, мовлення та письма.</p>
+        </div>
+        <ol class="hsk-stairs" aria-hidden="true">
+          {LEVEL_GLYPHS.map((glyph, i) => (
+            <li class="hsk-step" style={`--i:${i}`}>
+              <span class="hsk-tile" lang="zh-Hans">{glyph}</span>
+              <span class="hsk-step__label"><span class="hsk-word">HSK </span>{i + 1}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      <div class="hsk-screen hsk-quiz" data-hsk-screen="quiz" hidden>
+        <div class="hsk-quiz__card">
+          <div class="hsk-track" data-hsk-track aria-hidden="true"></div>
+          <div class="hsk-status">
+            <span data-hsk-counter>Запитання 1 із 20</span>
+            <span class="hsk-chip" data-hsk-stage>HSK 1</span>
+          </div>
+          <span class="hsk-tile hsk-watermark" data-hsk-watermark lang="zh-Hans" aria-hidden="true">一</span>
+          <div class="hsk-body" data-hsk-body>
+            <p class="hsk-prompt" data-hsk-prompt></p>
+            <p class="hsk-question" lang="zh-Hans" tabindex="-1" data-hsk-question></p>
+            <div class="hsk-options" data-hsk-options role="group" aria-label="Варіанти відповідей"></div>
+          </div>
+          <div class="hsk-controls">
+            <button class="tc-button tc-button--outline" type="button" data-hsk-prev>Назад</button>
+            <button class="hsk-skip" type="button" data-hsk-skip>Не знаю — пропустити</button>
+            <button class="tc-button" type="button" data-hsk-next>Далі</button>
+          </div>
+          <p class="hsk-keys" aria-hidden="true">Клавіші 1–4 або A–D — вибір, Enter — далі</p>
+        </div>
+        <p class="visuallyHidden" role="status" data-hsk-live></p>
+      </div>
+
+      <div class="hsk-screen hsk-results" data-hsk-screen="results" hidden>
+        <div class="hsk-results__hero">
+          <div class="hsk-seal" aria-hidden="true"><span lang="zh-Hans" data-hsk-seal></span></div>
+          <div>
+            <p class="tc-kicker"><span class="tc-dot"></span>Ваш результат</p>
+            <h2 class="hsk-results__title" tabindex="-1" data-hsk-results-title>Орієнтовний рівень китайської: <em data-hsk-level></em></h2>
+            <p class="hsk-results__desc" data-hsk-level-desc></p>
+          </div>
+        </div>
+        <ol class="hsk-stairs hsk-stairs--result" data-hsk-result-stairs aria-hidden="true">
+          {LEVEL_GLYPHS.map((glyph, i) => (
+            <li class="hsk-step" style={`--i:${i}`}>
+              <span class="hsk-tile" lang="zh-Hans">{glyph}</span>
+              <span class="hsk-step__label"><span class="hsk-word">HSK </span>{i + 1}</span>
+            </li>
+          ))}
+        </ol>
+        <dl class="hsk-facts">
+          <div><dt>правильних відповідей</dt><dd data-hsk-score>0 / 20</dd></div>
+          <div><dt>точність</dt><dd data-hsk-percent>0%</dd></div>
+        </dl>
+        <h3 class="hsk-results__sub">Результат за блоками</h3>
+        <div class="hsk-levels" data-hsk-levels></div>
+        <p class="hsk-results__rec" data-hsk-recommendation></p>
+        <div class="hsk-courses" data-hsk-courses></div>
+        <p class="hsk-note">Рівень визначено за послідовним проходженням складності: для HSK 1–4 потрібно щонайменше 2 правильні з 3, для HSK 5–6 — щонайменше 3 з 4 на кожному рівні. Це експрес-оцінка, а не сертифікація HSK.</p>
+        <div class="hsk-results__actions">
+          <button class="tc-button" type="button" data-open-modal>{siteText.shared.forms.trialButton}</button>
+          <button class="tc-button tc-button--outline" type="button" data-hsk-review-toggle aria-expanded="false">Переглянути відповіді</button>
+          <button class="hsk-skip" type="button" data-hsk-restart>Пройти ще раз</button>
+        </div>
+        <div class="hsk-review" data-hsk-review hidden></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tc-section hsk-info">
+    <div class="tc-wrap">
+      <div class="tc-section-head" data-rise><div><h2>Рівні HSK: <em>від 1 до 6</em></h2></div></div>
+      <div class="hsk-levels-grid">
+        {HSK_LEVEL_CARDS.map((card) => (
+          <article data-rise>
+            <span class="hsk-tile" lang="zh-Hans" aria-hidden="true">{LEVEL_GLYPHS[card.level - 1]}</span>
+            <h3>HSK {card.level} — {card.stage}</h3>
+            <p set:html={card.text.replace(/([㐀-鿿…]+)/g, '<span lang="zh-Hans">$1</span>')} />
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="tc-section hsk-info hsk-info--samples">
+    <div class="tc-wrap">
+      <div class="tc-section-head" data-rise>
+        <div>
+          <h2>Приклади завдань <em>із тесту</em></h2>
+          <p>По одному завданню на кожен рівень: перевірте, що вам уже знайоме, а відповіді дізнаєтеся після проходження.</p>
+        </div>
+      </div>
+      <div class="hsk-samples">
+        {samples.map((q) => (
+          <article data-rise>
+            <p class="hsk-chip">HSK {q.level}</p>
+            <h3 lang="zh-Hans">{q.text}</h3>
+            <p class="hsk-prompt">{q.prompt}</p>
+            <ul lang={q.optionsLang}>{q.options.map((option) => <li>{option}</li>)}</ul>
+          </article>
+        ))}
+      </div>
+      <div class="tc-actions" data-rise><a class="tc-button" href="#hsk-test">Пройти тест <span aria-hidden="true">↑</span></a></div>
+    </div>
+  </section>
+
+  <section class="tc-section hsk-info">
+    <div class="tc-wrap tc-prose-grid">
+      <div data-rise><h2>Як працює тест <em>і що далі</em></h2></div>
+      <div class="tc-prose" data-rise>
+        <p>Завдання йдуть від простого до складного: 3 запитання на кожен рівень HSK 1–4 і 4 запитання на HSK 5 та HSK 6. Рівень зараховується послідовно, тому випадкова правильна відповідь на складне запитання не завищить результат.</p>
+        <p>Тест перевіряє лексику, граматику та розуміння прочитаного. Аудіювання, письмо й усне мовлення він не оцінює, тому результат варто підтвердити з викладачем на <a href="/chinese/">курсах китайської</a>.</p>
+        <p>Тест використовує звичну шкалу HSK 1–6. Про дев’ять рівнів нової системи читайте у статті <a href="/blog/nova-systema-hsk-3-0/">про HSK 3.0</a>, а якщо ви плануєте складати іспит, перегляньте <a href="/chinese/hsk/">курс підготовки до HSK</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <FAQ items={HSK_TEST_FAQ} />
+
+  <script>
+    import { initChineseTest } from "../../scripts/features/chineseTest.js";
+    initChineseTest();
+  </script>
+</BaseLayout>

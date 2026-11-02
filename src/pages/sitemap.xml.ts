@@ -8,6 +8,7 @@ const pages = [
   { path: "/chinese/", lastmod: "2026-09-03" },
   { path: "/chinese/dlya-pochatkivciv/", lastmod: "2026-09-03" },
   { path: "/chinese/hsk/", lastmod: "2026-09-03" },
+  { path: "/chinese/test/", lastmod: "2026-11-02" },
   { path: "/chinese/dlya-ditey/", lastmod: "2026-09-03" },
   { path: "/chinese/dlya-pidlitkiv/", lastmod: "2026-09-03" },
   { path: "/chinese/dilova/", lastmod: "2026-09-03" },

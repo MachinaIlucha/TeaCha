@@ -17,5 +17,6 @@
   },
   "contactAdditions": {
     "locationDescription": "На базі приватної школи «Newton Kids». Є охорона, укриття та відеоспостереження."
-  }
+  },
+  "addedRoutes": ["/chinese/test/"]
 }

@@ -7012,6 +7012,159 @@
       }
     ]
   },
+  "/chinese/test/": {
+    "title": "Тест на рівень китайської мови онлайн: HSK 1–6 | TeaCha",
+    "meta": [
+      {
+        "charset": "utf-8"
+      },
+      {
+        "name": "viewport",
+        "content": "width=device-width,initial-scale=1"
+      },
+      {
+        "name": "description",
+        "content": "Безкоштовний онлайн-тест на рівень китайської мови від HSK 1 до HSK 6: 20 запитань, 5–7 хвилин, результат одразу й без реєстрації. Дізнайтеся свій рівень."
+      },
+      {
+        "name": "robots",
+        "content": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+      },
+      {
+        "name": "theme-color",
+        "content": "#f6f7fb"
+      },
+      {
+        "property": "og:type",
+        "content": "website"
+      },
+      {
+        "property": "og:locale",
+        "content": "uk_UA"
+      },
+      {
+        "property": "og:site_name",
+        "content": "TeaCha"
+      },
+      {
+        "property": "og:title",
+        "content": "Тест на рівень китайської мови онлайн: HSK 1–6 | TeaCha"
+      },
+      {
+        "property": "og:description",
+        "content": "Безкоштовний онлайн-тест на рівень китайської мови від HSK 1 до HSK 6: 20 запитань, 5–7 хвилин, результат одразу й без реєстрації. Дізнайтеся свій рівень."
+      },
+      {
+        "property": "og:url",
+        "content": "https://teacha.com.ua/chinese/test/"
+      },
+      {
+        "property": "og:image",
+        "content": "https://teacha.com.ua/img/og/chinese-level-test.png"
+      },
+      {
+        "property": "og:image:secure_url",
+        "content": "https://teacha.com.ua/img/og/chinese-level-test.png"
+      },
+      {
+        "property": "og:image:type",
+        "content": "image/png"
+      },
+      {
+        "property": "og:image:width",
+        "content": "1200"
+      },
+      {
+        "property": "og:image:height",
+        "content": "630"
+      },
+      {
+        "property": "og:image:alt",
+        "content": "Тест на рівень китайської мови онлайн: HSK 1–6 | TeaCha"
+      },
+      {
+        "name": "twitter:card",
+        "content": "summary_large_image"
+      },
+      {
+        "name": "twitter:title",
+        "content": "Тест на рівень китайської мови онлайн: HSK 1–6 | TeaCha"
+      },
+      {
+        "name": "twitter:description",
+        "content": "Безкоштовний онлайн-тест на рівень китайської мови від HSK 1 до HSK 6: 20 запитань, 5–7 хвилин, результат одразу й без реєстрації. Дізнайтеся свій рівень."
+      },
+      {
+        "name": "twitter:image",
+        "content": "https://teacha.com.ua/img/og/chinese-level-test.png"
+      }
+    ],
+    "links": [
+      {
+        "rel": "canonical",
+        "href": "https://teacha.com.ua/chinese/test/"
+      },
+      {
+        "rel": "icon",
+        "type": "image/png",
+        "sizes": "32x32",
+        "href": "/_astro/teacha-language-school-favicon-32.CEMEA6vY.png"
+      },
+      {
+        "rel": "icon",
+        "type": "image/png",
+        "sizes": "16x16",
+        "href": "/_astro/teacha-language-school-favicon-16.CjCAzVA9.png"
+      },
+      {
+        "rel": "shortcut icon",
+        "href": "/_astro/teacha-language-school-favicon-32.CEMEA6vY.png"
+      },
+      {
+        "rel": "apple-touch-icon",
+        "href": "/_astro/teacha-language-school-favicon.CsKLCeNS.png"
+      }
+    ],
+    "schemas": [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Тест на рівень китайської мови онлайн: HSK 1–6 | TeaCha",
+        "description": "Безкоштовний онлайн-тест на рівень китайської мови від HSK 1 до HSK 6: 20 запитань, 5–7 хвилин, результат одразу й без реєстрації. Дізнайтеся свій рівень.",
+        "url": "https://teacha.com.ua/chinese/test/",
+        "inLanguage": "uk-UA",
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": "TeaCha",
+          "url": "https://teacha.com.ua/"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Головна",
+            "item": "https://teacha.com.ua/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Курси китайської",
+            "item": "https://teacha.com.ua/chinese/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Тест на рівень",
+            "item": "https://teacha.com.ua/chinese/test/"
+          }
+        ]
+      }
+    ]
+  },
   "/chinese/hsk/": {
     "title": "Підготовка до HSK онлайн і в Києві | TeaCha",
     "meta": [

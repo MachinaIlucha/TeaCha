@@ -1,14 +1,16 @@
 ---
+const { language = "english" } = Astro.props;
+const chinese = language === "chinese";
 ---
 
 <section class="tc-test-strip">
   <div class="tc-wrap" data-rise>
     <div>
-      <h2>Яка в тебе англійська?</h2>
-      <p>Пройди безкоштовний тест на визначення рівня — 20 питань, 3–5 хвилин, результат від A1 до C1</p>
+      <h2>{chinese ? "Яка в тебе китайська?" : "Яка в тебе англійська?"}</h2>
+      <p>{chinese ? "Пройди безкоштовний тест на визначення рівня — 20 запитань, 5–7 хвилин, результат від HSK 1 до HSK 6" : "Пройди безкоштовний тест на визначення рівня — 20 питань, 3–5 хвилин, результат від A1 до C1"}</p>
     </div>
-    <a class="tc-button tc-button--cream" href="/english/test/">
-      ТЕСТ НА РІВЕНЬ
+    <a class="tc-button tc-button--cream" href={chinese ? "/chinese/test/" : "/english/test/"}>
+      {chinese ? "ТЕСТ НА РІВЕНЬ КИТАЙСЬКОЇ" : "ТЕСТ НА РІВЕНЬ"}
     </a>
   </div>
 </section>

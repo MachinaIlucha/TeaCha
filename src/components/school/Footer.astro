@@ -11,7 +11,7 @@ const d = siteText.shared.docs;
     <div class="tc-footer__grid">
       <div><a class="tc-brand-link" href="/" aria-label={siteText.shared.homeAriaLabel}><Brand light /></a><p>{f.contactsTitle}</p><Socials /></div>
       <div><h3>{f.contactsLabel}</h3>
-        <a href="/chinese/">КУРСИ КИТАЙСЬКОЇ</a><a href="/chinese/hsk/">ПІДГОТОВКА ДО HSK</a><a href="/blog/">БЛОГ ПРО КИТАЙСЬКУ</a><a href="/english/test/">ТЕСТ НА РІВЕНЬ</a>
+        <a href="/chinese/">КУРСИ КИТАЙСЬКОЇ</a><a href="/chinese/hsk/">ПІДГОТОВКА ДО HSK</a><a href="/chinese/test/">ТЕСТ НА РІВЕНЬ КИТАЙСЬКОЇ</a><a href="/blog/">БЛОГ ПРО КИТАЙСЬКУ</a><a href="/english/test/">ТЕСТ НА РІВЕНЬ АНГЛІЙСЬКОЇ</a>
       </div>
       <div><h3>{siteText.shared.forms.trialLeadTitle}</h3>{siteText.navigation.links.map(item => <a href={`/${item.href}`}>{item.label}</a>)}</div>
       <div><h3>{f.contactsLabel}</h3>{c.phones.map(phone => <a href={`tel:${phone.raw}`}>{phone.label}</a>)}<a href={`mailto:${c.email}`}>{c.email}</a><a href={c.mapUrl} target="_blank" rel="noopener">{c.street}, {c.city}</a><p>{c.locationDescription}</p><span>{c.openingHoursLabel}</span></div>

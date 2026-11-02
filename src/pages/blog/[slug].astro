@@ -6,6 +6,7 @@
  */
 
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import TestStrip from "../../components/school/TestStrip.astro";
 import ArticleCard from "../../components/blog/ArticleCard.astro";
 import { blogArticles, type BlogArticle } from "../../data/blog";
 import {
@@ -353,6 +354,8 @@ const faqSchema = buildFaqSchema(
       </div>
     </div>
   </article>
+
+  <TestStrip language="chinese" />
 
   <section
     class="articleRelated sectionShell section--b"

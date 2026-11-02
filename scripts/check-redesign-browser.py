@@ -16,7 +16,7 @@ with sync_playwright() as p:
     page.on('pageerror', lambda error: report['errors'].append(str(error)))
     for width in [1440, 390]:
         page.set_viewport_size({'width': width, 'height': 1000 if width == 1440 else 844})
-        for route in ['/', '/chinese/', '/chinese/hsk/', '/about/', '/corporate/', '/prices/', '/blog/', '/english/test/']:
+        for route in ['/', '/chinese/', '/chinese/hsk/', '/about/', '/corporate/', '/prices/', '/blog/', '/english/test/', '/chinese/test/']:
             response = page.goto(base_url + route, wait_until='networkidle')
             page.evaluate('document.fonts.ready')
             page.screenshot(path=str(out / f'{route.strip("/").replace("/", "-") or "home"}-{width}.png'), full_page=True)

@@ -62,9 +62,15 @@ for html in sorted(baseline.rglob('*.html')):
         report['missing_text'][relative.as_posix()] = missing
     report['pages'].append(relative.as_posix())
 
-for file in ['robots.txt', 'sitemap.xml']:
-    if (baseline/file).read_bytes() != (root/'dist'/file).read_bytes():
-        report['protected_errors'].append(file)
+def approved_sitemap(xml):
+    for path in approved['addedRoutes']:
+        xml = re.sub(r'\s*<url>\s*<loc>https://teacha\.com\.ua' + re.escape(path) + r'</loc>.*?</url>', '', xml, flags=re.S)
+    return xml
+
+if (baseline/'robots.txt').read_bytes() != (root/'dist/robots.txt').read_bytes():
+    report['protected_errors'].append('robots.txt')
+if (baseline/'sitemap.xml').read_text(encoding='utf-8') != approved_sitemap((root/'dist/sitemap.xml').read_text(encoding='utf-8')):
+    report['protected_errors'].append('sitemap.xml')
 for file in ['school.css','school-brand.css','school-motion.css','school-story.css']:
     if (root/'src/styles'/file).read_text(encoding='utf-8') != (original_design/'src/styles'/file).read_text(encoding='utf-8'):
         report['protected_errors'].append(file)

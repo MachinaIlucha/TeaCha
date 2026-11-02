@@ -120,7 +120,7 @@ const about = course.about;
       </div>
     </section>
   )}
-  {english && <TestStrip />}
+  <TestStrip language={language} />
   <div class="tc-wrap tc-actions"><button class="tc-button" data-open-modal>{siteText.sections.courseOverview.ctaLabel}</button><a class="tc-text-link" href="/prices/">{siteText.sections.courseOverview.pricesLabel}</a></div>
   <LanguageDetails language={language} />
   <Approach />
