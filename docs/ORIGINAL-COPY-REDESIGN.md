@@ -10,7 +10,7 @@ The original content data is preserved except for the owner's explicit school re
 
 The location is now вулиця Михайла Бойчука, 2/34, Київ, на базі приватної школи «Newton Kids», with охорона, укриття та відеоспостереження. Contacts, footer, offline format descriptions, FAQ answers, course and organization addresses, and map links use the new location. Maps query the supplied street address; obsolete coordinates were removed. `approvedContentChanges.json` records only these authorized differences so comparisons still protect all other original content and SEO.
 
-The Chinese level test at /chinese/test/ was added at the owner's request on 2 November 2026. Its SEO entry lives in preservedSeo.json, its Quiz and FAQ schemas come from src/data/chineseHskTest.ts through the seoSchemas layout prop, and addedRoutes in approvedContentChanges.json excludes it from the sitemap comparison. Browser check: python -X utf8 scripts/check-chinese-test.py.
+The Chinese level test at /chinese/test/ was added at the owner's request on 2 November 2026. Its SEO entry lives in preservedSeo.json, its Quiz and FAQ schemas come from src/data/chineseHskTest.ts through the seoSchemas layout prop, and addedRoutes in approvedContentChanges.json excludes it from the sitemap comparison. Browser check: python -X utf8 scripts/check-chinese-test.py. The English test at /english/test/ shares its engine (src/scripts/features/levelQuiz.js) and styles (src/styles/level-quiz.css); it keeps its own questions, scoring and protected wording, and its SEO entry is unchanged.
 
 Validation:
 

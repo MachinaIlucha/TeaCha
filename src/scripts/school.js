@@ -1,6 +1,5 @@
 import { attachLeadValidation } from "./lead/validation.js";
 import { bindLeadForm } from "./lead/bind.js";
-import { initLevelTest } from "./features/levelTest.js";
 import { tuition, packs } from "../data/school";
 import {
   initSchoolMotion,
@@ -189,4 +188,3 @@ document.querySelectorAll("[data-category]").forEach((button) =>
     filterArticles();
   }),
 );
-initLevelTest();

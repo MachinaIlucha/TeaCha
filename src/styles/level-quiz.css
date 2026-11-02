@@ -1,5 +1,6 @@
-/* /chinese/test/ — HSK level test. Everything is scoped to .page-chinese-test or .hsk-* classes. */
-.page-chinese-test {
+/* Shared look of the level tests (/chinese/test/, /english/test/). Scoped to the two pages or .hsk-* classes. */
+.page-chinese-test,
+.page-level-test {
   --hsk-cjk: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", "Noto Sans SC", "Hiragino Sans GB", sans-serif;
   --hsk-wash: #fdeef0;
   --hsk-red-text: #cc1b2e; /* --tc-red is 4.39:1 on the wash; this is 4.96:1 */
@@ -10,7 +11,8 @@
   letter-spacing: 0;
 }
 
-.page-chinese-test .visuallyHidden {
+.page-chinese-test .visuallyHidden,
+.page-level-test .visuallyHidden {
   position: absolute !important;
   width: 1px;
   height: 1px;
@@ -488,6 +490,8 @@
 }
 
 .hsk-blank.is-filled {
+  height: auto;
+  vertical-align: baseline;
   color: var(--tc-red);
   border-bottom-color: var(--tc-red);
   font-weight: 600;
@@ -972,6 +976,78 @@
   color: var(--tc-muted);
 }
 
+/* ---------- English page ---------- */
+/* Protected page copy stays uppercase in the HTML; this shows it in the shared sentence case. */
+.hsk-sentence {
+  text-transform: lowercase;
+}
+
+.hsk-sentence::first-letter {
+  text-transform: uppercase;
+}
+
+.hsk-sentence .hsk-keep {
+  text-transform: none;
+}
+
+.hsk-facts--plain > div {
+  flex-direction: column;
+}
+
+.hsk-facts--plain strong {
+  font-size: 30px;
+  font-weight: 750;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+
+.hsk-facts--plain span {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--tc-muted);
+  margin-top: 6px;
+}
+
+.hsk-status__chips {
+  display: flex;
+  gap: 6px;
+}
+
+.hsk-chip--quiet {
+  background: #eef0f6;
+  color: var(--tc-ink);
+}
+
+.hsk-stairs--names {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.hsk-stairs--names .hsk-step__label {
+  white-space: normal;
+  line-height: 1.2;
+}
+
+.hsk-info__lead {
+  max-width: 72ch;
+  margin-top: 16px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--tc-muted);
+}
+
+.hsk-info__cta {
+  max-width: 72ch;
+  margin-top: 28px;
+  font-size: 15px;
+  line-height: 1.6;
+  font-weight: 550;
+}
+
+.hsk-results__sub--next {
+  margin-top: 40px;
+}
+
 /* ---------- responsive ---------- */
 @media (max-width: 900px) {
   .hsk-intro {
@@ -993,6 +1069,10 @@
 
   .hsk-stairs--result .hsk-step {
     height: calc(84px + var(--i) * 18px);
+  }
+
+  .hsk-stairs--names .hsk-step__label {
+    display: none;
   }
 
   .hsk-levels-grid,

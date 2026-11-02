@@ -233,6 +233,51 @@ def home_offers_both_tests(page):
     assert 'Яка в тебе англійська?' in section and 'Яка в тебе китайська?' in section
 
 
+EN_ROUTE = '/english/test/'
+EN_CORRECT = [1, 1, 2, 1, 2, 0, 2, 2, 1, 1, 2, 1, 1, 2, 2, 2, 1, 1, 1, 2]
+
+
+def run_english(page, answers):
+    page.goto(base_url + EN_ROUTE, wait_until='networkidle')
+    page.locator('[data-hsk-start]').click()
+    for index, answer in enumerate(answers):
+        assert page.locator('[data-hsk-counter]').inner_text() == f'Питання {index + 1} із 20'
+        if answer is None:
+            page.locator('[data-hsk-skip]').click()
+        else:
+            page.locator('.hsk-option').nth(answer).click()
+            page.locator('[data-hsk-next]').click()
+    page.locator('[data-hsk-screen="results"]').wait_for(state='visible')
+
+
+@check
+def english_all_correct_is_c1(page):
+    run_english(page, EN_CORRECT)
+    assert result(page) == ('C1 — Advanced', '20', '100%'), result(page)
+
+
+@check
+def english_all_skipped_is_a1(page):
+    run_english(page, [None] * 20)
+    assert result(page) == ('A1 — Beginner', '0', '0%'), result(page)
+
+
+@check
+def english_keeps_highest_band_scoring(page):
+    # Only C1 answered correctly: the English test takes the highest passed band, without a sequence.
+    run_english(page, [None] * 16 + EN_CORRECT[16:])
+    assert result(page) == ('C1 — Advanced', '4', '20%'), result(page)
+
+
+@check
+def english_page_seo_unchanged(page):
+    html = page.request.get(base_url + EN_ROUTE).text()
+    assert '<title>Тест на рівень англійської онлайн | TeaCha</title>' in html
+    assert len(re.findall(r'<h1[\s>]', html)) == 1
+    assert 'ВИЗНАЧ СВІЙ РІВЕНЬ' in html
+    assert 'She ___ a student at this school.' in html
+
+
 def main():
     passed = []
     failed = []
