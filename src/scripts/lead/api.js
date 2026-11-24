@@ -18,6 +18,13 @@ const userMessageByCode = (code) => {
   }
 }
 
+// Reports a successful lead to the Google tag (used as the Google Ads conversion).
+const trackLead = (source) => {
+  try {
+    window.gtag?.("event", "generate_lead", { lead_source: source || "unknown" })
+  } catch {}
+}
+
 export const postLead = async ({ name, contact, source }) => {
   const res = await fetch("/api/lead", {
     method: "POST",
@@ -33,6 +40,7 @@ export const postLead = async ({ name, contact, source }) => {
     return { ok: false, json, status: res.status }
   }
 
+  trackLead(source)
   toast.success(text.lead.api.successTitle, text.lead.api.successText)
   return { ok: true, json, status: res.status }
 }
