@@ -18,10 +18,14 @@ const userMessageByCode = (code) => {
   }
 }
 
-// Reports a successful lead to the Google tag (used as the Google Ads conversion).
+// Google Ads conversion "Заявка на пробний урок (сайт)" in account 338-318-8133.
+const ADS_LEAD_CONVERSION = "AW-18592326856/bq1LCJnh7L4dEMjJwaFF"
+
+// Reports a successful lead to the Google tag: a GA-style event plus the Google Ads conversion.
 const trackLead = (source) => {
   try {
     window.gtag?.("event", "generate_lead", { lead_source: source || "unknown" })
+    window.gtag?.("event", "conversion", { send_to: ADS_LEAD_CONVERSION })
   } catch {}
 }
 
